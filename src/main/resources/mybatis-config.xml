@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.kh.MNB.babySitter.model.vo.BabySitter" alias="BabySitter"/>
+		<typeAlias type="com.kh.MNB.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.MNB.bsApply.model.vo.BSApply" alias="BSApply"/>
+		<typeAlias type="com.kh.MNB.chat.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.kh.MNB.fna.model.vo.FnA" alias="FnA"/>
+		<typeAlias type="com.kh.MNB.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.MNB.note.model.vo.Note" alias="Note"/>
+		<typeAlias type="com.kh.MNB.board.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.MNB.board.model.vo.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.MNB.board.model.vo.Free" alias="Free"/>
+		<typeAlias type="com.kh.MNB.board.model.vo.PageInfo" alias="PageInfo"/>
+		<typeAlias type="com.kh.MNB.propose.model.vo.Propose" alias="Propose"/>
+		<typeAlias type="com.kh.MNB.report.model.vo.Report" alias="Report"/>
+		<typeAlias type="com.kh.MNB.likeTb.model.vo.LikeTb" alias="LikeTb"/>
+		<typeAlias type="com.kh.MNB.memo.model.vo.Memo" alias="Memo"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/babySitter-mapper.xml"/>
+		<mapper resource="mappers/bsApply-mapper.xml"/>
+		<mapper resource="mappers/chat-mapper.xml"/>
+		<mapper resource="mappers/fna-mapper.xml"/>
+		<mapper resource="mappers/like-mapper.xml"/>
+		<mapper resource="mappers/note-mapper.xml"/>
+		<mapper resource="mappers/propose-mapper.xml"/>
+		<mapper resource="mappers/report-mapper.xml"/>
+		<mapper resource="mappers/memo-mapper.xml"/>
+		
+	</mappers>
+</configuration>
