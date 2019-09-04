@@ -13,7 +13,22 @@ public class BoardController {
 	
 	@RequestMapping("cIntro.do")
 	public String bIntro() {
-		return "borad/community/communityIntro";
+		return "board/community/communityIntro";
 
+	}
+	
+	@RequestMapping("nBoard.do")
+	public String nBoard() {
+		return "board/community/nanumView";
+	}
+	
+	@RequestMapping("inBoard.do")
+	public String inBoard() {
+		return "board/community/nanumInsertView";
+	}
+	
+	@RequestMapping("dBoard.do")
+	public String dBoard() {
+		return "board/community/nanumDetailView";
 	}
 }

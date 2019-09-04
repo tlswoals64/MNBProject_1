@@ -21,11 +21,19 @@ public class MemberDAO {
 	}
 
 	public ArrayList<Member> selectmemberLevelList(PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); // ë›°ì–´ë„˜ì–´ì•¼í•  í˜ì´ì§€,,, ìˆ˜,,,
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); // ¶Ù¾î³Ñ¾î¾ßÇÒ ÆäÀÌÁö,,, ¼ö,,,
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMList", null, rowBounds);
+	}
+
+	public Member selectUserDetail(String userId) {
+		return sqlSession.selectOne("memberMapper.selectMDetail", userId);
+	}
+
+	public int mUserDelete(String userId) {
+		return sqlSession.update("memberMapper.mUserDelete", userId);
 	}
 }

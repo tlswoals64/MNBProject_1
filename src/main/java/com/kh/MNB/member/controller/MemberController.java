@@ -1,6 +1,12 @@
 package com.kh.MNB.member.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,11 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.board.model.vo.Reply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.exception.MemberException;
 import com.kh.MNB.member.model.service.MemberService;
 import com.kh.MNB.member.model.vo.Member;
+import com.kh.MNB.memo.model.service.MemoService;
+import com.kh.MNB.memo.model.vo.Memo;
 
 
 @Controller
@@ -20,15 +31,17 @@ public class MemberController {
 	@Autowired
 	MemberService mService;
 	
+	@Autowired
+	MemoService memoService;
 	
 	
-	//------------------------- ê´€ë¦¬ì ë¶€ë¶„ ---------------------------
+	//------------------------- °ü¸®ÀÚ ºÎºĞ ---------------------------
 	@RequestMapping("manaHome.do")
 	public String test() {
-		System.out.println("ë“¤ì–´ì™”ë‹¤.");
 		return "manager/managermainView";
 	}
 	
+	// È¸¿ø µî±Ş ¸®½ºÆ®
 	@RequestMapping("mLevelList.do")
 	public ModelAndView manaLevel(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 		int currentPage = 1;
@@ -36,26 +49,76 @@ public class MemberController {
 			currentPage = page;
 		}
 		
-		int listCount = mService.getListCount(); // ì „ì²´ í˜ì´ì§€ ìˆ˜
+		int listCount = mService.getListCount(); // ÀüÃ¼ ÆäÀÌÁö ¼ö
 		
-		System.out.println("ë©¤ë²„ ìˆ˜ : " + listCount);
-		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // í˜ì´ì§€ì—ëŒ€í•œ ì •ë³´
-		System.out.println("piëŠ” ëª‡ì´ë‹ˆ? : " + pi);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ÆäÀÌÁö¿¡´ëÇÑ Á¤º¸
 		
 		ArrayList<Member> list = mService.selectmemberLevelList(pi);
 		
-		System.out.println("list ì˜ì™”ë‹ˆ ?  : " + list);
-		System.out.println(list.get(0).getMemberType());
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
 			mv.setViewName("manager/managerMemberManaListView");
 		}
 		else {
-			throw new MemberException("ê²Œì‹œê¸€ ì „ì²´ ì¡°íšŒì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			throw new MemberException("°Ô½Ã±Û ÀüÃ¼ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 		}
 		
 		return mv;
+	}
+	
+	// È¸¿øÁ¤º¸ µğÅ×ÀÏ ÆäÀÌÁö
+	@RequestMapping("mUserDetail.do")
+	public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {
+		String userId = request.getParameter("userId");
+		Member m = mService.selectUserDetail(userId);
+		if(userId != null) {
+			mv.addObject("m", m);
+			mv.setViewName("manager/managerMemberManaDetailView");
+		}
+		else {
+			throw new MemberException("È¸¿øÁ¤º¸ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+		}
+		return mv;
+	}
+	
+	// È¸¿øÁ¤º¸ µğÅ×ÀÏ ÆäÀÌÁö¿¡ ¸Ş¸ğºÒ·¯¿À´Â ÇÔ¼ö
+	@RequestMapping("memo.do")
+	public void getReplyList(HttpServletResponse response, String userId) throws IOException {
+		ArrayList<Memo> memoList = memoService.selectUserMemo(userId);
+		for(Memo m : memoList) {
+			m.setContent(URLEncoder.encode(m.getContent(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(memoList, response.getWriter());
+	}
+	
+	// ¸Ş¸ğ Ãß°¡
+	@RequestMapping("addMemo.do")
+	public void insertReply(HttpServletResponse response, String mContent, String userId) throws IOException {
+		
+		Memo memo = new Memo();
+		memo.setUserId(userId);
+		memo.setContent(mContent);
+		
+		int result = memoService.insertMemo(memo);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(result, response.getWriter());
+		
+	}
+	
+	// È¸¿ø¼öÁ¤
+	@RequestMapping("mUserUpdate.do")
+	public void mUserUpdate(HttpServletRequest request, ModelAndView mv, Member m) {
+		System.out.println("Àßµé¾î¿Ã±î¿ä? : " + m);
+		//int result = mService.mUserDelete(m);
+		//if(result > 0) {
+			//return "redirect:mUserDetail.do?userId=" + m;
+		//}
+		//else {
+			//throw new MemberException("È¸¿øÁ¤º¸ »èÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+		//}
 	}
 }

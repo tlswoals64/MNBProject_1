@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <!--PageInfo pi = "";
-    	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-     -->
-<%
-	int listCount = 10;
-	int currentPage = 10;
-	int maxPage = 10;
-	int startPage = 1;
-	int endPage = 10;
-%>
+
 <!DOCTYPE html>
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
@@ -215,7 +206,35 @@
 		text-align: center;
 		border-bottom: 1px solid gray;
 	}
+	
+	#userId{
+		width : 100px;
+	}
+	#userLevelName{
+		width : 150px;
+	}
+	#userName{
+		width : 70px;
+	}
+	#birth{
+		width : 150px;
+	}
+	#userAddr{
+		width : 450px;
+	}
+	#createDate{
+		width : 150px;
+	}
+	#status{
+		width : 100px;
+	}
 	/**********************************************************/
+	
+	#amountUser{
+		font-size : 18px;
+		color : #01A9DB;
+		
+	}
 	/*********************페이징***********************/
 	.pagingArea button{
 		border-radius: 15px; 
@@ -229,7 +248,7 @@
 		padding-bottom :20px;
 		text-align : center;
 		width : 700px;
-		margin-left : 120px;
+		margin-left : 250px;
 	}
 	/************************************************/
 </style>
@@ -292,10 +311,10 @@
 		</nav>	
 		
 		<div class="content">
-			<div id="memberListB">회원관리</div>
+			<div id="memberListB">회원관리<b id="amountUser">총 회원 수 : ${ pi.listCount }</b></div>
 			<div class="memberListArea">
-				<h3>총 회원 수 : ${ pi.listCount }</h3>
 				<div class="memberList">
+					
 					<table class="memberListTabe">
 						<tr class="memberListTrTh">
 							<th>아이디</th>
@@ -306,56 +325,77 @@
 							<th>가입날짜</th>
 							<th>회원유무</th>
 						</tr>
-						<c:forEach var="m" items="${ list }"> 
-						<tr class="memberListTr">
-							<td class="memberListTd" id="userId">${ m.userId }</td>
-							<td class="memberListTd" id="userLevel">
-							<c:if test=" ${ m.memberType ==1}">일반 회원</c:if>
-          					<c:if test=" ${ m.memberType ==2}">베이비시터 회원</c:if>
-          					</td>
-							<td class="memberListTd" id="userName">${ m.userName }</td>
-							<td class="memberListTd" id="userAge">${ m.birth }</td>
-							<td class="memberListTd" id="userAddr">${ m.address }</td>
-							<td class="memberListTd" id="createDate">${ m.modify_Date }</td>
-							<td class="memberListTd" id="status">${ m.status }</td>
-						</tr>
+						<c:forEach var="m" items="${ list }">
+						
+							<tr class="memberListTr" onclick="goUserDetail(this);">
+								<td class="memberListTd" id="userId">${ m.userId }</td>
+								<%-- <c:param name="userId" value="${ m.userId }"/> --%>
+								<td class="memberListTd" id="userLevelName">
+									<c:if test="${ m.memberType == 1}">일반 회원</c:if>
+		          					<c:if test="${ m.memberType == 2}">베이비시터 회원</c:if>
+		          				</td>
+								<td class="memberListTd" id="userName">${ m.userName }</td>
+								<td class="memberListTd" id="birth">${ m.birth }</td>
+								<td class="memberListTd" id="userAddr">${ m.address.replaceAll("/", " ") }</td>
+								<td class="memberListTd" id="createDate">${ m.modify_Date }</td>
+								<td class="memberListTd" id="status">${ m.status }</td>
+							</tr>
+							
+							<script>
+								function goUserDetail(t){
+									var userId = $(t).children("#userId").text();
+									location.href = 'mUserDetail.do?userId=' + userId;
+								}
+							</script>
+							
 						</c:forEach>
 								
 					</table>
+					
 				</div>
 			</div>
 			<!-- paging 부분 -->
 			<div class="pagingArea">
-				<% if(true) {%>
-					<button onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=1'">&lt;&lt;</button>
-																										  <!-- << -->
-					<!-- 이전 페이지로 가는 버튼 -->
-					<button id="beforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= currentPage - 1 %>'">&lt;</button>
-										<!-- < -->
-					<script>
-						// 1페이지 이하면 활성화 안되게
-						if(<%= currentPage %> <= 1){
-							$('#beforeBtn').attr("disabled", "true");
-						}
-					</script>
-					<!-- 10개의 페이지 목록 -->
-					<% for(int p = startPage; p <= endPage; p++){ %>
-						<% if(p == currentPage){ %>
-							<button id="choosen" disabled><%= p %></button>
-							<% } else {%>
-								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= p %>'"><%= p %></button>
-							<% } %>
-						<% } %>
-					<% } %>
-					<!-- 다음 페이지로 -->
-					<button id="afterBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= currentPage + 1 %>'">&gt;</button>
-					<script>
-						if(<%= currentPage %> >= <%= maxPage %>){
-							$('#afterBtn').attr('disabled', 'true');
-						}
-					</script>
+         
+	            <!-- [이전] -->
+	            <c:if test="${ pi.currentPage <= 1 }">
+	               [이전] &nbsp;
+	            </c:if>
+	            <c:if test="${ pi.currentPage > 1 }">
+	               <c:url var="before" value="mLevelList.do">
+	                  <c:param name="page" value="${ pi.currentPage - 1 }"/>
+	               </c:url>
+	               <a href="${ before }">[이전]</a> &nbsp;
+	            </c:if>
+	            
+	            <!-- 페이지 -->
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <c:if test="${ p eq currentPage }">
+	                  <font color="red" size="4"><b>[${ p }]</b></font>
+	               </c:if>
+	               
+	               <c:if test="${ p ne currentPage }">
+	                  <c:url var="pagination" value="mLevelList.do">
+	                     <c:param name="page" value="${ p }"/>
+	                     <!-- blist.do?page=${p}값   -->
+	                  </c:url>
+	                  <a href="${ pagination }">${ p }</a> &nbsp;
+	               </c:if>
+	            </c:forEach>
+	            
+	            <!-- [다음] -->
+	            <c:if test="${ pi.currentPage >= pi.maxPage }">
+	               [다음]
+	            </c:if>
+	            <c:if test="${ pi.currentPage < pi.maxPage }">
+	               <c:url var="after" value="mLevelList.do">
+	                  <c:param name="page" value="${ pi.currentPage + 1 }"/>
+	               </c:url> 
+	               <a href="${ after }">[다음]</a>
+            	</c:if>
 					<!-- 맨 끝으로 -->
 			</div>
+
 		</div>
 	</div>
 </body>

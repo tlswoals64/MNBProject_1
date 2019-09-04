@@ -3,23 +3,23 @@ package com.kh.MNB.member.model.vo;
 import java.sql.Date;
 
 public class Member {
-      private String userId; // íšŒì› ì•„ì´ë””
-      private String userPwd; // íšŒì› ë¹„ë°€ë²ˆí˜¸
-      private String userName; // íšŒì› ì´ë¦„
-      private Date birth; // íšŒì› ìƒì¼
-      private String nickName; // íšŒì› ë‹‰ë„¤ì„
-      private String gender; // íšŒì› ì„±ë³„
-      private String email; // íšŒì› ì´ë©”ì¼
-      private String phone; // íšŒì› ì—°ë½ì²˜
-      private String address; // íšŒì› ì£¼ì†Œ
-      private int memberType; // íšŒì› íƒ€ì…(1ì´ë©´ ì¼ë°˜íšŒì› 2ë©´ ë² ì´ë¹„ì‹œí„°íšŒì›)
-      private String status; // íšŒì› ìƒíƒœ
-      private Date enroll_Date; // íšŒì› ìˆ˜ì •ë‚ ì§œ
-      private Date modify_Date; // íšŒì› ê°€ì…ë‚ ì§œ
+      private String userId; // È¸¿ø ¾ÆÀÌµğ
+      private String userPwd; // È¸¿ø ºñ¹Ğ¹øÈ£
+      private String userName; // È¸¿ø ÀÌ¸§
+      private Date birth; // È¸¿ø »ıÀÏ
+      private String nickName; // È¸¿ø ´Ğ³×ÀÓ
+      private String gender; // È¸¿ø ¼ºº°
+      private String email; // È¸¿ø ÀÌ¸ŞÀÏ
+      private String phone; // È¸¿ø ¿¬¶ôÃ³
+      private String address; // È¸¿ø ÁÖ¼Ò
+      private int memberType; // È¸¿ø Å¸ÀÔ(1ÀÌ¸é ÀÏ¹İÈ¸¿ø 2¸é º£ÀÌºñ½ÃÅÍÈ¸¿ø)
+      private String status; // È¸¿ø »óÅÂ
+      private Date enroll_Date; // È¸¿ø ¼öÁ¤³¯Â¥
+      private Date modify_Date; // È¸¿ø °¡ÀÔ³¯Â¥
       
       public Member() {}
       
-      // ì „ì²´ ìƒì„±ì
+      // ÀüÃ¼ »ı¼ºÀÚ
       public Member(String userId, String userPwd, String userName, Date birth, String nickName, String gender,
             String email, String phone, String address, int memberType, String status, Date enroll_Date,
             Date modify_Date) {
@@ -38,7 +38,7 @@ public class Member {
          this.enroll_Date = enroll_Date;
          this.modify_Date = modify_Date;
       }
-      // enroll_Date ìˆ˜ì •ë‚ ì§œ, modify_Date ê°€ì…ë‚ ì§œ ëº€ ìƒì„±ì 
+      // enroll_Date ¼öÁ¤³¯Â¥, modify_Date °¡ÀÔ³¯Â¥ »« »ı¼ºÀÚ 
       public Member(String userId, String userPwd, String userName, Date birth, String nickName, String gender,
             String email, String phone, String address, int memberType, String status) {
          super();

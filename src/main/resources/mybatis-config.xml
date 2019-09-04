@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.MNB.propose.model.vo.Propose" alias="Propose"/>
 		<typeAlias type="com.kh.MNB.report.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.MNB.likeTb.model.vo.LikeTb" alias="LikeTb"/>
+		<typeAlias type="com.kh.MNB.memo.model.vo.Memo" alias="Memo"/>
 	</typeAliases>
 	
 	<mappers>
@@ -34,6 +35,7 @@
 		<mapper resource="mappers/note-mapper.xml"/>
 		<mapper resource="mappers/propose-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml"/>
+		<mapper resource="mappers/memo-mapper.xml"/>
 		
 	</mappers>
 </configuration>

@@ -7,10 +7,14 @@ import com.kh.MNB.member.model.vo.Member;
 
 
 public interface MemberService {
-	// ëŠìŠ¨í•œ ê²°í•©êµ¬ì¡°ë•Œë¬¸ì—
+	// ´À½¼ÇÑ °áÇÕ±¸Á¶¶§¹®¿¡
 	
-	int getListCount(); // í˜ì´ì§•ì²˜ë¦¬ë¥¼ìœ„í•´ ì „ì²´ê°¯ìˆ˜ë¥¼ ê°€ì ¸ì˜´
+	int getListCount(); // ÆäÀÌÂ¡Ã³¸®¸¦À§ÇØ ÀüÃ¼°¹¼ö¸¦ °¡Á®¿È
 	
-	ArrayList<Member> selectmemberLevelList(PageInfo pi); //member listë¥¼ ì­‰ ë°›ì•„ì˜´
+	ArrayList<Member> selectmemberLevelList(PageInfo pi); //member list¸¦ Âß ¹Ş¾Æ¿È
+
+	Member selectUserDetail(String userId); // member DetailÀ» ¹Ş¾Æ¿È
+
+	int mUserDelete(String userId);
 	
 }

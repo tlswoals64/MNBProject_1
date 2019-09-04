@@ -186,14 +186,14 @@ input, textarea, select {
                      </td>
                   </tr>
 	
-                  <tr class="first">
+                <!--   <tr class="first">
                      <th>의류종류</th>
                      <td class="pnawtd">
                            <select class="po" style="width: 150px;" name='category' id='Smallclassification'>
                               <option>선택</option>
                            </select> 
                      </td>
-                  </tr>
+                  </tr> -->
                   <tr>
                      <th scope="row">제목</th>
                      <td class="pnawtd"><input name="subject" value="" class="inputTypeText" style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
@@ -229,12 +229,8 @@ input, textarea, select {
                            <div id="contentImgArea3" class="po">
                               <img id="contentImg3" width="120" height="100">
                            </div>
-                           <div id="contentImgArea4" class="po">
-                              <img id="contentImg4" width="120" height="100">
-                           </div>
                         </div>
                      </td>
-
                   </tr>
                </tbody>
             </table>

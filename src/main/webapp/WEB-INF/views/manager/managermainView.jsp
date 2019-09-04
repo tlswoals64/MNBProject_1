@@ -271,7 +271,7 @@
 			<div id="userMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="userMa" onclick="location.href='mLevelList.do';">회원 관리</div>
+	        			<div id="userMa" onclick="location.href='mLevelList.do'">회원 관리</div>
 	       			 </li>
 			        <li class="nav2Menu">
 			        	<div id="userLevel">회원 등급</div>

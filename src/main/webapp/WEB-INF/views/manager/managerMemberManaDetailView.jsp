@@ -1,17 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!--PageInfo pi = "";
-    	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-     -->
-<%
-	int listCount = 10;
-	int currentPage = 10;
-	int maxPage = 10;
-	int startPage = 1;
-	int endPage = 10;
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
 <style>
 	*{
@@ -215,6 +205,11 @@
 		width : 300px;
 	}
 	
+	#userStatus_selectOption{
+		height : 30px;
+		width : 200px;
+	}
+	
 	/*************** info 테이블 2*****************/
 	#userInfoArea2{
 		margin-left : 20px;
@@ -320,46 +315,17 @@
 		margin-left : 23px;
 		margin-top : 10px;
 	}
-	
 	#memoB{
 		font-size : 20px;
 		font-weight : bold;
+		margin-bottom : 10px;
+		
 	}
-	
-	.memoIdTd{
-		width : 200px;
-		padding: 10px;
-		height: 70px;
-		text-align: center;
-		border-top: 1px solid rgb(240,240,240);
-		border-bottom: 1px solid rgb(240,240,240);
-	}
-	
-	.memoContentTd{
-		width : 600px;
-		padding: 10px;
-		height: 70px;
-		text-align: center;
-		border-top: 1px solid rgb(240,240,240);
-		border-bottom: 1px solid rgb(240,240,240);
-	}
-	
-	.memoDateTd{
-		width : 150px;
-		padding: 10px;
-		height: 70px;
-		text-align: center;
-		border-top: 1px solid rgb(240,240,240);
-		border-bottom: 1px solid rgb(240,240,240);
-	}
-	
-	.memoBtnTd{
-		width : 250px;
-		padding: 10px;
-		height: 70px;
-		text-align: center;
-		border-top: 1px solid rgb(240,240,240);
-		border-bottom: 1px solid rgb(240,240,240);
+	#mtb tbody td{
+		text-align : center;
+		border-bottom : 1px solid rgb(240,240,240);
+		border-top : 1px solid rgb(240,240,240);
+
 	}
 	
 	#delBtn, #rSubmit, #secBtn {
@@ -378,6 +344,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -429,99 +396,196 @@
 		</nav>	
 		
 		<div class="content">
-			<div id="memberListB">회원정보보기</div>
-			<div id="userInfoArea1">
-				<table id="userInfoTable">
-					<tr class="userInfoTr">
-						<th class="userInfoTh">아이디</th>
-						<td class="userInfoTd">0322sol</td>
-						<th class="userInfoTh">이름</th>
-						<td class="userInfoTd"><input type="text" value="이한솔" style="width:300px;height:30px;"></td>
-					</tr>
-					<tr class="userInfoTr"> 
-						<th class="userInfoTh">생년월일</th>
-						<td class="userInfoTd">1995.03.22</td>
-						<th class="userInfoTh">가입일자</th>
-						<td class="userInfoTd">2018.08.08</td>
-					</tr>
-					<tr class="userInfoTr"> 
-						<th class="userInfoTh">회원등급</th>
-						<td class="userInfoTd">
-							<select id="userLevel_selectOption">
-								<option value="1">일반회원</option>
-								<option value="2">베이비시터 회원</option>	
-							</select></td>
-						<th class="userInfoTh">회원상태</th>
-						<td class="userInfoTd">
-							Y &nbsp;&nbsp;&nbsp;
-							<button id="secBtn">탈퇴하기</button>
-						</td>
-					</tr>
-					<tr>
-						<td class="userInfoTd" colspan="4" style="font-size:12px; text-align:left">
-							* 베이비시터로 등급 변경은 회원등급 페이지에서 가능합니다.(베이비시터 신청서를 작성한 회원에 대해서만)
-						</td>
-					</tr>
-				</table>
-			</div>
-			
-			<div id="userInfoArea2">
-				<table id="userDetailTable">
-					<tr class="userDetailTr">
-						<th class="userDetailTh">주소</th>
-						<td class="userDetailTd" colspan="3">
-							주소 <a onclick="addressPopup();"><span class="addrSearch" style="font-size: 15px;">주소검색></span></a>
-	               			<div><input type="text" name="address2" id="address2" class="form-control" value="인천 계양구 장제로743번길 14"></div>
-	            		
-	               			<div><input type="text" name="address3" id="address3" class="form-control" value="(작전동, 작전2차뉴서울아파트)"></div>
-	            		
-	               			<div><br>상세주소<input type="text" name="address4" id="address4" class="form-control" value="201동 606호"></div>
-	               		</td>
-					</tr>
-					<tr class="userDetailTr">
-						<th class="userDetailTh">핸드폰번호</th>
-						<td class="userDetailTd"><input type="text" value="010-8488-6817" style="width:300px;height:30px;"></td>
-						<th class="userDetailTh">이메일</th>
-						<td class="userDetailTd"><input type="text" value="0322sol@naver.com" style="width:300px;height:30px;"></td>
-					</tr>
-				</table>
-			</div>
-			
-			<div id="saveBtnArea">
-				<button id="saveBtn">저장하기</button>
-			</div>
-			
-			<div id="userMemoArea">
-				<table id="userMemoTable">
-					<tr class="userMemoTr">
-						<th class="userMemoTh">회원메모</th>
-						<td class="userMemoTextTd"><textarea cols=100 rows=3 id=rContent style="resize: none;"></textarea></td>
-   						<td class="userMemoBtnTd"><button id="rSubmit">등록하기</button></td>
-					</tr>
-				</table>
-			</div>
-			
-			<div id="memoArea">
-				<div id="memoB">메모 내역</div>
-				<table id="memoTable">
-					<tr class="memoTr">
-						<td class="memoIdTd">admin</td>
-						<td class="memoContentTd">비밀번호 변경 요청함</td>
-						<td class="memoDateTd">2018.03.22</td>
-						<td class="memoBtnTd"><button id="delBtn">삭제</button></td>
-					</tr>
-					<tr class="memoTr">
-						<td class="memoIdTd">admin2</td>
-						<td class="memoContentTd">일반회원으로 변경을 요청함</td>
-						<td class="memoDateTd">2018.09.24</td>
-						<td class="memoBtnTd"><button id="delBtn">삭제</button></td>
-					</tr>
-				</table>
-			</div>
-			
+			<form action="mUserUpdate.do" method="post">
+				<div id="memberListB">회원정보보기</div>
+				<div id="userInfoArea1">
+					<table id="userInfoTable">
+						<tr class="userInfoTr">
+							<th class="userInfoTh">아이디</th>
+							<td class="userInfoTd"><input type="hidden" name="userId" value="${ m.userId }">${ m.userId }</td>
+							<th class="userInfoTh">이름</th>
+							<td class="userInfoTd"><input type="text" name="userName" value="${ m.userName }" style="width:300px;height:30px;">
+													
+							</td>
+						</tr>
+						<tr class="userInfoTr"> 
+							<th class="userInfoTh">닉네임</th>
+							<td class="userInfoTd"><input type="hidden" name="nickName" value="${ m.nickName }">${ m.nickName }</td>
+							<th class="userInfoTh">생년월일</th>
+							<td class="userInfoTd"><input type="hidden" name="birth" value="${ m.birth }">${ m.birth }</td>
+						</tr>
+						<tr class="userInfoTr"> 
+							<th class="userInfoTh">성별</th>
+							<td class="userInfoTd">${ m.gender }</td>
+							<th class="userInfoTh">가입일자</th>
+							<td class="userInfoTd">${ m.enroll_Date }</td>
+						</tr>
+						<tr class="userInfoTr"> 
+							<th class="userInfoTh">회원등급</th>
+							<td class="userInfoTd">
+								<select id="userLevel_selectOption">
+									<c:if test="${ m.memberType == 1}">
+										<option value="1" selected>일반회원</option>
+										<option value="2" disabled>베이비시터 회원</option>	
+									</c:if>
+			          				<c:if test="${ m.memberType == 2}">
+			          					<option value="1" >일반회원</option>
+										<option value="2" selected>베이비시터 회원</option>	
+										<input type="hidden" name="memberType" >
+			          				</c:if>
+								</select>
+							</td>
+							<th class="userInfoTh">회원상태</th>
+							<td class="userInfoTd">
+								<select id="userStatus_selectOption">
+									
+									<c:if test="${ m.status == 'Y'}">
+										<option value="1" selected>Y</option>
+										<option value="2">N</option>	
+									</c:if>
+			          				<c:if test="${ m.status == 'N'}">
+			          					<option value="1">Y</option>
+										<option value="2" selected>N</option>	
+			          				</c:if>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="userInfoTd" colspan="4" style="font-size:12px; text-align:left">
+								* 베이비시터로 등급 변경은 회원등급 페이지에서 가능합니다.(베이비시터 신청서를 작성한 회원에 대해서만)
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="userInfoArea2">
+					<table id="userDetailTable">
+						<tr class="userDetailTr">
+							<th class="userDetailTh">주소</th>
+							<td class="userDetailTd" colspan="3">
+								주소 <a onclick="addressPopup();"><span class="addrSearch" style="font-size: 15px;">주소검색></span></a>
+		               				<c:forTokens var="addr" items="${ m.address }" delims="/" varStatus="status">
+					                 	 <c:if test="${ status.index eq 0}">
+					                     	<div><input type="text" name="address2" id="address2" class="form-control" value= "${ addr }"></div>
+						                  </c:if>
+										  <c:if test="${ status.index eq 1 }">					       
+											<div><input type="text" name="address3" id="address3" class="form-control" value= "${ addr }"></div>
+						                  </c:if>
+						                  <c:if test="${ status.index eq 2 }">
+											<div><input type="text" name="address4" id="address4" class="form-control" value= "${ addr }"></div>
+						                  </c:if>
+						               </c:forTokens>
+		               		</td>
+						</tr>
+						<tr class="userDetailTr">
+							<th class="userDetailTh">핸드폰번호</th>
+							<td class="userDetailTd"><input type="text" value="${ m.phone }" style="width:300px;height:30px;"></td>
+							<th class="userDetailTh">이메일</th>
+							<td class="userDetailTd"><input type="text" value="${ m.email }" style="width:300px;height:30px;"></td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="saveBtnArea">
+					<button id="saveBtn" type="submit">저장하기</button>
+				</div>
+				
+				<div id="userMemoArea">
+					<table id="userMemoTable">
+						<tr class="userMemoTr">
+							<th class="userMemoTh">회원메모</th>
+							<td class="userMemoTextTd"><textarea cols=100 rows=3 id=rContent style="resize: none;"></textarea></td>
+	   						<td class="userMemoBtnTd"><button id="rSubmit">등록하기</button></td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="memoArea">
+					<div id="memoB">메모 내역</div>
+					<table class="memoTable" id="mtb">					
+						<tbody>
+						   			
+						</tbody>
+					</table>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
+
+<script>
+
+//메모 리스트 ajax
+	function getmemoList(){
+			var userId = '${m.userId}';
+			console.log("ajax전" + userId);
+			$.ajax({
+				url: "memo.do",
+				data: {userId:userId},
+				dataType: "json",
+				success: function(data){
+					$tableBody = $("#mtb tbody");
+					$tableBody.html("");
+					var $tr;
+					var $rWriter;
+					var $rContent;
+					var $rCreateDate;
+					
+					$("#rCount").text("댓글 (" + data.length + ")");
+					
+					if(data.length > 0){
+						for(var i in data){
+							$tr = $("<tr>");
+						    $rContent = $("<td width='700px'; height='70px'; background:'green'>").text(decodeURIComponent(data[i].content.replace(/\+/g, " ")));
+						    $rCreateDate =  $("<td width='200'>").text(data[i].create_date);
+						    $tr.append($rWriter);
+		   					$tr.append($rContent);
+		   					$tr.append($rCreateDate);
+		   					$tableBody.append($tr);
+						}
+					}
+					else{
+						$tr = $("<tr>");
+						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+			
+				   	$tr.append($rContent);
+					$tableBody.append($tr);
+					}
+				}
+		 	});
+	};
+	
+	$(function(){
+		getmemoList();
+   	
+   	});
+		
+	   	
+	$("#rSubmit").on("click", function(){
+	   	var mContent = $("#rContent").val();
+	   	var userId = '${m.userId}';
+	   		
+	   	$.ajax({
+	   		url: "addMemo.do",
+	   		data: {mContent:mContent, userId:userId},
+	   		type: "post",
+	   		success: function(data){
+	   				
+	   			if(data > 0){
+	   				$("#rContent").val("");
+	   				getmemoList();
+	   			}
+	   			else{
+	   				alert("댓글등록에 실패했습니다.");
+	   				$("#rContent").val("");
+	   			}
+	   				
+	   		}
+	   	});
+	});	   	
+	   	
+   </script>
+
 <script>
     $(document).ready(function(){
         $(".menu>div").click(function(){

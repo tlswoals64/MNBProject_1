@@ -25,12 +25,12 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
     margin: 0px;
     padding: 0px;}
 *#header {width:100%;background:url('resources/images/main/header_bak_img.png') no-repeat;min-height:908px;}
-
+	
 #content{width:100%;margin-bottom:65px;}
 .content_wrap{width:1200px;margin:0 auto}
 .content_wrap_title h2{font-family: 'NanumMyeongjo';font-size:48px;text-align:center;color:#afbf00;padding-bottom:25px;}
 .content_wrap_title p {font-size:18px; text-align:center; margin-top:25px;}
-
+	
 #content2 {width:100%;}
 .content2_right {width:1200px;margin:0 auto;margin-top:130px;}
 .content2_right ul li {float:left;}
@@ -39,7 +39,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .content2_right ul li h3 {font-size:36px;}
 .content2_right ul li p {width:100%;font-size:14px;padding-top:30px;}
 .content2_right ul li h5 {padding:10px 15px; border:1px solid #000;font-size:14px;width:150px;text-align:center;margin-top:35px;}
-
+	
 .content2_right2 {width:1200px;margin:0 auto;margin-top:130px;}
 .content2_right2 ul li {float:left;}
 .content2_right2 ul li img {width:80%}
@@ -48,7 +48,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .content2_right2 ul .li_right2 h3 {font-size:36px;}
 .content2_right2 ul .li_right2 p {width:100%;font-size:14px;padding-top:30px;}
 .content2_right2 ul .li_right2 h5 {padding:10px 15px; border:1px solid #000;font-size:14px;width:150px;text-align:center;margin-top:35px;}
-
+	
 .content2_left {width:1200px;margin:0 auto;margin-top:130px;}
 .content2_left ul li {float:left;}
 .content2_left ul li img {width:80%;text-align:right;}
@@ -57,13 +57,13 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .content2_left ul .li_text h3 {font-size:36px;}
 .content2_left ul .li_text p {width:100%;font-size:14px;padding-top:30px;}
 .content2_left ul .li_text h5 {padding:10px 15px; border:1px solid #000;font-size:14px;width:150px;text-align:center;margin-top:35px;}
-
+	
 </style>
 </head>
 <body>
 	<jsp:include page="WEB-INF/views/common/header.jsp"></jsp:include>
   <div class="both"></div>
-
+	
   <div id="content">
    <div class="content_wrap">
       <div class="content_wrap_title">
@@ -86,7 +86,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
             이럴때 비슷한 또래가 있어 육아용품 공유를 할 수 있다면 얼마나<br>
             좋을까요? 이러한 고민을 가진 부모들에게 추천합니다!<br>
             육아용품 나눔하고 나눔받아가세요~ </p>
-         <h5><a href="#">더 많은 정보보기</a></h5>
+         <h5><a href="nBoard.do">더 많은 정보보기</a></h5>
          </li>
       </ul>
    </div>

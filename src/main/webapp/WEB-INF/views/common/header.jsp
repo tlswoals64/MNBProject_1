@@ -9,7 +9,7 @@
 	body {margin:0;padding:0;  text-decoration:none; font-family:"NanumSquare","NanumMyeongjo","malgun","나눔고딕", "NanumGothic", "돋움", "Dotum", "굴림", "Gulim", "Sans-serif","Roboto"; font-size:13px; letter-spacing:-1px; background:#fff;line-height:160%}
 	html{ }
 	img{border:0; vertical-align:middle;}
-	ul{list-style:none;}
+	ul{list-style:none;  margin:0; padding:0;}
 	li{list-style:none;}
 	a {text-decoration:none;color:#000;cursor:pointer;}
 	a:link, a:visited {text-decoration:none;color:#000;}
@@ -46,6 +46,7 @@
 	<div class="header_btn_wrap">
 		<div class="header_btn">
 			<ul>
+				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
 				<li><A href="#">LOGIN</a></li>
 				<li><A href="#">JOIN</a></li>
 				<li><A href="#">베이비시터등록</a></li>
