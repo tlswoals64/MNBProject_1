@@ -24,8 +24,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public ArrayList<Member> selectmemberLevelList(PageInfo pi) {
-		return mDAO.selectmemberLevelList(pi);
+	public ArrayList<Member> selectmemberManaList(PageInfo pi) {
+		return mDAO.selectmemberManaList(pi);
 	}
 	
 	@Override
@@ -34,8 +34,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int mUserDelete(String userId) {
-		return mDAO.mUserDelete(userId);
+	public int mUserUpdate(Member m) {
+		return mDAO.mUserUpdate(m);
 	}
+	
 	
 }

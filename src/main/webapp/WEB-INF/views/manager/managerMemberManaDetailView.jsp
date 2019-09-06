@@ -375,10 +375,10 @@
 			<div id="userMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="userMa">회원 관리</div>
+	        			<div id="userMa" onclick="location.href='mManaList.do'">회원 관리</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="userLevel">회원 등급</div>
+			        	<div id="userLevel" onclick="location.href='mLevelList.do'">회원 등급</div>
 			        </li>
 			    </ul>
 			</div>
@@ -416,14 +416,14 @@
 						</tr>
 						<tr class="userInfoTr"> 
 							<th class="userInfoTh">성별</th>
-							<td class="userInfoTd">${ m.gender }</td>
+							<td class="userInfoTd"><input type="hidden" name="gender" value="${ m.gender }">${ m.gender }</td>
 							<th class="userInfoTh">가입일자</th>
 							<td class="userInfoTd">${ m.enroll_Date }</td>
 						</tr>
 						<tr class="userInfoTr"> 
 							<th class="userInfoTh">회원등급</th>
 							<td class="userInfoTd">
-								<select id="userLevel_selectOption">
+								<select id="userLevel_selectOption" name="memberType">
 									<c:if test="${ m.memberType == 1}">
 										<option value="1" selected>일반회원</option>
 										<option value="2" disabled>베이비시터 회원</option>	
@@ -431,21 +431,20 @@
 			          				<c:if test="${ m.memberType == 2}">
 			          					<option value="1" >일반회원</option>
 										<option value="2" selected>베이비시터 회원</option>	
-										<input type="hidden" name="memberType" >
 			          				</c:if>
 								</select>
 							</td>
 							<th class="userInfoTh">회원상태</th>
 							<td class="userInfoTd">
-								<select id="userStatus_selectOption">
+								<select id="userStatus_selectOption" name="status">
 									
 									<c:if test="${ m.status == 'Y'}">
-										<option value="1" selected>Y</option>
-										<option value="2">N</option>	
+										<option value="Y" selected>Y</option>
+										<option value="N">N</option>	
 									</c:if>
 			          				<c:if test="${ m.status == 'N'}">
-			          					<option value="1">Y</option>
-										<option value="2" selected>N</option>	
+			          					<option value="Y">Y</option>
+										<option value="N" selected>N</option>	
 			          				</c:if>
 								</select>
 							</td>
@@ -466,12 +465,15 @@
 								주소 <a onclick="addressPopup();"><span class="addrSearch" style="font-size: 15px;">주소검색></span></a>
 		               				<c:forTokens var="addr" items="${ m.address }" delims="/" varStatus="status">
 					                 	 <c:if test="${ status.index eq 0}">
+					                 	 	<c:set var="address2" value="${ addr }"/>
 					                     	<div><input type="text" name="address2" id="address2" class="form-control" value= "${ addr }"></div>
 						                  </c:if>
-										  <c:if test="${ status.index eq 1 }">					       
+										  <c:if test="${ status.index eq 1 }">	
+										  	<c:set var="address3" value="${ addr }"/>				       
 											<div><input type="text" name="address3" id="address3" class="form-control" value= "${ addr }"></div>
 						                  </c:if>
 						                  <c:if test="${ status.index eq 2 }">
+						                  	<c:set var="address4" value="${ addr }"/>
 											<div><input type="text" name="address4" id="address4" class="form-control" value= "${ addr }"></div>
 						                  </c:if>
 						               </c:forTokens>
@@ -479,9 +481,9 @@
 						</tr>
 						<tr class="userDetailTr">
 							<th class="userDetailTh">핸드폰번호</th>
-							<td class="userDetailTd"><input type="text" value="${ m.phone }" style="width:300px;height:30px;"></td>
+							<td class="userDetailTd"><input type="text" name="phone" value="${ m.phone }" style="width:300px;height:30px;"></td>
 							<th class="userDetailTh">이메일</th>
-							<td class="userDetailTd"><input type="text" value="${ m.email }" style="width:300px;height:30px;"></td>
+							<td class="userDetailTd"><input type="text" name="email" value="${ m.email }" style="width:300px;height:30px;"></td>
 						</tr>
 					</table>
 				</div>
@@ -490,7 +492,8 @@
 					<button id="saveBtn" type="submit">저장하기</button>
 				</div>
 				
-				<div id="userMemoArea">
+			</form>
+			<div id="userMemoArea">
 					<table id="userMemoTable">
 						<tr class="userMemoTr">
 							<th class="userMemoTh">회원메모</th>
@@ -508,7 +511,6 @@
 						</tbody>
 					</table>
 				</div>
-			</form>
 		</div>
 	</div>
 </body>

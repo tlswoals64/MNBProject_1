@@ -76,7 +76,9 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div class="boardchoose_wrap">
 		<ul>
 			<li><a href="#"><img src="resources/images/board/communityIntro.png" width="550" height="600"></a></li>
+			   <p class="both"></p>
 			<li><a href="nBoard.do"><img src="resources/images/board/nanumIntro.png" width="550" height="600"></a></li>
+			   <p class="both"></p>
 			
 		</ul>
 	</div>
@@ -93,7 +95,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 				</div>
 				<div class="notice_cont">
 					내용
-				</div>	
+				</div>
 			</div>
 		</li>
 		<li>

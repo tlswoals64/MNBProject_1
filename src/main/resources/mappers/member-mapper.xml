@@ -23,10 +23,19 @@
   		where userId = #{ userId }
   	</select>
   	
-  	<!-- 관리자용 회원 탈퇴 -->
-  	<update id="mUserDelete" parameterType="string">
+  	<!-- 관리자용 회원 수정 -->
+  	<update id="mUserUpdate" parameterType="Member">
   		update member
-  		set status = 'N'
+  		set userName = #{ userName },
+  			memberType = #{ memberType},
+  			status = #{ status },
+  			address = #{ address},
+  			phone = #{ phone },
+  			email = #{ email},
+  			modify_Date = sysdate
   		where userId = #{ userId }
   	</update>
+  	
+  	
+  	
 </mapper>

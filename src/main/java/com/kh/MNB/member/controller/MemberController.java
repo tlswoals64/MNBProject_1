@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.MNB.board.model.vo.PageInfo;
-import com.kh.MNB.board.model.vo.Reply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.exception.MemberException;
 import com.kh.MNB.member.model.service.MemberService;
@@ -41,9 +39,9 @@ public class MemberController {
 		return "manager/managermainView";
 	}
 	
-	// 회원 등급 리스트
-	@RequestMapping("mLevelList.do")
-	public ModelAndView manaLevel(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+	// 회원 관리 리스트
+	@RequestMapping("mManaList.do")
+	public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = page;
@@ -53,7 +51,7 @@ public class MemberController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 페이지에대한 정보
 		
-		ArrayList<Member> list = mService.selectmemberLevelList(pi);
+		ArrayList<Member> list = mService.selectmemberManaList(pi);
 		
 		if(list != null) {
 			mv.addObject("list", list);
@@ -111,14 +109,20 @@ public class MemberController {
 	
 	// 회원수정
 	@RequestMapping("mUserUpdate.do")
-	public void mUserUpdate(HttpServletRequest request, ModelAndView mv, Member m) {
-		System.out.println("잘들어올까요? : " + m);
-		//int result = mService.mUserDelete(m);
-		//if(result > 0) {
-			//return "redirect:mUserDetail.do?userId=" + m;
-		//}
-		//else {
-			//throw new MemberException("회원정보 삭제에 실패하였습니다.");
-		//}
+	public String mUserUpdate(HttpServletRequest request, Member m,
+								   @RequestParam("address2") String address2,
+								   @RequestParam("address3") String address3,
+								   @RequestParam("address4") String address4) {
+		
+		m.setAddress(address2 + "/" + address3+ "/" + address4);
+		
+		int result = mService.mUserUpdate(m);
+		if(result > 0) {
+			return "redirect:mUserDetail.do?userId=" + m.getUserId();
+		}
+		else {
+			throw new MemberException("회원정보 삭제에 실패하였습니다.");
+		}
 	}
+	
 }

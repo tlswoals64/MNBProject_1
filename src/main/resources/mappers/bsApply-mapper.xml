@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bsApplyMapper">
 
+	<!-- 관리자 신청 리스트 받아올때 페이징에 사용 -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from BSAPPLY
+	</select>
 	
+	<!-- 관리자 회원 레벨 리스트 -->
+	<select id="selectMLevelList" resultType="BSApply">
+		select b.userId, b.caring, b.intro, b.job, b.btype, b.activity, b.create_date, b.apply_date, m.username, m.birth, m.address
+		from bsapply b
+     		left outer join member m
+     		on b.userid = m.userid
+     	order by b.create_date
+	</select>
+	
+	<!-- 관리자 신청서 detail -->
+  	<select id="selectBsaDetail" parameterType="string" resultType="BSApply">
+  		select b.userId, b.caring, b.intro, b.job, b.btype, b.activity, b.apply_date, m.username, m.birth, m.address
+		from bsapply b
+     		left outer join member m
+     		on b.userid = m.userid
+  		where b.userId = #{ userId }
+  	</select>
+	
+	<!-- 회원 레벨 변경 -->
+	<update id="levelUpdate" parameterType="Member">
+		update bsapply
+		set apply_date = sysdate
+		where userid = #{ userId }  
+	</update>
+	<update id="levelMemberUpdate" parameterType="Member">
+		update member
+		set memberType = #{ memberType }
+		where userid = #{ userId }  
+	</update>
 	
 </mapper>
