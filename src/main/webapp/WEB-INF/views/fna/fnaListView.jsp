@@ -117,7 +117,10 @@ element.style {
         불건전 행위
     </c:when>
      <c:when test="${f.fType ==4}">
-        베이비시터 관련
+       기타
+    </c:when>
+     <c:when test="${f.fType ==5}">
+       베이비시터 관련
     </c:when>
     <c:otherwise>
         부모님 관련
