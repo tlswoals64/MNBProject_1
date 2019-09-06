@@ -37,6 +37,16 @@ public class MemberServiceImpl implements MemberService {
 	public int mUserUpdate(Member m) {
 		return mDAO.mUserUpdate(m);
 	}
+
+	@Override
+	public Member memberLogin(Member m) {
+		return mDAO.selectMember(m);
+	}
+
+	@Override
+	public String idSearch(Member m) {
+		return mDAO.idSearch(m);
+	}
 	
 	
 }

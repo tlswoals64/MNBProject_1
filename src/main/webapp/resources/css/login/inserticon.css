@@ -1,0 +1,466 @@
+@charset "UTF-8";
+
+/* 연령 아이콘1 */
+input[id="c1"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/milk-bottle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c1"]:checked+label {
+	background-image: url("../images/bcimg/milk-bottle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c1"] {
+	display: none;
+}
+
+
+/* 연령 아이콘2 */
+input[id="c2"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/pacifier.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c2"]:checked+label {
+	background-image: url("../images/bcimg/pacifier2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c2"] {
+	display: none;
+}
+
+/* 연령 아이콘3 */
+input[id="c3"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c3"]:checked+label {
+	background-image: url("../images/bcimg/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c3"] {
+	display: none;
+}
+/* 두번째연령 아이콘1 */
+input[id="c4"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/milk-bottle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c4"]:checked+label {
+	background-image: url("../images/bcimg/milk-bottle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c4"] {
+	display: none;
+}
+
+
+/* 두번째 연령 아이콘2 */
+input[id="c5"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/pacifier.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c5"]:checked+label {
+	background-image: url("../images/bcimg/pacifier2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c5"] {
+	display: none;
+}
+
+/* 두번째 연령 아이콘3 */
+input[id="c6"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c6"]:checked+label {
+	background-image: url("../images/bcimg/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c6"] {
+	display: none;
+}
+
+/* 세번째 연령 아이콘1 */
+input[id="c7"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c7"]:checked+label {
+	background-image: url("../images/bcimg/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c7"] {
+	display: none;
+}
+/* 세번째 연령 아이콘2 */
+input[id="c8"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c8"]:checked+label {
+	background-image: url("../images/bcimg/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c8"] {
+	display: none;
+}
+/* 세번째 연령 아이콘3 */
+input[id="c9"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c9"]:checked+label {
+	background-image: url("../images/bcimg/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c9"] {
+	display: none;
+}
+
+/* 네번째 아이콘 */
+input[id="cb4"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/puzzle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb4"]:checked+label {
+	background-image: url("../images/bcimg/puzzle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb4"] {
+	display: none;
+}
+
+
+/* 다섯번째 아이콘 */
+input[id="cb5"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/gohome.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb5"]:checked+label {
+	background-image: url("../images/bcimg/gohome2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb5"] {
+	display: none;
+}
+
+
+/* 여섯번째 아이콘 */
+input[id="cb6"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/book.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb6"]:checked+label {
+	background-image: url("../images/bcimg/book2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb6"] {
+	display: none;
+}
+
+
+/* 일곱번째 아이콘 */
+input[id="cb7"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/butterfly.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb7"]:checked+label {
+	background-image: url("../images/bcimg/butterfly2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb7"] {
+	display: none;
+}
+
+
+/* 여덟번째 아이콘 */
+input[id="cb8"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/hangle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb8"]:checked+label {
+	background-image: url("../images/bcimg/hangle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb8"] {
+	display: none;
+}
+
+
+/* 아홉번째 아이콘 */
+input[id="cb9"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/english.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb9"]:checked+label {
+	background-image: url("../images/bcimg/english2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb9"] {
+	display: none;
+}
+
+
+/* 열번째 아이콘 */
+input[id="cb10"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/study.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb10"]:checked+label {
+	background-image: url("../images/bcimg/study2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb10"] {
+	display: none;
+}
+
+
+/* 열한번째 아이콘 */
+input[id="cb11"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/soccer.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb11"]:checked+label {
+	background-image: url("../images/bcimg/soccer2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb11"] {
+	display: none;
+}
+
+
+/* 열두번째 아이콘 */
+input[id="cb12"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../images/bcimg/baby-feeding.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb12"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb12"] {
+	display: none;
+}
+/* 열세번째 아이콘 */
+input[id="cb13"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../images/bcimg/boy.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb13"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb13"] {
+	display: none;
+}
+/* 열네번째 아이콘 */
+input[id="cb14"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../images/bcimg/girl.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb14"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb14"] {
+	display: none;
+}
+/* 열다섯째 아이콘 */
+input[id="cb15"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../images/bcimg/boy.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb15"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb15"] {
+	display: none;
+}
+/* 열여섯 아이콘 */
+input[id="cb16"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../images/bcimg/girl.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb16"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb16"] {
+	display: none;
+}
+/* 열일곱째 아이콘 */
+input[id="cb17"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../images/bcimg/boy.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb17"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb17"] {
+	display: none;
+}
+/* 열여덟째 아이콘 */
+input[id="cb18"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../images/bcimg/girl.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb18"]:checked+label {
+	background-image: url("../images/bcimg/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb18"] {
+	display: none;
+}
+
+
+
+
+
+
+
+
