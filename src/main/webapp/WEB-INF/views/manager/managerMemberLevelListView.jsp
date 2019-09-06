@@ -299,11 +299,11 @@
 			
 			<div id="boardMbar">
 				 <ul class="nav2MenuUl">
-	        		<li class="nav2Menu">
+	        		<li class="nav2Menu" onclick="location.href='mDeList.do'">
 	        			<div id="boardMbb">신고게시판</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="boardQnA">QnA게시판</div>
+			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 			        </li>
 			    </ul>
 			</div>

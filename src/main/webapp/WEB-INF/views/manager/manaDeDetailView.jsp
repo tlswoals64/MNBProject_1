@@ -340,6 +340,19 @@ ul {
 	padding-bottom: 15px;
 }
 /*******************************************************/
+
+/*************content부분*************************?
+
+ .outer{
+      width: 600px; height: 500px; background-color: rgba(255, 255, 255, 0.4); border: 5px solid white;
+      margin-left: auto; margin-right: auto; margin-top: 50px;
+   }
+   .tableArea {width:450px; height:350px; margin-left:auto; margin-right:auto;}
+   #updateNoBtn, #cancelBtn, #deleteNoBtn{color: white;
+    border-color: #747cfd;
+    background-color: #747cfd;  border-radius: 15px; width: 50px; heigth: 100px; text-align: center; display: inline-block;}
+   #updateNoBtn:hover, #cancelBtn:hover, #deleteNoBtn:hover{cursor: pointer;}
+
 </style>
 <head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -413,119 +426,83 @@ ul {
 		<div class="content">
 			<form action="mUserLevelUpdate.do" method="post">
 				<div id="deListB">회원 등급 관리</div>
+				<div class="boardbox">
+      <div class="boxrow">
+         <div class = "boxrow-top">
+         </div>
+        <form action="views/propose/proposeUpdateForm.jsp" id="detailForm" name="detailForm">
+      
+            <table class="pnaw_box" summary="">
+               <tbody>
+                <tr class="first">
+                     <th>신고유형</th>
+                     <td class="pnawtd" id="rType">
+                     	<c:choose>
+							<c:when test="${r.rType ==1}">
+									부적절한 홍보
+							</c:when>
+							<c:when test="${r.rType ==2}">
+									음란성 또는 청소년에게 부적합한 내용
+							</c:when>
+							<c:when test="${r.rType ==3}">
+									명예훼손/사생활 침해 및 저작권침해 등
+							</c:when>
+							<c:otherwise>
+									 기타
+							</c:otherwise>
+						</c:choose>
+                     </td>
+                  </tr>
 
-				<div id="levelTableArea">
-					<div id="babyApply">맘시터 신청</div>
-					<table id="levelTable">
-						<tr class="levelTr">
-							<th class="levelTh">회원 아이디</th>
-							<td class="levelTd"><input type="hidden" name="userId" value="${ b.userId }">${ b.userId }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">회원 이름</th>
-							<td class="levelTd">${ b.userName }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">생년월일</th>
-							<td class="levelTd">${ b.birth }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">주소</th>
-							<td class="levelTd">${ b.address }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">육아돌봄 경험</th>
-							<td class="levelTd">
-								<table class="exTable">
-									<tr class="exTableTr">
-										<th class="exTitleTd">경력 사항</th>
-										<th class="exPeTd">기간</th>
-										<th class="exConTd">돌봄 내용</th>
-									</tr>
-									<c:forTokens var="caring" items="${ b.caring }" delims="/"
-										varStatus="status">
-										<c:if test="${ status.index eq 0}">
-											<tr class="exTableTr" id="ex1">
-												<c:forTokens var="tdcaring" items="${caring}" delims="@!"
-													varStatus="status">
-													<c:if test="${ status.index eq 0}">
-														<td class="exTitleTd" id="exTitle1">${ tdcaring }</td>
-													</c:if>
-												
-													<c:if test="${ status.index eq 1}">
-														<td class="exPeTd" id="exPe1">${ tdcaring }</td>
-													</c:if>
-													<c:if test="${ status.index eq 2}">
-														<td class="exConTd" id="exCon1">${ tdcaring }</td>
-													</c:if>
-												</c:forTokens>
-											</tr>
-										</c:if>
-										<c:if test="${ status.index eq 1}">
-											<tr class="exTableTr" id="ex2">
-												<c:forTokens var="tdcaring" items="${caring}" delims="@!"
-													varStatus="status">
-													<c:if test="${ status.index eq 0}">
-														<td class="exTitleTd" id="exTitle2">${ tdcaring }</td>
-													</c:if>
-													<c:if test="${ status.index eq 1}">
-														<td class="exPeTd" id="exPe2">${ tdcaring }</td>
-													</c:if>
-													<c:if test="${ status.index eq 2}">
-														<td class="exConTd" id="exCon2">${ tdcaring }</td>
-													</c:if>
-												</c:forTokens>
-											</tr>
-										</c:if>
-										<c:if test="${ status.index eq 2}">
-											<tr class="exTableTr" id="ex3">
-												<c:forTokens var="tdcaring" items="${caring}" delims="@!"
-													varStatus="status">
-													<c:if test="${ status.index eq 3}">
-														<td class="exTitleTd" id="exTitle1">${ tdcaring }</td>
-													</c:if>
-													<c:if test="${ status.index eq 3}">
-														<td class="exPeTd" id="exPe1">${ tdcaring }</td>
-													</c:if>
-													<c:if test="${ status.index eq 3}">
-														<td class="exConTd" id="exCon1">${ tdcaring }</td>
-													</c:if>
-												</c:forTokens>
-											</tr>
-										</c:if>
-									</c:forTokens>
-								</table>
-							</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">간단 자기소개</th>
-							<td class="levelTd">${ b.intro }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">아이돌봄 유형</th>
-							<td class="levelTd">${ b.bType }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">가능 활동</th>
-							<td class="levelTd">${ b.activity }</td>
-						</tr>
-
-						<tr class="levelTr">
-							<th class="levelTh">회원 등급</th>
-							<td class="levelTd"><select id="userLevel_selectOption" name="memberType">
-									<option value="1">일반회원</option>
-									<option value="2">베이비시터 회원</option>
-							</select></td>
-						</tr>
-					</table>
-				</div>
+                  <tr>
+                     <th scope="row">제목</th>
+                     <td class="pnawtd">
+                    	${ r.bTitle }
+                     
+      				<input type="hidden" name="rNo" value="${ r.rNo }">
+                     
+                  </td>   
+                  
+                
+                  </tr>
+                 <tr>
+                     <th scope="row">신고 아이디</th>
+                     <td class="pnawtd">${ r.rMan }</td>
+                  </tr>
+                  <tr>
+                <th scope="row">상세내용</th>
+                     <td class="write pnawtd">
+                     <textarea name="content"style='width: 100%; height: 200px;'readonly>${ r.bContent }</textarea>
+                  </td>
+                </tr>
+                  <tr>
+                     <th scope="row">신고내용</th>
+                     <td class="write pnawtd">
+                     <textarea name="content"style='width: 100%; height: 200px;'readonly>${ r.rContent }</textarea>
+                  </td>
+                   
+                
+                  </tr>
+               
+               </tbody>
+            </table>
+            
+             <div class="joinbox" style="max-width: 100%;">
+               <ul class="ul01">
+                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="탈퇴시키기" onclick="register();"></li>
+                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="확인여부" onclick="UpdateYN();"></li> 
+       
+          
+             
+                   <li><input class="inputbox02 btn btn-outline-dark" type="button" value="목록으로" onclick="menulo();"></li>
+               
+               </ul>
+            </div>
+        
+         </form>
+      </div>
+   </div>
+				
 				<div class="btnArea">
 					<button class="btn" id="applyBtn" type="submit">확인</button>
 					<div class="btn" id="cancleBtn"onclick="location.href='mLevelList.do'">취소</div>
@@ -550,5 +527,64 @@ ul {
         });
     });
 </script>
+ <script>
 
-</html>
+      $('#Smallclassification').change(function() {
+
+         $("#Smallclassification option:selected").each(function() {
+            console.log(this);
+         });
+      });
+
+     
+  
+    
+
+    // 등록 버튼이 눌렷을때
+   function register(){
+      var form = $('#writeform');
+      var isall = true;
+      console.log('실행');   
+      console.log($('#cates').val());
+      
+      
+      // 의류 값이 없을 경우 포커스
+      if($('#cates').val() == ''){
+          alert('의류를 선택해주세요.');
+          var offset = $('#cates').offset();
+          $("html").animate({scrollTop:offset.top},400);
+          isall = false;
+          return false;
+       }
+     /*  // 의류종류 선택 안햇을 경우 포커스
+      if($('#Smallclassification').val() == ''){
+          alert('의류종류를 선택해주세요.');
+          var offset = $('#cates').offset();
+          $("html").animate({scrollTop:offset.top},400);
+          isall = false;
+          return false;
+       } */
+      // text 박스 구분
+       form.find('input[type=text]').each (function(){
+         var obj = $(this);
+         console.log(obj);
+         
+         if (obj.attr('valch') == 'yes') {
+
+            if (obj.val() == '') {
+               alert(obj.attr('msg'));
+               obj.focus();
+               isall = false;
+               return false;
+            }
+         }
+      });
+       
+      
+   }
+
+
+
+   </script> 
+
+</html> 

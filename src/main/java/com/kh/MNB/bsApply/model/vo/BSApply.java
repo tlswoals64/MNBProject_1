@@ -3,22 +3,44 @@ package com.kh.MNB.bsApply.model.vo;
 import java.sql.Date;
 
 public class BSApply {
-   private String userId; // È¸¿ø ¾ÆÀÌµğ
-   private String userName; //È¸¿ø ÀÌ¸§
-   private Date birth; // È¸¿ø »ıÀÏ
-   private String address; // È¸¿øÁÖ¼Ò
-   private String caring; // À°¾Æµ¹º½°æÇè
-   private String intro; // °£´ÜÀÚ±â¼Ò°³
-   private String job; // Á÷¾÷
-   private String bType; // ¾ÆÀÌ À¯Çü 
-   private String activity; // È°µ¿
-   private Date apply_Date; // ½ÂÀÎÀÏ
-   private Date create_Date; // ½ÅÃ»ÀÏ
+   private String userId; // íšŒì›ì•„ì´ë””
+   private String userName; // íšŒì›ì´ë¦„
+   private Date birth; // ìƒì¼
+   private String address; // ì£¼ì†Œ
+   private String caring; // ê²½ë ¥
+   private String intro; // ìê¸°ì†Œê°œ
+   private String job; // ì§ì—…
+   private String bType; // ì•„ì´íƒ€ì…
+   private String activity; // ì•„ì´í™œë™
+   private Date apply_Date; // ìŠ¹ì¸ë‚ ì§œ
+   private Date create_Date; // ì‹ ì²­ë‚ ì§œ
+   private String reason; // ë°˜ë ¤ì‚¬ìœ 
    
    
    public BSApply() {
 
    }
+   
+
+
+	public BSApply(String userId, String userName, Date birth, String address, String caring, String intro, String job,
+		String bType, String activity, Date apply_Date, Date create_Date, String reason) {
+	super();
+	this.userId = userId;
+	this.userName = userName;
+	this.birth = birth;
+	this.address = address;
+	this.caring = caring;
+	this.intro = intro;
+	this.job = job;
+	this.bType = bType;
+	this.activity = activity;
+	this.apply_Date = apply_Date;
+	this.create_Date = create_Date;
+	this.reason = reason;
+}
+
+
 
 
 	public BSApply(String userId, String userName, Date birth, String address, String caring, String intro, String job,
@@ -160,8 +182,17 @@ public class BSApply {
 	public void setCreate_Date(Date create_Date) {
 		this.create_Date = create_Date;
 	}
+	
+
+	public String getReason() {
+		return reason;
+	}
 
 
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 
 
 
@@ -169,10 +200,9 @@ public class BSApply {
 	public String toString() {
 		return "BSApply [userId=" + userId + ", userName=" + userName + ", birth=" + birth + ", address=" + address
 				+ ", caring=" + caring + ", intro=" + intro + ", job=" + job + ", bType=" + bType + ", activity="
-				+ activity + ", apply_Date=" + apply_Date + ", create_Date=" + create_Date + "]";
+				+ activity + ", apply_Date=" + apply_Date + ", create_Date=" + create_Date + ", reason=" + reason + "]";
 	}
 
-	
 
 	   
    
