@@ -2,8 +2,13 @@ package com.kh.MNB.fna.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.MNB.fna.model.vo.FnA;
+
 
 public interface FnAService {
-	// 느슨한 결합구조때문에
+
+	ArrayList<FnA> fIntro();
+	
+
 	
 }

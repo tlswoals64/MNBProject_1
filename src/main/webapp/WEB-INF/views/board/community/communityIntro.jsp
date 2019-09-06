@@ -75,7 +75,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div id ="boardchoose">
 	<div class="boardchoose_wrap">
 		<ul>
-			<li><a href="#"><img src="resources/images/board/communityIntro.png" width="550" height="600"></a></li>
+			<li><a href="cListView.do"><img src="resources/images/board/communityIntro.png" width="550" height="600"></a></li>
 			   <p class="both"></p>
 			<li><a href="nBoard.do"><img src="resources/images/board/nanumIntro.png" width="550" height="600"></a></li>
 			   <p class="both"></p>

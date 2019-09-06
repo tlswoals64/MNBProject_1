@@ -62,6 +62,7 @@
 				<li><A href="index.jsp">Mom And Babe</a></li>
 				<li><A href='bIntro.do'>베이비시터</a></li>
 				<li><A href="cIntro.do">커뮤니티</a></li>
+				<li><A href="fListView.do">자주묻는질문</a></li>
 			</ul>
 		</div>
 	</div>

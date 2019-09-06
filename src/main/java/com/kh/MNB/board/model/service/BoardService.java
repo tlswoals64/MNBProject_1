@@ -2,8 +2,21 @@ package com.kh.MNB.board.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.MNB.board.model.vo.Board;
+import com.kh.MNB.board.model.vo.PageInfo;
+
 
 public interface BoardService {
-	// 느슨한 결합구조때문에
+
+	int getListCount();
+
+	ArrayList<Board> selectList(PageInfo pi);
+
+	void addReadCount(int bNo);
+
+	Board selectBoard(int bNo);
+
+	int insertBoard(Board b);
+
 	
 }
