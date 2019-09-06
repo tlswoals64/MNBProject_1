@@ -24,7 +24,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
     visibility: hidden;
     margin: 0px;
     padding: 0px;}
-*#header {width:100%;background:url('resources/images/main/header_bak_img.png') no-repeat;min-height:908px;}
+#header {width:100%;background:url('resources/images/main/header_bak_img.png') no-repeat;min-height:908px;}
 	
 #content{width:100%;margin-bottom:65px;}
 .content_wrap{width:1200px;margin:0 auto}

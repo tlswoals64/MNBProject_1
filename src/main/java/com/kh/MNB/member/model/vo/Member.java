@@ -54,8 +54,15 @@ public class Member {
          this.memberType = memberType;
          this.status = status;
       }
+      
+      
+      public Member(String userId, int memberType) {
+		super();
+		this.userId = userId;
+		this.memberType = memberType;
+	}
 
-      public String getUserId() {
+	public String getUserId() {
          return userId;
       }
 

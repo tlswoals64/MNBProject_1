@@ -20,8 +20,8 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.getListCount");
 	}
 
-	public ArrayList<Member> selectmemberLevelList(PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); // ¶Ù¾î³Ñ¾î¾ßÇÒ ÆäÀÌÁö,,, ¼ö,,,
+	public ArrayList<Member> selectmemberManaList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); // ï¿½Ù¾ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,,, ï¿½ï¿½,,,
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
@@ -33,7 +33,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.selectMDetail", userId);
 	}
 
-	public int mUserDelete(String userId) {
-		return sqlSession.update("memberMapper.mUserDelete", userId);
+
+	public int mUserUpdate(Member m) {
+		return sqlSession.update("memberMapper.mUserUpdate", m);
 	}
+
 }

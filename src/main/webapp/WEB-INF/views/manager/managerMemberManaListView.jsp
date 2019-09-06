@@ -165,7 +165,7 @@
 		font-size : 27px;
 		font-weight : 900;
 		margin-left : 15px;
-		width : 1400px;
+		width : 1600px;
 		padding-top : 10px;
 		padding-bottom : 10px;
 		border-bottom : 3px solid black;
@@ -193,7 +193,7 @@
 	
 	.memberListTrTh>th {
 		padding: 10px;
-		height: 40px;
+		height: 50px;
 		border-bottom: 1px solid black;
 		font-weight : 800;
 		font-size : 20px;
@@ -202,28 +202,29 @@
 	
 	.memberListTd {
 		padding: 10px;
-		height: 75px;
+		height: 90px;
 		text-align: center;
 		border-bottom: 1px solid gray;
+		font-size : 18px;
 	}
 	
 	#userId{
-		width : 100px;
+		width : 120px;
 	}
 	#userLevelName{
-		width : 150px;
+		width : 200px;
 	}
 	#userName{
-		width : 70px;
+		width : 100px;
 	}
 	#birth{
-		width : 150px;
+		width : 200px;
 	}
 	#userAddr{
-		width : 450px;
+		width : 550px;
 	}
 	#createDate{
-		width : 150px;
+		width : 200px;
 	}
 	#status{
 		width : 100px;
@@ -248,7 +249,7 @@
 		padding-bottom :20px;
 		text-align : center;
 		width : 700px;
-		margin-left : 250px;
+		margin-left : 350px;
 	}
 	/************************************************/
 </style>
@@ -290,10 +291,10 @@
 			<div id="userMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="userMa">회원 관리</div>
+	        			<div id="userMa" onclick="location.href='mManaList.do'">회원 관리</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="userLevel">회원 등급</div>
+			        	<div id="userLevel" onclick="location.href='mLevelList.do'">회원 등급</div>
 			        </li>
 			    </ul>
 			</div>
@@ -362,7 +363,7 @@
 	               [이전] &nbsp;
 	            </c:if>
 	            <c:if test="${ pi.currentPage > 1 }">
-	               <c:url var="before" value="mLevelList.do">
+	               <c:url var="before" value="mManaList.do">
 	                  <c:param name="page" value="${ pi.currentPage - 1 }"/>
 	               </c:url>
 	               <a href="${ before }">[이전]</a> &nbsp;
@@ -375,7 +376,7 @@
 	               </c:if>
 	               
 	               <c:if test="${ p ne currentPage }">
-	                  <c:url var="pagination" value="mLevelList.do">
+	                  <c:url var="pagination" value="mManaList.do">
 	                     <c:param name="page" value="${ p }"/>
 	                     <!-- blist.do?page=${p}값   -->
 	                  </c:url>
@@ -388,7 +389,7 @@
 	               [다음]
 	            </c:if>
 	            <c:if test="${ pi.currentPage < pi.maxPage }">
-	               <c:url var="after" value="mLevelList.do">
+	               <c:url var="after" value="mManaList.do">
 	                  <c:param name="page" value="${ pi.currentPage + 1 }"/>
 	               </c:url> 
 	               <a href="${ after }">[다음]</a>
