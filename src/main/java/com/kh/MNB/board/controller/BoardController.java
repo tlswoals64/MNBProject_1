@@ -6,19 +6,24 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.MNB.board.model.exception.BoardException;
 import com.kh.MNB.board.model.service.BoardService;
+
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
@@ -26,16 +31,12 @@ import com.kh.MNB.board.model.vo.Reply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.vo.Member;
 
+
 @Controller
 public class BoardController {
 	@Autowired
 	BoardService bService;
 	
-	@RequestMapping("cIntro.do")
-	public String bIntro() {
-		return "board/community/communityIntro";
-
-	}
 	
 	@RequestMapping("nBoard.do")
 	public String nBoard() {
@@ -52,8 +53,10 @@ public class BoardController {
 		return "board/community/nanumDetailView";
 	}
 	
+
 	@RequestMapping("blist.do")
 	public ModelAndView boardList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -184,5 +187,6 @@ public class BoardController {
 		else {
 			throw new BoardException("댓글 작성에 실패하였습니다.");
 		}
+
 	}
 }

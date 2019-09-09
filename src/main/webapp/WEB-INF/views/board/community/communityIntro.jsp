@@ -66,6 +66,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div id ="boardchoose">
 	<div class="boardchoose_wrap">
 		<ul>
+
 			<li><a href="#"><img src="resources/images/board/communityIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:480px;font-size:20px;line-height:115%">커뮤니티바로가기</h5></a></li>
 			<li><a href="blist.do"><img src="resources/images/board/nanumIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:1100px;font-size:20px;line-height:115%">무료나눔바로가기</h5></a></li>
 			      

@@ -4,21 +4,25 @@ import java.sql.Date;
 
 public class Board {
    
-   private int bNo; // °Ô½Ã±Û ¹øÈ£
+
+   private int bNo; // ê²Œì‹œê¸€ ë²ˆí˜¸
    private int bType; 
-   // °Ô½Ã±Û Å¸ÀÔ(1 Ä¿¹Â´ÏÆ¼ / 2 ¹«·á³ª´® / 3 ºÎ¸ğ / 4 ½ÃÅÍ / 5 ¹®ÀÇ»çÇ× / 6 °øÁö»çÇ× / 7 ½Å°í / 8 ÈÄ±â)
-   private String bTitle; // °Ô½Ã±Û Á¦¸ñ
-   private String bWriter; //°Ô½Ã±Û ÀÛ¼ºÀÚ
-   private String bContent; // °Ô½Ã±Û ³»¿ë
-   private int bCount; // Á¶È¸¼ö
-   private Date b_CreateDate; //»ı¼º³¯Â¥
-   private Date b_ModifyDate; // ¼öÁ¤³¯Â¥
-   private String status; //»óÅÂ
+   // ê²Œì‹œê¸€ íƒ€ì…(1 ì»¤ë®¤ë‹ˆí‹° / 2 ë¬´ë£Œë‚˜ëˆ” / 3 ë¶€ëª¨ / 4 ì‹œí„° / 5 ë¬¸ì˜ì‚¬í•­ / 6 ê³µì§€ì‚¬í•­ / 7 ì‹ ê³  / 8 í›„ê¸°)
+   private String bTitle; // ê²Œì‹œê¸€ ì œëª©
+   private String bWriter; //ê²Œì‹œê¸€ ì‘ì„±ì
+   private String bContent; // ê²Œì‹œê¸€ ë‚´ìš©
+   private int bCount; // ì¡°íšŒìˆ˜
+   private Date b_CreateDate; //ìƒì„±ë‚ ì§œ
+   private Date b_ModifyDate; // ìˆ˜ì •ë‚ ì§œ
+   private String status; //ìƒíƒœ
+
    
    public Board() {}
    
    
-   // ÀüÃ¼»ı¼ºÀÚ
+
+   // ì „ì²´ìƒì„±ì
+
    public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, Date b_CreateDate,
          Date b_ModifyDate, String status) {
       super();
@@ -34,7 +38,9 @@ public class Board {
    }
 
    
-   // »ı¼º³¯Â¥, ¼öÁ¤³¯Â¥ »« »ı¼ºÀÚ
+
+   // ìƒì„±ë‚ ì§œ, ìˆ˜ì •ë‚ ì§œ ëº€ ìƒì„±ì
+
    public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, String status) {
       super();
       this.bNo = bNo;
@@ -46,7 +52,9 @@ public class Board {
       this.status = status;
    }
 
-   // »ı¼º³¯Â¥, ¼öÁ¤³¯Â¥, status »« »ı¼ºÀÚ
+
+   // ìƒì„±ë‚ ì§œ, ìˆ˜ì •ë‚ ì§œ, status ëº€ ìƒì„±ì
+
    public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount) {
       super();
       this.bNo = bNo;
@@ -154,15 +162,11 @@ public class Board {
             + ", bContent=" + bContent + ", bCount=" + bCount + ", b_CreateDate=" + b_CreateDate + ", b_ModifyDate="
             + b_ModifyDate + ", status=" + status + "]";
    }
-   
-   
-   
-   
-   
-
 
    
    
+
    
+
 
 }

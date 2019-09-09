@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
 
+
 	<select id="getListNanumCount" resultType="_int">
 		select count(*)
 		from board
@@ -70,6 +71,18 @@
 		insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
 	</insert>
 	
+
 	
+	<!-- 정보공유 -->
+	<select id="selectOne" parameterType="_int" resultType="board">
+		select * 
+		from board
+		where bno = #{bNo} and status = 'Y'
+	</select>
 	
+	<!-- 정보공유게시판 인서트 -->
+	<insert id="insertBoard" parameterType="Board">
+		insert into board
+		values(seq_bno.nextval,#{bType}, #{bTitle}, #{bContent}, sysdate, default, sysdate, #{bWriter})
+	</insert>
 </mapper>

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
@@ -53,6 +54,5 @@ public class BoardDAO {
 	public int insertReply(Reply r) {
 		return sqlSession.insert("boardMapper.insertReply", r);
 	}
-
 
 }
