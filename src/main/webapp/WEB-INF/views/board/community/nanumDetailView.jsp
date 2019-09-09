@@ -131,7 +131,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 				<h2>상품안내
 				<span style="float:right;"><img src="resources/images/board/singo.png"></span></h2>
 				<ul>
-					<li class="pro_title">판매자정보</li>
+					<li class="pro_title">작성자 : ${ b.bWriter }</li>
 					<li>아이디</li>
 					<li>이메일</li>
 				</ul>
@@ -180,12 +180,24 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 			<div class = "replyWriterArea">
 			
 			<div class = "replySelectArea">
-				<table id = "replySelectTable">
+			 <table class="replyTable" id="rtb">
+			 <h2> 댓글 </h2>	
+   		<thead>
+   			<tr><td colspan="2">
+   				<b id="rCount"></b>
+   			</tr>
+   		</thead>
+   		<tbody>
+   			
+   		</tbody>
+   </table>
+   
+				<%-- <table id = "replySelectTable">
 					
 			<h2> 댓글 </h2>			
 							<tr>
-								<td style="width:100px; font-size:20px;padding-top:10px;">고브르</td> 
-								<td style="width:200px; font-size:20px;padding-top:10px;">2019-08-06</td>
+								<td style="width:100px; font-size:20px;padding-top:10px;"> ${ loginUser.nickName }</td> 
+								<td style="width:200px; font-size:20px;padding-top:10px;"> ${ } </td>
 							</tr>
 							<tr>
 								<td style="width:600px;text-align: left; padding-left: 20px; font-size:15px; padding-top: 5px;">맨티스 새우 딱밤?!</td>
@@ -193,7 +205,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 						
 					
 					
-				</table>
+				</table> --%>
 			</div>
 
 	
@@ -214,6 +226,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		</div>
 		
 		 <script>
+		 
 	   	$(function(){
 	   		getReplyList();
 	   		
@@ -222,7 +235,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   		}, 10000);
 	   	});
 	 	$("#addReply").on("click", function(){
-	   		var rContent = $("#replyContent").val();
+	   		var nContent = $("#replyContent").val();
 	   		var refBno = ${board.bNo};
 	   		
 	   		$.ajax({
@@ -265,13 +278,15 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   				if(data.length > 0){
 	   					for(var i in data){
 	   						$tr = $("<tr>");
-	   						$rWriter =  $("<td width='100'>").text(data[i].rWriter);
-	   					    $rContent = $("<td>").text(decodeURIComponent(data[i].rContent.replace(/\+/g, " ")));
-	   					    $rCreateDate =  $("<td width='100'>").text(data[i].rCreateDate);
+	   						/* width:100px; font-size:20px;padding-top:10px */
+	   						/* width:600px;text-align: left; padding-left: 20px; font-size:15px; padding-top: 5px; */
+	   						$rWriter =  $("<td style='width:100px; font-size:20px;padding-top:10px;'>").text(data[i].rWriter);
+	   					    $rContent = $("<td style='width:600px;text-align: left; padding-left: 20px; font-size:15px; padding-top: 5px;'>").text(decodeURIComponent(data[i].rContent.replace(/\+/g, " ")));
+	   					    $rCreateDate =  $("<td style='width:200px; font-size:20px;padding-top:10px;'>").text(data[i].rCreateDate);
 	   					    
 	   					    $tr.append($rWriter);
 		   					$tr.append($rContent);
-		   					$tr.append($rCreateDate);
+		   					$tr.append($nCreateDate);
 		   					$tableBody.append($tr);
 	   					}
 	   				}
