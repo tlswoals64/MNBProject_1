@@ -35,8 +35,8 @@ public class BsApplyServiceImpl implements BsApplyService {
 	}
 	
 	@Override
-	public int levelUpdate(Member m) {
-		return bsaDAO.levelUpdate(m);
+	public int levelUpdate(BSApply b) {
+		return bsaDAO.levelUpdate(b);
 	}
 	
 }

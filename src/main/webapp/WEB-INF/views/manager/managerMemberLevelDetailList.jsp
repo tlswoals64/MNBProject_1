@@ -312,6 +312,14 @@ ul {
 	width: 200px;
 }
 
+#applyReason{
+	display:none;
+}
+
+textarea{
+	border : 1px solid white;
+}
+
 /*************************************************************/
 
 /********************** 버튼 *****************************/
@@ -518,11 +526,17 @@ ul {
 						</tr>
 
 						<tr class="levelTr">
-							<th class="levelTh">회원 등급</th>
-							<td class="levelTd"><select id="userLevel_selectOption" name="memberType">
-									<option value="1">일반회원</option>
-									<option value="2">베이비시터 회원</option>
+							<th class="levelTh">승인 여부</th>
+							<td class="levelTd"><select id="userLevel_selectOption" name="memberType" onclick="reasonUp();">
+									<option value="2">승인</option>
+									<option value="1">반려</option>
 							</select></td>
+						</tr>
+						<tr class="levelTr" id="applyReason">
+							<th class="levelTh">반려 사유</th>
+							<td class="levelTd">
+								<textarea cols=80 rows=3 id="reason" name="reason" style="resize: none;"></textarea>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -534,6 +548,18 @@ ul {
 		</div>
 	</div>
 </body>
+<script>
+	function reasonUp(){
+		var option = $('#userLevel_selectOption').val();
+		if(option == 1){
+			$('#applyReason').show();
+		}
+		if(option == 2){
+			$('#reason').val("");
+			$('#applyReason').hide();
+		}
+	}
+</script>
 <script>
     $(document).ready(function(){
         $(".menu>div").click(function(){

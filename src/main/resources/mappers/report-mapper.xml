@@ -21,10 +21,39 @@
 	
 	<!-- 관리자 신고 디테일 -->
 	<select id="mReportDetail" parameterType="_int" resultType="Report">
-		select *
-		from report
-		where rNo = #{ rNo }
+		select b.bwriter, b.b_modifydate, b.status, b.bcount, b.b_createdate, b.bcontent, b.btitle, 
+				r.rno, r.rcontent, r.rman, r.rtype, r.rre, r.rdate, r.bno
+		from report r
+            join board b
+     		on (r.bno = b.bno)
+     	order by b.b_createdate
 	</select>
 	
+	<!-- 관리자 신고 반려 -->
+	<update id="mDerefuse" parameterType="_int">
+		update report
+		set rre = 'Y'
+		where rNo = #{ rNo }
+	</update>
+	<!-- 관리자 신고 승인 -->
+	<update id="mDeRApply" parameterType="_int">
+		update report
+		set rre = 'Y'
+		where rNo = #{ rNo }
+	</update>
+	
+	<!-- 관리자용 dec 횟수 -->
+	<select id="selectDec" parameterType="string" resultType="_int">
+		select dec
+		from member
+		where userId = #{ userId }
+	</select>
+	
+	<!-- 관리자용 블랙리스트 멤버로 등급변경 -->
+	<update id="mDeMemberUpdate" parameterType="string">
+		update member
+		set membertype = 3, dec_date = sysdate + 7
+		where userId = #{ userId }
+	</update>
 	
 </mapper>

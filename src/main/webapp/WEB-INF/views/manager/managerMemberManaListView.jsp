@@ -334,6 +334,7 @@
 								<td class="memberListTd" id="userLevelName">
 									<c:if test="${ m.memberType == 1}">일반 회원</c:if>
 		          					<c:if test="${ m.memberType == 2}">베이비시터 회원</c:if>
+		          					<c:if test="${ m.memberType == 3}">블랙리스트 회원</c:if>
 		          				</td>
 								<td class="memberListTd" id="userName">${ m.userName }</td>
 								<td class="memberListTd" id="birth">${ m.birth }</td>

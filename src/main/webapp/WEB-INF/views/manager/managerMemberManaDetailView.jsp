@@ -427,11 +427,18 @@
 									<c:if test="${ m.memberType == 1}">
 										<option value="1" selected>일반회원</option>
 										<option value="2" disabled>베이비시터 회원</option>	
+										<option value="3" disabled>블랙리스트 회원</option>
 									</c:if>
 			          				<c:if test="${ m.memberType == 2}">
 			          					<option value="1" >일반회원</option>
 										<option value="2" selected>베이비시터 회원</option>	
+										<option value="3" disabled>블랙리스트 회원</option>
 			          				</c:if>
+			          				<c:if test="${ m.memberType == 3}">
+										<option value="1" disabled>일반회원</option>
+										<option value="2" disabled>베이비시터 회원</option>	
+										<option value="3" selected>블랙리스트 회원</option>
+									</c:if>
 								</select>
 							</td>
 							<th class="userInfoTh">회원상태</th>

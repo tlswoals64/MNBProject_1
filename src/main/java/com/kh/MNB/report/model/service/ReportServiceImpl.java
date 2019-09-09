@@ -29,4 +29,32 @@ public class ReportServiceImpl implements ReportService {
 	public Report mReportDetail(int rNo) {
 		return rDAO.mReportDetail(rNo);
 	}
+	
+	@Override
+	public int mDerefuse(int rNo) {
+		return rDAO.mDerefuse(rNo);
+	}
+	
+	@Override
+	public int mDeBApply(int bNo) {
+		return rDAO.mDeBApply(bNo);
+	}
+	@Override
+	public int mDeMApply(String userId) {
+		return rDAO.mDeMApply(userId);
+	}
+	@Override
+	public int mDeRApply(int rNo) {
+		return rDAO.mDeRApply(rNo);
+	}
+	
+	@Override
+	public int selectDec(String userId) {
+		return rDAO.selectDec(userId);
+	}
+	
+	@Override
+	public void mDeMemberUpdate(String userId) {
+		rDAO.mDeMemberUpdate(userId);
+	}
 }

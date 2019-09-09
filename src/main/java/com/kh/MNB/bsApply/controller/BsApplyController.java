@@ -67,12 +67,10 @@ public class BsApplyController {
 	
 	// 회원 등급수정
 	@RequestMapping("mUserLevelUpdate.do")
-	public String mUserLevelUpdate(@RequestParam("userId") String userId, @RequestParam("memberType") int memberType) {
-		System.out.println("userId : " + userId);
-		System.out.println("memberType : " + memberType);
-		
-		Member m = new Member(userId, memberType);
-		int result = bsaService.levelUpdate(m);
+	public String mUserLevelUpdate(BSApply b) {
+		System.out.println("b : " + b);
+
+		int result = bsaService.levelUpdate(b);
 		
 		if(result > 0) {
 			return "redirect:mLevelList.do";

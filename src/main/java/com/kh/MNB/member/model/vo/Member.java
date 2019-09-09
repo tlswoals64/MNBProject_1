@@ -3,24 +3,48 @@ package com.kh.MNB.member.model.vo;
 import java.sql.Date;
 
 public class Member {
-      private String userId; // È¸¿ø ¾ÆÀÌµð
-      private String userPwd; // È¸¿ø ºñ¹Ð¹øÈ£
-      private String userName; // È¸¿ø ÀÌ¸§
-      private Date birth; // È¸¿ø »ýÀÏ
-      private String nickName; // È¸¿ø ´Ð³×ÀÓ
-      private String gender; // È¸¿ø ¼ºº°
-      private String email; // È¸¿ø ÀÌ¸ÞÀÏ
-      private String phone; // È¸¿ø ¿¬¶ôÃ³
-      private String address; // È¸¿ø ÁÖ¼Ò
-      private int memberType; // È¸¿ø Å¸ÀÔ(1ÀÌ¸é ÀÏ¹ÝÈ¸¿ø 2¸é º£ÀÌºñ½ÃÅÍÈ¸¿ø)
-      private String status; // È¸¿ø »óÅÂ
-      private Date enroll_Date; // È¸¿ø ¼öÁ¤³¯Â¥
-      private Date modify_Date; // È¸¿ø °¡ÀÔ³¯Â¥
+      private String userId; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+      private String userPwd; // È¸ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
+      private String userName; // È¸ï¿½ï¿½ ï¿½Ì¸ï¿½
+      private Date birth; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+      private String nickName; // È¸ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½
+      private String gender; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+      private String email; // È¸ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
+      private String phone; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³
+      private String address; // È¸ï¿½ï¿½ ï¿½Ö¼ï¿½
+      private int memberType; // È¸ï¿½ï¿½ Å¸ï¿½ï¿½(1ï¿½Ì¸ï¿½ ï¿½Ï¹ï¿½È¸ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½)
+      private String status; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+      private Date enroll_Date; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥
+      private Date modify_Date; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ô³ï¿½Â¥
+      private int dec;
+      private Date dec_date;
       
       public Member() {}
       
-      // ÀüÃ¼ »ý¼ºÀÚ
+      
       public Member(String userId, String userPwd, String userName, Date birth, String nickName, String gender,
+			String email, String phone, String address, int memberType, String status, Date enroll_Date,
+			Date modify_Date, int dec, Date dec_date) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.birth = birth;
+		this.nickName = nickName;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.memberType = memberType;
+		this.status = status;
+		this.enroll_Date = enroll_Date;
+		this.modify_Date = modify_Date;
+		this.dec = dec;
+		this.dec_date = dec_date;
+	}
+
+
+	public Member(String userId, String userPwd, String userName, Date birth, String nickName, String gender,
             String email, String phone, String address, int memberType, String status, Date enroll_Date,
             Date modify_Date) {
          super();
@@ -38,7 +62,7 @@ public class Member {
          this.enroll_Date = enroll_Date;
          this.modify_Date = modify_Date;
       }
-      // enroll_Date ¼öÁ¤³¯Â¥, modify_Date °¡ÀÔ³¯Â¥ »« »ý¼ºÀÚ 
+      // enroll_Date ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥, modify_Date ï¿½ï¿½ï¿½Ô³ï¿½Â¥ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
       public Member(String userId, String userPwd, String userName, Date birth, String nickName, String gender,
             String email, String phone, String address, int memberType, String status) {
          super();
@@ -165,13 +189,37 @@ public class Member {
       public void setModify_Date(Date modify_Date) {
          this.modify_Date = modify_Date;
       }
+      
+      
+      public int getDec() {
+		return dec;
+	}
 
-      @Override
-      public String toString() {
-         return "Member [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", birth=" + birth
-               + ", nickName=" + nickName + ", gender=" + gender + ", email=" + email + ", phone=" + phone
-               + ", address=" + address + ", memberType=" + memberType + ", status=" + status + ", enroll_Date="
-               + enroll_Date + ", modify_Date=" + modify_Date + "]";
-      }
+
+	public void setDec(int dec) {
+		this.dec = dec;
+	}
+
+
+	public Date getDec_date() {
+		return dec_date;
+	}
+
+
+	public void setDec_date(Date dec_date) {
+		this.dec_date = dec_date;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Member [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", birth=" + birth
+				+ ", nickName=" + nickName + ", gender=" + gender + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", memberType=" + memberType + ", status=" + status + ", enroll_Date="
+				+ enroll_Date + ", modify_Date=" + modify_Date + ", dec=" + dec + ", dec_date=" + dec_date + "]";
+	}
+
+
+	
       
 }

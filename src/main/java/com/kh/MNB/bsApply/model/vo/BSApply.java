@@ -15,12 +15,33 @@ public class BSApply {
    private Date apply_Date; // 승인날짜
    private Date create_Date; // 신청날짜
    private String reason; // 반려사유
+   private int MemberType; //메머 유형
    
    
    public BSApply() {
 
    }
    
+   
+
+	public BSApply(String userId, String userName, Date birth, String address, String caring, String intro, String job,
+		String bType, String activity, Date apply_Date, Date create_Date, String reason, int memberType) {
+	super();
+	this.userId = userId;
+	this.userName = userName;
+	this.birth = birth;
+	this.address = address;
+	this.caring = caring;
+	this.intro = intro;
+	this.job = job;
+	this.bType = bType;
+	this.activity = activity;
+	this.apply_Date = apply_Date;
+	this.create_Date = create_Date;
+	this.reason = reason;
+	MemberType = memberType;
+}
+
 
 
 	public BSApply(String userId, String userName, Date birth, String address, String caring, String intro, String job,
@@ -70,6 +91,18 @@ public class BSApply {
 		this.activity = activity;
 	}
 	
+
+	public int getMemberType() {
+		return MemberType;
+	}
+
+
+
+	public void setMemberType(int memberType) {
+		MemberType = memberType;
+	}
+
+
 
 	public String getUserId() {
 		return userId;
@@ -200,10 +233,11 @@ public class BSApply {
 	public String toString() {
 		return "BSApply [userId=" + userId + ", userName=" + userName + ", birth=" + birth + ", address=" + address
 				+ ", caring=" + caring + ", intro=" + intro + ", job=" + job + ", bType=" + bType + ", activity="
-				+ activity + ", apply_Date=" + apply_Date + ", create_Date=" + create_Date + ", reason=" + reason + "]";
+				+ activity + ", apply_Date=" + apply_Date + ", create_Date=" + create_Date + ", reason=" + reason
+				+ ", MemberType=" + MemberType + "]";
 	}
 
 
-	   
+	
    
 }

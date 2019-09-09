@@ -32,4 +32,27 @@ public class ReportDAO {
 	public Report mReportDetail(int rNo) {
 		return sqlSession.selectOne("reportMapper.mReportDetail", rNo);
 	}
+
+	public int mDerefuse(int rNo) {
+		return sqlSession.update("reportMapper.mDerefuse", rNo);
+	}
+
+	public int mDeMApply(String userId) {
+		return sqlSession.update("memberMapper.mDeMApply", userId);
+	}
+	public int mDeBApply(int bNo) {
+		return sqlSession.update("boardMapper.mDeBApply", bNo);
+	}
+	
+	public int mDeRApply(int rNo) {
+		return sqlSession.update("reportMapper.mDeRApply", rNo);
+	}
+
+	public int selectDec(String userId) {
+		return sqlSession.selectOne("reportMapper.selectDec", userId);
+	}
+
+	public void mDeMemberUpdate(String userId) {
+		sqlSession.selectOne("reportMapper.mDeMemberUpdate", userId);
+	}
 }

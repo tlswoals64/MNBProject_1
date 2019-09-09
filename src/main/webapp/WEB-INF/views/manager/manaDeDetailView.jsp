@@ -180,6 +180,21 @@ ul {
 	height: 100vh;
 }
 
+#memberListB {
+	font-size: 27px;
+	font-weight: 900;
+	margin-left: 15px;
+	width: 1600px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 3px solid black;
+}
+
+#amountUser {
+	font-size: 18px;
+	color: #01A9DB;
+}
+
 #deListB {
 	font-size: 27px;
 	font-weight: 900;
@@ -189,120 +204,107 @@ ul {
 	padding-bottom: 10px;
 	border-bottom: 3px solid black;
 }
+.reportTable{
+		border : 2px solid #01A9DB;
+		border-collapse: separate;
+		border-spacing: 0 10px;
+		padding-left : 10px;
+		padding-right : 10px;
+		
+	}
+	.rpTh{
+		text-align : center;
+		font-size : 18px;
+		height : 50px;
+		margin-top : 20px;
+	}
+	
+	.rpTd{
 
-.deListTr:hover {
-	background: rgb(248, 248, 248);
-	cursor: pointer;
-}
-
-.deListArea {
-	padding-left: 50px;
-	padding-top: 10px;
-}
-
-.deListList {
-	border-top: 2px solid black;
-	margin-bottom: 20px;
-}
-
-.deListTable {
-	margin-left: 10px;
-	border-bottom: 1px solid darkgray;
-	border-collapse: collapse;
-}
-
-.deListTrTh>th {
-	padding: 10px;
-	height: 40px;
-	border-bottom: 1px solid black;
-	font-weight: 800;
-	font-size: 20px;
-	text-align: center;
-}
-
-.deListTd {
-	padding: 10px;
-	height: 75px;
-	text-align: center;
-	border-bottom: 1px solid gray;
-}
-/**********************************************************/
-#levelTable {
-	border-collapse: collapse;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.levelTh {
-	text-align: center;
-	font-size: 18px;
-	border-bottom: 1px solid rgb(180, 180, 180);
-	border-right: 1px solid rgb(180, 180, 180);
-	border-top: 1px solid rgb(180, 180, 180);
-	background: rgb(248, 248, 248);
-	width: 200px;
-}
-
-.levelTd {
-	width: 770px;
-	font-size: 15px;
-	border-bottom: 1px solid rgb(180, 180, 180);
-	border-top: 1px solid rgb(180, 180, 180);
-	padding-left: 10px;
-}
-
-.levelTr {
-	height: 80px;
-}
-
-#levelTableArea {
-	padding-left: 20px;
-	width: 1300px;
-}
-
-#babyApply {
-	padding-top: 20px;
-	padding-bottom: 10px;
-	font-size: 25px;
-	font-weight: bold;
-	text-align: center;
-}
-
-/**************** 육아돌봄 경험 테이블 ******************/
-.exTable {
-	border: 1px solid rgb(180, 180, 180);
-	border-collapse: collapse;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.exTableTr>th {
-	text-align: center;
-	font-size: 18px;
-	border-bottom: 1px solid rgb(180, 180, 180);
-	border-right: 1px solid rgb(180, 180, 180);
-	height: 50px;
-}
-
-.exTableTr>td {
-	height: 70px;
-	font-size: 15px;
-	border-bottom: 1px solid rgb(180, 180, 180);
-	border-right: 1px solid rgb(180, 180, 180);
-	padding-left: 10px;
-}
-
-.exTitleTd {
-	width: 100px;
-}
-
-.exPeTd {
-	width: 200px;
-}
-
-.exConTd {
-	width: 500px;
-}
+		font-size : 17px;
+		padding-left : 10px;
+	}
+	
+	#firstArea{
+		background : #CEE3F6;
+	}
+	#secondtArea>th{
+		border-bottom : 2px solid rgb(220,220,220);
+	}
+	
+	#deContentArea{
+		background : #CEE3F6;
+	}
+	#secondtArea>td{
+		border-bottom : 2px solid rgb(220,220,220);
+	}
+	
+	#contentArea > td{
+		border-top : 2px solid rgb(220,220,220);
+	}
+	#contentArea > th{
+		border-top : 2px solid rgb(220,220,220);
+		
+	}
+	#replyArea{
+		background : rgb(248,248,248);
+		
+	}
+	
+	#writeDate, #userId, #type{
+		width : 300px;
+	}
+	
+	#typeArea{
+		width : 120px;
+		
+	}
+	
+	#userIdArea, #writeDateArea{
+		width : 130px;
+	}
+	
+	.qnaRely{
+		width : 1077px;
+		margin-top : 10px;
+		resize : none;
+		border : 2px solid rgb(248,248,248);
+		font-size : 17px;
+		text-aling : left;
+	}
+	#replyTd{
+		border-top : 2px solid white;
+	}
+	
+	#qnaContent{
+		width : 1150px;
+		height : 300px;
+		margin-top : 30px;
+		margin-bottom : 20px;
+		padding : 10px;
+		border : 2px solid #CEE3F6;;
+	}
+	#deContent{
+		width : 1140px;
+		height : 300px;
+		margin-top : 30px;
+		margin-bottom : 20px;
+		padding : 10px;
+		background : white;
+	}
+	
+	.repTable{
+		border : 3px solid #01A9DB;
+		border-top : 3px solid white;
+		
+	}
+	.repTh{
+		text-align : center;
+		font-size : 18px;
+		height : 50px;
+		width : 150px;
+		margin-top : 20px;
+	}
 
 /************************************************/
 
@@ -333,7 +335,7 @@ ul {
 }
 
 .btnArea {
-	width: 1000px;
+	width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 15px;
@@ -341,18 +343,30 @@ ul {
 }
 /*******************************************************/
 
-/*************content부분*************************?
+/*************content부분*************************/
+/***********테이블 부분**************/
+.rtTd {
+	border: 1px solid rgb(220, 220, 220);
+	width: 1000px;
+	height: 90px;
+}
 
- .outer{
-      width: 600px; height: 500px; background-color: rgba(255, 255, 255, 0.4); border: 5px solid white;
-      margin-left: auto; margin-right: auto; margin-top: 50px;
-   }
-   .tableArea {width:450px; height:350px; margin-left:auto; margin-right:auto;}
-   #updateNoBtn, #cancelBtn, #deleteNoBtn{color: white;
-    border-color: #747cfd;
-    background-color: #747cfd;  border-radius: 15px; width: 50px; heigth: 100px; text-align: center; display: inline-block;}
-   #updateNoBtn:hover, #cancelBtn:hover, #deleteNoBtn:hover{cursor: pointer;}
+.rtTh {
+	border: 1px solid white;
+	width: 300px;
+	height: 90px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	background: rgb(240, 240, 240);
+}
 
+#tableArea {
+	margin-left: 30px;
+	margin-top: 30px;
+}
+
+/*************************************/
 </style>
 <head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -424,93 +438,89 @@ ul {
 		</nav>
 
 		<div class="content">
-			<form action="mUserLevelUpdate.do" method="post">
-				<div id="deListB">회원 등급 관리</div>
-				<div class="boardbox">
-      <div class="boxrow">
-         <div class = "boxrow-top">
-         </div>
-        <form action="views/propose/proposeUpdateForm.jsp" id="detailForm" name="detailForm">
-      
-            <table class="pnaw_box" summary="">
-               <tbody>
-                <tr class="first">
-                     <th>신고유형</th>
-                     <td class="pnawtd" id="rType">
-                     	<c:choose>
-							<c:when test="${r.rType ==1}">
-									부적절한 홍보
-							</c:when>
-							<c:when test="${r.rType ==2}">
-									음란성 또는 청소년에게 부적합한 내용
-							</c:when>
-							<c:when test="${r.rType ==3}">
-									명예훼손/사생활 침해 및 저작권침해 등
-							</c:when>
-							<c:otherwise>
-									 기타
-							</c:otherwise>
-						</c:choose>
-                     </td>
-                  </tr>
+			<div id="memberListB">신고 게시판</div>
+				<div id="tableArea">
+					<table class="reportTable">
+						<tr class="rpTr" id="firstArea">
+							<th class="rpTh" id="typeArea">유형</th>
+							<td class="rpTd" id="type"><c:choose>
+									<c:when test="${r.rType ==1}">
+								          사이트 이용관련
+								    </c:when>
+									<c:when test="${r.rType ==2}">
+								        회원정보
+								    </c:when>
+									<c:when test="${r.rType ==3}">
+								        불건전 행위
+								    </c:when>
+									<c:when test="${r.rType ==4}">
+								        베이비시터 관련
+								    </c:when>
+									<c:otherwise>
+								        부모님 관련
+								    </c:otherwise>
+								</c:choose></td>
 
-                  <tr>
-                     <th scope="row">제목</th>
-                     <td class="pnawtd">
-                    	${ r.bTitle }
-                     
-      				<input type="hidden" name="rNo" value="${ r.rNo }">
-                     
-                  </td>   
-                  
-                
-                  </tr>
-                 <tr>
-                     <th scope="row">신고 아이디</th>
-                     <td class="pnawtd">${ r.rMan }</td>
-                  </tr>
-                  <tr>
-                <th scope="row">상세내용</th>
-                     <td class="write pnawtd">
-                     <textarea name="content"style='width: 100%; height: 200px;'readonly>${ r.bContent }</textarea>
-                  </td>
-                </tr>
-                  <tr>
-                     <th scope="row">신고내용</th>
-                     <td class="write pnawtd">
-                     <textarea name="content"style='width: 100%; height: 200px;'readonly>${ r.rContent }</textarea>
-                  </td>
-                   
-                
-                  </tr>
-               
-               </tbody>
-            </table>
-            
-             <div class="joinbox" style="max-width: 100%;">
-               <ul class="ul01">
-                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="탈퇴시키기" onclick="register();"></li>
-                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="확인여부" onclick="UpdateYN();"></li> 
-       
-          
-             
-                   <li><input class="inputbox02 btn btn-outline-dark" type="button" value="목록으로" onclick="menulo();"></li>
-               
-               </ul>
-            </div>
-        
-         </form>
-      </div>
-   </div>
-				
-				<div class="btnArea">
-					<button class="btn" id="applyBtn" type="submit">확인</button>
-					<div class="btn" id="cancleBtn"onclick="location.href='mLevelList.do'">취소</div>
+							<th class="rpTh" id="userIdArea">신고신청자</th>
+							<td class="rpTd" id="userId">${ r.rMan }</td>
+
+							<th class="rpTh" id="writeDateArea">신고일</th>
+							<td class="rpTd" id="writeDate">${ r.rDate }</td>
+						</tr>
+						<tr class="rpTr" id="secondtArea">
+							<th class="rpTh" id="typeArea">게시판 번호</th>
+							<td class="rpTd" id="bNo">${ r.bNo }</td>
+
+							<th class="rpTh" id="userIdArea">게시글 작성자</th>
+							<td class="rpTd" id="bWriter">${ r.bWriter }</td>
+
+							<th class="rpTh" id="writeDateArea">게시글 작성일</th>
+							<td class="rpTd" id="b_CrateDate">${ r.b_CreateDate }</td>
+						</tr>
+
+						<tr class="rpTr" id="titleArea">
+							<th class="rpTh" colspan="1">게시글 제목</th>
+							<td class="rpTd" colspan="5">${ r.bTitle }</td>
+						</tr>
+
+						<tr class="rpTr" id="contentArea">
+							<th class="rpTh" colspan="1">게시글 내용</th>
+							<td class="rpTd" colspan="5">
+								<div id="qnaContent">${ r.bContent }</div>
+							</td>
+						</tr>
+						<tr class="rpTr" id="deContentArea">
+							<th class="rpTh" colspan="1">신고 내용</th>
+							<td class="rpTd" colspan="5">
+								<div id="deContent">${ r.rContent }</div>
+							</td>
+						</tr>
+
+					</table>
 				</div>
-				</form>
+				<div class="btnArea">
+					<button class="btn" id="applyBtn" onclick="apply(this);" value="1">승인</button>
+					<button class="btn" id="refuseBtn" onclick="apply(this);" value="2">반려</button>
+					<div class="btn" id="cancleBtn"
+						onclick="location.href='mDeList.do'">취소</div>
+				</div>
+
 		</div>
 	</div>
 </body>
+<script>
+	function apply(v){
+		var type = $(v).val();
+		var rNo = '${ r.rNo }';
+		var bNo = $('#bNo').text();
+		var userId = $('#bWriter').text();
+		console.log(type);
+		
+		location.href = 'mDeDeApply.do?rNo=' + rNo + '&bNo=' + bNo + '&userId='+userId + '&type=' + type;
+			
+		
+	}
+</script>
 <script>
     $(document).ready(function(){
         $(".menu>div").click(function(){
@@ -527,64 +537,5 @@ ul {
         });
     });
 </script>
- <script>
 
-      $('#Smallclassification').change(function() {
-
-         $("#Smallclassification option:selected").each(function() {
-            console.log(this);
-         });
-      });
-
-     
-  
-    
-
-    // 등록 버튼이 눌렷을때
-   function register(){
-      var form = $('#writeform');
-      var isall = true;
-      console.log('실행');   
-      console.log($('#cates').val());
-      
-      
-      // 의류 값이 없을 경우 포커스
-      if($('#cates').val() == ''){
-          alert('의류를 선택해주세요.');
-          var offset = $('#cates').offset();
-          $("html").animate({scrollTop:offset.top},400);
-          isall = false;
-          return false;
-       }
-     /*  // 의류종류 선택 안햇을 경우 포커스
-      if($('#Smallclassification').val() == ''){
-          alert('의류종류를 선택해주세요.');
-          var offset = $('#cates').offset();
-          $("html").animate({scrollTop:offset.top},400);
-          isall = false;
-          return false;
-       } */
-      // text 박스 구분
-       form.find('input[type=text]').each (function(){
-         var obj = $(this);
-         console.log(obj);
-         
-         if (obj.attr('valch') == 'yes') {
-
-            if (obj.val() == '') {
-               alert(obj.attr('msg'));
-               obj.focus();
-               isall = false;
-               return false;
-            }
-         }
-      });
-       
-      
-   }
-
-
-
-   </script> 
-
-</html> 
+</html>
