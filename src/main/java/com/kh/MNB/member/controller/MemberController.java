@@ -136,8 +136,8 @@ public class MemberController {
 		public String MemberLogin(Member m, Model model) {
 			System.out.println(m.getUserId());
 			
-			Member loginUser = mService.memberLogin(m);		
-			 if (loginUser != null) {
+			Member loginUser = mService.memberLogin(m);	
+			if (bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {			
 				 if(loginUser.getUserId().equals("admin")) {
 					 model.addAttribute("loginUser", loginUser);
 					 return "manager/managermainView";
