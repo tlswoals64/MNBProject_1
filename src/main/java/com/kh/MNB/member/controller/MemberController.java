@@ -3,14 +3,22 @@ package com.kh.MNB.member.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -32,40 +40,117 @@ public class MemberController {
 	@Autowired
 	MemoService memoService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	//------------------------- °ü¸®ÀÚ ºÎºĞ ---------------------------
+	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+	
+	@RequestMapping("memberSingUp.do")
+	public String memberSingUp() {
+		return "member/singUpForm";
+	}
+	
+	@RequestMapping("dupid.do")
+	public ModelAndView idDuplicateCheck(ModelAndView mv, String id) {
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		boolean isUsable = mService.checkIdDup(id) == 0 ? true : false;
+		
+		map.put("isUsable", isUsable);
+		mv.addAllObjects(map);
+		mv.setViewName("jsonView");
+		
+		return mv;
+	}
+	
+	@RequestMapping("isNick.do")
+	public void idDuplicateCheck(HttpServletResponse response, String nickname) throws IOException {
+		
+		boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false;
+		
+		response.getWriter().print(checkNickName);
+	}
+	
+	// íšŒì›ê°€ì…
+	@RequestMapping("minsert.do")
+	public String memberInsert(@ModelAttribute Member m, @RequestParam("address") String address, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, @RequestParam("addEmail") String addEmail) {
+		
+		System.out.println(m);
+		
+		/*
+			1. ê²°ê³¼ ê°’ì„ ë°›ì•„ë³´ë©´ í• ê¸€ì´ ê¹¨ì§
+				ìŠ¤í”„ë§ì—ì„œ ì œê³µí•˜ëŠ” í•„í„°ë¥¼ ì´ìš©í•´ì„œ ìš”ì²­ ì‹œ ì „ë‹¬ ë°›ëŠ” ê°’ì— í•œê¸€ì´ ìˆì„ ê²½ìš° ì¸ì½”ë”© í•˜ëŠ” ê²ƒ ì¶”ê°€
+				
+			2. ë¹„ë°€ë²ˆí˜¸ í‰ë¬¸
+				bcrypt : ìŠ¤í”„ë§ ì‹œíë¦¬í‹° ëª¨ë“ˆì—ì„œ ì œê³µí•˜ëŠ” ì•”í˜¸í™” ë°©ì‹
+		*/
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		// encPwd : ì•”í˜¸í™”ëœ ë¹„ë°€ë²ˆí˜¸
+		m.setUserPwd(encPwd);
+		String email = m.getEmail() + "@" + addEmail;
+		m.setEmail(email);
+		m.setAddress(address + "/" + detailAddress + "/" + extraAddress);
+		
+		System.out.println(m);
+		int result = mService.insertMember(m);
+		
+		if(result > 0) {
+			return "redirect:index.jsp";
+			
+		} else {
+			throw new MemberException("íšŒì›ê°€ì…ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+		}
+	}
+	
+	@RequestMapping(value = "sendMail.do", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean sendMail(HttpSession session, @RequestParam String email) {
+		String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -ë¥¼ ì œê±°í•´ ì£¼ì—ˆë‹¤. 
+		randomCode = randomCode.substring(0, 6);
+		String joinCode = String.valueOf(randomCode);
+		session.setAttribute("joinCode", joinCode);
+		
+		System.out.println(joinCode);
+		
+		String subject = "íšŒì› ê°€ì… ìŠ¹ì¸ë²ˆí˜¸ ì…ë‹ˆë‹¤.";
+		StringBuilder sb = new StringBuilder();
+		sb.append("íšŒì›ê°€ì… ìŠ¹ì¸ ë²ˆí˜¸ëŠ” ").append(joinCode).append(" ì…ë‹ˆë‹¤.");
+		
+		return mService.send(subject, sb.toString(), "seok1721@gamil.com", email);
+	}
+	
+	//------------------------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ---------------------------
 	@RequestMapping("manaHome.do")
 	public String test() {
 		return "manager/managermainView";
 	}
 	
-	// È¸¿ø °ü¸® ¸®½ºÆ®
 	@RequestMapping("mManaList.do")
-	public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
-		int currentPage = 1;
-		if(page != null) {
-			currentPage = page;
-		}
-		
-		int listCount = mService.getListCount(); // ÀüÃ¼ ÆäÀÌÁö ¼ö
-		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ÆäÀÌÁö¿¡´ëÇÑ Á¤º¸
-		
-		ArrayList<Member> list = mService.selectmemberManaList(pi);
-		
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.addObject("pi", pi);
-			mv.setViewName("manager/managerMemberManaListView");
-		}
-		else {
-			throw new MemberException("°Ô½Ã±Û ÀüÃ¼ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
-		}
-		
-		return mv;
-	}
+	   public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+	      int currentPage = 1;
+	      if(page != null) {
+	         currentPage = page;
+	      }
+	      
+	      int listCount = mService.getListCount(); // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	      
+	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	      
+	      ArrayList<Member> list = mService.selectmemberManaList(pi);
+	      
+	      if(list != null) {
+	         mv.addObject("list", list);
+	         mv.addObject("pi", pi);
+	         mv.setViewName("manager/managerMemberManaListView");
+	      }
+	      else {
+	         throw new MemberException("ï¿½Ô½Ã±ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+	      }
+	      
+	      return mv;
+	   }
 	
-	// È¸¿øÁ¤º¸ µğÅ×ÀÏ ÆäÀÌÁö
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("mUserDetail.do")
 	public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {
 		String userId = request.getParameter("userId");
@@ -75,12 +160,12 @@ public class MemberController {
 			mv.setViewName("manager/managerMemberManaDetailView");
 		}
 		else {
-			throw new MemberException("È¸¿øÁ¤º¸ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new MemberException("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 		return mv;
 	}
 	
-	// È¸¿øÁ¤º¸ µğÅ×ÀÏ ÆäÀÌÁö¿¡ ¸Ş¸ğºÒ·¯¿À´Â ÇÔ¼ö
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¸ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	@RequestMapping("memo.do")
 	public void getReplyList(HttpServletResponse response, String userId) throws IOException {
 		ArrayList<Memo> memoList = memoService.selectUserMemo(userId);
@@ -92,7 +177,7 @@ public class MemberController {
 		gson.toJson(memoList, response.getWriter());
 	}
 	
-	// ¸Ş¸ğ Ãß°¡
+	// ï¿½Ş¸ï¿½ ï¿½ß°ï¿½
 	@RequestMapping("addMemo.do")
 	public void insertReply(HttpServletResponse response, String mContent, String userId) throws IOException {
 		
@@ -107,7 +192,7 @@ public class MemberController {
 		
 	}
 	
-	// È¸¿ø¼öÁ¤
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("mUserUpdate.do")
 	public String mUserUpdate(HttpServletRequest request, Member m,
 								   @RequestParam("address2") String address2,
@@ -121,7 +206,7 @@ public class MemberController {
 			return "redirect:mUserDetail.do?userId=" + m.getUserId();
 		}
 		else {
-			throw new MemberException("È¸¿øÁ¤º¸ »èÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new MemberException("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 	}
 	
