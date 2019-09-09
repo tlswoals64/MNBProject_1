@@ -51,6 +51,22 @@
   		where userId = #{ userId }
   	</update>
   	
+  	<select id="idCheck" parameterType="string" resultType="_int">
+		select count(*)
+		from member
+		where userid = #{userId}
+	</select>
+	
+	<insert id = "insertMember" parameterType="Member">
+		insert into member
+		values(#{userId}, #{userPwd}, #{userName}, #{birth}, #{nickName}, #{gender}, #{email}, #{phone}, #{address}, default,  default, sysdate, sysdate, default)
+	</insert>
+	
+	<select id="nickCheck" parameterType="string" resultType="_int">
+		select count(*)
+		from member
+		where nickname = #{nickName}
+	</select>
   	
 	<!-- 관리자 신고 승인 -->
 	<update id="mDeMApply" parameterType="string">

@@ -21,12 +21,23 @@ public class MemberDAO {
 	}
 
 	public ArrayList<Member> selectmemberManaList(PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); // �پ�Ѿ���� ������,,, ��,,,
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); // 뛰어넘어야할 페이지,,, 수,,,
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMList", null, rowBounds);
+	}
+
+	public int checkIdDup(String id) {
+		return sqlSession.selectOne("memberMapper.idCheck", id);
+	}
+
+	public int insertMember(Member m) {
+		return sqlSession.insert("memberMapper.insertMember", m);
+	}
+
+	public int checkNickName(String nickname) {
+		return sqlSession.selectOne("memberMapper.nickCheck", nickname);
 	}
 
 	public Member selectUserDetail(String userId) {
