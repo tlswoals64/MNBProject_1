@@ -20,34 +20,34 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAO bDAO;
 
 	@Override
-	public int getListCount() {
-		return bDAO.getListCount();
+	public int getListNanumCount() {
+		return bDAO.getListNanumCount();
 
 
 	}
 
 	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
-		return bDAO.selectList(pi);
-	}
-
-	
-
-	@Override
-	public int insertBoard(Board b) {
-		return bDAO.insertBoard(b);
+	public ArrayList<Board> selectNanumList(PageInfo pi) {
+		return bDAO.selectNanumList(pi);
 	}
 
 	
+
 	@Override
-	public int insertAttachment(ArrayList<Attachment> aList) {
-		return bDAO.insertAttachment(aList);
+	public int insertNanumBoard(Board b) {
+		return bDAO.insertNanumBoard(b);
 	}
 
 	
 	@Override
-	public int insertReply(Reply r) {
-		return bDAO.insertReply(r);
+	public int insertNanumAttachment(ArrayList<Attachment> aList) {
+		return bDAO.insertNanumAttachment(aList);
+	}
+
+	
+	@Override
+	public int insertNanumReply(Reply r) {
+		return bDAO.insertNanumReply(r);
 	}
 	
 }
