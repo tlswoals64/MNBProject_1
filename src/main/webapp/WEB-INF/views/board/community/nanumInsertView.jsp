@@ -170,7 +170,7 @@ input, textarea, select {
       		<h2 class="subtext">무료나눔 게시판 작성</h2>
       	</div>
          <!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-         <form name='writeform' id='writeform' action='insertBoard.do' method='post' ENCTYPE='multipart/form-data'>
+         <form name='writeform' id='writeform' action='insertNanumBoard.do' method='post' ENCTYPE='multipart/form-data'>
             <table class="pnaw_box" summary="">
                <tbody>
                   <tr>

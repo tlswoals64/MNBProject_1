@@ -88,7 +88,7 @@ public class BoardController {
 	
 
 	@RequestMapping("insertNanumBoard.do")
-	public String insertNanumBoard(@ModelAttribute Board b, @RequestParam("category") String category,
+	public String insertNanumBoard(@ModelAttribute Board b,
 													   @RequestParam("thumbnailImg1") MultipartFile titleImg,
 													   @RequestParam(value="thumbnailImg2", required=false) MultipartFile contentImg1,
 														@RequestParam(value="thumbnailImg3", required=false) MultipartFile contentImg2,

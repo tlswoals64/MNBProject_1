@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
 <style>
 	
@@ -37,7 +38,7 @@
 	.header_nav_wrap ul li {float:left; font-size:20px; font-weight:bold;margin-right:68px;}
 	.header_nav_wrap ul li:last-child {float:left; font-size:20px; font-weight:bold;margin-right:0px;}
 </style>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
