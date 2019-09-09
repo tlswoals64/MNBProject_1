@@ -3,166 +3,166 @@ package com.kh.MNB.board.model.vo;
 import java.sql.Date;
 
 public class Board {
-	
-	private int bNum; // ê²Œì‹œê¸€ ë²ˆí˜¸
-	private int bType; 
-	// ê²Œì‹œê¸€ íƒ€ì…(1 ì»¤ë®¤ë‹ˆí‹° / 2 ë¬´ë£Œë‚˜ëˆ” / 3 ë¶€ëª¨ / 4 ì‹œí„° / 5 ë¬¸ì˜ì‚¬í•­ / 6 ê³µì§€ì‚¬í•­ / 7 ì‹ ê³  / 8 í›„ê¸°)
-	private String bTitle; // ê²Œì‹œê¸€ ì œëª©
-	private String bWriter; //ê²Œì‹œê¸€ ì‘ì„±ì
-	private String bContent; // ê²Œì‹œê¸€ ë‚´ìš©
-	private int bCount; // ì¡°íšŒìˆ˜
-	private Date bc_ReateDate; //ìƒì„±ë‚ ì§œ
-	private Date b_ModifyDate; // ìˆ˜ì •ë‚ ì§œ
-	private String bStatus; //ìƒíƒœ
-	
-	public Board() {}
-	
-	
-	// ì „ì²´ìƒì„±ì
-	public Board(int bNum, int bType, String bTitle, String bWriter, String bContent, int bCount, Date bc_ReateDate,
-			Date b_ModifyDate, String bStatus) {
-		super();
-		this.bNum = bNum;
-		this.bType = bType;
-		this.bTitle = bTitle;
-		this.bWriter = bWriter;
-		this.bContent = bContent;
-		this.bCount = bCount;
-		this.bc_ReateDate = bc_ReateDate;
-		this.b_ModifyDate = b_ModifyDate;
-		this.bStatus = bStatus;
-	}
+   
+   private int bNo; // °Ô½Ã±Û ¹øÈ£
+   private int bType; 
+   // °Ô½Ã±Û Å¸ÀÔ(1 Ä¿¹Â´ÏÆ¼ / 2 ¹«·á³ª´® / 3 ºÎ¸ğ / 4 ½ÃÅÍ / 5 ¹®ÀÇ»çÇ× / 6 °øÁö»çÇ× / 7 ½Å°í / 8 ÈÄ±â)
+   private String bTitle; // °Ô½Ã±Û Á¦¸ñ
+   private String bWriter; //°Ô½Ã±Û ÀÛ¼ºÀÚ
+   private String bContent; // °Ô½Ã±Û ³»¿ë
+   private int bCount; // Á¶È¸¼ö
+   private Date b_CreateDate; //»ı¼º³¯Â¥
+   private Date b_ModifyDate; // ¼öÁ¤³¯Â¥
+   private String status; //»óÅÂ
+   
+   public Board() {}
+   
+   
+   // ÀüÃ¼»ı¼ºÀÚ
+   public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, Date b_CreateDate,
+         Date b_ModifyDate, String status) {
+      super();
+      this.bNo = bNo;
+      this.bType = bType;
+      this.bTitle = bTitle;
+      this.bWriter = bWriter;
+      this.bContent = bContent;
+      this.bCount = bCount;
+      this.b_CreateDate = b_CreateDate;
+      this.b_ModifyDate = b_ModifyDate;
+      this.status = status;
+   }
 
-	
-	// ìƒì„±ë‚ ì§œ, ìˆ˜ì •ë‚ ì§œ ëº€ ìƒì„±ì
-	public Board(int bNum, int bType, String bTitle, String bWriter, String bContent, int bCount, String bStatus) {
-		super();
-		this.bNum = bNum;
-		this.bType = bType;
-		this.bTitle = bTitle;
-		this.bWriter = bWriter;
-		this.bContent = bContent;
-		this.bCount = bCount;
-		this.bStatus = bStatus;
-	}
+   
+   // »ı¼º³¯Â¥, ¼öÁ¤³¯Â¥ »« »ı¼ºÀÚ
+   public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, String status) {
+      super();
+      this.bNo = bNo;
+      this.bType = bType;
+      this.bTitle = bTitle;
+      this.bWriter = bWriter;
+      this.bContent = bContent;
+      this.bCount = bCount;
+      this.status = status;
+   }
 
-	// ìƒì„±ë‚ ì§œ, ìˆ˜ì •ë‚ ì§œ, status ëº€ ìƒì„±ì
-	public Board(int bNum, int bType, String bTitle, String bWriter, String bContent, int bCount) {
-		super();
-		this.bNum = bNum;
-		this.bType = bType;
-		this.bTitle = bTitle;
-		this.bWriter = bWriter;
-		this.bContent = bContent;
-		this.bCount = bCount;
-	}
-
-
-	public int getbNum() {
-		return bNum;
-	}
+   // »ı¼º³¯Â¥, ¼öÁ¤³¯Â¥, status »« »ı¼ºÀÚ
+   public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount) {
+      super();
+      this.bNo = bNo;
+      this.bType = bType;
+      this.bTitle = bTitle;
+      this.bWriter = bWriter;
+      this.bContent = bContent;
+      this.bCount = bCount;
+   }
 
 
-	public void setbNum(int bNum) {
-		this.bNum = bNum;
-	}
+   public int getbNo() {
+      return bNo;
+   }
 
 
-	public int getbType() {
-		return bType;
-	}
+   public void setbNo(int bNo) {
+      this.bNo = bNo;
+   }
 
 
-	public void setbType(int bType) {
-		this.bType = bType;
-	}
+   public int getbType() {
+      return bType;
+   }
 
 
-	public String getbTitle() {
-		return bTitle;
-	}
+   public void setbType(int bType) {
+      this.bType = bType;
+   }
 
 
-	public void setbTitle(String bTitle) {
-		this.bTitle = bTitle;
-	}
+   public String getbTitle() {
+      return bTitle;
+   }
 
 
-	public String getbWriter() {
-		return bWriter;
-	}
+   public void setbTitle(String bTitle) {
+      this.bTitle = bTitle;
+   }
 
 
-	public void setbWriter(String bWriter) {
-		this.bWriter = bWriter;
-	}
+   public String getbWriter() {
+      return bWriter;
+   }
 
 
-	public String getbContent() {
-		return bContent;
-	}
+   public void setbWriter(String bWriter) {
+      this.bWriter = bWriter;
+   }
 
 
-	public void setbContent(String bContent) {
-		this.bContent = bContent;
-	}
+   public String getbContent() {
+      return bContent;
+   }
 
 
-	public int getbCount() {
-		return bCount;
-	}
+   public void setbContent(String bContent) {
+      this.bContent = bContent;
+   }
 
 
-	public void setbCount(int bCount) {
-		this.bCount = bCount;
-	}
+   public int getbCount() {
+      return bCount;
+   }
 
 
-	public Date getBc_ReateDate() {
-		return bc_ReateDate;
-	}
+   public void setbCount(int bCount) {
+      this.bCount = bCount;
+   }
 
 
-	public void setBc_ReateDate(Date bc_ReateDate) {
-		this.bc_ReateDate = bc_ReateDate;
-	}
+   public Date getb_CreateDate() {
+      return b_CreateDate;
+   }
 
 
-	public Date getB_ModifyDate() {
-		return b_ModifyDate;
-	}
+   public void setb_CreateDate(Date b_CreateDate) {
+      this.b_CreateDate = b_CreateDate;
+   }
 
 
-	public void setB_ModifyDate(Date b_ModifyDate) {
-		this.b_ModifyDate = b_ModifyDate;
-	}
+   public Date getB_ModifyDate() {
+      return b_ModifyDate;
+   }
 
 
-	public String getbStatus() {
-		return bStatus;
-	}
+   public void setB_ModifyDate(Date b_ModifyDate) {
+      this.b_ModifyDate = b_ModifyDate;
+   }
 
 
-	public void setbStatus(String bStatus) {
-		this.bStatus = bStatus;
-	}
+   public String getstatus() {
+      return status;
+   }
 
 
-	@Override
-	public String toString() {
-		return "Board [bNum=" + bNum + ", bType=" + bType + ", bTitle=" + bTitle + ", bWriter=" + bWriter
-				+ ", bContent=" + bContent + ", bCount=" + bCount + ", bc_ReateDate=" + bc_ReateDate + ", b_ModifyDate="
-				+ b_ModifyDate + ", bStatus=" + bStatus + "]";
-	}
-	
-	
-	
-	
-	
+   public void setstatus(String status) {
+      this.status = status;
+   }
 
 
-	
-	
-	
+   @Override
+   public String toString() {
+      return "Board [bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bWriter=" + bWriter
+            + ", bContent=" + bContent + ", bCount=" + bCount + ", b_CreateDate=" + b_CreateDate + ", b_ModifyDate="
+            + b_ModifyDate + ", status=" + status + "]";
+   }
+   
+   
+   
+   
+   
+
+
+   
+   
+   
 
 }

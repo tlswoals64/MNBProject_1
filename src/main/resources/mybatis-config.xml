@@ -16,7 +16,7 @@
 		<typeAlias type="com.kh.MNB.note.model.vo.Note" alias="Note"/>
 		<typeAlias type="com.kh.MNB.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.MNB.board.model.vo.Attachment" alias="Attachment"/>
-		<typeAlias type="com.kh.MNB.board.model.vo.Free" alias="Free"/>
+		<typeAlias type="com.kh.MNB.board.model.vo.PictureBoard" alias="PictureBoard"/>
 		<typeAlias type="com.kh.MNB.board.model.vo.PageInfo" alias="PageInfo"/>
 		<typeAlias type="com.kh.MNB.propose.model.vo.Propose" alias="Propose"/>
 		<typeAlias type="com.kh.MNB.report.model.vo.Report" alias="Report"/>

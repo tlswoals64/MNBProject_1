@@ -3,39 +3,36 @@ package com.kh.MNB.board.model.vo;
 import java.sql.Date;
 
 public class Attachment {
-	private int iNo; // 이미지 번호
-	private int bNo; // 게시글 번호
-	private String originName; // 이미지 명
-	private String changeName; // 변경 이미지 명
-	private String filePath; // 이미지 경로
-	private Date upload_Date; // 업로드 날짜
-	private String iType; // 이미지 타입
-	private String status; // 상태
+	private int iNo; // �씠誘몄� 踰덊샇
+	private int bNo; // 寃뚯떆湲� 踰덊샇
+	private String originName; // �씠誘몄� 紐�
+	private String changeName; // 蹂�寃� �씠誘몄� 紐�
+	private Date upload_Date; // �뾽濡쒕뱶 �궇吏�
+	private int iType; // �씠誘몄� ���엯
+	private String status; // �긽�깭
 	
 	public Attachment() {}
 
-	// 전체 생성자
-	public Attachment(int iNo, int bNo, String originName, String changeName, String filePath, Date upload_Date,
-			String iType, String status) {
+	// �쟾泥� �깮�꽦�옄
+	public Attachment(int iNo, int bNo, String originName, String changeName, Date upload_Date,
+			int iType, String status) {
 		super();
 		this.iNo = iNo;
 		this.bNo = bNo;
 		this.originName = originName;
 		this.changeName = changeName;
-		this.filePath = filePath;
 		this.upload_Date = upload_Date;
 		this.iType = iType;
 		this.status = status;
 	}
 	
-	// status랑 iType뺀 생성자
-	public Attachment(int iNo, int bNo, String originName, String changeName, String filePath, String iType) {
+	// status�옉 iType類� �깮�꽦�옄
+	public Attachment(int iNo, int bNo, String originName, String changeName, int iType) {
 		super();
 		this.iNo = iNo;
 		this.bNo = bNo;
 		this.originName = originName;
 		this.changeName = changeName;
-		this.filePath = filePath;
 		this.iType = iType;
 	}
 
@@ -71,14 +68,6 @@ public class Attachment {
 		this.changeName = changeName;
 	}
 
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
 	public Date getUpload_Date() {
 		return upload_Date;
 	}
@@ -87,11 +76,11 @@ public class Attachment {
 		this.upload_Date = upload_Date;
 	}
 
-	public String getiType() {
+	public int getiType() {
 		return iType;
 	}
 
-	public void setiType(String iType) {
+	public void setiType(int iType) {
 		this.iType = iType;
 	}
 
@@ -106,7 +95,7 @@ public class Attachment {
 	@Override
 	public String toString() {
 		return "Attachment [iNo=" + iNo + ", bNo=" + bNo + ", originName=" + originName + ", changeName=" + changeName
-				+ ", filePath=" + filePath + ", upload_Date=" + upload_Date + ", iType=" + iType + ", status=" + status
+				+ ", filePath=" + ", upload_Date=" + upload_Date + ", iType=" + iType + ", status=" + status
 				+ "]";
 	}
 
