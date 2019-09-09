@@ -9,8 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -24,6 +30,9 @@ import com.kh.MNB.memo.model.service.MemoService;
 import com.kh.MNB.memo.model.vo.Memo;
 
 
+
+@SessionAttributes("loginUser")
+
 @Controller
 public class MemberController {
 	@Autowired
@@ -32,14 +41,72 @@ public class MemberController {
 	@Autowired
 	MemoService memoService;
 	
+	//---------ë¡œê·¸ì¸í™”ë©´ì´ë™----------
+		@RequestMapping("loginView.do")
+		public String loginView() {
+			return "login/loginView";
+		}
+		//-----------ë¡œê·¸ì¸ --------------
+		@RequestMapping(value="login.do", method=RequestMethod.POST)
+		public String MemberLogin(Member m, Model model) {
+			System.out.println(m.getUserId());
+			
+			Member loginUser = mService.memberLogin(m);		
+			 if (loginUser != null) {
+				 if(loginUser.getUserId().equals("admin")) {
+					 model.addAttribute("loginUser", loginUser);
+					 return "manager/managermainView";
+				 }else {
+				 model.addAttribute("loginUser", loginUser); 
+				 return "redirect:index.jsp";
+				 }
+			 } else {
+				 throw new MemberException("ë¡œê·¸ì¸ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			}
+			 
+		}
+		
+		// ---------- ë¡œê·¸ì•„ì›ƒ ----------
+		@RequestMapping("logout.do")
+		public String logout(SessionStatus status) {
+			// SessionStatus : ì»¤ë§¨ë“œ ê°ì²´ë¡œ ì„¸ì…˜ ìƒíƒœë¥¼ ê´€ë¦¬í•  ìˆ˜ ìˆìŒ
+			status.setComplete();
+			return "redirect:index.jsp";
+		}
+		
+		//---------- ì•„ì´ë”” ì°¾ê¸° ----------
+		@RequestMapping("idSearchView.do")
+		public String idSearchView() {
+			return "login/idSearchView";
+		}
+		@RequestMapping(value="idSearch.do", method=RequestMethod.POST)
+		public String idSearch(@ModelAttribute Member m, Model model) {
+			System.out.println(m);
+			
+			String id= mService.idSearch(m);
+			System.out.println(id);
+			if(id !=null) {
+				model.addAttribute("searchId", id);
+				return "login/idSearchResult";
+			}else {
+				throw new MemberException("ì•„ì´ë”” ì°¾ê¸°ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			}
+		}
+		
+		
+		//--------- ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°-----------
+		@RequestMapping("pwdIdCheck.do")
+		public String pwdIdCheckView() {
+			return "login/pwdIdCheckView";
+		}
 	
-	//------------------------- °ü¸®ÀÚ ºÎºĞ ---------------------------
+	//------------------------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ---------------------------
 	@RequestMapping("manaHome.do")
 	public String test() {
 		return "manager/managermainView";
 	}
 	
-	// È¸¿ø °ü¸® ¸®½ºÆ®
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	@RequestMapping("mManaList.do")
 	public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 		int currentPage = 1;
@@ -47,9 +114,9 @@ public class MemberController {
 			currentPage = page;
 		}
 		
-		int listCount = mService.getListCount(); // ÀüÃ¼ ÆäÀÌÁö ¼ö
+		int listCount = mService.getListCount(); // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ÆäÀÌÁö¿¡´ëÇÑ Á¤º¸
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		ArrayList<Member> list = mService.selectmemberManaList(pi);
 		
@@ -59,13 +126,13 @@ public class MemberController {
 			mv.setViewName("manager/managerMemberManaListView");
 		}
 		else {
-			throw new MemberException("°Ô½Ã±Û ÀüÃ¼ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new MemberException("ï¿½Ô½Ã±ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 		
 		return mv;
 	}
 	
-	// È¸¿øÁ¤º¸ µğÅ×ÀÏ ÆäÀÌÁö
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("mUserDetail.do")
 	public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {
 		String userId = request.getParameter("userId");
@@ -75,12 +142,12 @@ public class MemberController {
 			mv.setViewName("manager/managerMemberManaDetailView");
 		}
 		else {
-			throw new MemberException("È¸¿øÁ¤º¸ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new MemberException("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 		return mv;
 	}
 	
-	// È¸¿øÁ¤º¸ µğÅ×ÀÏ ÆäÀÌÁö¿¡ ¸Ş¸ğºÒ·¯¿À´Â ÇÔ¼ö
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¸ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	@RequestMapping("memo.do")
 	public void getReplyList(HttpServletResponse response, String userId) throws IOException {
 		ArrayList<Memo> memoList = memoService.selectUserMemo(userId);
@@ -92,7 +159,7 @@ public class MemberController {
 		gson.toJson(memoList, response.getWriter());
 	}
 	
-	// ¸Ş¸ğ Ãß°¡
+	// ï¿½Ş¸ï¿½ ï¿½ß°ï¿½
 	@RequestMapping("addMemo.do")
 	public void insertReply(HttpServletResponse response, String mContent, String userId) throws IOException {
 		
@@ -107,7 +174,7 @@ public class MemberController {
 		
 	}
 	
-	// È¸¿ø¼öÁ¤
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("mUserUpdate.do")
 	public String mUserUpdate(HttpServletRequest request, Member m,
 								   @RequestParam("address2") String address2,
@@ -121,7 +188,7 @@ public class MemberController {
 			return "redirect:mUserDetail.do?userId=" + m.getUserId();
 		}
 		else {
-			throw new MemberException("È¸¿øÁ¤º¸ »èÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new MemberException("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 	}
 	

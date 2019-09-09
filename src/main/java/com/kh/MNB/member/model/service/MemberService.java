@@ -8,13 +8,17 @@ import com.kh.MNB.member.model.vo.Member;
 
 public interface MemberService {
 	
-	int getListCount(); // ÆäÀÌÂ¡
+	int getListCount(); // ï¿½ï¿½ï¿½ï¿½Â¡
 	
-	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list È¸¿ø °ü¸®¿ë
+	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	Member selectUserDetail(String userId); // member Detail È¸¿ø°ü¸® º¸±â¿ë
+	Member selectUserDetail(String userId); // member Detail È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	int mUserUpdate(Member m);
+
+	Member memberLogin(Member m);
+
+	String idSearch(Member m);
 	
 }
