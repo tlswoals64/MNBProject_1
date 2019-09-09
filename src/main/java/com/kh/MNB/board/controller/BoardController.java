@@ -53,7 +53,11 @@ public class BoardController {
 		return "board/community/nanumDetailView";
 	}
 	
-
+	@RequestMapping("cIntro.do")
+	public String cBoard() {
+		return "board/community/communityIntro";
+	}
+	
 	@RequestMapping("blist.do")
 	public ModelAndView boardList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 
