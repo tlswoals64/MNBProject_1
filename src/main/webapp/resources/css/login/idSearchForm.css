@@ -1,0 +1,42 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+#btn2  {
+	width: 150px;
+	height: 35px;
+	margin: auto;
+	font-size: 20px;
+	color: white;	
+	text-align: center;
+	background: #9abf7f;
+	border-radius: 12px;
+}
+
+#btn3 {
+	width: 150px;
+	height: 35px;
+	margin: auto;
+	font-size: 20px;
+	color: white;	
+	text-align: center;
+	background: #9abf7f;
+	border-radius: 12px;
+}
+
+#emailCheck  {
+	width: 110px;
+	height: 35px;
+	margin: auto;
+	font-size: 14px;
+	color: white;
+	text-align: center;
+	background: #9abf7f;
+	border-radius: 12px;
+}
+
+	#id,#nametext,#emailtext,#birthday, #cNum{
+		width:310px;
+		height:30px;
+		font-size: large;
+		border-radius: 12px;
+	}
