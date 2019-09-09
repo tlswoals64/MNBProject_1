@@ -2,6 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="proposeMapper">
 
+	<!-- 관리자 qna 리스트 받아올때 페이징에 사용 -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from propose
+	</select>
 	
+	<!-- 관리자  QNA 리스트 -->
+	<select id="selectQnaList" resultType="Propose">
+		select b.bwriter, b.b_modifydate, b.status, b.bcount, b.b_createdate, b.bcontent, b.btitle, p.pno, p.ptype, p.pre
+		from propose p
+     		left outer join board b
+     		on (p.pno = b.bno)
+     	where b.status = 'Y'
+     	order by b.b_createdate
+	</select>
+
+	<!-- 관리자용 QNA 디테일 -->
+	<select id="mQnADetail" parameterType="_int" resultType="Propose">
+		select b.bwriter, b.b_modifydate, b.status, b.bcount, b.b_createdate, b.bcontent, b.btitle, p.pno, p.ptype, p.pre, p.pReContent
+		from propose p
+     		left outer join board b
+     		on (p.pno = b.bno)
+     	where p.pno = ${ pNo }
+     	order by b.b_createdate
+	</select>
 	
+	<!-- 관리자용 QNA 댓글 -->
+	<update id="mQnAReplyAdd" parameterType="Propose">
+		update propose
+		set pReContent = #{ pReContent },
+			pRe = 'Y'
+		where pNo = #{ pNo }
+			
+			
+	</update>
 </mapper>

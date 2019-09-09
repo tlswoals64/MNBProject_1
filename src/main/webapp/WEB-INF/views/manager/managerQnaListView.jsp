@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	int listCount = 10;
-	int currentPage = 10;
-	int maxPage = 10;
-	int startPage = 1;
-	int endPage = 10;
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
@@ -170,12 +164,17 @@
 		font-size : 27px;
 		font-weight : 900;
 		margin-left : 15px;
-		width : 1400px;
+		width : 1600px;
 		padding-top : 10px;
 		padding-bottom : 10px;
 		border-bottom : 3px solid black;
 	}
 	
+	#amountUser{
+		font-size : 18px;
+		color : #01A9DB;
+		
+	}
 	.QnAListTr:hover{
 		background: rgb(248,248,248);
 		cursor : pointer;
@@ -210,6 +209,25 @@
 		height: 80px;
 		text-align: center;
 		border-bottom: 1px solid gray;
+	}
+	
+	#pNo{
+		width : 200px;
+	}
+	#pType{
+		width : 250px;
+	}
+	#bTitle{
+		width : 500px;
+	}
+	#bWriter{
+		width : 200px;
+	}
+	#b_CreateDate{
+		width : 200px;
+	}
+	#pRe{
+		width : 100px;
 	}
 	/**********************************************************/
 	/*********************페이징***********************/
@@ -278,17 +296,17 @@
 			<div id="boardMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="boardMbb">신고게시판</div>
+	        			<div id="boardMbb" onclick="location.href='mDeList.do'">신고게시판</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="boardQnA">QnA게시판</div>
+			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 			        </li>
 			    </ul>
 			</div>
 		</nav>	
 		
 		<div class="content">
-			<div id="QnAListB">QnA 게시판</div>
+			<div id="QnAListB">QnA 게시판<b id="amountUser">총 Qna 질문 수 : ${ pi.listCount }</b></div>
 			<div class="QnAListArea">
 				<div class="QnAList">
 					<table class="QnAListTabe">
@@ -300,50 +318,87 @@
 							<th>작성 날짜</th>
 							<th>확인유무</th>
 						</tr>
-						<% for(int i= 0; i < 10; i++){ %>
-						<tr class="QnAListTr">
-							<td class="QnAListTd" id="qNum">1554</td>
-							<td class="QnAListTd" id="qCate">배아비시터 등록</td>
-							<td class="QnAListTd" id="qTitle">베이비시터 등록은 어떻게 하는건가요?</td>
-							<td class="QnAListTd" id="qWriter">hh123</td>
-							<td class="QnAListTd" id="createDate">2019.08.18</td>
-							<td class="QnAListTd" id="status">N</td>
-						</tr>
-						<%} %>
+						<c:forEach var="p" items="${ list }">
+							<tr class="QnAListTr" onclick="goQnaDetail(this);">
+								<td class="QnAListTd" id="pNo">${ p.pNo }</td>
+								<td class="QnAListTd" id="pType">
+								<c:choose>
+								   <c:when test="${p.pType ==1}">
+								          사이트 이용관련
+								    </c:when>
+								    <c:when test="${p.pType ==2}">
+								        회원정보
+								    </c:when>
+								     <c:when test="${p.pType ==3}">
+								        불건전 행위
+								    </c:when>
+								    <c:when test="${p.pType ==4}">
+								        기타
+								    </c:when>
+								     <c:when test="${p.pType ==5}">
+								        베이비시터 관련
+								    </c:when>
+								    <c:otherwise>
+								        부모님 관련
+								    </c:otherwise>
+								   </c:choose>
+								</td>
+								<td class="QnAListTd" id="bTitle">${ p.bTitle }</td>
+								<td class="QnAListTd" id="bWriter">${ p.bWriter }</td>
+								<td class="QnAListTd" id="b_CreateDate">${ p.b_CreateDate }</td>
+								<td class="QnAListTd" id="pRe">${ p.pRe }</td>
+							</tr>
+							<script>
+								function goQnaDetail(t){
+									var pNo = $(t).children("#pNo").text();
+									console.log(pNo);
+									location.href = 'mQnADetail.do?pNo=' + pNo;
+								}
+							</script>
+						</c:forEach>
 								
 					</table>
 				</div>
 			</div>
 			<!-- paging 부분 -->
 			<div class="pagingArea">
-				<% if(true) {%>
-					<button onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=1'">&lt;&lt;</button>
-																										  <!-- << -->
-					<!-- 이전 페이지로 가는 버튼 -->
-					<button id="beforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= currentPage - 1 %>'">&lt;</button>
-										<!-- < -->
-					<script>
-						// 1페이지 이하면 활성화 안되게
-						if(<%= currentPage %> <= 1){
-							$('#beforeBtn').attr("disabled", "true");
-						}
-					</script>
-					<!-- 10개의 페이지 목록 -->
-					<% for(int p = startPage; p <= endPage; p++){ %>
-						<% if(p == currentPage){ %>
-							<button id="choosen" disabled><%= p %></button>
-							<% } else {%>
-								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= p %>'"><%= p %></button>
-							<% } %>
-						<% } %>
-					<% } %>
-					<!-- 다음 페이지로 -->
-					<button id="afterBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= currentPage + 1 %>'">&gt;</button>
-					<script>
-						if(<%= currentPage %> >= <%= maxPage %>){
-							$('#afterBtn').attr('disabled', 'true');
-						}
-					</script>
+         
+	            <!-- [이전] -->
+	            <c:if test="${ pi.currentPage <= 1 }">
+	               [이전] &nbsp;
+	            </c:if>
+	            <c:if test="${ pi.currentPage > 1 }">
+	               <c:url var="before" value="mQnaList.do">
+	                  <c:param name="page" value="${ pi.currentPage - 1 }"/>
+	               </c:url>
+	               <a href="${ before }">[이전]</a> &nbsp;
+	            </c:if>
+	            
+	            <!-- 페이지 -->
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <c:if test="${ p eq currentPage }">
+	                  <font color="red" size="4"><b>[${ p }]</b></font>
+	               </c:if>
+	               
+	               <c:if test="${ p ne currentPage }">
+	                  <c:url var="pagination" value="mQnaList.do">
+	                     <c:param name="page" value="${ p }"/>
+	                     <!-- blist.do?page=${p}값   -->
+	                  </c:url>
+	                  <a href="${ pagination }">${ p }</a> &nbsp;
+	               </c:if>
+	            </c:forEach>
+	            
+	            <!-- [다음] -->
+	            <c:if test="${ pi.currentPage >= pi.maxPage }">
+	               [다음]
+	            </c:if>
+	            <c:if test="${ pi.currentPage < pi.maxPage }">
+	               <c:url var="after" value="mQnaList.do">
+	                  <c:param name="page" value="${ pi.currentPage + 1 }"/>
+	               </c:url> 
+	               <a href="${ after }">[다음]</a>
+            	</c:if>
 					<!-- 맨 끝으로 -->
 			</div>
 		</div>

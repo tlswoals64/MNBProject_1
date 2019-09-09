@@ -3,6 +3,15 @@
 <mapper namespace="boardMapper">
 
 
+	<!-- 관리자 신고 승인 -->
+
+	<update id="mDeBApply" parameterType="_int">
+		update board
+		set status = 'N'
+		where bNo = #{ bNo }
+	</update>
+
+
 	<select id="getListNanumCount" resultType="_int">
 		select count(*)
 		from board

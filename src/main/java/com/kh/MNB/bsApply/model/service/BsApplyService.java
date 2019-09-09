@@ -14,7 +14,7 @@ public interface BsApplyService {
 
 	BSApply selectBsaDetail(String userId);
 
-	int levelUpdate(Member m);
+	int levelUpdate(BSApply b);
 
 	
 }

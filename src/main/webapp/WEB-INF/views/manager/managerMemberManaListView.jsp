@@ -302,10 +302,10 @@
 			<div id="boardMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="boardMbb">신고게시판</div>
+	        			<div id="boardMbb" onclick="location.href='mDeList.do'">신고게시판</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="boardQnA">QnA게시판</div>
+			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 			        </li>
 			    </ul>
 			</div>
@@ -334,6 +334,7 @@
 								<td class="memberListTd" id="userLevelName">
 									<c:if test="${ m.memberType == 1}">일반 회원</c:if>
 		          					<c:if test="${ m.memberType == 2}">베이비시터 회원</c:if>
+		          					<c:if test="${ m.memberType == 3}">블랙리스트 회원</c:if>
 		          				</td>
 								<td class="memberListTd" id="userName">${ m.userName }</td>
 								<td class="memberListTd" id="birth">${ m.birth }</td>

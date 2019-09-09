@@ -25,7 +25,7 @@ public class BsApplyController {
 	BsApplyService bsaService;
 	MemberService mService;
 
-	// È¸¿ø ·¹º§ ¸®½ºÆ®
+	// íšŒì›ë“±ê¸‰ ë¦¬ìŠ¤íŠ¸
 	@RequestMapping("mLevelList.do")
 	public ModelAndView manaLevel(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
 		int currentPage = 1;
@@ -33,9 +33,9 @@ public class BsApplyController {
 			currentPage = page;
 		}
 
-		int listCount = bsaService.getListCount(); // ÀüÃ¼ ÆäÀÌÁö ¼ö
+		int listCount = bsaService.getListCount(); 
 
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ÆäÀÌÁö¿¡´ëÇÑ Á¤º¸
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
 		ArrayList<BSApply> list = bsaService.selectmemberLevelList(pi);
 
@@ -44,13 +44,13 @@ public class BsApplyController {
 			mv.addObject("pi", pi);
 			mv.setViewName("manager/managerMemberLevelListView");
 		} else {
-			throw new BsApplyException("°Ô½Ã±Û ÀüÃ¼ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new BsApplyException("íšŒì›ë“±ê¸‰ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		}
 
 		return mv;
 	}
 	
-	// »ó¼¼ÆäÀÌÁö
+	// íšŒì›ë“±ê¸‰ ë””í…Œì¼
 	@RequestMapping("mApplyDetail.do")
 	public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {
 		String userId = request.getParameter("userId");
@@ -60,25 +60,23 @@ public class BsApplyController {
 			mv.setViewName("manager/managerMemberLevelDetailList");
 		}
 		else {
-			throw new BsApplyException("È¸¿øÁ¤º¸ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new BsApplyException("íšŒì›ë“±ê¸‰ ì‹ ì²­ ë³´ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤");
 		}
 		return mv;
 	}
 	
-	// È¸¿ø·¹º§ º¯°æ
+	// íšŒì› ë“±ê¸‰ìˆ˜ì •
 	@RequestMapping("mUserLevelUpdate.do")
-	public String mUserLevelUpdate(@RequestParam("userId") String userId, @RequestParam("memberType") int memberType) {
-		System.out.println("userId : " + userId);
-		System.out.println("memberType : " + memberType);
-		
-		Member m = new Member(userId, memberType);
-		int result = bsaService.levelUpdate(m);
+	public String mUserLevelUpdate(BSApply b) {
+		System.out.println("b : " + b);
+
+		int result = bsaService.levelUpdate(b);
 		
 		if(result > 0) {
 			return "redirect:mLevelList.do";
 		}
 		else {
-			throw new BsApplyException("È¸¿øÁ¤º¸ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			throw new BsApplyException("íšŒì›ë“±ê¸‰ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		}
 
 	}

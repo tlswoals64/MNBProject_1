@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!--PageInfo pi = "";
-    	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-     -->
-<%
-	int listCount = 10;
-	int currentPage = 10;
-	int maxPage = 10;
-	int startPage = 1;
-	int endPage = 10;
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
@@ -139,6 +130,21 @@
 		background : #0B4C5F;
 	}
 	
+	#deListB{
+		font-size : 27px;
+		font-weight : 900;
+		margin-left : 15px;
+		width : 1600px;
+		padding-top : 10px;
+		padding-bottom : 10px;
+		border-bottom : 3px solid black;
+	}
+	#amountUser{
+		font-size : 18px;
+		color : #01A9DB;
+		
+	}
+	
 	#boardMbar{
 		display:none;
 		cursor:pointer;
@@ -173,7 +179,7 @@
 		font-size : 27px;
 		font-weight : 900;
 		margin-left : 15px;
-		width : 1400px;
+		width : 1700px;
 		padding-top : 10px;
 		padding-bottom : 10px;
 		border-bottom : 3px solid black;
@@ -210,10 +216,36 @@
 	
 	.deListTd {
 		padding: 10px;
-		height: 75px;
+		height: 90px;
 		text-align: center;
 		border-bottom: 1px solid gray;
 	}
+	
+	#rNo{
+		width : 150px;
+	}
+	#rType{
+		width : 220px;
+	}
+	#bNo{
+		width : 200px;
+	}
+	#bTitle{
+		width : 500px;
+	}
+	#bWriter{
+		width : 150px;
+	}
+	#rMan{
+		width : 150px;
+	}
+	#rDate{
+		width : 150px;
+	}
+	#status{
+		width : 100px;
+	}
+
 	/**********************************************************/
 	
 	/*********************페이징***********************/
@@ -228,7 +260,7 @@
 		padding-top : 20px;
 		padding-bottom :20px;
 		text-align : center;
-		width : 700px;
+		width : 1400px;
 		margin-left : 250px;
 	}
 	/************************************************/
@@ -282,17 +314,17 @@
 			<div id="boardMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="boardMbb">신고게시판</div>
+	        			<div id="boardMbb" onclick="location.href='mDeList.do'">신고게시판</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="boardQnA">QnA게시판</div>
+			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 			        </li>
 			    </ul>
 			</div>
 		</nav>	
 		
 		<div class="content">
-			<div id="deListB">신고관리 게시판</div>
+			<div id="deListB">신고 게시판<b id="amountUser">총 신고 게시판 수 : ${ pi.listCount }</b></div>
 			<div class="deListArea">
 				<div class="deList">
 					<table class="deListTabe">
@@ -306,18 +338,39 @@
 							<th>신고 날짜</th>
 							<th>확인유무</th>
 						</tr>
-						<% for(int i= 0; i < 10; i++){ %>
-						<tr class="deListTr">
-							<td class="deListTd" id="deNum">1554</td>
-							<td class="deListTd" id="boardCate">커뮤니티</td>
-							<td class="deListTd" id="bNum">2432</td>
-							<td class="deListTd" id="bTitle">이 게시글을 신고하지 말아주세요!</td>
-							<td class="deListTd" id="bWriter">희희</td>
-							<td class="deListTd" id="deId">user02</td>
-							<td class="deListTd" id="createDate">2019.08.18</td>
-							<td class="deListTd" id="status">N</td>
-						</tr>
-						<%} %>
+						<c:forEach var="r" items="${ list }">
+							<tr class="deListTr" onclick="goReportDetail(this);">
+								<td class="deListTd" id="rNo">${ r.rNo }</td>
+								<td class="deListTd" id="rType">
+									<c:choose>
+										<c:when test="${r.rType ==1}">
+											 부적절한 홍보
+										</c:when>
+										<c:when test="${r.rType ==2}">
+											 음란성 또는 청소년에게 부적합한 내용
+										</c:when>
+										<c:when test="${r.rType ==3}">
+											명예훼손/사생활 침해 및 저작권침해 등
+										</c:when>
+										<c:otherwise>
+											        기타
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td class="deListTd" id="bNo">${ r.bNo }</td>
+								<td class="deListTd" id="bTitle">${ r.bTitle }</td>
+								<td class="deListTd" id="bWriter">${r.bWriter }</td>
+								<td class="deListTd" id="rMan">${ r.rMan }</td>
+								<td class="deListTd" id="rDate">${ r.rDate }</td>
+								<td class="deListTd" id="rRe">${ r.rRe }</td>
+							</tr>
+							<script>
+								function goReportDetail(t){
+									var rNo = $(t).children("#rNo").text();
+									location.href = 'mReportDetail.do?rNo=' + rNo;
+								}
+							</script>
+						</c:forEach>
 								
 					</table>
 				</div>
@@ -325,34 +378,43 @@
 			
 			<!-- paging 부분 -->
 			<div class="pagingArea">
-				<% if(true) {%>
-					<button onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=1'">&lt;&lt;</button>
-																										  <!-- << -->
-					<!-- 이전 페이지로 가는 버튼 -->
-					<button id="beforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= currentPage - 1 %>'">&lt;</button>
-										<!-- < -->
-					<script>
-						// 1페이지 이하면 활성화 안되게
-						if(<%= currentPage %> <= 1){
-							$('#beforeBtn').attr("disabled", "true");
-						}
-					</script>
-					<!-- 10개의 페이지 목록 -->
-					<% for(int p = startPage; p <= endPage; p++){ %>
-						<% if(p == currentPage){ %>
-							<button id="choosen" disabled><%= p %></button>
-							<% } else {%>
-								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= p %>'"><%= p %></button>
-							<% } %>
-						<% } %>
-					<% } %>
-					<!-- 다음 페이지로 -->
-					<button id="afterBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= currentPage + 1 %>'">&gt;</button>
-					<script>
-						if(<%= currentPage %> >= <%= maxPage %>){
-							$('#afterBtn').attr('disabled', 'true');
-						}
-					</script>
+         
+	            <!-- [이전] -->
+	            <c:if test="${ pi.currentPage <= 1 }">
+	               [이전] &nbsp;
+	            </c:if>
+	            <c:if test="${ pi.currentPage > 1 }">
+	               <c:url var="before" value="mDeList.do">
+	                  <c:param name="page" value="${ pi.currentPage - 1 }"/>
+	               </c:url>
+	               <a href="${ before }">[이전]</a> &nbsp;
+	            </c:if>
+	            
+	            <!-- 페이지 -->
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <c:if test="${ p eq currentPage }">
+	                  <font color="red" size="4"><b>[${ p }]</b></font>
+	               </c:if>
+	               
+	               <c:if test="${ p ne currentPage }">
+	                  <c:url var="pagination" value="mDeList.do">
+	                     <c:param name="page" value="${ p }"/>
+	                     <!-- blist.do?page=${p}값   -->
+	                  </c:url>
+	                  <a href="${ pagination }">${ p }</a> &nbsp;
+	               </c:if>
+	            </c:forEach>
+	            
+	            <!-- [다음] -->
+	            <c:if test="${ pi.currentPage >= pi.maxPage }">
+	               [다음]
+	            </c:if>
+	            <c:if test="${ pi.currentPage < pi.maxPage }">
+	               <c:url var="after" value="mDeList.do">
+	                  <c:param name="page" value="${ pi.currentPage + 1 }"/>
+	               </c:url> 
+	               <a href="${ after }">[다음]</a>
+            	</c:if>
 					<!-- 맨 끝으로 -->
 			</div>
 		</div>
