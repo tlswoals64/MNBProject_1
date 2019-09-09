@@ -226,7 +226,7 @@ vertical-align: top;
 				<tr>
 					<th><em>*</em> 연락처</th>
 					<td>
-						<input type = "tel" class = "joininput phone" name = "phone" placeholder="-를 포함하여 입력해주세요." title = "ex) 010-1234-5678" required>
+						<input id = "phone" type = "tel" class = "joininput phone" name = "phone" placeholder="-를 포함하여 입력해주세요." title = "ex) 010-1234-5678" required>
 						<input type = "hidden" name = "phoneCheck" id = "phoneCheck" value = "0">
 					</td>
 				</tr>
@@ -308,8 +308,6 @@ vertical-align: top;
 					success: function(data){
 						if(data === true){
 							joinCode = <%= session.getAttribute("joinCode") %>;
-							
-							alert(joinCode);
 						} else{
 							alert("실패!");
 						}
@@ -334,7 +332,7 @@ vertical-align: top;
 				var userId = $(this).val().trim();
 				
 				if(userId.length < 4){
-					$(".guide").hide();
+					$(".guide.id").hide();
                     $("#idDuplicateCheck").val(0);
                      
                     return;
@@ -368,8 +366,8 @@ vertical-align: top;
 				var isnickName = /^[\w가-힣]{2,20}$/;
 				
 				if(nickName.length < 2 && isnickName.test(nickName) != true){
-					$(".guide").hide();
-                    $("#nickNameCheck").val(0);7
+					$(".guide.nick").hide();
+                    $("#nickNameCheck").val(0);
                      
                     return;
 				}
@@ -418,7 +416,6 @@ vertical-align: top;
 			var isName = /^[가-힣]{2,4}$/;
 			if(isName.test(name) != true){
 				$("#name").val("");
-			    $("#name").focus();
 			    $("#nameCheck").val(0);
 			} else{
 				$("#nameCheck").val(1);
@@ -432,7 +429,6 @@ vertical-align: top;
          	var isPW = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
          	if(isPW.test(pwd) != true){
          		$("#pass").val("");
-			    $("#pass").focus();
 			    $("#passCheck").val(0);
          	}else{
          		$("#passCheck").val(1);
@@ -462,7 +458,6 @@ vertical-align: top;
 			
 			if(phoneCheck.test(phone) != true){
          		$("#phone").val("");
-			    $("#phone").focus();
 			    $("#phoneCheck").val(0);
          	} else{
          		$("#phoneCheck").val(1);

@@ -59,7 +59,7 @@
 	
 	<insert id = "insertMember" parameterType="Member">
 		insert into member
-		values(#{userId}, #{userPwd}, #{userName}, #{birth}, #{nickName}, #{gender}, #{email}, #{phone}, #{address}, default,  default, sysdate, sysdate, default)
+		values(#{userId}, #{userPwd}, #{userName}, #{birth}, #{nickName}, #{gender}, #{email}, #{phone}, #{address}, default,  default, sysdate, sysdate, default, null)
 	</insert>
 	
 	<select id="nickCheck" parameterType="string" resultType="_int">
