@@ -8,11 +8,15 @@ import com.kh.MNB.member.model.vo.Member;
 
 public interface MemberService {
 	
-	int getListCount(); // 페이징처리를위해 전체갯수를 가져옴
-	
-	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list를 쭉 받아옴
 
 	int checkIdDup(String id);
+
+	int getListCount(); // ����¡
+	
+	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list ȸ�� ������
+
+	Member selectUserDetail(String userId); // member Detail ȸ������ �����
+
 
 	int insertMember(Member m);
 
@@ -23,5 +27,9 @@ public interface MemberService {
 	Member selectUserDetail(String userId); // member Detail ȸ������ �����
 
 	int mUserUpdate(Member m);
+
+	Member memberLogin(Member m);
+
+	String idSearch(Member m);
 	
 }

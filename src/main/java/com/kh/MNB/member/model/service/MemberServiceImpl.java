@@ -47,6 +47,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
 	public int checkIdDup(String id) {
 		return mDAO.checkIdDup(id);
 	}
@@ -79,6 +80,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		return false;
+
+	public Member memberLogin(Member m) {
+		return mDAO.selectMember(m);
+	}
+
+	@Override
+	public String idSearch(Member m) {
+		return mDAO.idSearch(m);
+
 	}
 	
 	

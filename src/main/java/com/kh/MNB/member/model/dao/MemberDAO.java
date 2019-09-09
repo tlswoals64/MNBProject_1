@@ -49,4 +49,12 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.mUserUpdate", m);
 	}
 
+	public Member selectMember(Member m) {
+		return (Member)sqlSession.selectOne("memberMapper.selectMember", m);
+	}
+
+	public String idSearch(Member m) {
+		return sqlSession.selectOne("memberMapper.idSearch", m);
+	}
+
 }

@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	int listCount = 10;
-	int currentPage = 10;
-	int maxPage = 10;
-	int startPage = 1;
-	int endPage = 10;
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
@@ -128,6 +122,7 @@
     .menuUl{
     	width : 100%;
     }
+    
 	/***********************************************/
 	
 	/************************nav2****************************/
@@ -169,9 +164,9 @@
 	
 	.qnaTable{
 		border : 2px solid #01A9DB;
+		border-bottom : 2px solid white;
 		border-collapse: separate;
 		border-spacing: 0 10px;
-		margin-bottom : 10px;
 		padding-left : 10px;
 		padding-right : 10px;
 		
@@ -185,7 +180,7 @@
 	
 	.qnaTd{
 
-		font-size : 15px;
+		font-size : 17px;
 		padding-left : 10px;
 	}
 	
@@ -198,6 +193,7 @@
 	}
 	#contentArea > th{
 		border-top : 2px solid rgb(220,220,220);
+		
 	}
 	#replyArea{
 		background : rgb(248,248,248);
@@ -218,16 +214,36 @@
 	}
 	
 	.qnaRely{
-		width : 1020px;
+		width : 1077px;
 		margin-top : 10px;
 		resize : none;
 		border : 2px solid rgb(248,248,248);
+		font-size : 17px;
+		text-aling : left;
+	}
+	#replyTd{
+		border-top : 2px solid white;
 	}
 	
 	#qnaContent{
 		width : 1020px;
 		height : 300px;
 		margin-top : 30px;
+		
+		
+	}
+	
+	.repTable{
+		border : 3px solid #01A9DB;
+		border-top : 3px solid white;
+		
+	}
+	.repTh{
+		text-align : center;
+		font-size : 18px;
+		height : 50px;
+		width : 70px;
+		margin-top : 20px;
 	}
 	
 	/**********************************************************/
@@ -268,7 +284,7 @@
 	}
 	
 	.btnArea{
-		width : 750px;
+		width : 1200px;
 		margin-left : auto;
 		margin-right : auto;
 		margin-top : 15px;
@@ -326,10 +342,10 @@
 			<div id="boardMbar">
 				 <ul class="nav2MenuUl">
 	        		<li class="nav2Menu">
-	        			<div id="boardMbb">신고게시판</div>
+	        			<div id="boardMbb" onclick="location.href='mDeList.do'">신고게시판</div>
 	       			 </li>
 			        <li class="nav2Menu">
-			        	<div id="boardQnA">QnA게시판</div>
+			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 			        </li>
 			    </ul>
 			</div>
@@ -340,21 +356,37 @@
 				<tr class="qnaTr" id="firstArea">
 					<th class="qnaTh" id="typeArea">유형</th>
 					<td class="qnaTd" id="type">
-						베이비시터 등록
+						<c:choose>
+							<c:when test="${p.pType ==1}">
+								          사이트 이용관련
+								    </c:when>
+							<c:when test="${p.pType ==2}">
+								        회원정보
+								    </c:when>
+							<c:when test="${p.pType ==3}">
+								        불건전 행위
+								    </c:when>
+							<c:when test="${p.pType ==4}">
+								        베이비시터 관련
+								    </c:when>
+							<c:otherwise>
+								        부모님 관련
+								    </c:otherwise>
+						</c:choose>
 					</td>
 					
 					<th class="qnaTh" id="userIdArea">작성자</th>
-					<td class="qnaTd" id="userId">0322sol</td>
+					<td class="qnaTd" id="userId">${ p.bWriter }</td>
 					
 					<th class="qnaTh" id="writeDateArea">작성일</th>
 					<td class="qnaTd" id="writeDate">
-						2019.08.27
+						${ p.b_CreateDate }
 					</td>
 				</tr>
 				
 				<tr class="qnaTr" id="titleArea">
 					<th class="qnaTh" colspan="1">제목</th>
-					<td class="qnaTd" colspan="5">베이비시터가 되려면 어떻게 해야하나요?</td>
+					<td class="qnaTd" colspan="5">${ p.bTitle }</td>
 				</tr>
 				
 				<tr class="qnaTr" id="contentArea">
@@ -362,28 +394,32 @@
 						내용
 					</th>
 					<td class="qnaTd" colspan="5">
-						<div id="qnaContent">베이비시터가 되고싶습니다 어떻게해야할까요?
-							 아무리 찾아도 베이비시터 신청버튼이 어딨는지 모르겠습니다.
-							 도!대!체 버든티 어디있는건가요?!?!?!!?!?!??!?!!?!?
-							 진짜 알려주세요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-							 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</div>
+						<div id="qnaContent">${ p.bContent }</div>
 					</td>
 				</tr>
-				<tr class="qnaTr" id="replyArea">
-					<th class="qnaTh" colspan="1">답변</th>
-					<td class="qnaTd" colspan="5">
-						<textarea class="qnaRely" rows="17">
-						</textarea>
-					</td>
-				</tr>
+				
 			</table>
-			<div class="btnArea">
-				<div class="btn" id="applyBtn">확인</div>
-				<div class="btn" id="cancleBtn">취소</div>
-			</div>
+			<form action="qnaReplyAdd.do" method="post">
+				<table class="repTable">
+					<tr class="repTr" id="replyArea">
+						<th class="repTh" colspan="1">답변</th>
+						<td class="repTd" colspan="5">
+							<input type="hidden" name="pNo" id="pNo" value="${ p.pNo }">
+							<textarea class="qnaRely" rows="17" name="pReContent" id="pReContent">${ p.pReContent }</textarea>
+						</td>
+					</tr>
+				</table>
+				<div class="btnArea">
+					<button type="submit" class="btn" id="applyBtn">확인</button>
+					<div class="btn" id="cancleBtn" onclick="location.href='mQnaList.do'">취소</div>
+				</div>
+		</form>
+		
 		</div>
 	</div>
 </body>
+
+
 <script>
     $(document).ready(function(){
         $(".menu>div").click(function(){

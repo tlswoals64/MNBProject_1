@@ -14,11 +14,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -32,6 +37,9 @@ import com.kh.MNB.memo.model.service.MemoService;
 import com.kh.MNB.memo.model.vo.Memo;
 
 
+
+@SessionAttributes("loginUser")
+
 @Controller
 public class MemberController {
 	@Autowired
@@ -40,6 +48,7 @@ public class MemberController {
 	@Autowired
 	MemoService memoService;
 	
+
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
@@ -73,9 +82,88 @@ public class MemberController {
 	// 회원가입
 	@RequestMapping("minsert.do")
 	public String memberInsert(@ModelAttribute Member m, @RequestParam("address") String address, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, @RequestParam("addEmail") String addEmail) {
+
+	//---------로그인화면이동----------
+		@RequestMapping("loginView.do")
+		public String loginView() {
+			return "login/loginView";
+		}
+		//-----------로그인 --------------
+		@RequestMapping(value="login.do", method=RequestMethod.POST)
+		public String MemberLogin(Member m, Model model) {
+			System.out.println(m.getUserId());
+			
+			Member loginUser = mService.memberLogin(m);		
+			 if (loginUser != null) {
+				 if(loginUser.getUserId().equals("admin")) {
+					 model.addAttribute("loginUser", loginUser);
+					 return "manager/managermainView";
+				 }else {
+				 model.addAttribute("loginUser", loginUser); 
+				 return "redirect:index.jsp";
+				 }
+			 } else {
+				 throw new MemberException("로그인에 실패하였습니다.");
+			}
+			 
+		}
+		
+		// ---------- 로그아웃 ----------
+		@RequestMapping("logout.do")
+		public String logout(SessionStatus status) {
+			// SessionStatus : 커맨드 객체로 세션 상태를 관리할 수 있음
+			status.setComplete();
+			return "redirect:index.jsp";
+		}
+		
+		//---------- 아이디 찾기 ----------
+		@RequestMapping("idSearchView.do")
+		public String idSearchView() {
+			return "login/idSearchView";
+		}
+		@RequestMapping(value="idSearch.do", method=RequestMethod.POST)
+		public String idSearch(@ModelAttribute Member m, Model model) {
+			System.out.println(m);
+			
+			String id= mService.idSearch(m);
+			System.out.println(id);
+			if(id !=null) {
+				model.addAttribute("searchId", id);
+				return "login/idSearchResult";
+			}else {
+				throw new MemberException("아이디 찾기에 실패하였습니다.");
+			}
+		}
+		
+		
+		//--------- 비밀번호 찾기-----------
+		@RequestMapping("pwdIdCheck.do")
+		public String pwdIdCheckView() {
+			return "login/pwdIdCheckView";
+		}
+	
+	//------------------------- ������ �κ� ---------------------------
+	@RequestMapping("manaHome.do")
+	public String test() {
+		return "manager/managermainView";
+	}
+	
+	// ȸ�� ���� ����Ʈ
+	@RequestMapping("mManaList.do")
+	public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = mService.getListCount(); // ��ü ������ ��
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ������������ ����
+
 		
 		System.out.println(m);
 		
+
 		/*
 			1. 결과 값을 받아보면 할글이 깨짐
 				스프링에서 제공하는 필터를 이용해서 요청 시 전달 받는 값에 한글이 있을 경우 인코딩 하는 것 추가
@@ -99,6 +187,15 @@ public class MemberController {
 			
 		} else {
 			throw new MemberException("회원가입에 실패하였습니다.");
+
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("manager/managerMemberManaListView");
+		}
+		else {
+			throw new MemberException("�Խñ� ��ü ��ȸ�� �����Ͽ����ϴ�.");
+
 		}
 	}
 	
@@ -125,6 +222,7 @@ public class MemberController {
 		return "manager/managermainView";
 	}
 	
+
 	@RequestMapping("mManaList.do")
 	   public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 	      int currentPage = 1;
@@ -150,6 +248,7 @@ public class MemberController {
 	      return mv;
 	   }
 	
+
 	// ȸ������ ������ ������
 	@RequestMapping("mUserDetail.do")
 	public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {

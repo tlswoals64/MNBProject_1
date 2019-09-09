@@ -14,6 +14,7 @@
 		from bsapply b
      		left outer join member m
      		on b.userid = m.userid
+     	where reason is null
      	order by b.create_date
 	</select>
 	
@@ -27,12 +28,13 @@
   	</select>
 	
 	<!-- 회원 레벨 변경 -->
-	<update id="levelUpdate" parameterType="Member">
+	<update id="levelUpdate" parameterType="BSApply">
 		update bsapply
-		set apply_date = sysdate
+		set apply_date = sysdate,
+			reason = #{ reason }
 		where userid = #{ userId }  
 	</update>
-	<update id="levelMemberUpdate" parameterType="Member">
+	<update id="levelMemberUpdate" parameterType="BSApply">
 		update member
 		set memberType = #{ memberType }
 		where userid = #{ userId }  
