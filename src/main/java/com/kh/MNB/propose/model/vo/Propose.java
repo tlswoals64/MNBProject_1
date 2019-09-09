@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Propose {
 
+
 	private int pNo; //게시글번호
 	private int pType; // 게시글분류
 	private String pRe; // 답변여부

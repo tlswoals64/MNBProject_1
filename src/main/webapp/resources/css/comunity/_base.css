@@ -1,0 +1,234 @@
+
+@charset "utf-8";
+
+/* ========================================================================
+ Component: Base
+ ========================================================================== */
+
+html {
+  font-family: $global-font-family;
+  font-size: $global-font-size;
+  font-weight: normal;
+  line-height: $global-line-height;
+  
+  background: $color-content;
+  color: $color-base-dark;
+
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $global-font-family;
+  font-size: $global-font-size;
+  font-weight: normal;
+  line-height: $global-line-height;
+
+  padding: 0;
+  margin: 0;
+}
+
+table, input, textarea, select, button {
+  font-family: $global-font-family;
+  font-size: $global-font-size-small;
+}
+
+audio, canvas, img, video {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+main {
+  display: block;
+}
+
+
+/* Text
+ ========================================================================== */
+
+p {
+  margin: 0 0 20px 0;
+}
+
+h1, .eq.h1,
+h2, .eq.h2,
+h3, .eq.h3,
+h4, .eq.h4,
+h5, .eq.h5,
+h6, .eq.h6 {
+  margin: 0 0 20px 0;
+}
+
+h1, .eq.h1 {
+  font-size: $global-font-size-xxlarge;
+  font-weight: 300;
+  line-height: $base-line-height-large;
+}
+h2, .eq.h2 {
+  font-size: $global-font-size-xlarge;
+  font-weight: 300;
+  line-height: $base-line-height-xlarge;
+}
+h3, .eq.h3 {
+  font-size: $global-font-size-large;
+  font-weight: normal;
+  line-height: $base-line-height-xxlarge;
+}
+h4, .eq.h4 {
+  font-size: $global-font-size-medium;
+  font-weight: normal;
+  line-height: $base-line-height-xxlarge;
+}
+h5, .eq.h5 {
+  font-size: $global-font-size;
+  font-weight: normal;
+  line-height: $base-line-height-xxlarge;
+}
+h6, .eq.h6 {
+  font-size: $global-font-size-small;
+  font-weight: normal;
+  line-height: $base-line-height-xxlarge;
+}
+
+/* Links
+ ========================================================================== */
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+  &:active, &:hover {
+     outline: none;
+  }
+}
+
+a,
+.eq.link {
+  color: $color-primary;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover,
+.eq.link:hover {
+  color: $color-primary;
+  text-decoration: underline;
+}
+
+/* Bootstrap Button box-sizing */ 
+a.btn {
+  box-sizing: content-box;
+}
+
+.eq.link-muted {
+  text-decoration: none;
+  color: $color-base;
+  &:hover, &:hover * {
+    color: $color-base-dark;
+  }
+  &:active, &:active * {
+    color: $color-base-darker;
+  }
+}
+
+.eq.link-reset, .eq.link-reset * {
+  text-decoration: none;
+}
+
+
+/* Tap Hightlight
+ ========================================================================== */
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+
+/* Selection pseudo-element
+ ========================================================================== */
+
+::-moz-selection {
+    background: $color-primary-lighter;
+    color: $color-base-darker;
+    text-shadow: none;
+}
+
+::selection {
+    background: $color-primary-lighter;
+    color: $color-base-darker;
+    text-shadow: none;
+}
+
+/* Horizontal rules
+ ========================================================================== */
+
+ hr, .eq.hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  text-align: inherit;
+
+  margin: 0 0 20px 0;
+  border: 0;
+  border-top: 1px solid $color-base-lighter;
+}
+
+* + hr,
+* + .eq.hr {
+  margin-top: 20px;
+}
+
+
+/* XE code reset
+ ========================================================================== */
+ #popup_menu_area {
+  position: absolute;
+  z-index: 9999;
+  margin: $padding-xsmall 0;
+  padding: $padding-xsmall;
+  border: none;
+  border-radius: $border-rounded;
+  font-size: $global-font-size-small;
+  box-shadow: 0 0 1px 1px rgba(31, 45, 61, 0.15);
+  background: $color-content;
+  min-width: 80px;
+  a {
+    padding: 7px $padding-xsmall;
+    color: $color-base-darker;
+
+    -webkit-transition: all 150ms;
+    -moz-transition: all 150ms;
+    -o-transition: all 150ms;
+    transition: all 150ms;
+    &:hover, &:focus {
+      background: none;
+      color: $color-primary;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+
+/* Custom scroll
+=========================================================================== */
+
+.eq.custom-scroll::-webkit-scrollbar {
+	width: 8px;
+  background-color: transparent;
+}
+.eq.custom-scroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: rgba($color-base-dark, 0.3);
+}
+.eq.custom-scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
