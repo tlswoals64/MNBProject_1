@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Board {
    
+
    private int bNo; // 게시글 번호
    private int bType; 
    // 게시글 타입(1 커뮤니티 / 2 무료나눔 / 3 부모 / 4 시터 / 5 문의사항 / 6 공지사항 / 7 신고 / 8 후기)
@@ -14,11 +15,14 @@ public class Board {
    private Date b_CreateDate; //생성날짜
    private Date b_ModifyDate; // 수정날짜
    private String status; //상태
+
    
    public Board() {}
    
    
+
    // 전체생성자
+
    public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, Date b_CreateDate,
          Date b_ModifyDate, String status) {
       super();
@@ -34,7 +38,9 @@ public class Board {
    }
 
    
+
    // 생성날짜, 수정날짜 뺀 생성자
+
    public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, String status) {
       super();
       this.bNo = bNo;
@@ -46,7 +52,9 @@ public class Board {
       this.status = status;
    }
 
+
    // 생성날짜, 수정날짜, status 뺀 생성자
+
    public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount) {
       super();
       this.bNo = bNo;
@@ -155,28 +163,10 @@ public class Board {
             + b_ModifyDate + ", status=" + status + "]";
    }
 
-
-public void setOriginalFile(String originalFilename) {
-	// TODO Auto-generated method stub
-	
-}
-
-
-public void setRenameFile(String renameFileName) {
-	// TODO Auto-generated method stub
-	
-}
-
-
-   
-   
-   
    
    
 
+   
 
-   
-   
-   
 
 }

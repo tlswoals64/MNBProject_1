@@ -7,19 +7,30 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpSession;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.MNB.board.model.exception.BoardException;
 import com.kh.MNB.board.model.service.BoardService;
+
+import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.board.model.vo.Reply;
 import com.kh.MNB.common.Pagination;
+import com.kh.MNB.member.model.vo.Member;
+
 
 @Controller
 public class BoardController {
@@ -42,113 +53,140 @@ public class BoardController {
 		return "board/community/nanumDetailView";
 	}
 	
-	@RequestMapping("cIntro.do")
-	public String cIntro() {
-		return "board/community/communityIntro";
-	}
-	
-	// 정보공유게시판 리스트불러오기
-	@RequestMapping("cListView.do")
-	public ModelAndView cListView(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+
+	@RequestMapping("blist.do")
+	public ModelAndView boardList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+
 		
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = page;
 		}
 		
-		int listCount = bService.getListCount();
+		int listCount = bService.getListCount(); // �쟾泥� �럹�씠吏� �닔
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // �럹�씠吏��뿉���븳 �젙蹂�
 		
 		ArrayList<Board> list = bService.selectList(pi);
-		System.out.println(list);
+		
+		System.out.println("blist.do list : " + list); 
+		
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
-			mv.setViewName("board/community/comunityListView");
-		} else {
-			throw new BoardException("게시판불러오기에 실패하였습니다.");
+			mv.setViewName("board/community/nanumView");
 		}
-		
+		else {
+			throw new BoardException("게시글 조회에 실패하였습니다.");
+		}
 		return mv;
+	}
+	
 
-	}
-	
-	// 정보공유게시판 상세보기 페이지
-	@RequestMapping("bdetail.do")
-	public ModelAndView bDetailView(@RequestParam("bNo") int bNo, @RequestParam("page") int page, ModelAndView mv ) {
+	@RequestMapping("insertBoard.do")
+	public String insertBoard(@ModelAttribute Board b, @RequestParam("category") String category,
+													   @RequestParam("thumbnailImg1") MultipartFile titleImg,
+													   @RequestParam(value="thumbnailImg2", required=false) MultipartFile contentImg1,
+														@RequestParam(value="thumbnailImg3", required=false) MultipartFile contentImg2,
+														@RequestParam(value="thumbnailImg4", required=false) MultipartFile contentImg3, HttpServletRequest request) {
 		
-		bService.addReadCount(bNo);
-		Board board = bService.selectBoard(bNo);
+//		Member member = (Member)request.getSession().getAttribute("loginUser");
+//		String userId = member.getUserId();
+//		Board board = new Board(b.getbNo(), 2, b.getbTitle(), b.getbWriter(), b.getbContent(), 0, null, null, null);
 		
-		if(board != null) {
-			mv.addObject("board", board)
-			.addObject("page", page)
-			.setViewName("board/community/comunityDetailView");
-		} else {
-			throw new BoardException("게시글 상세보기에 실패하였습니다.");
-		}
 		
-		return mv;
-	}
-	
-	//정보공유게시판 insert 페이지
-	@RequestMapping("binsertView.do")
-	public String boardInsertView() {
-		return "board/community/comunityInsertView";
-	}
-	
-	@RequestMapping("binsert.do")
-	public String boardInsert(@ModelAttribute Board b, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request) {
-		System.out.println(b);
-		System.out.println(uploadFile);
-		System.out.println(uploadFile.getOriginalFilename());
-		// 파일을 넣지 않은 경우 파일 이름은 ""으로 들어감
+		Board board = new Board(b.getbNo(), 2, b.getbTitle(), "tlswoals", b.getbContent(), 0, null, null, null);
+		Attachment a;
 		
-//		if(!uploadFile.getOriginalFilename().equals("")) {
-		if(uploadFile != null && !uploadFile.isEmpty())	{
-			// 저장할 경로를 지정하는 saveFile()메소드 생성
-			String renameFileName = saveFile(uploadFile, request);
+		ArrayList<MultipartFile> list = new ArrayList<MultipartFile>();
+		list.add(titleImg);
+		list.add(contentImg1);
+		list.add(contentImg2);
+		list.add(contentImg3);
+		
+		
+		ArrayList<String> renameList = saveFile(list, request);
+		
+		ArrayList<Attachment> aList = new ArrayList<Attachment>();
+		
+		
+		if(renameList != null) {
 			
-			if(renameFileName != null) {
-				b.setOriginalFile(uploadFile.getOriginalFilename());
-				b.setRenameFile(renameFileName);
+			for(int i = 0; i < renameList.size(); i++) {
+				a =  new Attachment();
+				a.setOriginName(list.get(i).getOriginalFilename());
+				a.setChangeName(renameList.get(i));
+				
+				if(i == 0) a.setiType(0);
+				else 	   a.setiType(1);
+				
+				aList.add(a);
 			}
 		}
 		
-		int result = bService.insertBoard(b);
+		int result1 = bService.insertBoard(board);
+		int result2 = bService.insertAttachment(aList);
 		
-		if(result > 0) {
+		int result = result1 + result2;
+		
+		if(result == 2) {
 			return "redirect:blist.do";
-		} else {
-			throw new BoardException("게시글 등록에 실패하였습니다.");
 		}
-		
+		else {
+			throw new BoardException("寃뚯떆湲� �벑濡앹뿉 �떎�뙣�븯���뒿�땲�떎.");
+		}
+			
 	}
 	
-	public String saveFile(MultipartFile file, HttpServletRequest request) {
+	public ArrayList<String> saveFile(ArrayList<MultipartFile> list, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\buploadFiles";
+		String savePath = root + "\\images\\board";
 		
 		File folder = new File(savePath);
-		if(!folder.exists()) {
+		if(!folder.exists()) { // �뤃�뜑媛� �뾾�쑝硫� �뤃�뜑瑜� 留뚮뱾�뼱以�
 			folder.mkdirs();
 		}
+			
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String originalFileName = file.getOriginalFilename();
-		String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+		ArrayList<String> renameList = new ArrayList<String>();
 		
-		String renamePath = folder + "\\" + renameFileName;
-		
-		try {
-			file.transferTo(new File(renamePath)); // 전달 받은 file이 rename명으로 저장
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		for(int i = 0; i < list.size(); i++) {
+			
+			String originalFileName = list.get(i).getOriginalFilename();
+			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) +"." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			String renamePath = folder + "\\" + renameFileName;
+			
+			try {
+				list.get(i).transferTo(new File(renamePath));
+				
+				renameList.add(renameFileName);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
-		return renameFileName;
+		return renameList;
+	}
+	@RequestMapping("addReply.do")
+	@ResponseBody	
+	public String addReply(Reply r, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String rWriter = loginUser.getUserId();
+		
+		r.setrWriter(rWriter);
+		
+		int result = bService.insertReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}
+		else {
+			throw new BoardException("댓글 작성에 실패하였습니다.");
+		}
+
 	}
 }

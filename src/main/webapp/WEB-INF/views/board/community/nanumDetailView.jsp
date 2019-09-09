@@ -196,6 +196,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 				</table>
 			</div>
 
+	
+	   	
 
 				<div class="comment_wrap">
 					<div class="comment_text"	>
@@ -210,8 +212,91 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		</div>
 			
 		</div>
+		
+		 <script>
+	   	$(function(){
+	   		getReplyList();
+	   		
+	   		setInterval(function(){
+	   			getReplyList();
+	   		}, 10000);
+	   	});
+	 	$("#addReply").on("click", function(){
+	   		var rContent = $("#replyContent").val();
+	   		var refBno = ${board.bNo};
+	   		
+	   		$.ajax({
+	   			url: "addReply.do",
+	   			data: {nContent:nContent, refBno:refBno},
+	   			type: "post",
+	   			success: function(data){
+	   				
+	   				if(data == "success"){
+	   					$("#replyContent").val("");
+	   					getReplyList();
+	   				}
+	   				else{
+	   					alert("댓글등록에 실패했습니다.");
+	   					$("#replyContent").val("");
+	   				}
+	   				
+	   			}
+	   		});
+	   	});
+	 	
+	  	// 댓글 리스트 ajax
+	   	function getReplyList(){
+	   		var bNo = ${board.bNo};
+	   		$.ajax({
+	   			url: "rList.do",
+	   			data: {bNo:bNo},
+	   			dataType: "json",
+	   			success: function(data){
+	   				$tableBody = $("#rtb tbody");
+	   				$tableBody.html("");
+	   				
+	   				var $tr;
+	   				var $rWriter;
+	   				var $rContent;
+	   				var $rCreateDate;
+	   				
+	   				$("#rCount").text("댓글 (" + data.length + ")");
+	   				
+	   				if(data.length > 0){
+	   					for(var i in data){
+	   						$tr = $("<tr>");
+	   						$rWriter =  $("<td width='100'>").text(data[i].rWriter);
+	   					    $rContent = $("<td>").text(decodeURIComponent(data[i].rContent.replace(/\+/g, " ")));
+	   					    $rCreateDate =  $("<td width='100'>").text(data[i].rCreateDate);
+	   					    
+	   					    $tr.append($rWriter);
+		   					$tr.append($rContent);
+		   					$tr.append($rCreateDate);
+		   					$tableBody.append($tr);
+	   					}
+	   				}
+	   				else{
+	   					$tr = $("<tr>");
+	   					$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+	   		
+					   	$tr.append($rContent);
+						$tableBody.append($tr);
+	   				}
+	   			}
+	  	 	});
+	   	}
+	 	
+	 	</script>
+	 	
 
 	<div class="both"></div>
+	
+	 <p align="center">
+      <button onclick="location.href='home.do'">시작 페이지로 이동</button>
+      <button onclick="location.href='${ blist }'">목록 보기로 이동</button>
+   </p>
+   	
+   	<div class="both"></div>
 
 	  <jsp:include page="../../common/footer.jsp"></jsp:include>
 	  

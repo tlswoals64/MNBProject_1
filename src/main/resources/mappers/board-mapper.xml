@@ -3,26 +3,75 @@
 <mapper namespace="boardMapper">
 
 
-	<!-- 정보공유 글 갯수 -->
-	<select id="getListCount" resultType = "_int">
+	<select id="getListNanumCount" resultType="_int">
 		select count(*)
 		from board
-		where status = 'Y'
-	</select>
-		<!-- 정보공유 리시트불러오기 -->
-	<select id = "selectList" resultType = "board">
-		select *
-		from board
-		where status = 'Y'
-		order by bno desc
+		where status = 'Y' and btype=2
 	</select>
 	
-	<!-- 정보공유  -->
-	<update id="updateCount" parameterType="_int">
-		update board
-		set bcount = bcount + 1
-		where bno = #{bNo}
-	</update>
+	<resultMap type="PictureBoard" id="PictureBoardResultSet">
+		<id property="bNo" column="BNO"/>
+		<result property="bType" column="BTYPE"/>
+		<result property="bTitle" column="BTITLE"/>
+		<result property="bContent" column="BCONTENT"/>
+		<result property="b_CreateDate" column="B_CREATEDATE"/>
+		<result property="bCount" column="BCOUNT"/>
+		<result property="status" column="STATUS"/>
+		<result property="b_ModifyDate" column="B_MODIFYDATE"/>
+		<result property="bWriter" column="NICKNAME"/>
+		<result property="iNo" column="INO"/>
+		<result property="originName" column="ORIGNNAME"/>
+		<result property="changeName" column="CHANGENAME"/>
+		<result property="iType" column="ITYPE"/>
+		<result property="upload_Date" column="UPLOAD_DATE"/>
+	</resultMap>
+	<select id="selectNanumList" resultMap="PictureBoardResultSet">
+		select *
+		from board b
+		    join board_picture a on(b.bno = a.bno)
+		    join member m on(b.bwriter = m.userid)
+		where b.status = 'Y' and btype=2 and itype=0
+		order by b.bno desc
+	</select>
+	
+	<insert id="insertNanumBoard" parameterType="Board">
+		insert into board
+		values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, #{bWriter})
+	</insert>
+	
+	<insert id="insertNanumAttachment0" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, 'Y')
+	</insert>
+	<insert id="insertNanumAttachment" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 1, sysdate, 'Y')
+	</insert>
+	
+	
+	<select id="selectNanumReplyList" parameterType="_int" resultMap="replyNanumResultSet">
+		select *
+		from reply r
+			 join board b on(r.ref_bno = b.bno)
+		where ref_bno = #{bNo}
+		order by rNum desc
+	</select>
+	
+	<resultMap id="replyNanumResultSet" type="Reply">
+		<id property="rNum" column="RNUM"/>
+  		<result property="nContent" column="NCONTENT"/>
+  		<result property="bNo" column="BNO"/>
+  		<result property="rWriter" column="RWRITER"/>
+  		<result property="nCreate_Date" column="NCREATE_DATE"/>
+  		<result property="status" column="R_STATUS"/>
+	</resultMap>
+		
+	
+		<insert id="insertNanumReply" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
+	</insert>
+	
+
 	
 	<!-- 정보공유 -->
 	<select id="selectOne" parameterType="_int" resultType="board">

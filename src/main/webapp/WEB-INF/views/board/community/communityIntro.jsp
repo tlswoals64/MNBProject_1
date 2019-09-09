@@ -25,22 +25,15 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
     margin: 0px;
     padding: 0px;}
 
-
-
-
-
 #boardchoose{width:1200px;margin-bottom:65px;margin:0 auto;}
 .boardchoose_wrap	{margin-top: 15px;}
 .boardchoose_wrap ul li {float:left; width:50%; text-align:center
     
 }
 
-
 #content{width:100%;margin-bottom:20px;}
 .Community_list {width:800px;margin:0 auto;}
 .Community_list h2 {font-size:30px;padding-top:25px;text-align:center;margin-bottom:25px}
-
-
 
 .Community_list{width:1200px; margin:0 auto;margin-top:65px;}
 .Community_list h2 {font-size:30px; margin-bottom:55px;text-align:center;}
@@ -62,24 +55,21 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .notice_cont {padding:15px 20px 15px 20px;}
 .cont_more {float:right;padding-right:20px;padding-top:5px;}
 
-
 </style>
-
 
 </head>
 <body>
   <jsp:include page="../../common/header.jsp"></jsp:include>
-  
+  		
 		<div class="both"></div>
 	
 	<div id ="boardchoose">
 	<div class="boardchoose_wrap">
 		<ul>
-			<li><a href="cListView.do"><img src="resources/images/board/communityIntro.png" width="550" height="600"></a></li>
-			   <p class="both"></p>
-			<li><a href="nBoard.do"><img src="resources/images/board/nanumIntro.png" width="550" height="600"></a></li>
-			   <p class="both"></p>
-			
+
+			<li><a href="#"><img src="resources/images/board/communityIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:480px;font-size:20px;line-height:115%">커뮤니티바로가기</h5></a></li>
+			<li><a href="blist.do"><img src="resources/images/board/nanumIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:1100px;font-size:20px;line-height:115%">무료나눔바로가기</h5></a></li>
+			      
 		</ul>
 	</div>
 	</div>
@@ -94,7 +84,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 커뮤니티 게시판 " 
 				</div>
 				<div class="notice_cont">
-					내용
+					<li class="pro_title">판매자정보</li>
 				</div>
 			</div>
 		</li>
@@ -104,7 +94,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 무료나눔 게시판 " 
 				</div>
 				<div class="notice_cont">
-					내용
+						<li class="pro_title">판매자정보</li>
 				</div>	
 			</div>
 		</li>
