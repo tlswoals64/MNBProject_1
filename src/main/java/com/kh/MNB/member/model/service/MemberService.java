@@ -15,7 +15,6 @@ public interface MemberService {
 	
 	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list ȸ�� ������
 
-	Member selectUserDetail(String userId); // member Detail ȸ������ �����
 
 
 	int insertMember(Member m);

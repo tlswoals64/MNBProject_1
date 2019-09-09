@@ -80,6 +80,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		return false;
+	}
 
 	public Member memberLogin(Member m) {
 		return mDAO.selectMember(m);
