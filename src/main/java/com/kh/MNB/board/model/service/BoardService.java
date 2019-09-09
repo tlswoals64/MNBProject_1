@@ -12,16 +12,16 @@ import com.kh.MNB.board.model.vo.Reply;
 
 public interface BoardService {
 
-	int getListCount();
+	int getListNanumCount();
 
-	ArrayList<Board> selectList(PageInfo pi);
+	ArrayList<Board> selectNanumList(PageInfo pi);
 
 
-	int insertBoard(Board b);
+	int insertNanumBoard(Board b);
 
-	int insertAttachment(ArrayList<Attachment> aList);
+	int insertNanumAttachment(ArrayList<Attachment> aList);
 
-	int insertReply(Reply r);
+	int insertNanumReply(Reply r);
 
 	
 }
