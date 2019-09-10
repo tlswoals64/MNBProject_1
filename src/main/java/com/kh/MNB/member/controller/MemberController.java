@@ -72,7 +72,7 @@ public class MemberController {
 	   @RequestMapping("isNick.do")
 	   public void idDuplicateCheck(HttpServletResponse response, String nickname) throws IOException {
 	      
-	      boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false;
+	      boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false; 
 	      
 	      response.getWriter().print(checkNickName);
 	   }
