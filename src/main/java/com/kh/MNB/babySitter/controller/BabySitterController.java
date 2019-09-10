@@ -60,13 +60,9 @@ public class BabySitterController
 		return mv;
 	}
 	
-	
 	@RequestMapping("suppotInsert.do")
 	public String suppotInsert() {
-		
 		return "board/baby/babySitter/suppotInsert";
 	}
-	
-
 	
 }

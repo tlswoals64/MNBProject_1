@@ -58,8 +58,8 @@ public class BoardController {
 		return "board/community/communityIntro";
 	}
 	
-	@RequestMapping("blist.do")
-	public ModelAndView boardList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+	@RequestMapping("bNanumlist.do")
+	public ModelAndView boardNanumList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 
 		
 		int currentPage = 1;
@@ -67,13 +67,13 @@ public class BoardController {
 			currentPage = page;
 		}
 		
-		int listCount = bService.getListCount(); // �쟾泥� �럹�씠吏� �닔
+		int listCount = bService.getListNanumCount(); // �쟾泥� �럹�씠吏� �닔
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // �럹�씠吏��뿉���븳 �젙蹂�
 		
-		ArrayList<Board> list = bService.selectList(pi);
+		ArrayList<Board> list = bService.selectNanumList(pi);
 		
-		System.out.println("blist.do list : " + list); 
+		System.out.println("bNanumlist.do list : " + list); 
 		
 		if(list != null) {
 			mv.addObject("list", list);
@@ -87,8 +87,8 @@ public class BoardController {
 	}
 	
 
-	@RequestMapping("insertBoard.do")
-	public String insertBoard(@ModelAttribute Board b, @RequestParam("category") String category,
+	@RequestMapping("insertNanumBoard.do")
+	public String insertNanumBoard(@ModelAttribute Board b, @RequestParam("category") String category,
 													   @RequestParam("thumbnailImg1") MultipartFile titleImg,
 													   @RequestParam(value="thumbnailImg2", required=false) MultipartFile contentImg1,
 														@RequestParam(value="thumbnailImg3", required=false) MultipartFile contentImg2,
@@ -109,7 +109,7 @@ public class BoardController {
 		list.add(contentImg3);
 		
 		
-		ArrayList<String> renameList = saveFile(list, request);
+		ArrayList<String> renameList = saveNanumFile(list, request);
 		
 		ArrayList<Attachment> aList = new ArrayList<Attachment>();
 		
@@ -128,20 +128,20 @@ public class BoardController {
 			}
 		}
 		
-		int result1 = bService.insertBoard(board);
-		int result2 = bService.insertAttachment(aList);
+		int result1 = bService.insertNanumBoard(board);
+		int result2 = bService.insertNanumAttachment(aList);
 		
 		int result = result1 + result2;
 		
 		if(result == 2) {
-			return "redirect:blist.do";
+			return "redirect:bNanumlist.do";
 		}
 		else {
 			throw new BoardException("寃뚯떆湲� �벑濡앹뿉 �떎�뙣�븯���뒿�땲�떎.");
 		}
 	}
 	
-	public ArrayList<String> saveFile(ArrayList<MultipartFile> list, HttpServletRequest request) {
+	public ArrayList<String> saveNanumFile(ArrayList<MultipartFile> list, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\images\\board";
 		
@@ -174,15 +174,15 @@ public class BoardController {
 		
 		return renameList;
 	}
-	@RequestMapping("addReply.do")
+	@RequestMapping("addNanumReply.do")
 	@ResponseBody	
-	public String addReply(Reply r, HttpSession session) {
+	public String addNanumReply(Reply r, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String rWriter = loginUser.getUserId();
 		
 		r.setrWriter(rWriter);
 		
-		int result = bService.insertReply(r);
+		int result = bService.insertNanumReply(r);
 		
 		if(result > 0) {
 			return "success";
@@ -192,4 +192,6 @@ public class BoardController {
 		}
 
 	}
+
+
 }

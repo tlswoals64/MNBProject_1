@@ -135,8 +135,8 @@ public class MemberController {
 		public String MemberLogin(Member m, Model model) {
 			System.out.println(m.getUserId());
 			
-			Member loginUser = mService.memberLogin(m);		
-			 if (loginUser != null) {
+			Member loginUser = mService.memberLogin(m);	
+			if (bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {			
 				 if(loginUser.getUserId().equals("admin")) {
 					 model.addAttribute("loginUser", loginUser);
 					 return "manager/managermainView";
@@ -183,6 +183,26 @@ public class MemberController {
 		public String pwdIdCheckView() {
 			return "login/pwdIdCheckView";
 		}
+//		비밀번호 찾기전 아이디 체크		
+		@RequestMapping(value="pwdIdSearch.do", method=RequestMethod.POST)
+		public String pwdSearch(@RequestParam("userId") String userId, Model model) {
+			
+			System.out.println(userId);
+			String result= mService.pwdSearch(userId);
+			
+			if(result!=null) {
+			model.addAttribute("pwdSearch", result);
+			return "login/pwdSearchForm";
+			}else {
+				throw new MemberException("아이디 찾기에 실패하였습니다.");
+			}			
+		}
+		
+		@RequestMapping("pwdSerach.do")
+		public String pwdSearch() {
+			return "login/pwdChange";
+		}
+		
 	
 	//------------------------- ������ �κ� ---------------------------
 	@RequestMapping("manaHome.do")
