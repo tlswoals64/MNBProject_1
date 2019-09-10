@@ -14,20 +14,20 @@ public class BabySitterController
 	
 	@RequestMapping("bIntro.do")
 	public String bIntro() {
-		return "borad/baby/babyIntro";
+		return "board/baby/babyIntro";
 	}
 	
 	@RequestMapping("sitterSuppot.do")
 	public String sitterSuppot() {
 		
-		return "babySitter/sitter_Suppot";
+		return "board/baby/babySitter/sitter_Suppot";
 	}
-	
 	
 	@RequestMapping("suppotInsert.do")
 	public String suppotInsert() {
 		
-		return "babySitter/suppotInsert";
+		return "board/baby/babySitter/suppotInsert";
 	}
+	
 	
 }

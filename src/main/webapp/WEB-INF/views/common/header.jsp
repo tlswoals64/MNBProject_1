@@ -50,7 +50,6 @@
 			<c:if test="${ empty sessionScope.loginUser }">
 			<ul>
 				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
-
 				<li><A href='loginView.do'>LOGIN</a></li>
 				<li><A href="memberSingUp.do">JOIN</a></li>
 

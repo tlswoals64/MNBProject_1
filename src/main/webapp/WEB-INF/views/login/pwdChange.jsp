@@ -55,7 +55,7 @@
 	border-radius: 12px;
 }
 
-#id, #nametext, #emailtext, #birthday, #cNum {
+#id, #newPassword, #newPassword2, #cNum {
 	width: 310px;
 	height: 30px;
 	font-size: large;
@@ -72,27 +72,22 @@
 <div class="loginmenu">
 
 <div class="login">  
-  <div class="logintext"><h1 style="text-align:center">아이디 찾기</h1></div>
+  <div class="logintext"><h1 style="text-align:center">비밀번호 변경</h1></div>
   <br>
   <div>
   <form action="idSearch.do" class="login-container" method="post">
-	<div class="logintext"><input type="text" placeholder="이름"  id="nametext" name="userName" required="required"></div><br>
-	<div class="logintext"><input type="date" placeholder="생년월일"  id="birthday" name="birth" required="required"></div><br>
-	<div class="logintext"><input type="email" placeholder="이메일주소" id="emailtext" name="email" required="required"></div>
+	<div class="logintext"><input type="password" placeholder="새로운 비밀번호"  id="newPassword" name="newPassword" required="required"></div><br>
+	<div class="logintext"><input type="password" placeholder="비밀번호 확인"  id="newPassword2" name="newPassword2" required="required"></div><br>
 	<br>
     <div class="logintext">
-    <input type="submit" value="아이디 찾기" id="btn2">&nbsp;&nbsp;<input type="button" onclick="back();" value="취소" id="btn2">
+    <input type="submit" value="비밀번호 변경" id="btn2">&nbsp;&nbsp;<input type="button" onclick="location.href='loginView.do';" value="취소" id="btn2">
     </div> 
    </form>
     </div>
 </div>
 </div>
 </div>
-<script>
-function back(){
-	location.href="javascript:history.go(-1);";	
-}
-</script>
+
 <jsp:include page="../common/footer.jsp"/>
 </body>
 
