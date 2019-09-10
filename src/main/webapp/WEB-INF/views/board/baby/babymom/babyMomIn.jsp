@@ -226,7 +226,7 @@ input, textarea, select {
             <pre class="subtext">베이비시터 모집</pre>
          </div>
          <!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-         <form name='writeform' id='writeform' action='' method='post' ENCTYPE='multipart/form-data'>
+         <form action='babymomin.do' name='writeform' id='writeform' method='post' ENCTYPE='multipart/form-data'>
             <table class="pnaw_box" summary="">
                <tbody>
                    <tr>
@@ -236,7 +236,7 @@ input, textarea, select {
                	  <tr class="first">
                   <th>인원</th>
                   <td>
-                    <select class="po" style="width: 150px; height:30px;" name='personel' id='pesronel'>                              
+                    <select class="po" style="width: 150px; height:30px;" name='personnel' id='personnel'>                              
                               <option value="1">1명</option>
                               <option value="2">2명</option>
                               <option value="3">3명</option>                           
@@ -249,7 +249,7 @@ input, textarea, select {
                   </tr>
                    <tr>
                      <th scope="row">희망 급여</th>
-                     <td class="pnawtd"><input type="text" name="salary" placeholder="ex) 시급10000원 " id="salary" style="height:30px; font-size:13px;"></td>
+                     <td class="pnawtd"><input type="text" name="bcSalary" placeholder="ex) 시급10000원 " id="salary" style="height:30px; font-size:13px;"></td>
                   </tr>
                   <tr>
                   	<th>주소</th>
@@ -532,8 +532,8 @@ input, textarea, select {
 	  }); 
    });
    
-   $('#pesronel').change(function(){
-		var count= $('#pesronel option:selected').val();
+   $('#personnel').change(function(){
+		var count= $('#personnel option:selected').val();
 		if(count == '1'){
 			$('#gen1').css("display","inline-block");
 			$('#gen2').attr("disabled", true).css("display","none");
@@ -547,8 +547,8 @@ input, textarea, select {
 		}
 	});
 
-	$('#pesronel').change(function(){
-		var count= $('#pesronel option:selected').val();
+	$('#personnel').change(function(){
+		var count= $('#personnel option:selected').val();
 		if(count == '1'){
 			$('#age1').css("display","inline-block");
 			$('#age2').attr("disabled", true).css("display","none");

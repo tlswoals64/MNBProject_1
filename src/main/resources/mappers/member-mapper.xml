@@ -13,7 +13,7 @@
 	<select id="idSearch" parameterType="Member" resultType="string">
 	select userId
 	from member
-	where userName = #{userName} and To_date(birth,'YY/MM/DD')=#{birth}  and email = #{email} and status='Y'
+	where userName = #{userName} and To_date(birth,'RR/MM/DD')=#{birth}  and email = #{email} and status='Y'
 	
 	</select>
 	<select id="pwdSearch" parameterType="string" resultType="string">
