@@ -14,9 +14,10 @@ public class sitterSuppot {
 	private Date b_ModifyDate;
 	private String bWriter;
 	private String bCcarrer;
-	private String bHtype;
 	private String salary;
 	private String time;
+	private String address;
+	private String bcActivity;
 	private int iNo;
 	private String originalName;
 	private String changeName;
@@ -24,9 +25,10 @@ public class sitterSuppot {
 	
 	public sitterSuppot() {}
 	
+
 	public sitterSuppot(int rNo, int bNo, int bType, String bTitle, String bContent, int bCount, String status,
-			Date b_CreateDate, Date b_ModifyDate, String bWriter, String bCcarrer, String bHtype, String salary,
-			String time, int iNo, String originalName, String changeName, Date upload_Date) {
+			Date b_CreateDate, Date b_ModifyDate, String bWriter, String bCcarrer, String salary, String time,
+			String address, String bcActivity, int iNo, String originalName, String changeName, Date upload_Date) {
 		super();
 		this.rNo = rNo;
 		this.bNo = bNo;
@@ -39,13 +41,31 @@ public class sitterSuppot {
 		this.b_ModifyDate = b_ModifyDate;
 		this.bWriter = bWriter;
 		this.bCcarrer = bCcarrer;
-		this.bHtype = bHtype;
 		this.salary = salary;
 		this.time = time;
+		this.address = address;
+		this.bcActivity = bcActivity;
 		this.iNo = iNo;
 		this.originalName = originalName;
 		this.changeName = changeName;
 		this.upload_Date = upload_Date;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getBcActivity() {
+		return bcActivity;
+	}
+
+	public void setBcActivity(String bcActivity) {
+		this.bcActivity = bcActivity;
 	}
 
 	public int getrNo() {
@@ -136,14 +156,6 @@ public class sitterSuppot {
 		this.bCcarrer = bCcarrer;
 	}
 
-	public String getbHtype() {
-		return bHtype;
-	}
-
-	public void setbHtype(String bHtype) {
-		this.bHtype = bHtype;
-	}
-
 	public String getSalary() {
 		return salary;
 	}
@@ -192,13 +204,17 @@ public class sitterSuppot {
 		this.upload_Date = upload_Date;
 	}
 
+
 	@Override
 	public String toString() {
 		return "sitterSuppot [rNo=" + rNo + ", bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bContent="
 				+ bContent + ", bCount=" + bCount + ", status=" + status + ", b_CreateDate=" + b_CreateDate
-				+ ", b_ModifyDate=" + b_ModifyDate + ", bWriter=" + bWriter + ", bCcarrer=" + bCcarrer + ", bHtype="
-				+ bHtype + ", salary=" + salary + ", time=" + time + ", iNo=" + iNo + ", originalName=" + originalName
-				+ ", changeName=" + changeName + ", upload_Date=" + upload_Date + "]";
+				+ ", b_ModifyDate=" + b_ModifyDate + ", bWriter=" + bWriter + ", bCcarrer=" + bCcarrer + ", salary="
+				+ salary + ", time=" + time + ", address=" + address + ", bcActivity=" + bcActivity + ", iNo=" + iNo
+				+ ", originalName=" + originalName + ", changeName=" + changeName + ", upload_Date=" + upload_Date
+				+ "]";
 	}
+
+	
 	
 }
