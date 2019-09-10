@@ -139,7 +139,6 @@ public class BoardController {
 		else {
 			throw new BoardException("寃뚯떆湲� �벑濡앹뿉 �떎�뙣�븯���뒿�땲�떎.");
 		}
-			
 	}
 	
 	public ArrayList<String> saveFile(ArrayList<MultipartFile> list, HttpServletRequest request) {

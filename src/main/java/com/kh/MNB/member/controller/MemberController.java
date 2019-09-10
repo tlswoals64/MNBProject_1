@@ -50,7 +50,6 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	
 	   @RequestMapping("memberSingUp.do")
 	   public String memberSingUp() {

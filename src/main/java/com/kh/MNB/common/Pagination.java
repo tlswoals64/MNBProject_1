@@ -3,39 +3,39 @@ package com.kh.MNB.common;
 import com.kh.MNB.board.model.vo.PageInfo;
 
 public class Pagination {
-   // PageInfo 媛앹껜瑜� 由ы꽩�븯�뒗 static 硫붿냼�뱶 異붽�
+   // PageInfo 객체를 리턴하는 static 메소드 추가
    public static PageInfo getPageInfo(int currentPage, int listCount) {
       
-      // �럹�씠吏� �젙蹂대�� �떞�븘以� PageInfo 李몄“蹂��닔 �꽑�뼵
+	  // 페이지 정보를 담아줄 PageInfo 참조변수 선언
       PageInfo pi = null;
       
-      // currentPage�� listCount媛� �꽆�뼱�삩 �긽�깭�씠湲� �븣臾몄뿉 
-      // �럹�씠吏� 泥섎━�뿉 �븘�슂�븳 �굹癒몄� 蹂��닔留� �꽑�뼵�븿
+      // currentPage와 listCount가 넘어온 상태이기 때문에 
+      // 페이징 처리에 필요한 나머지 변수만 선언함
       
-      int pageLimit = 10;   // �븳 �럹�씠吏��뿉�꽌 蹂댁뿬吏� �럹�씠吏� �닔 
-      int maxPage;      // �쟾泥� �럹�씠吏� �닔 以� 媛��옣 留덉�留� �럹�씠吏�
-      int startPage;      // �쁽�옱 �럹�씠吏��뿉�꽌 蹂댁뿬吏� �럹�씠吏� 踰꾪듉�쓽 �떆�옉 �럹�씠吏�
-      int endPage;      // �쁽�옱 �럹�씠吏��뿉�꽌 蹂댁뿬�맆 �럹�씠吏� 踰꾪듉�쓽 �걹 �럹�씠吏�
+      int pageLimit = 10;   // 한 페이지에서 보여질 페이징 수 
+      int maxPage;      // 전체 페이징 수 중 가장 마지막 페이지
+      int startPage;     // 현재 페이지에서 보여질 페이징 버튼의 시작 페이지
+      int endPage;       // 현재 페이지에서 보여될 페이징 버튼의 끝 페이지
       
-      int boardLimit = 10; // �븳 �럹�씠吏��뿉 蹂댁뿬吏� 寃뚯떆湲� 媛��닔
+      int boardLimit = 10; // 한 페이지에 보여질 게시글 갯수
       
-      // * maxPage - 珥� �럹�씠吏� �닔
-      // 紐⑸줉 �닔媛� 123媛쒖씠硫� �럹�씠吏� �닔�뒗 13�럹�씠吏��엫
-      // 吏쒗닾由� 紐⑸줉�씠 理쒖냼 1媛쒖씪 �븣, 1page濡� 泥섎━�븯湲� �쐞�빐 0.9瑜� �뜑�븿
+      // * maxPage - 총 페이지 수
+      // 목록 수가 123개이면 페이지 수는 13페이지임
+      // 짜투리 목록이 최소 1개일 때, 1page로 처리하기 위해 0.9를 더함
       maxPage = (int)((double)listCount / boardLimit + 0.9);
       
-      // * startPage - �쁽�옱 �럹�씠吏��뿉 蹂댁뿬吏� �떆�옉 �럹�씠吏� �닔 
-      //   �븘�옒履쎌뿉 �럹�씠吏� �닔媛� 10媛쒖뵫 蹂댁뿬吏�寃� �븷 寃쎌슦
+      // * startPage - 현재 페이지에 보여질 시작 페이지 수 
+      //   아래쪽에 페이지 수가 10개씩 보여지게 할 경우
       //   1, 11, 21, 31, .....
       startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1;
       
-      // * endPage - �쁽�옱 �럹�씠吏��뿉�꽌 蹂댁뿬吏� 留덉�留� �럹�씠吏� �닔
-      //   �븘�옒履쎌뿉 �럹�씠吏� �닔媛� 10媛쒖뵫 蹂댁뿬吏�寃� �븷 寃쎌슦
+      // * endPage - 현재 페이지에서 보여질 마지막 페이지 수
+      //   아래쪽에 페이지 수가 10개씩 보여지게 할 경우
       //   10, 20, 30, 40, .....
       endPage = startPage + pageLimit - 1;
       
-      // �븯吏�留� 留덉�留� �럹�씠吏� �닔媛� 珥� �럹�씠吏� �닔蹂대떎 �겢 寃쎌슦
-      // maxPage媛� 13�럹�씠吏�怨� endPage媛� 20�럹�씠吏��씪 寃쎌슦
+      // 하지만 마지막 페이지 수가 총 페이지 수보다 클 경우
+      // maxPage가 13페이지고 endPage가 20페이지일 경우
       if(maxPage < endPage) {
          endPage = maxPage;
       }
