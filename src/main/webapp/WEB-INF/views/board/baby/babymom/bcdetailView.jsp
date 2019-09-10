@@ -157,9 +157,6 @@
 	<tr>
 	<td style="text-align:left">
 	<textarea name="content" cols="110" rows="10" style="text-align:left" readonly>	
-	3살 여자 아이입니다. 활발하며, 에너지가 넘치는 아이 입니다. 오전 등원(9시 15분) 1시간, 하원(태권도/ 5시 20분) 1시간 해서 하루 총 2시간 봐주실 수 있는 맘시터를 원합니다^^
-	3살 여자 아이입니다. 활발하며, 에너지가 넘치는 아이 입니다. 오전 등원(9시 15분) 1시간, 하원(태권도/ 5시 20분) 1시간 해서 하루 총 2시간 봐주실 수 있는 맘시터를 원합니다^^
-	3살 여자 아이입니다. 활발하며, 에너지가 넘치는 아이 입니다. 오전 등원(9시 15분) 1시간, 하원(태권도/ 5시 20분) 1시간 해서 하루 총 2시간 봐주실 수 있는 맘시터를 원합니다^^
 	</textarea>
 	</td>
 	</tr>
@@ -274,8 +271,7 @@
          <input type="text" class="req" id="req3" value="" placeholder="예시) 시범채용">
          <br>
          <label class="la">희망 베이비시터 성별 : </label>
-         <input type="text" class="req" id="req1" value="" placeholder="예시) 남자">
-         
+         <input type="text" class="req" id="req1" value="" placeholder="예시) 남자">         
 		</div>
 	</div>
 	

@@ -26,6 +26,18 @@ public class BabySitterController
 	public String suppotInsert() {		
 		return "borad/baby/suppotInsert";
 	}
+	@RequestMapping("babymom.do")
+	public String BabyCareList() {		
+		return "board/baby/babymom/babyCareList";
+	}
+	@RequestMapping("babymomIn.do")
+	public String babyMomIn() {		
+		return "board/baby/babymom/babyMomIn";
+	}
+	@RequestMapping("bcdetailView.do")
+	public String bcDetailView() {		
+		return "board/baby/babymom/bcdetailView";
+	}
 	
 	
 }
