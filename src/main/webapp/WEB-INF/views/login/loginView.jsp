@@ -29,14 +29,14 @@
 	margin: auto;
 }
 
-#idtext {
+#userId {
 	width: 420px;
 	height: 50px;
 	font-size: large;
 	border-radius: 12px;
 }
 
-#pwdtext {
+#userPwd {
 	width: 420px;
 	height: 50px;
 	font-size: large;
@@ -70,27 +70,30 @@
 }
 </style>
 
+
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
 
-<div style="height:150px"></div>
+<div style="height:150px">
+
+</div>
 <div class="loginmenu">
 
 <div class="login">
-<img src="resources/images/login/login.jpg" style="width:550px; height:350px">
+<img src="resources/images/login/login.jpg" style="width:550px; height:350px; border-radius: 24px">
 </div>
 <div class="login">  
   <div class="logintext"><h1 style="text-align:center">Log in</h1></div>
   <br>
   <div>
-  <form action="login.do" class="login-container" method="post">
+  <form action="login.do" class="login-container" method="post"> 
      <table class="ltable">
     <tr>
-    <td> <div class="logintext"><input type="text" placeholder="아이디"  id="idtext" name="userId"></div>
+    <td> <div class="logintext"><input type="text" placeholder="아이디"  id="userId" name="userId" required="required"></div>
     </td>
     <tr>
-    <td><div class="logintext"><input type="password" placeholder="비밀번호" id="pwdtext" name="userPwd"></div>
+    <td><div class="logintext"><input type="password" placeholder="비밀번호" id="userPwd" name="userPwd" required="required"></div>
     </td>
     </tr>
     </table>
@@ -98,7 +101,7 @@
     <input type="submit" value="로그인" id="btn1" class="btn2">
     </div>    
     <div class="logintext">
-    <input type="button" onclick="join();" value="회원가입" id="btn2" class="btn2">
+    <input type="button" onclick="location.href='memberSingUp.do';" value="회원가입" id="btn2" class="btn2">
     </div>
     <div class="logintext" style="width:240px">
     <a href="idSearchView.do"><img src="resources/images/login/ID.png" style="width:30px; height:30px">아이디 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -110,10 +113,7 @@
 
 </div>
 
-</div>
-<script>
-	
-</script>
+
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

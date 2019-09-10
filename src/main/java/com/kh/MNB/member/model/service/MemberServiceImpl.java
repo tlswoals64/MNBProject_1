@@ -91,6 +91,15 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.idSearch(m);
 
 	}
+
+	@Override
+	public String pwdSearch(String userId) {
+		return mDAO.pwdSearch(userId);
+	}
+
+	
+
+	
 	
 	
 }

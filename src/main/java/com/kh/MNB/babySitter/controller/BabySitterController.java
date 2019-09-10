@@ -22,11 +22,10 @@ public class BabySitterController
 		return "borad/baby/sitter_Suppot";
 	}
 	
-	
 	@RequestMapping("suppotInsert.do")
-	public String suppotInsert() {
-		
+	public String suppotInsert() {		
 		return "borad/baby/suppotInsert";
 	}
+	
 	
 }

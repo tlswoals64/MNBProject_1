@@ -57,4 +57,8 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.idSearch", m);
 	}
 
+	public String pwdSearch(String userId) {
+		return sqlSession.selectOne("memberMapper.pwdSearch", userId);
+	}
+
 }

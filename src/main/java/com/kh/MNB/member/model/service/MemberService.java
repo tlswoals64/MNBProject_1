@@ -30,5 +30,7 @@ public interface MemberService {
 	Member memberLogin(Member m);
 
 	String idSearch(Member m);
+
+	String pwdSearch(String userId);
 	
 }
