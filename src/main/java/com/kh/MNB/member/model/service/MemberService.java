@@ -15,8 +15,6 @@ public interface MemberService {
 	
 	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list ȸ�� ������
 
-
-
 	int insertMember(Member m);
 
 	int checkNickName(String nickname);

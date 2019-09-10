@@ -60,7 +60,6 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		<ul>
 			<li><a href="babymom.do"><img src="resources/images/board/babyParentIntro.png" width="550" height="600"></a></li>
 			<li><a href="sitterSuppot.do"><img src="resources/images/board/babySitterIntro.png" width="550" height="600"></a></li>
-			
 		</ul>
 	</div>
 	</div>
@@ -110,7 +109,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 </div>
  
   
-  <jsp:include page="../../common/header.jsp"></jsp:include>
+  <jsp:include page="../../common/footer.jsp"></jsp:include>
  
  
  </body>
