@@ -61,6 +61,12 @@
 	font-size: large;
 	border-radius: 12px;
 }
+.pr{
+	font-size: 16px;
+	width: 80px;
+	hieght:30px;
+
+}
 </style>
 
 </head>
@@ -76,9 +82,9 @@
   <br>
   <div>
   <form action="idSearch.do" class="login-container" method="post">
-	<div class="logintext"><input type="text" placeholder="이름"  id="nametext" name="userName" required="required"></div><br>
-	<div class="logintext"><input type="date" placeholder="생년월일"  id="birthday" name="birth" required="required"></div><br>
-	<div class="logintext"><input type="email" placeholder="이메일주소" id="emailtext" name="email" required="required"></div>
+	<div class="logintext"><div class="pr">이름</div><input type="text" placeholder="이름"  id="nametext" name="userName" required="required"></div><br>
+	<div class="logintext"><div class="pr">생년월일</div><input type="date" placeholder="생년월일"  id="birthday" name="birth" required="required"></div><br>
+	<div class="logintext"><div class="pr">이메일</div><input type="email" placeholder="이메일주소" id="emailtext" name="email" required="required"></div>
 	<br>
     <div class="logintext">
     <input type="submit" value="아이디 찾기" id="btn2">&nbsp;&nbsp;<input type="button" onclick="back();" value="취소" id="btn2">

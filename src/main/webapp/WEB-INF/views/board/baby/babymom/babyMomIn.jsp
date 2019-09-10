@@ -102,10 +102,11 @@ input, textarea, select {
 	display: inline-block;
 }
 
-.inputbox02 {
+.inputbtn {
 	width: 200px;
 	height: 40px;
 	border-radius: 15px;
+	cursor:pointer;
 }
 
 #titleImgArea {
@@ -204,6 +205,14 @@ input, textarea, select {
     outline: 0;
     width: 20em;
 }
+#contentImg{
+	width:120px;
+	height:100px;
+	
+}
+#contentImg img{
+	max-width:100%;
+}
 </style>
 <jsp:include page="../../../common/header.jsp"/>
 </head>
@@ -222,30 +231,34 @@ input, textarea, select {
                <tbody>
                    <tr>
                      <th scope="row">제목</th>
-                     <td class="pnawtd"><input name="subject" value="" class="inputTypeText" style='width: 80%; height:40px;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
+                     <td class="pnawtd"><input name="btitle" value="" class="inputTypeText" style='width: 80%; height:40px;' maxLength="125" type="text" required="required"></td>
                   </tr>
                	  <tr class="first">
                   <th>인원</th>
                   <td>
                     <select class="po" style="width: 150px; height:30px;" name='personel' id='pesronel'>                              
-                              <option value="one">1명</option>
-                              <option value="two">2명</option>
-                              <option value="three">3명</option>                           
+                              <option value="1">1명</option>
+                              <option value="2">2명</option>
+                              <option value="3">3명</option>                           
                     </select>                  
                   </td>                  
                   </tr>                  
                   <tr>
                      <th scope="row">희망 시간</th>
-                     <td class="pnawtd"><input name="mem_name" value="" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd"><input type="time" name="time1" required="required" style="height:30px; font-size:13px;"> ~ <input type="time" name="time2" style="height:30px; font-size:13px;"></td>
+                  </tr>
+                   <tr>
+                     <th scope="row">희망 급여</th>
+                     <td class="pnawtd"><input type="text" name="salary" placeholder="ex) 시급10000원 " id="salary" style="height:30px; font-size:13px;"></td>
                   </tr>
                   <tr>
                   	<th>주소</th>
                   	<td>
-                  	<input type="text" id="sample6_postcode" class="addr1" placeholder="우편번호">
+                  	<input type="text" id="sample6_postcode" class="addr1" placeholder="우편번호" name="postNum">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample6_address" class="addr" placeholder="주소" style="width: 38em;"><br>
-					<input type="text" id="sample6_detailAddress" class="addr"  placeholder="상세주소">
-					<input type="text" id="sample6_extraAddress" class="addr" placeholder="참고항목">
+					<input type="text" id="sample6_address" class="addr" placeholder="주소" style="width: 38em;" name="addr1" required="required"><br>
+					<input type="text" id="sample6_detailAddress" class="addr"  placeholder="상세주소" name="addr2">
+					<input type="text" id="sample6_extraAddress" class="addr" placeholder="참고항목" name="addr3">
 
 					<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 					<script>
@@ -316,7 +329,7 @@ input, textarea, select {
                  
                   <tr>
                      <th scope="row">상세내용</th>
-                     <td class="write pnawtd"><textarea name='content' style='width: 90%; height: 200px;'></textarea></td>
+                     <td class="write pnawtd"><textarea name='content' required="required" style='width: 90%; height: 200px;'></textarea></td>
                   </tr>
                   <tr class="first">
                      <th>성별</th>
@@ -324,7 +337,7 @@ input, textarea, select {
                      
                      <div id="gen1" style="display:inline-block">
 							<div class="gicon">
-								<br> <input type="radio" name="gender1" id="cb13" value="남자"> <label
+								<br> <input type="radio" name="gender1" id="cb13" value="남자" checked="checked"> <label
 									for="cb13"></label>								
 							</div>
 							<div class="gicon">
@@ -335,7 +348,7 @@ input, textarea, select {
 					</div>
 					  <div id="gen2">
 							<div class="gicon">
-								<br> <input type="radio" name="gender2" id="cb15" value="남자"> <label
+								<br> <input type="radio" name="gender2" id="cb15" value="남자" checked="checked"> <label
 									for="cb15"></label>								
 							</div>
 							<div class="gicon">
@@ -346,7 +359,7 @@ input, textarea, select {
 					</div>
 					  <div id="gen3">
 							<div class="gicon">
-								<br> <input type="radio" name="gender3" id="cb17" value="남자"> <label
+								<br> <input type="radio" name="gender3" id="cb17" value="남자" checked="checked"> <label
 									for="cb17"></label>								
 							</div>
 							<div class="gicon">
@@ -363,7 +376,7 @@ input, textarea, select {
                   <td style="text-align:center;">
                   <div class="age1">
                    <div class="icon"><br>
-                   <input type="radio" name="age1" id="c1" value="신생아">
+                   <input type="radio" name="age1" id="c1" value="신생아" checked="checked">
     				<label for="c1"></label>
     				<p class="menu">신생아(0~6개월)</p>
                   </div>
@@ -380,7 +393,7 @@ input, textarea, select {
                   </div>
                    <div id="age2">
                    <div class="icon"><br>
-                   <input type="radio" name="age2" id="c4" value="신생아">
+                   <input type="radio" name="age2" id="c4" value="신생아" checked="checked">
     				<label for="c4"></label>
     				<p class="menu">신생아(0~6개월)</p>
                   </div>
@@ -397,7 +410,7 @@ input, textarea, select {
                   </div>
                   <div id="age3">
                    <div class="icon"><br>
-                   <input type="radio" name="age3" id="c7" value="신생아">
+                   <input type="radio" name="age3" id="c7" value="신생아" checked="checked">
     				<label for="c7"></label>
     				<p class="menu">신생아(0~6개월)</p>
                   </div>
@@ -433,7 +446,7 @@ input, textarea, select {
                   <input type="checkbox" id="cb6" value="책읽기" name="active">
     			  <label for="cb6"></label>
     			  <p class="menu">책읽기</p>
-                  </div>       
+                  </div>     
                   <br><br>        
                   <div class="icon"><br>
                   <input type="checkbox" id="cb7" value="야외활동" name="active">
@@ -473,13 +486,13 @@ input, textarea, select {
                	 <th>그 외 요청 사항</th>
                	 <td>              	
                	 <label class="la">희망 돌보는 방식 : </label>
-               	 <input type="text" class="req" id="req2" value="" placeholder="예시) 부모님과 같이 돌봐주세요">
+               	 <input type="text" class="req" id="req2" value="" placeholder="예시) 부모님과 같이 돌봐주세요" name="req1">
                	 <br>
                	 <label class="la">희망 인터뷰 방식 :</label>
-               	 <input type="text" class="req" id="req3" value="" placeholder="예시) 시범채용">
+               	 <input type="text" class="req" id="req3" value="" placeholder="예시) 시범채용" name="req2">
                	 <br>
                	 <label class="la">희망 베이비시터 성별 : </label>
-               	 <input type="text" class="req" id="req1" value="" placeholder="예시) 남자">
+               	 <input type="text" class="req" id="req1" value="" placeholder="예시) 남자" name="req3">
                	 <br>
                	 
                	 </td>
@@ -489,9 +502,9 @@ input, textarea, select {
                      <td>
                         <div class="par">
                            <div id="contentImgArea1" class="po">
-                              <img id="contentImg1" width="120" height="100">
+                              <img id="contentImg">
                            	  </div> 			
-							  <input type="file" name="uploadFile">		     
+							  <input type="file" id="inputimg" name="uploadFile" onchange="LoadImg(this,1);">		     
                         </div>
                      </td>
 
@@ -500,8 +513,8 @@ input, textarea, select {
             </table>
             <div class="joinbox" style="max-width: 90%;">
                <ul class="ul01">
-                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="등록" onclick="register();"></li>
-                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="취소" onclick="javascript:history.back()"></li>
+                  <li><input class="inputbtn" type="submit" value="등록"></li>
+                  <li><input class="inputbtn" type="button" value="취소" onclick="javascript:history.back()"></li>
                </ul>
             </div>
          </form>
@@ -510,10 +523,9 @@ input, textarea, select {
    <script> 
    $(document).ready(function(){
 	  $("input[type='checkbox']").on("click",function(){
-		  var count = $("input:checked[type='checkbox']").length;
-		  
+		  var count = $("input:checked[type='checkbox']").length;		  
 		  if(count>3){
-			  $(this).attr("checked",false);
+			  $(this).prop("checked",false);
 			  alert("3개까지만 선택할 수 있습니다.");
 		  }
 		  
@@ -522,11 +534,11 @@ input, textarea, select {
    
    $('#pesronel').change(function(){
 		var count= $('#pesronel option:selected').val();
-		if(count == 'one'){
+		if(count == '1'){
 			$('#gen1').css("display","inline-block");
 			$('#gen2').attr("disabled", true).css("display","none");
 			$('#gen3').attr("disabled", true).css("display","none");			
-		}else if(count =='two'){
+		}else if(count =='2'){
 			$('#gen2').attr("disabled", false).css("display","inline-block");
 			$('#gen3').attr("disabled", true).css("display","none");
 		}else{
@@ -537,11 +549,11 @@ input, textarea, select {
 
 	$('#pesronel').change(function(){
 		var count= $('#pesronel option:selected').val();
-		if(count == 'one'){
+		if(count == '1'){
 			$('#age1').css("display","inline-block");
 			$('#age2').attr("disabled", true).css("display","none");
 			$('#age3').attr("disabled", true).css("display","none");
-		}else if(count =='two'){
+		}else if(count =='2'){
 			$('#age2').attr("disabled", false).css("display","inline-block");
 			$('#age3').attr("disabled", true).css("display","none");
 		}else{
@@ -549,6 +561,18 @@ input, textarea, select {
 			$('#age3').attr("disabled", false).css("display","inline-block");
 		}
 	});
+	
+	function LoadImg(value){
+		 if (value.files && value.files[0]) {
+	            var reader = new FileReader();
+
+	            reader.onload = function(e) {
+	            $("#contentImg").attr("src", e.target.result);
+	            
+	         }
+	       reader.readAsDataURL(value.files[0]);
+	}
+	}
       
    </script>
 </body>

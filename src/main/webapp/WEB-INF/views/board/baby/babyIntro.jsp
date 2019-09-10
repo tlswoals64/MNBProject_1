@@ -58,8 +58,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div id ="boardchoose">
 	<div class="boardchoose_wrap">
 		<ul>
-			<li><a href="#"><img src="resources/images/board/babyParentIntro.png" width="550" height="600"></a></li>
-			<li><a href="suppotList.do"><img src="resources/images/board/babySitterIntro.png" width="550" height="600"></a></li>
+			<li><a href="babymom.do"><img src="resources/images/board/babyParentIntro.png" width="550" height="600"></a></li>
+			<li><a href="sitterSuppot.do"><img src="resources/images/board/babySitterIntro.png" width="550" height="600"></a></li>
 		</ul>
 	</div>
 	</div>
