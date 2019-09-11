@@ -183,9 +183,6 @@ input, textarea, select {
                   </tr>
                  
                    
-                    
-                      
-                   
                
                   <tr>
                      <th scope="row">상세내용</th>
