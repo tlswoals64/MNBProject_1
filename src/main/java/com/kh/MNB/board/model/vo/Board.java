@@ -3,21 +3,21 @@ package com.kh.MNB.board.model.vo;
 import java.sql.Date;
 
 public class Board {
-	private int bNo; // 게시글 번호
+	private int bNo; // 寃뚯떆湲� 踰덊샇
 	private int bType;
 	// 게시글 타입(1 커뮤니티 / 2 무료나눔 / 3 부모 / 4 시터 / 5 문의사항 / 6 공지사항 / 7 신고 / 8 후기)
-	private String bTitle; // 게시글 제목
-	private String bWriter; // 게시글 작성자
-	private String bContent; // 게시글 내용
-	private int bCount; // 조회수
-	private Date b_CreateDate; // 생성날짜
-	private Date b_ModifyDate; // 수정날짜
-	private String status; // 상태
+	private String bTitle; // 寃뚯떆湲� �젣紐�
+	private String bWriter; // 寃뚯떆湲� �옉�꽦�옄
+	private String bContent; // 寃뚯떆湲� �궡�슜
+	private int bCount; // 議고쉶�닔
+	private Date b_CreateDate; // �깮�꽦�궇吏�
+	private Date b_ModifyDate; // �닔�젙�궇吏�
+	private String status; // �긽�깭
 
 	public Board() {
 	}
 
-	// 전체생성자
+	// �쟾泥댁깮�꽦�옄
 	public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, Date b_CreateDate,
 			Date b_ModifyDate, String status) {
 		super();
@@ -32,7 +32,7 @@ public class Board {
 		this.status = status;
 	}
 
-	// 생성날짜, 수정날짜 뺀 생성자
+	// �깮�꽦�궇吏�, �닔�젙�궇吏� 類� �깮�꽦�옄
 	public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount, String status) {
 		super();
 		this.bNo = bNo;
@@ -44,7 +44,7 @@ public class Board {
 		this.status = status;
 	}
 
-	// 생성날짜, 수정날짜, status 뺀 생성자
+	// �깮�꽦�궇吏�, �닔�젙�궇吏�, status 類� �깮�꽦�옄
 	public Board(int bNo, int bType, String bTitle, String bWriter, String bContent, int bCount) {
 		super();
 		this.bNo = bNo;
@@ -133,5 +133,6 @@ public class Board {
 				+ bContent + ", bCount=" + bCount + ", b_CreateDate=" + b_CreateDate + ", b_ModifyDate=" + b_ModifyDate
 				+ ", status=" + status + "]";
 	}
+
 
 }

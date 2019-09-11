@@ -75,10 +75,10 @@
 <div class="frame">
 
        <div class="sidebar">
-      <h2>커뮤니티</h2>
+      <h2>문의사항</h2>
       <ul>
-         <li>커뮤니티</li>
-         <li>나눔게시판</li>
+         <li>문의사항</li>
+         <li>자주묻는질문</li>
       </ul>
    </div>
       
@@ -92,7 +92,7 @@
                <th>번호</th>
                <th class="title">제목</th>
                <th>글쓴이</th>
-               <th>조회수</th>   
+               <th>답변여부</th>   
                <th>작성 일</th>
             </tr>
             <!-- 리스트가져오기 -->
@@ -111,7 +111,7 @@
 			</td>
 			
 			<td align="center">${ b.bWriter }</td>
-			<td align="center">${ b.bCount }</td>
+			<td align="center">${ b.Re }</td>
 			<td align="center">${ b.b_CreateDate }</td>
 			
 		
@@ -120,7 +120,7 @@
 			function comDetail(v){
 				var bNo=$(v).children("#bNo").text();
 				console.log(bNo);
-			location.href="detailCom.do?bNo="+ bNo; 
+				location.href="detailCom.do?bNo="+ bNo;
 			}
 		</script>
 		</c:forEach>
@@ -133,7 +133,7 @@
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi1.currentPage > 1 }">
-					<c:url var="before" value="comListView.do">
+					<c:url var="before" value="proListView.do">
 						<c:param name="page" value="${ pi1.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
@@ -146,7 +146,7 @@
 					</c:if>
 					
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="comListView.do">
+						<c:url var="pagination" value="proListView.do">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -158,7 +158,7 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi1.currentPage < pi1.maxPage }">
-					<c:url var="after" value="blist.do">
+					<c:url var="after" value="proListView.do">
 						<c:param name="page" value="${ pi1.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
