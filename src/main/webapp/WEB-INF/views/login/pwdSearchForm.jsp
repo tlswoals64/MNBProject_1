@@ -30,6 +30,12 @@
 	.ltable{
 		margin:auto;
 	}
+	.pr{
+	font-size: 16px;
+	width: 80px;
+	hieght:30px;
+
+}
 
 }
 </style>
@@ -46,13 +52,13 @@
   <div class="logintext"><h1 style="text-align:center">비밀번호 찾기</h1></div>
   <br>
   <div>
-  <form class="login-container">
-  	<div class="logintext"><input type="text" placeholder="아이디"  id="id" value="" readonly></div><br>
-	<div class="logintext"><input type="text" placeholder="이름"   id="nametext" value=""></div><br>
-	<div class="logintext"><input type="text" placeholder="생년월일"  id="birthday" value=""></div><br>
-	<div class="logintext"><input type="email" placeholder="이메일주소" id="emailtext" value="">&nbsp;&nbsp;&nbsp;<input type="button" id="emailCheck" value="인증번호 발송"></div>
+  <form action="pwdSerach.do" class="login-container" method="post">
+  	<div class="logintext"><div class="pr">아이디</div><input type="text" placeholder="아이디"  id="id" value="${param.userId}" name="userId" readonly></div><br>
+	<div class="logintext"><div class="pr">이름</div><input type="text" placeholder="이름"   id="nametext" value="" name="userPwd" required="required"></div><br>
+	<div class="logintext"><div class="pr">생년월일</div><input type="date" placeholder="생년월일"  id="birthday" name="birth" required="required"></div><br>
+	<div class="logintext"><div class="pr">이메일주소</div><input type="email" placeholder="이메일주소" id="emailtext" value="" name="email" required="required">&nbsp;&nbsp;&nbsp;<input type="button" id="emailCheck" value="인증번호 발송"></div>
 	<br>
-	<div class="logintext"><input type="text" placeholder="인증번호" id="cNum" value=""><br></div>
+	<div class="logintext"><input type="text" placeholder="인증번호" id="cNum" value="" required="required"><br></div>
 	
     <div class="logintext">
     <br>

@@ -37,7 +37,7 @@
 	.header_nav_wrap ul li {float:left; font-size:20px; font-weight:bold;margin-right:68px;}
 	.header_nav_wrap ul li:last-child {float:left; font-size:20px; font-weight:bold;margin-right:0px;}
 </style>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -50,7 +50,6 @@
 			<c:if test="${ empty sessionScope.loginUser }">
 			<ul>
 				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
-
 				<li><A href='loginView.do'>LOGIN</a></li>
 				<li><A href="memberSingUp.do">JOIN</a></li>
 

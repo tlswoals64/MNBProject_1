@@ -58,21 +58,25 @@ public class BoardController {
 		return "board/community/communityIntro";
 	}
 
-	@RequestMapping("blist.do")
-	public ModelAndView boardList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+	
+	@RequestMapping("bNanumlist.do")
+	public ModelAndView boardNanumList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+
 
 		int currentPage = 1;
 		if (page != null) {
 			currentPage = page;
 		}
-
-		int listCount = bService.getListCount(); // 占쎌읈筌ｏ옙 占쎈읂占쎌뵠筌욑옙 占쎈땾
-
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 占쎈읂占쎌뵠筌욑옙占쎈퓠占쏙옙占쎈립 占쎌젟癰귨옙
-
-		ArrayList<Board> list = bService.selectList(pi);
-
-		if (list != null) {
+		
+		int listCount = bService.getListNanumCount(); // �쟾泥� �럹�씠吏� �닔
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // �럹�씠吏��뿉���븳 �젙蹂�
+		
+		ArrayList<Board> list = bService.selectNanumList(pi);
+		
+		System.out.println("bNanumlist.do list : " + list); 
+		
+		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
 			mv.setViewName("board/community/nanumView");
@@ -82,13 +86,13 @@ public class BoardController {
 		return mv;
 	}
 
-	@RequestMapping("insertBoard.do")
-	public String insertBoard(@ModelAttribute Board b, @RequestParam("category") String category,
-			@RequestParam("thumbnailImg1") MultipartFile titleImg,
-			@RequestParam(value = "thumbnailImg2", required = false) MultipartFile contentImg1,
-			@RequestParam(value = "thumbnailImg3", required = false) MultipartFile contentImg2,
-			@RequestParam(value = "thumbnailImg4", required = false) MultipartFile contentImg3,
-			HttpServletRequest request) {
+
+	@RequestMapping("insertNanumBoard.do")
+	public String insertNanumBoard(@ModelAttribute Board b, @RequestParam("category") String category,
+													   @RequestParam("thumbnailImg1") MultipartFile titleImg,
+													   @RequestParam(value="thumbnailImg2", required=false) MultipartFile contentImg1,
+														@RequestParam(value="thumbnailImg3", required=false) MultipartFile contentImg2,
+														@RequestParam(value="thumbnailImg4", required=false) MultipartFile contentImg3, HttpServletRequest request) {
 
 //		Member member = (Member)request.getSession().getAttribute("loginUser");
 //		String userId = member.getUserId();
@@ -102,8 +106,8 @@ public class BoardController {
 		list.add(contentImg1);
 		list.add(contentImg2);
 		list.add(contentImg3);
-
-		ArrayList<String> renameList = saveFile(list, request);
+		
+		ArrayList<String> renameList = saveNanumFile(list, request);
 
 		ArrayList<Attachment> aList = new ArrayList<Attachment>();
 
@@ -122,21 +126,22 @@ public class BoardController {
 				aList.add(a);
 			}
 		}
-
-		int result1 = bService.insertBoard(board);
-		int result2 = bService.insertAttachment(aList);
-
+    
+		int result1 = bService.insertNanumBoard(board);
+		int result2 = bService.insertNanumAttachment(aList);
+		
 		int result = result1 + result2;
-
-		if (result == 2) {
-			return "redirect:blist.do";
-		} else {
-			throw new BoardException("野껊슣�뻻疫뀐옙 占쎈쾻嚥≪빘肉� 占쎈뼄占쎈솭占쎈릭占쏙옙占쎈뮸占쎈빍占쎈뼄.");
+		
+		if(result == 2) {
+			return "redirect:bNanumlist.do";
 		}
-
+		else {
+			throw new BoardException("寃뚯떆湲� �벑濡앹뿉 �떎�뙣�븯���뒿�땲�떎.");
+		}
 	}
+	
+	public ArrayList<String> saveNanumFile(ArrayList<MultipartFile> list, HttpServletRequest request) {
 
-	public ArrayList<String> saveFile(ArrayList<MultipartFile> list, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\images\\board";
 
@@ -170,11 +175,10 @@ public class BoardController {
 
 		return renameList;
 	}
-
-	@RequestMapping("addReply.do")
-	@ResponseBody
-	public String addReply(Reply r, HttpSession session) {
-		Member loginUser = (Member) session.getAttribute("loginUser");
+	@RequestMapping("addNanumReply.do")
+	@ResponseBody	
+	public String addNanumReply(Reply r, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		String rWriter = loginUser.getUserId();
 
 		r.setrWriter(rWriter);
@@ -240,6 +244,9 @@ public class BoardController {
 		Attachment a;
 
 		ArrayList<MultipartFile> list = new ArrayList<MultipartFile>();
+		
+		//int result = bService.insertNanumReply(r);
+
 		
 		if(titleImg.getOriginalFilename() != "") {
 			list.add(titleImg);
@@ -469,4 +476,6 @@ public class BoardController {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(result, response.getWriter());
 	}
+
+
 }

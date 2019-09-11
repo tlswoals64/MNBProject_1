@@ -14,20 +14,20 @@ import com.kh.MNB.propose.model.vo.Propose;
 
 public interface BoardService {
 
-	int getListCount();
+	int getListNanumCount();
 
-	ArrayList<Board> selectList(PageInfo pi);
+	ArrayList<Board> selectNanumList(PageInfo pi);
 
-	int insertBoard(Board b);
+	int insertNanumBoard(Board b);
 
-	int insertAttachment(ArrayList<Attachment> aList);
+	int insertNanumAttachment(ArrayList<Attachment> aList);
 
-	int insertReply(Reply r);
+	int insertNanumReply(Reply r);
 
-	// Á¤º¸°øÀ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int getListCount1();
 
-	// Á¤º¸°øÀ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ArrayList<Board> selectList1(PageInfo pi);
 
 	int insertBoard1(Board board);
@@ -36,9 +36,9 @@ public interface BoardService {
 
 	int insertReply1(Reply r);
 
-	//µğÅ×ÀÏÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void addReadCount1(int bNo);
-	//µğÅ×ÀÏÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	ArrayList<Attachment> selectBoard1(int bNo);
 

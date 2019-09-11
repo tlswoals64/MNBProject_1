@@ -22,7 +22,7 @@ public class BoardDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Board> selectNanumList(PageInfo pi) {
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
@@ -31,15 +31,15 @@ public class BoardDAO {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectNanumList", null, rowBounds);
 	}
 
-	public int getListCount() {
+	public int getListNanumCount() {
 		return sqlSession.selectOne("boardMapper.getListNanumCount");
 	}
 
-	public int insertBoard(Board b) {
+	public int insertNanumBoard(Board b) {
 		return sqlSession.insert("boardMapper.insertNanumBoard", b);
 	}
 
-	public int insertAttachment(ArrayList<Attachment> aList) {
+	public int insertNanumAttachment(ArrayList<Attachment> aList) {
 
 		int result = 0;
 		for(int i = 0; i < aList.size(); i++) {
@@ -54,8 +54,8 @@ public class BoardDAO {
 		return result;
 	}
 
-	public int insertReply(Reply r) {
-		return sqlSession.insert("boardMapper.insertReply", r);
+	public int insertNanumReply(Reply r) {
+		return sqlSession.insert("boardMapper.insertNanumReply", r);
 	}
 
 	// 정보공유
