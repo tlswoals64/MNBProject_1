@@ -10,7 +10,7 @@ public class BabySitter {
 	   private int bNo; // 게시글 번호
 	   private String address;//주소
 	   private int personnel;//인원
-	   private String bage;//나이
+	   private String bAge;//나이
 	   private String bgender;//성별
 	   
 	   
@@ -29,7 +29,7 @@ public class BabySitter {
 	}
 	//부모님용
 	public BabySitter(String bcSalary, String bcTime, String bcactivity, String req, int bNo, String address,
-			int personnel, String bage, String bgender) {
+			int personnel, String bAge, String bgender) {
 		super();
 		this.bcSalary = bcSalary;
 		this.bcTime = bcTime;
@@ -38,12 +38,12 @@ public class BabySitter {
 		this.bNo = bNo;
 		this.address = address;
 		this.personnel = personnel;
-		this.bage = bage;
+		this.bAge = bAge;
 		this.bgender = bgender;
 	}
 	//전체생성자
 	public BabySitter(String bcCarrer, String bcSalary, String bcTime, String bcactivity, String req, int bNo,
-			String address, int personnel, String bage, String bgender) {
+			String address, int personnel, String bAge, String bgender) {
 		super();
 		this.bcCarrer = bcCarrer;
 		this.bcSalary = bcSalary;
@@ -53,7 +53,7 @@ public class BabySitter {
 		this.bNo = bNo;
 		this.address = address;
 		this.personnel = personnel;
-		this.bage = bage;
+		this.bAge = bAge;
 		this.bgender = bgender;
 	}
 	
@@ -88,11 +88,11 @@ public class BabySitter {
 	}
 
 	public String getBage() {
-		return bage;
+		return bAge;
 	}
 
-	public void setBage(String bage) {
-		this.bage = bage;
+	public void setBage(String bAge) {
+		this.bAge = bAge;
 	}
 
 	public String getBgender() {

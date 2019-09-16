@@ -34,7 +34,7 @@
 	border-radius: 12px;
 }
 
-	#id,#nametext,#emailtext,#birthday, #cNum{
+	.id,#nametext,#emailtext,#birthday, #cNum{
 		width:310px;
 		height:30px;
 		font-size: large;

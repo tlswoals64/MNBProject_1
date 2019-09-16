@@ -2,6 +2,7 @@ package com.kh.MNB.member.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.member.model.vo.Member;
 
@@ -30,5 +31,17 @@ public interface MemberService {
 	String idSearch(Member m);
 
 	String pwdSearch(String userId);
+
+	Member detailMember(String userId);
+
+	int updateMember(Member m);
+
+	int pwdUpdate(Member m);
+
+	int getmyListCount(String bWriter);
+
+	ArrayList<Board> myBoardList(PageInfo pi, String bWriter);
+
+
 	
 }

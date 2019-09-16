@@ -58,13 +58,13 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertNanumReply", r);
 	}
 
-	// Á¤º¸°øÀ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getListCount1() {
 		
 		return sqlSession.selectOne("boardMapper.getListComCount");
 	}
 	
-	// Á¤º¸°øÀ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<Board> selectList1(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
@@ -96,12 +96,12 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertReply1", r);
 	}
 
-	//Á¤º¸°øÀ¯ µðÅ×ÀÏ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void addReadCount(int bNo) {
 		
 		sqlSession.update("boardMapper.updateCount1", bNo);
 	}
-	//Á¤º¸°øÀ¯ µðÅ×ÀÏ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	public ArrayList<Attachment> selectBoard1(int bNo) {
 		ArrayList<Attachment> list =  (ArrayList)sqlSession.selectList("boardMapper.selectOne1",bNo);
@@ -119,10 +119,7 @@ public class BoardDAO {
 		
 	}
 
-	public int getListCountPro() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	public Board selectBoard2(int bNo) {
 		return sqlSession.selectOne("boardMapper.selectOne2", bNo);

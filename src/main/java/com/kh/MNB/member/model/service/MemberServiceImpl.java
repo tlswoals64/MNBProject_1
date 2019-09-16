@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.member.model.dao.MemberDAO;
 import com.kh.MNB.member.model.vo.Member;
@@ -96,6 +97,33 @@ public class MemberServiceImpl implements MemberService {
 	public String pwdSearch(String userId) {
 		return mDAO.pwdSearch(userId);
 	}
+
+	@Override
+	public Member detailMember(String userId) {
+		return mDAO.detailMember(userId);
+	}
+
+	@Override
+	public int updateMember(Member m) {
+		return mDAO.updateMember(m);
+	}
+
+	@Override
+	public int pwdUpdate(Member m) {
+		return mDAO.pwdUpdate(m);
+	}
+
+
+	@Override
+	public int getmyListCount(String bWriter) {
+		return mDAO.getmyListCount(bWriter);
+	}
+
+	@Override
+	public ArrayList<Board> myBoardList(PageInfo pi, String bWriter) {
+		return mDAO.myBoardList(pi, bWriter);
+	}
+
 
 	
 

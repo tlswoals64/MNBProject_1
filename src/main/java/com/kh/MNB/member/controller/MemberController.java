@@ -26,6 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.MNB.board.model.exception.BoardException;
+import com.kh.MNB.board.model.service.BoardService;
+import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.exception.MemberException;
@@ -176,6 +179,44 @@ public class MemberController {
 				throw new MemberException("아이디 찾기에 실패하였습니다.");
 			}
 		}
+		@RequestMapping("pwdUpdateView.do")
+		public String pwdUpdateView(){
+			
+			return "myPage/pwdUpdateView";
+		}
+		@RequestMapping("pwdUpdate.do")
+		public String pwdUpdate(@ModelAttribute Member m, Model model, @RequestParam("userPwd1") String userPwd1,
+								@RequestParam("newPassword") String newPassword,
+								@RequestParam("newPassword2") String newPassword2,
+								HttpSession session) {
+			Member p = (Member)session.getAttribute("loginUser");
+			System.out.println(p.getUserPwd());
+		
+		  /* String encpwd = bcryptPasswordEncoder.encode(userPwd1);
+		   System.out.println(encpwd);
+		 
+			if(encpwd==p.getUserPwd()) {*/
+			if(newPassword.equals(newPassword2)) {
+				m.setUserId(p.getUserId());
+				m.setUserPwd(newPassword);
+				String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+				m.setUserPwd(encPwd);
+				System.out.println(m.getUserId());
+				int result= mService.pwdUpdate(m);
+
+				if(result>0) {
+					model.addAttribute("loginUser",m);
+					return "redirect:index.jsp";
+				}else {
+					throw new MemberException("비밀번호 변경에 실패하였습니다.");
+				}
+			}else {
+				throw new MemberException("새로운 비밀번호가 일치하지 않습니다.");
+			}
+			/*}
+		 * else { throw new MemberException("현재 비밀번호가 일치하지 않습니다."); }
+		 */
+		}
 		
 		
 		//--------- 비밀번호 찾기-----------
@@ -295,5 +336,86 @@ public class MemberController {
 			throw new MemberException("ȸ������ ������ �����Ͽ����ϴ�.");
 		}
 	}
+	@RequestMapping("detailMemberView.do")
+	public ModelAndView detailMember(HttpSession session, ModelAndView mv) {
+		
+		Member p = (Member)session.getAttribute("loginUser");
+		String userId=p.getUserId();	
+		Member m = mService.detailMember(userId); 
+		
+		System.out.println(m);
+		if(userId != null) {
+			mv.addObject("m", m);
+			mv.setViewName("myPage/detailMember");
+		}
+		else {
+			throw new MemberException("회원 조회에 실패하였습니다.");
+		}
+		return mv;
+	}
+	@RequestMapping("updateMemberView.do")
+	public ModelAndView updateMemberView(HttpSession session, ModelAndView mv) {
+		  
+		Member m = (Member)session.getAttribute("loginUser");
+		mv.addObject("m", m);
+		mv.setViewName("myPage/updateMember");
+		
+		return mv;
+	   }
+	@RequestMapping(value="updateMember.do", method=RequestMethod.POST)
+	public String updateMember(@ModelAttribute Member m,
+								@RequestParam("address") String address,
+								@RequestParam("detailAddress") String detailAddress,
+								@RequestParam("extraAddress") String extraAddress, 
+								@RequestParam("addEmail") String addEmail) {
+		
+		  String email = m.getEmail() + "@" + addEmail;
+	      m.setEmail(email);
+	      m.setAddress(address + "/" + detailAddress + "/" + extraAddress);
+
+	      int result = mService.updateMember(m);
+	      
+	      if(result > 0) {
+	         return "redirect:index.jsp";
+	         
+	      } else {
+	         throw new MemberException("회원가입에 실패하였습니다.");
+	      }		
+		
+	}
+	// 내가 쓴 게시글 목록
+	@RequestMapping("myboardList.do")
+public ModelAndView myListView(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv,HttpSession session) {		
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		/* String userId = m.getUserId(); */
+		String bWriter = m.getNickName();
+		System.out.println(bWriter);
+		int currentPage = 1;
+	      if(page != null) {
+	         currentPage = page;
+	      }
+	      
+	      int listCount = mService.getmyListCount(bWriter); 
+	      System.out.println(listCount);
+	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+	      
+	      ArrayList<Board> list = mService.myBoardList(pi, bWriter);
+	     
+	      if(list != null) {
+	         mv.addObject("list", list);
+	         mv.addObject("pi", pi);
+	         mv.setViewName("myPage/boardList");
+	      }
+	      else {
+	    	  throw new BoardException("게시글 불러오기에 실패하였습니다.");
+	      }
+	      
+	      return mv;
+	   }
 	
-}
+
+	}
+	
+	   
+

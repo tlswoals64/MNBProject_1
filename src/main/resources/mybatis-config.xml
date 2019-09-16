@@ -9,8 +9,10 @@
 	<typeAliases>
 		<typeAlias type="com.kh.MNB.babySitter.model.vo.BabySitter" alias="BabySitter"/>
 		<typeAlias type="com.kh.MNB.babySitter.model.vo.sitterSuppot" alias="sitterSuppot"/>
+		<typeAlias type="com.kh.MNB.babySitter.model.vo.Momboard" alias="Momboard"/>
 		<typeAlias type="com.kh.MNB.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.MNB.bsApply.model.vo.BSApply" alias="BSApply"/>
+		<typeAlias type="com.kh.MNB.reView.model.vo.ReView" alias="ReView"/>
 		<typeAlias type="com.kh.MNB.chat.model.vo.Chat" alias="Chat"/>
 		<typeAlias type="com.kh.MNB.fna.model.vo.FnA" alias="FnA"/>
 		<typeAlias type="com.kh.MNB.member.model.vo.Member" alias="Member"/>

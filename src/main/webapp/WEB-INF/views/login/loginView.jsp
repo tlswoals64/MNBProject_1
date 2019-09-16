@@ -108,6 +108,7 @@
     <a href="pwdIdCheck.do"><img src="resources/images/login/password.png" style="width:30px; height:30px">비밀번호 찾기</a>
     </div>
      </form>
+     
     </div>
 </div>
 
