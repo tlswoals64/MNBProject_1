@@ -24,8 +24,10 @@ public interface BoardService {
 
 	int insertNanumReply(Reply r);
 
+	// ������
 	int getListCount1();
 
+	// ������
 	ArrayList<Board> selectList1(PageInfo pi);
 
 	int insertBoard1(Board board);
@@ -77,5 +79,5 @@ public interface BoardService {
 
 
 
-	
+
 }
