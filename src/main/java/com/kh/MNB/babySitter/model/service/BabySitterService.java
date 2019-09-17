@@ -14,7 +14,7 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 
 	ArrayList selectList(PageInfo pi);
 
-	int insertMomBoard(Board b);
+	int insertMomBoard(Board board);
 
 	int insertMomAttachment(Attachment a);
 

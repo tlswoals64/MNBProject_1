@@ -123,7 +123,7 @@ public class BabySitterController
    
    
    @RequestMapping(value="babymominsert.do", method=RequestMethod.POST)
-   public String insertMom(@ModelAttribute Board b, @ModelAttribute Attachment a, @ModelAttribute BabySitter bs,@RequestParam("salary") String salary,  @RequestParam("personnel") int personnel, @RequestParam("time1") String time1, @RequestParam("time2") String time2,
+   public String insertMom(@ModelAttribute Momboard b,  @RequestParam("time1") String time1, @RequestParam("time2") String time2,
 		   				   @RequestParam("postNum") String postNum, @RequestParam("addr1") String addr1, @RequestParam("addr2") String addr2, @RequestParam("addr3") String addr3,
 		   				   @RequestParam("gender1") String gender1, @RequestParam(value="gender2", required=false) String gender2, @RequestParam(value="gender3", required=false) String gender3,
 		   				   @RequestParam("age1") String age1, @RequestParam(value="age2", required=false) String age2, @RequestParam(value="age3", required=false) String age3,
@@ -133,8 +133,9 @@ public class BabySitterController
 	   
 	    
 		Member member = (Member)request.getSession().getAttribute("loginUser");
-		String bWriter =member.getNickName();
-		b.setbWriter(bWriter);
+		
+		
+		b.setbWriter(member.getNickName());
 		int bType=3;
 		b.setbType(bType);
 	   String bGender =gender1;
@@ -144,7 +145,7 @@ public class BabySitterController
 			   bGender +="," + gender3;
 		   }
 	   }
-	   bs.setBgender(bGender);
+	   b.setbGender(bGender);
 	   String bAge = age1;
 	   if(age2!=null) {
 		   bAge += ","+ age2;
@@ -152,12 +153,11 @@ public class BabySitterController
 			   bAge +="," + age3;
 		   }
 	   }
-	   bs.setBage(bAge);
-	   bs.setBcSalary(salary);
+	   b.setbAge(bAge);
 	   String time = time1 +" ~ " + time2;
-	   bs.setBcTime(time);
+	   b.setBcTime(time);
 	   String address= postNum + " "+ addr1 +" "+ addr2 +" "+ addr3;
-	   bs.setAddress(address);
+	   b.setAddress(address);
 	   String bActive = "";
 	   for(int i=0; i<active.length;i++) {
 		   if(i<active.length-1) {
@@ -166,19 +166,29 @@ public class BabySitterController
 			   bActive += active[i];
 		   }		   
 	   }
-	   bs.setBcactivity(bActive);
+	   b.setBcActivity(bActive);
 	   String req = req1 + "," + req2 + "," +req3;
-	   bs.setReq(req);
+	   b.setReq(req);
+	   
+	   Board board = new Board(b.getbNo(), 3, b.getbTitle(), member.getNickName(),b.getbContent(), 0, null, null, null);
+	   Attachment Attachment = new Attachment(b.getbNo(), b.getOriginName(), b.getChangeName(), null);
+	   BabySitter babySitter = new BabySitter(b.getBcSalary(), b.getBcTime(),b.getBcActivity(),b.getReq(),b.getbNo(),b.getAddress(),b.getPersonnel(),b.getbAge(),b.getbGender());
 	   
 	   String renameFileName = saveFile(contentImg, request);
 		if(renameFileName != null) {
-			a.setOriginName(contentImg.getOriginalFilename());
-			a.setChangeName(renameFileName);
+			Attachment.setOriginName(contentImg.getOriginalFilename());
+			Attachment.setChangeName(renameFileName);
 		}
+		
+		System.out.println(b);
+		System.out.println(board);
+		System.out.println(Attachment);
+		System.out.println(babySitter);
+		
 		int result=0;
-		int result1 = bsService.insertMomBoard(b);
-		int result2 = bsService.insertMomAttachment(a);
-		int result3 = bsService.insertBcMojib(bs);
+		int result1 = bsService.insertMomBoard(board);		
+		int result2 = bsService.insertMomAttachment(Attachment);
+		int result3 = bsService.insertBcMojib(babySitter);
 		result= result1+result2+result3;
 		if(result>2) {  
 	   return "redirect:babymom.do";
@@ -211,6 +221,6 @@ public class BabySitterController
 			}
 			return renameFileName;
 		
-   }
+		}
 }
    

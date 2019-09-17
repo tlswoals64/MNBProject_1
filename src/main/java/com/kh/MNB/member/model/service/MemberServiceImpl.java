@@ -1,6 +1,7 @@
 package com.kh.MNB.member.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -123,6 +124,18 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Board> myBoardList(PageInfo pi, String bWriter) {
 		return mDAO.myBoardList(pi, bWriter);
 	}
+
+	@Override
+	public int deleteMember(String id) {
+		return mDAO.deleteMember(id);
+	}
+
+	@Override
+	public int myBoardupdate(Map<String, String> map) {
+		return mDAO.myBoardUpdate(map);
+	}
+
+
 
 
 	

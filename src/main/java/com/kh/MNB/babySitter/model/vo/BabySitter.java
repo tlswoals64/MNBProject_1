@@ -130,6 +130,14 @@ public class BabySitter {
 	public void setbNo(int bNo) {
 		this.bNo = bNo;
 	}
+
+
+	@Override
+	public String toString() {
+		return "BabySitter [bcCarrer=" + bcCarrer + ", bcSalary=" + bcSalary + ", bcTime=" + bcTime + ", bcactivity="
+				+ bcactivity + ", req=" + req + ", bNo=" + bNo + ", address=" + address + ", personnel=" + personnel
+				+ ", bAge=" + bAge + ", bgender=" + bgender + "]";
+	}
 	
 	
 }

@@ -20,9 +20,9 @@
 		select * from suppotMom_list
 		where btype = 3 and status='Y'
 	</select>
-	<insert id="insertMomBoard" parameterType="Board">
+	<insert id="insertMomBoard">
 	insert into board
-	values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, default, sysdate, #{bWriter})
+	values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, default, default, sysdate, #{bWriter})
 	</insert>
 	<insert id="insertMomAttachment" parameterType="Attachment">
 		insert into board_picture
@@ -31,7 +31,7 @@
 	
 	<insert id="insertBcMojib" parameterType="BabySitter">
 		insert into BC_MOJIB
-		values(seq_bno.currval, #{bcactivity}, #{req}, #{bcSalary}, #{bcTime}, #{address}, #{personnel}, #{bAge}, #{bgender})
+		values(seq_bno.currval, #{bcActivity}, #{req}, #{bcSalary}, #{bcTime}, #{address}, #{personnel}, #{bAge}, #{bGender})
 	</insert>
 	<select id="selectDetail" parameterType="board" resultType="Momboard">
 		select *

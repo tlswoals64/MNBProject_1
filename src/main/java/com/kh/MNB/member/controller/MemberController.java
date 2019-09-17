@@ -353,6 +353,7 @@ public class MemberController {
 		}
 		return mv;
 	}
+	//개인정보수정
 	@RequestMapping("updateMemberView.do")
 	public ModelAndView updateMemberView(HttpSession session, ModelAndView mv) {
 		  
@@ -363,24 +364,35 @@ public class MemberController {
 		return mv;
 	   }
 	@RequestMapping(value="updateMember.do", method=RequestMethod.POST)
-	public String updateMember(@ModelAttribute Member m,
+	public ModelAndView updateMember(@ModelAttribute Member m,
 								@RequestParam("address") String address,
 								@RequestParam("detailAddress") String detailAddress,
 								@RequestParam("extraAddress") String extraAddress, 
-								@RequestParam("addEmail") String addEmail) {
-		
-		  String email = m.getEmail() + "@" + addEmail;
+								@RequestParam("addEmail") String addEmail,ModelAndView mv,HttpSession session) {
+		  Member p = (Member)session.getAttribute("loginUser");
+		  String email = m.getEmail() + "@" + addEmail;		  
 	      m.setEmail(email);
 	      m.setAddress(address + "/" + detailAddress + "/" + extraAddress);
-
-	      int result = mService.updateMember(m);
 	      
-	      if(result > 0) {
-	         return "redirect:index.jsp";
+		  
+		  Map<String, String> map = new HashMap<String, String>();
+		  map.put("nickName", p.getNickName());
+		  map.put("nickName2", m.getNickName());	  
+		 
+		  int result1= mService.myBoardupdate(map);
+	      int result = mService.updateMember(m);
+	     
+	     
+	     
+	      if(result > 1) {
+	    	  mv.addObject("loginUser", m);
+	    	  mv.setViewName("myPage/detailMember");
+	         
 	         
 	      } else {
-	         throw new MemberException("회원가입에 실패하였습니다.");
-	      }		
+	         throw new MemberException("회원정보 수정에 실패하였습니다.");
+	      }
+	      return mv;
 		
 	}
 	// 내가 쓴 게시글 목록
@@ -401,7 +413,6 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
 	      
 	      ArrayList<Board> list = mService.myBoardList(pi, bWriter);
-	     
 	      if(list != null) {
 	         mv.addObject("list", list);
 	         mv.addObject("pi", pi);
@@ -413,7 +424,23 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	      
 	      return mv;
 	   }
-	
+	 @RequestMapping("mdelete.do")
+	 public String deleteMember(@RequestParam("id") String id,SessionStatus status) {
+		 
+		 int result  = mService.deleteMember(id);
+		 
+		 
+		 if(result>0) {
+		 status.setComplete();
+		 return "myPage/detailMember";	
+//		 session.invalidate();
+		 //return "redirect:logout.do";
+		 }
+		 else {
+			 
+			 throw new MemberException("회원 탈퇴에 실패하였습니다..");
+		 }
+	 }
 
 	}
 	

@@ -86,7 +86,7 @@ table{
 			<td align="left">
 				<c:if test="${ !empty loginUser }">
 					<c:url var="bdetail" value="bdetail.do">
-						<c:param name="bId" value="${ b.bId }"/>
+						<c:param name="bNo" value="${ b.bNo }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
 					<a href="${ bdetail }">${ b.bTitle }</a>
@@ -96,7 +96,7 @@ table{
 				</c:if>
 			</td>			
 			<td align="center">${ b.bWriter }</td>
-			<td align="center">${ b.bCreateDate }</td>
+			<td align="center">${ b.b_CreateDate }</td>
 		
 		</tr>
 		</c:forEach>

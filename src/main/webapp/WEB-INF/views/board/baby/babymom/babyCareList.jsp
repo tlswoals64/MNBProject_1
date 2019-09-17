@@ -317,8 +317,8 @@ padding : 5px;
 		<div style="width: 100%; height: 800px; display: inline-block; margin: 3% 15% 0 15%;">
 			<div id="mojibList">
 			
-				<c:forEach var="bc" items="${bclist}">
 			<form id="mdetail" action="momDetail.do" method="post">						
+			<c:forEach var="bc" items="${bclist}">
 				<div class = "list" id="detail" style="cursor:pointer;">							
 					<table>
 						<colgroup>
@@ -357,14 +357,13 @@ padding : 5px;
 					</table>
 					
 				</div>	
+				</c:forEach>
 				</form>	
 				<script>
 				$('#detail').on("click",function(){
 					$('#mdetail').submit();
 				});
-				
 				</script>			
-				</c:forEach>
 				
 				
 				<table>

@@ -201,9 +201,23 @@ vertical-align: top;
 				</tr>
 			</table>
 			<div class= "updateButton">
-				<button type = "button" onclick ="location.href='updateMemberView.do'">회원정보수정</button><button onclick = "">탈퇴</button><button onclick = "history.back();">취소</button>
+				<button type = "button" onclick ="location.href='updateMemberView.do'">회원정보수정</button>
+				<c:url var="mdelete" value="mdelete.do">
+						<c:param name="id" value="${ loginUser.userId }"/><!-- 넘어갈 값이 있으니 param을 넣게 c:url을 쓰자 -->
+				</c:url>
+				<button onclick="deleteMember()">회원탈퇴</button>
+				<button onclick = "history.back();">취소</button>
 			</div>
 		</div>
+	<script>
 	
+	function deleteMember(){
+		var bool = confirm("정말로 삭제하시겠습니까?");
+		
+		if(bool){
+		location.href='${ mdelete }';
+		}
+	};
+	</script>
 </body>
 </html>

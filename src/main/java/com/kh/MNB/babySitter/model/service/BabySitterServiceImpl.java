@@ -29,8 +29,8 @@ public class BabySitterServiceImpl implements BabySitterService {
 	}
 
 	@Override
-	public int insertMomBoard(Board b) {
-		return bsDAO.insertMomBoard(b);
+	public int insertMomBoard(Board board) {
+		return bsDAO.insertMomBoard(board);
 	}
 
 	@Override

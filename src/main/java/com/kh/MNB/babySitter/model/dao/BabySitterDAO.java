@@ -39,9 +39,9 @@ public class BabySitterDAO {
 		return (ArrayList)sqlSession.selectList("babySitterMapper.selectMomlist", null, rowBounds);
 	}
 
-	public int insertMomBoard(Board b) {
+	public int insertMomBoard(Board board) {
 	
-		return sqlSession.insert("babySitterMapper.insertMomBoard", b);
+		return sqlSession.insert("babySitterMapper.insertMomBoard", board);
 	}
 
 	public int insertMomAttachment(Attachment a) {

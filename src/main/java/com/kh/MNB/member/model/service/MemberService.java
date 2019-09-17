@@ -1,6 +1,7 @@
 package com.kh.MNB.member.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
@@ -41,6 +42,11 @@ public interface MemberService {
 	int getmyListCount(String bWriter);
 
 	ArrayList<Board> myBoardList(PageInfo pi, String bWriter);
+
+	int deleteMember(String id);
+
+	int myBoardupdate(Map<String, String> map);
+
 
 
 	

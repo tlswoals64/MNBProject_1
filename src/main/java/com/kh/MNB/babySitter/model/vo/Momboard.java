@@ -23,7 +23,7 @@ public class Momboard {
 	private String bAge;
 	private String bGender;
 	private int iNo;
-	private String originalName;
+	private String originName;
 	private String changeName;
 	private Date upload_Date;
 	
@@ -31,7 +31,7 @@ public class Momboard {
 	
 	public Momboard(int rNo, int bNo, int bType, String bTitle, String bContent, int bCount, String status,
 			Date b_CreateDate, Date b_ModifyDate, String bWriter, String bcSalary, String bcTime, String address,
-			String bcActivity, String req, int personnel, String bAge, String bGender, int iNo, String originalName,
+			String bcActivity, String req, int personnel, String bAge, String bGender, int iNo, String originName,
 			String changeName, Date upload_Date) {
 		super();
 		this.rNo = rNo;
@@ -53,7 +53,7 @@ public class Momboard {
 		this.bAge = bAge;
 		this.bGender = bGender;
 		this.iNo = iNo;
-		this.originalName = originalName;
+		this.originName = originName;
 		this.changeName = changeName;
 		this.upload_Date = upload_Date;
 	}
@@ -159,25 +159,30 @@ public class Momboard {
 	}
 
 
-	public String getSalary() {
+
+	public String getBcSalary() {
 		return bcSalary;
 	}
 
-
-	public void setSalary(String bcSalary) {
+	public void setBcSalary(String bcSalary) {
 		this.bcSalary = bcSalary;
 	}
 
-
-	public String getTime() {
+	public String getBcTime() {
 		return bcTime;
 	}
 
-
-	public void setTime(String bcTime) {
+	public void setBcTime(String bcTime) {
 		this.bcTime = bcTime;
 	}
 
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+
+	public String getOriginName() {
+		return originName;
+	}
 
 	public String getAddress() {
 		return address;
@@ -249,16 +254,6 @@ public class Momboard {
 	}
 
 
-	public String getOriginalName() {
-		return originalName;
-	}
-
-
-	public void setOriginalName(String originalName) {
-		this.originalName = originalName;
-	}
-
-
 	public String getChangeName() {
 		return changeName;
 	}
@@ -278,19 +273,19 @@ public class Momboard {
 		this.upload_Date = upload_Date;
 	}
 
-
 	@Override
 	public String toString() {
-		return "MomSuppot [rNo=" + rNo + ", bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bContent="
+		return "Momboard [rNo=" + rNo + ", bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bContent="
 				+ bContent + ", bCount=" + bCount + ", status=" + status + ", b_CreateDate=" + b_CreateDate
-				+ ", b_ModifyDate=" + b_ModifyDate + ", bWriter=" + bWriter + ", bcSalary=" + bcSalary + ", time=" + bcTime
-				+ ", address=" + address + ", bcActivity=" + bcActivity + ", req=" + req + ", personnel=" + personnel
-				+ ", bAge=" + bAge + ", bGender=" + bGender + ", iNo=" + iNo + ", originalName=" + originalName
+				+ ", b_ModifyDate=" + b_ModifyDate + ", bWriter=" + bWriter + ", bcSalary=" + bcSalary + ", bcTime="
+				+ bcTime + ", address=" + address + ", bcActivity=" + bcActivity + ", req=" + req + ", personnel="
+				+ personnel + ", bAge=" + bAge + ", bGender=" + bGender + ", iNo=" + iNo + ", originName=" + originName
 				+ ", changeName=" + changeName + ", upload_Date=" + upload_Date + "]";
 	}
-	
-	
-	
 
-}
+	
+	}
+
+
+
 

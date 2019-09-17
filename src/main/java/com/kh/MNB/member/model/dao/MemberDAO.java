@@ -1,6 +1,7 @@
 package com.kh.MNB.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -83,7 +84,15 @@ public class MemberDAO {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.myBoardList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("memberMapper.myBoardList", bWriter, rowBounds);
+	}
+
+	public int deleteMember(String id) {
+		return sqlSession.update("memberMapper.deleteMember");
+	}
+
+	public int myBoardUpdate(Map<String, String> map) {
+		return sqlSession.update("memberMapper.myBoardUpdate",map);
 	}
 
 	
