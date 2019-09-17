@@ -401,9 +401,9 @@ public class BabySitterController
 		}
 	}
 	
-	@RequestMapping("rList.do")
-	public void getReplyList(HttpServletResponse response, int bNo) throws Exception {
-		ArrayList<Reply> rlist = bsService.selectReplyList(bNo);
+	@RequestMapping("rSuppotList.do")
+	public void getSuppotReplyList(HttpServletResponse response, int bNo) throws Exception {
+		ArrayList<Reply> rlist = bsService.selectSuppotReplyList(bNo);
 		
 		for(Reply r : rlist) {
 			r.setnContent(URLEncoder.encode(r.getnContent(), "utf-8"));
@@ -413,16 +413,16 @@ public class BabySitterController
 		gson.toJson(rlist, response.getWriter());
 	}
 	
-	@RequestMapping("addReply.do")
-	public String insertReply(@ModelAttribute Reply r, HttpSession session) throws IOException {
+	@RequestMapping("addSuppotReply.do")
+	public String insertSuppotReply(@ModelAttribute Reply r, HttpSession session) throws IOException {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		r.setrWriter(loginUser.getNickName());
 		System.out.println(r);
 		
-		int result = bsService.insertReply(r);
+		int result = bsService.insertSuppotReply(r);
 		
 		if(result > 0) {
-			 return "redirect:rList.do?bNo=" + r.getbNo();
+			 return "redirect:rSuppotList.do?bNo=" + r.getbNo();
 		} else {
 			throw new BoardException("댓글 등록에 실패하였습니다.");
 		}

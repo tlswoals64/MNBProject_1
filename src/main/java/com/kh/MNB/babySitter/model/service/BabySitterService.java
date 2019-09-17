@@ -3,7 +3,7 @@ package com.kh.MNB.babySitter.model.service;
 import java.util.ArrayList;
 
 import com.kh.MNB.babySitter.model.vo.BabySitter;
-<
+
 import com.kh.MNB.babySitter.model.vo.Momboard;
 
 import com.kh.MNB.babySitter.model.vo.sitterSuppot;
@@ -49,9 +49,9 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 
 	sitterSuppot selectSuppotBoard(int bNo);
 
-	ArrayList<Reply> selectReplyList(int bNo);
+	ArrayList<Reply> selectSuppotReplyList(int bNo);
 
-	int insertReply(Reply r);
+	int insertSuppotReply(Reply r);
 
 	
 }

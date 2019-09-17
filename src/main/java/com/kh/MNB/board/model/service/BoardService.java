@@ -1,7 +1,6 @@
 package com.kh.MNB.board.model.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
@@ -18,12 +17,12 @@ public interface BoardService {
 
 	ArrayList<Board> selectNanumList(PageInfo pi);
 
+
 	int insertNanumBoard(Board b);
 
 	int insertNanumAttachment(ArrayList<Attachment> aList);
 
 	int insertNanumReply(Reply r);
-
 
 	ArrayList<Reply> selectNanumReplyList(int bNo);
 
@@ -37,57 +36,55 @@ public interface BoardService {
 
 	int insertSubNanumAttachment(ArrayList<Attachment> insertList);
 
-	// ������
-	ArrayList<Board> selectList1(PageInfo pi);
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	
+	 int getComListCount();
 
-	int insertBoard1(Board board);
+	   ArrayList<Board> selectComList(PageInfo pi);
 
-	int insertAttachment1(ArrayList<Attachment> aList1);
+	   int insertComBoard(Board board);
 
-	int insertReply1(Reply r);
+	   int insertComAttachment(ArrayList<Attachment> aList);
 
-	//������������
-	void addReadCount1(int bNo);
-	//������������
+	   int insertProBoard(Board board);
 
-	Attachment selectBoard1(int bNo);
+	   int insertProAttachment(ArrayList<Attachment> aList);
 
-	ArrayList<Propose> selectProList(PageInfo pi);
+	   int insertComReply(Reply r);
 
-	int getListCountPro();
+	   void addComReadCount(int bNo);
 
-	Board selectBoard2(int bNo);
+	   Attachment selectComPicBoard1(int bNo);
 
-	ArrayList<Reply> selectUserReply(int bNo);
+	   Attachment selectComPicBoard2(int bNo);
 
-	int insertReplyMH(Reply reply);
+	   Attachment selectComPicBoard3(int bNo);
 
-	int updateComBoard(Board b);
+	   Attachment selectComPicBoard4(int bNo);
 
-	int deleteComBoard(int bNo);
+	   Board selectComBoard(int bNo);
 
-	int insertProBoard(Board board);
+	   int getProListCount();
 
-	int insertProAttachment(ArrayList<Attachment> aList);
+	   ArrayList<Propose> selectProList(PageInfo pi);
 
-	Attachment selectPicBoard1(int bNo);
+	   Attachment selectComupPBoard1(int bNo);
 
-	Attachment selectPicBoard2(int bNo);
+	   Attachment selectComupPBoard2(int bNo);
 
-	Attachment selectPicBoard3(int bNo);
+	   Attachment selectComupPBoard3(int bNo);
 
-	Attachment selectupPBoard1(int bNo);
+	   Attachment selectComupPBoard4(int bNo);
 
-	Attachment selectupPBoard2(int bNo);
+	   int updateComBoard(Board b);
 
-	Attachment selectupPBoard3(int bNo);
+	   int deleteComBoard(int bNo);
 
-	Attachment selectupPBoard4(int bNo);
+	   ArrayList<Reply> selectUserReply(int bNo);
 
+	   int insertReplyMH(Reply reply);
 
-
-
-
-
-
+	
 }

@@ -83,14 +83,14 @@
 		where bno = #{bNo}
 	</update>
 	
-	<select id="selectReplyList" parameterType="_int" resultType="Reply">
+	<select id="selectSuppotReplyList" parameterType="_int" resultType="Reply">
 		select *
 		from reply
 		where bno = #{bNo}
 		order by rnum desc
 	</select>
 	
-	<insert id="insertReply" parameterType="Reply">
+	<insert id="insertSuppotReply" parameterType="Reply">
 		insert into reply
 		values(seq_rnum.nextval, #{nContent}, sysdate, default, #{rWriter}, #{bNo})
 	</insert>

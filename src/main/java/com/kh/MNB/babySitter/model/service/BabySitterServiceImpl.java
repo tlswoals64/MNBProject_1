@@ -65,7 +65,7 @@ public class BabySitterServiceImpl implements BabySitterService {
 	public Momboard selectDetail(Board board) {
 		// TODO Auto-generated method stub
 		return bsDAO.selectDetail(board);
-
+	}
 
 	public int insertSuppotBoard(Board board) {
 		return bsDAO.insertSuppotBoard(board);
@@ -107,13 +107,13 @@ public class BabySitterServiceImpl implements BabySitterService {
 	}
 
 	@Override
-	public ArrayList<Reply> selectReplyList(int bNo) {
-		return bsDAO.selectReplyList(bNo);
+	public ArrayList<Reply> selectSuppotReplyList(int bNo) {
+		return bsDAO.selectSuppotReplyList(bNo);
 	}
 
 	@Override
-	public int insertReply(Reply r) {
-		return bsDAO.insertReply(r);
+	public int insertSuppotReply(Reply r) {
+		return bsDAO.insertSuppotReply(r);
 
 	}
 	
