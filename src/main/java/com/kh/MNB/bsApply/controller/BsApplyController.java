@@ -3,6 +3,7 @@ package com.kh.MNB.bsApply.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,5 +80,27 @@ public class BsApplyController {
 			throw new BsApplyException("회원등급 수정에 실패했습니다.");
 		}
 
+	}
+	
+	@RequestMapping("sitterApplyPage.do")
+	public ModelAndView sitterApply(HttpSession session, ModelAndView mv) {
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		if(m != null) {
+            mv.addObject("m", m);
+            mv.setViewName("common/SitterApplicationView");
+         }
+         else {
+            throw new MemberException("�Խñ� ��ü ��ȸ�� �����Ͽ����ϴ�.");
+         }
+         
+		return mv;
+	}
+	
+	// 신청서 작성
+	@RequestMapping("userBsApply.do")
+	public void userBsApply(BSApply b) {
+		System.out.println("신청서 작성 잘들어왔니?");
+		System.out.println(b);
 	}
 }
