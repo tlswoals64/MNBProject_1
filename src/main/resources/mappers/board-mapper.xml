@@ -34,6 +34,7 @@
 		<result property="iType" column="ITYPE"/>
 		<result property="upload_Date" column="UPLOAD_DATE"/>
 	</resultMap>
+	
 	<select id="selectNanumList" resultMap="PictureBoardResultSet">
 		select *
 		from board b
@@ -80,6 +81,7 @@
 		insert into Reply values(seq_rnum.nextval,  #{nContent}, sysdate, default, #{rWriter}, #{bNo})
 	</insert>
 	
+
 	<select id="selectNanumOne" parameterType="_int" resultType="PictureBoard">
 	select *
 		from board b
@@ -120,6 +122,92 @@
 	<insert id="insertSubNanumAttachment" parameterType="Attachment">
 			insert into board_picture
 			values (seq_ino.nextval, #{bNo}, #{originName}, #{changeName}, 1, sysdate, 'Y')
+
+
+	<!-- 정보공유 리스트 -->
+	<select id = "selectComList" resultType = "Board">
+		select *
+		from board
+		where status = 'Y'
+		order by bno desc
+	</select>
+	
+	<select id="getListComCount" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y'
+	</select>
+	
+	<insert id="insertComBoard" parameterType="Board">
+		insert into board
+		values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, 'user01')
+	</insert>
+	
+	<insert id="insertComAttachment0" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, 'Y')
+	</insert>
+	<insert id="insertComAttachment" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 1, sysdate, 'Y')
+	</insert>
+	
+	<insert id="insertComReply" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
+	</insert>
+
+	
+	<!-- 정보공유 디테일 -->
+	<update id="updateCount1" parameterType="_int">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo}
+	</update>
+	
+	<!-- 정보공유 디테일-->
+	<select id="selectOne1" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture <!-- b join board_picture p on b.bno = p.bno -->
+		where bno = #{bNo} and status = 'Y'
+	</select>
+	
+	<insert id="insertReply1" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
+	</insert>
+	
+	
+	<!-- 문의사항 리스트 불러오기 -->
+	<select id = "selectProList" resultType = "propose">
+		select *
+		from board b join propose p on b.bno = p.pno
+		where b.status = 'Y'
+		order by p.pno desc
+	</select>
+	
+	<select id="getListProCount" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y'
+	</select>
+
+	<select id="selectOne2" parameterType="_int" resultType="board">
+		select * 
+		from board
+		where bno = #{bNo} and status = 'Y'
+	</select>
+	
+	
+	<!-- 리플 가져오기 -->
+	
+	<select id="userReplyList" parameterType="_int" resultType="Reply">
+		select *
+		from reply
+		where bno = #{bNo} and status='Y'
+	</select>
+	<!-- 리플 등록 -->
+	<insert id="insertReplyMH" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, sysdate, default, #{rWriter}, #{bNo})
+
 	</insert>
 	
 </mapper>

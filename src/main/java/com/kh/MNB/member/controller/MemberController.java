@@ -50,7 +50,6 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	
 	   @RequestMapping("memberSingUp.do")
 	   public String memberSingUp() {
@@ -72,7 +71,7 @@ public class MemberController {
 	   @RequestMapping("isNick.do")
 	   public void idDuplicateCheck(HttpServletResponse response, String nickname) throws IOException {
 	      
-	      boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false;
+	      boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false; 
 	      
 	      response.getWriter().print(checkNickName);
 	   }
@@ -184,6 +183,26 @@ public class MemberController {
 		public String pwdIdCheckView() {
 			return "login/pwdIdCheckView";
 		}
+//		비밀번호 찾기전 아이디 체크		
+		@RequestMapping(value="pwdIdSearch.do", method=RequestMethod.POST)
+		public String pwdSearch(@RequestParam("userId") String userId, Model model) {
+			
+			System.out.println(userId);
+			String result= mService.pwdSearch(userId);
+			
+			if(result!=null) {
+			model.addAttribute("pwdSearch", result);
+			return "login/pwdSearchForm";
+			}else {
+				throw new MemberException("아이디 찾기에 실패하였습니다.");
+			}			
+		}
+		
+		@RequestMapping("pwdSerach.do")
+		public String pwdSearch() {
+			return "login/pwdChange";
+		}
+		
 	
 	//------------------------- ������ �κ� ---------------------------
 	@RequestMapping("manaHome.do")

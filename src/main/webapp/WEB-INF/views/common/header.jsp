@@ -51,7 +51,6 @@
 			<c:if test="${ empty sessionScope.loginUser }">
 			<ul>
 				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
-
 				<li><A href='loginView.do'>LOGIN</a></li>
 				<li><A href="memberSingUp.do">JOIN</a></li>
 
@@ -78,6 +77,7 @@
 				<li><A href='bIntro.do'>베이비시터</a></li>
 				<li><A href="cIntro.do">커뮤니티</a></li>
 				<li><A href="fListView.do">자주묻는질문</a></li>
+				<li><A href="proListView.do">문의사항</a></li>
 			</ul>
 		</div>
 	</div>
