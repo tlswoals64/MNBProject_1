@@ -22,7 +22,7 @@ public class BoardDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Board> selectNanumList(PageInfo pi) {
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
@@ -31,15 +31,15 @@ public class BoardDAO {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectNanumList", null, rowBounds);
 	}
 
-	public int getListCount() {
+	public int getListNanumCount() {
 		return sqlSession.selectOne("boardMapper.getListNanumCount");
 	}
 
-	public int insertBoard(Board b) {
+	public int insertNanumBoard(Board b) {
 		return sqlSession.insert("boardMapper.insertNanumBoard", b);
 	}
 
-	public int insertAttachment(ArrayList<Attachment> aList) {
+	public int insertNanumAttachment(ArrayList<Attachment> aList) {
 
 		int result = 0;
 		for(int i = 0; i < aList.size(); i++) {
@@ -54,17 +54,17 @@ public class BoardDAO {
 		return result;
 	}
 
-	public int insertReply(Reply r) {
-		return sqlSession.insert("boardMapper.insertReply", r);
+	public int insertNanumReply(Reply r) {
+		return sqlSession.insert("boardMapper.insertNanumReply", r);
 	}
 
-	// Á¤º¸°øÀ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getListCount1() {
 		
 		return sqlSession.selectOne("boardMapper.getListComCount");
 	}
 	
-	// Á¤º¸°øÀ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<Board> selectList1(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
@@ -79,15 +79,13 @@ public class BoardDAO {
 
 	public int insertAttachment1(ArrayList<Attachment> aList1) {
 		int result = 0;
-		for(int i = 0; i < aList1.size(); i++) {
-			if(i == 0) {
-				result = sqlSession.insert("boardMapper.insertComAttachment0", aList1.get(0));
-			}
-			else {
-			
-				result = sqlSession.insert("boardMapper.insertComAttachment", aList1.get(i));
-			}
-		}
+		
+		  for(int i = 0; i < aList1.size(); i++) { if(i == 0) {
+		  System.out.println(aList1.get(0)); result =
+		  sqlSession.insert("boardMapper.insertComAttachment0", aList1.get(0)); } else
+		  { System.out.println(aList1.get(i)); result =
+		  sqlSession.insert("boardMapper.insertComAttachment", aList1.get(i)); } }
+		
 		
 		return result;
 	}
@@ -96,15 +94,15 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertReply1", r);
 	}
 
-	//Á¤º¸°øÀ¯ µðÅ×ÀÏ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void addReadCount(int bNo) {
 		
 		sqlSession.update("boardMapper.updateCount1", bNo);
 	}
-	//Á¤º¸°øÀ¯ µðÅ×ÀÏ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	public ArrayList<Attachment> selectBoard1(int bNo) {
-		ArrayList<Attachment> list =  (ArrayList)sqlSession.selectList("boardMapper.selectOne1",bNo);
+	public Attachment selectBoard1(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectOne1",bNo);
 		
 		return list;
 	}
@@ -134,6 +132,79 @@ public class BoardDAO {
 
 	public int insertReplyMH(Reply reply) {
 		return sqlSession.insert("boardMapper.insertReplyMH", reply);
+	}
+
+	public int updateComBoard(Board b) {
+		return sqlSession.update("boardMapper.updateComBoard", b);
+	}
+
+	public int deleteComBoard(int bNo) {
+		return sqlSession.update("boardMapper.deleteComBoard", bNo);
+	}
+
+	//ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½Î¼ï¿½Æ®
+	public int insertProBoard(Board b) {
+		return sqlSession.insert("boardMapper.insertProBoard", b);
+	}
+
+	public int insertProAttachment1(ArrayList<Attachment> aList) {
+		int result = 0;
+		for(int i = 0; i < aList.size(); i++) {
+			if(i == 0) {
+				result = sqlSession.insert("boardMapper.insertProAttachment0", aList.get(0));
+			}
+			else {
+			
+				result = sqlSession.insert("boardMapper.insertProAttachment", aList.get(i));
+			}
+		}
+		
+		return result;
+	}
+
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½Â°ï¿½ï¿½
+	public Attachment selectPicBoard1(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectPicOne1",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectPicBoard2(int bNo) {
+	Attachment list =  sqlSession.selectOne("boardMapper.selectPicOne2",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectPicBoard3(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectPicOne3",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectupPBoard1(int bNo) {
+		
+		Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne1",bNo);
+		
+		return list;
+	
+	}
+
+	public Attachment selectupPBoard2(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne2",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectupPBoard3(int bNo) {
+	Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne3",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectupPBoard4(int bNo) {
+	Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne4",bNo);
+		
+		return list;
 	}
 
 	

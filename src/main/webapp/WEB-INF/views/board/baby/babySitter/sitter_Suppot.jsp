@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -216,9 +215,9 @@ padding : 5px;
 </style>
 </head>
 <body>
-	<nav>
-		<jsp:include page="../common/header.jsp"></jsp:include>
-	</nav>
+	<header>
+		<jsp:include page="../../../common/header.jsp"></jsp:include>
+	</header>
 
 	<div id="bigForm">
 		<div id="headview">
@@ -421,83 +420,7 @@ padding : 5px;
 		<div style="width: 100%; height: 1500px; display: inline-block; margin-top: 3%;">
 			<div id="mojibList">
 				<div class = "list">
-					<table>
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tr>
-							<th rowspan="3"><img id="searchImg" width="70px"
-								height="70px" src="resources/images/babySitter/search.png"></th>
-							<td><span>영아 1명</span>&nbsp;|&nbsp;<span>등록 시간</span></td>
-						</tr>
-						<tr>
-							<td>등하원 돕기, 실내놀이, 영어놀이 맘시터 찾습니다.</td>
-						</tr>
-						<tr>
-							<td><span>경기도 화성시</span>&nbsp;|&nbsp;<span>전O영</span>&nbsp;|&nbsp;<span>근무
-									시작일</span></td>
-						</tr>
-						<tr>
-							<th>0명 지원</th>
-							<td><span>희망 시급 10000원</span>&nbsp;/&nbsp;협의가능</td>
-						</tr>
-					</table>
-					<hr>
-					<table>
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tr>
-							<th>기간</th>
-							<td><span class="week">월</span> <span class="week">화</span>
-								<span class="week">수</span> <span class="week">목</span> <span
-								class="week">금</span> <span class="week">토</span> <span
-								class="week">일</span></td>
-						</tr>
-					</table>
-				</div>
-				<div class = "list">
-					<table>
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tr>
-							<th rowspan="3"><img id="searchImg" width="70px"
-								height="70px" src="resources/images/babySitter/search.png"></th>
-							<td><span>영아 1명</span>&nbsp;|&nbsp;<span>등록 시간</span></td>
-						</tr>
-						<tr>
-							<td>등하원 돕기, 실내놀이, 영어놀이 맘시터 찾습니다.</td>
-						</tr>
-						<tr>
-							<td><span>경기도 화성시</span>&nbsp;|&nbsp;<span>전O영</span>&nbsp;|&nbsp;<span>근무
-									시작일</span></td>
-						</tr>
-						<tr>
-							<th>0명 지원</th>
-							<td><span>희망 시급 10000원</span>&nbsp;/&nbsp;협의가능</td>
-						</tr>
-					</table>
-					<hr>
-					<table>
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tr>
-							<th>기간</th>
-							<td><span class="week">월</span> <span class="week">화</span>
-								<span class="week">수</span> <span class="week">목</span> <span
-								class="week">금</span> <span class="week">토</span> <span
-								class="week">일</span></td>
-						</tr>
-					</table>
-				</div>
-				<div class = "list">
-					<table>
+					<table summary="베이비시터 중 구직글을 작성한 리스트">
 						<colgroup>
 							<col width="30%">
 							<col width="70%">
@@ -569,7 +492,7 @@ padding : 5px;
 		페이징<button onclick="location.href='suppotInsert.do'">글쓰기</button>
 	</div>
 	<footer style="margin-top: 10%;">
-		<jsp:include page="../common/footer.jsp"></jsp:include>
+		<jsp:include page="../../../common/footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

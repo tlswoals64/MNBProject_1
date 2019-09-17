@@ -134,15 +134,15 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 <body>
 	<jsp:include page="../../common/header.jsp"></jsp:include>
 
-	<form action="comupView.do" method="post" enctype="Multipart/form-data">
+	
 				<h2 style="text-align:center; margin-top:30px;">정보공유 게시판</h2>
 	<div class="both"></div>
 	
 	
 		<div class="content">	
-				
 		
 		 <table class="pnaw_box" summary="">
+	
                <tbody>
               
                   <tr>
@@ -150,7 +150,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
                      <td class="pnawtd">
                     <input name="title" value="${ board123.bTitle }" class="inputTypeText" 
                      style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes" style="bor" readonly/>
-							
+					<input type="hidden"  name = "bNo" value="${baord123.bNo }">		
 						</td>	
                   </tr>
                   
@@ -163,23 +163,25 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
                      <th scope="row">상세내용</th>
                      <td class="write pnawtd">
 							<!-- textarea 읽기만 가능하게 하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-						
-       				
-			<%-- 			  <img src="resources/images/board/${board.changeName }" width="200" height="200">  --%> 
-						
-		
-		
-						
-							<textarea name="content"style='width: 100%; height: 200px;'readonly>${board123.bContent } 
-							</textarea>
-						</td>
-						
-          
-                  </tr>
+			<c:if test="${ !empty board.changeName }"> 
+			<img src="resources/images/board/${board.changeName}" width="200" height="200">  
+			</c:if>
+			<c:if test="${ !empty board2.changeName }"> 
+				<img src="resources/images/board/${board2.changeName}" width="200" height="200">  
+				</c:if>
+				<c:if test="${ !empty board3.changeName }"> 
+				<img src="resources/images/board/${board3.changeName}" width="200" height="200">  
+		</c:if>
+				<c:if test="${ !empty board4.changeName }"> 
+				<img src="resources/images/board/${board4.changeName}" width="200" height="200"> 
+			</c:if>
+				<textarea name="content"style='width: 100%; height: 200px;'readonly>${board123.bContent } 
+				</textarea>
+			</td>
+		  </tr>
                 
                </tbody>
             </table>
-            
             
 		<div class="both" style="margin-top:40px; margin-bottom:30px;"></div>
 			<div class="applybtnArea" style="max-width: 100%;">
@@ -187,18 +189,27 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
               
                <li>
 					
-               		<input class="inputbox02 btn btn-outline-dark" type="button" onclick="comup();" value="수정하기">
+               		<input class="inputbox02 btn btn-outline-dark" type="button" onclick="comup();"  value="수정하기">
                </li>
              
-                <li><input class="inputbox02 btn btn-outline-dark" type="button" value="삭제하기" onclick="deleteBoard();"></li>
-    
+                <li><input class="inputbox02 btn btn-outline-dark" type="button" value="삭제하기" onclick="comdelete();"></li>
+    		
                 	<li><input class="inputbox02 btn btn-outline-dark" type="button" value="목록으로" onclick="menulo()"></li>
 					
                </ul>
             </div>
 		<script type="text/javascript">
 			function comup(){
-				location.href="${comup}"
+				var bNo = ${board123.bNo};
+				console.log(bNo);
+				
+				location.href="comup.do?bNo="+ bNo; 
+			}
+			function comdelete() {
+				var bNo = ${board123.bNo};
+				console.log(bNo);
+				
+				location.href="comdelete.do?bNo="+ bNo; 
 			}
 		</script>
 		<div class="both"></div>
@@ -206,7 +217,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 			
 			
 		</div>
-		</form>
+		
 		<div id="replyyy">
 		<div id="userMemoArea">
 					<table id="userMemoTable">
@@ -237,10 +248,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 
 	<div class="both"></div>
 	
-	 <p align="center">
-      <button onclick="location.href='home.do'" class="inputbox02 btn btn-outline-dark" style="margin-right:15px;">시작 페이지로 이동</button>
-      <button onclick="location.href='${ blist }'" class="inputbox02 btn btn-outline-dark">목록 보기로 이동</button>
-   </p>
+
    	
    	<div class="both"></div>
 
@@ -318,6 +326,10 @@ $("#rSubmit").on("click", function(){
 		}
 	});
 });	   	
+
+function menulo() {
+	location.href='comListView.do'
+}
 	
 </script>
 </html>

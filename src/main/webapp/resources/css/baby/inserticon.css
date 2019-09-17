@@ -1,0 +1,466 @@
+@charset "UTF-8";
+
+/* 연령 아이콘1 */
+input[id="c1"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/milk-bottle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c1"]:checked+label {
+	background-image: url("../../images/board/babymom/milk-bottle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c1"] {
+	display: none;
+}
+
+
+/* 연령 아이콘2 */
+input[id="c2"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/pacifier.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c2"]:checked+label {
+	background-image: url("../../images/board/babymom/pacifier2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c2"] {
+	display: none;
+}
+
+/* 연령 아이콘3 */
+input[id="c3"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c3"]:checked+label {
+	background-image: url("../../images/board/babymom/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c3"] {
+	display: none;
+}
+/* 두번째연령 아이콘1 */
+input[id="c4"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/milk-bottle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c4"]:checked+label {
+	background-image: url("../../images/board/babymom/milk-bottle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c4"] {
+	display: none;
+}
+
+
+/* 두번째 연령 아이콘2 */
+input[id="c5"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/pacifier.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c5"]:checked+label {
+	background-image: url("../../images/board/babymom/pacifier2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c5"] {
+	display: none;
+}
+
+/* 두번째 연령 아이콘3 */
+input[id="c6"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c6"]:checked+label {
+	background-image: url("../../images/board/babymom/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c6"] {
+	display: none;
+}
+
+/* 세번째 연령 아이콘1 */
+input[id="c7"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/milk-bottle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c7"]:checked+label {
+	background-image: url("../../images/board/babymom/milk-bottle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c7"] {
+	display: none;
+}
+/* 세번째 연령 아이콘2 */
+input[id="c8"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/pacifier.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c8"]:checked+label {
+	background-image: url("../../images/board/babymom/pacifier2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c8"] {
+	display: none;
+}
+/* 세번째 연령 아이콘3 */
+input[id="c9"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/maternity.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="c9"]:checked+label {
+	background-image: url("../../images/board/babymom/maternity2.png");
+	background-size: 100px 100px;
+}
+
+input[id="c9"] {
+	display: none;
+}
+
+/* 네번째 아이콘 */
+input[id="cb4"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/puzzle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb4"]:checked+label {
+	background-image: url("../../images/board/babymom/puzzle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb4"] {
+	display: none;
+}
+
+
+/* 다섯번째 아이콘 */
+input[id="cb5"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/gohome.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb5"]:checked+label {
+	background-image: url("../../images/board/babymom/gohome2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb5"] {
+	display: none;
+}
+
+
+/* 여섯번째 아이콘 */
+input[id="cb6"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/book.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb6"]:checked+label {
+	background-image: url("../../images/board/babymom/book2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb6"] {
+	display: none;
+}
+
+
+/* 일곱번째 아이콘 */
+input[id="cb7"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/butterfly.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb7"]:checked+label {
+	background-image: url("../../images/board/babymom/butterfly2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb7"] {
+	display: none;
+}
+
+
+/* 여덟번째 아이콘 */
+input[id="cb8"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/hangle.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb8"]:checked+label {
+	background-image: url("../../images/board/babymom/hangle2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb8"] {
+	display: none;
+}
+
+
+/* 아홉번째 아이콘 */
+input[id="cb9"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/english.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb9"]:checked+label {
+	background-image: url("../../images/board/babymom/english2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb9"] {
+	display: none;
+}
+
+
+/* 열번째 아이콘 */
+input[id="cb10"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/study.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb10"]:checked+label {
+	background-image: url("../../images/board/babymom/study2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb10"] {
+	display: none;
+}
+
+
+/* 열한번째 아이콘 */
+input[id="cb11"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/soccer.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb11"]:checked+label {
+	background-image: url("../../images/board/babymom/soccer2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb11"] {
+	display: none;
+}
+
+
+/* 열두번째 아이콘 */
+input[id="cb12"]+label {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/board/babymom/baby-feeding.png");
+	background-size: 100px 100px;
+	cursor: pointer;
+}
+
+input[id="cb12"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 100px 100px;
+}
+
+input[id="cb12"] {
+	display: none;
+}
+/* 열세번째 아이콘 */
+input[id="cb13"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../../images/board/babymom/boy.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb13"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb13"] {
+	display: none;
+}
+/* 열네번째 아이콘 */
+input[id="cb14"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image:url("../../images/board/babymom/girl.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb14"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb14"] {
+	display: none;
+}
+/* 열다섯째 아이콘 */
+input[id="cb15"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../../images/board/babymom/boy.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb15"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb15"] {
+	display: none;
+}
+/* 열여섯 아이콘 */
+input[id="cb16"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../../images/board/babymom/girl.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb16"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb16"] {
+	display: none;
+}
+/* 열일곱째 아이콘 */
+input[id="cb17"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../../images/board/babymom/boy.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb17"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb17"] {
+	display: none;
+}
+/* 열여덟째 아이콘 */
+input[id="cb18"]+label {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	background-image: url("../../images/board/babymom/girl.png");
+	background-size: 50px 40px;
+	cursor: pointer;
+}
+
+input[id="cb18"]:checked+label {
+	background-image: url("../../images/board/babymom/baby-feeding2.png");
+	background-size: 50px 40px;
+}
+
+input[id="cb18"] {
+	display: none;
+}
+
+
+
+
+
+
+
+

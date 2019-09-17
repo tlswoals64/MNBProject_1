@@ -122,9 +122,9 @@ input, textarea, select {
 }
 
 #titleImgArea {
-   width: 350px;
-   height: 200px;
-   text-align: center;
+   width: 120px;
+   height: 100px;
+   text-align: left;
    display: table-cell;
    
 }
@@ -134,7 +134,7 @@ input, textarea, select {
    cursor: pointer;
 }
 
-#contentImgArea1, #contentImgArea2, #contentImgArea3 {
+#titleImg, #contentImgArea1, #contentImgArea2, #contentImgArea3 {
    width: 120px;
    height: 100px;
    text-align: left;
@@ -154,6 +154,10 @@ input, textarea, select {
 }
 .comm{
    vertical-align: middle;
+}
+
+.pnaw_box th{
+	background-color:pink;
 }
 </style>
 </head>
@@ -179,7 +183,7 @@ input, textarea, select {
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${loginUser.userId}" class="inputTypeText" maxLength="125" type="text" value="" readonly></td>
                   </tr>
                  
                    
@@ -191,13 +195,14 @@ input, textarea, select {
                      <th scope="row">상세내용</th>
                      <td class="write pnawtd"><textarea name='bContent' style='width: 100%; height: 200px;'></textarea></td>
                   </tr>
-                  <tr>
+               <tr>
                      <th>사진 첨부</th>
                      <td>
                         <div class="par">
-                          <div id="titleImgArea">
+                           <div id="titleImgArea" class="po">
                            <img id="titleImg" name="titleImg" width="100" height="100" tabindex="0">
                         	</div>
+                        	
                            <div id="contentImgArea1" class="po">
                               <img id="contentImg1" name="contentImg1" width="120" height="100">
                            </div>

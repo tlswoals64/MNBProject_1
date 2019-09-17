@@ -38,8 +38,8 @@
   <div class="logintext"><h3>비밀번호 찾기를 위한 아이디를 입력해주세요.</h3></div>
   <br>
   <div>
-  <form action="pwdIdCheck.do" class="login-container">
-  	<div class="logintext"><input type="text" placeholder="아이디"  id="id" name="userId"></div><br>
+  <form action="pwdIdSearch.do" class="login-container" method="post">
+  	<div class="logintext"><input type="text" placeholder="아이디"  id="id" name="userId" required="required"></div><br>
     <div class="logintext">
     <input type="submit" value="다음" id="btn3">&nbsp;&nbsp;<input type="button" onclick="back();" value="취소" id="btn3">
     </div> 

@@ -107,7 +107,7 @@
 	</insert>
 	<insert id="insertComAttachment" parameterType="Attachment">
 		insert into board_picture
-		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 1, sysdate, 'Y')
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, #{iType}, sysdate, 'Y')
 	</insert>
 	
 	<insert id="insertComReply" parameterType="Reply">
@@ -119,14 +119,34 @@
 	<update id="updateCount1" parameterType="_int">
 		update board
 		set bcount = bcount + 1
-		where bno = #{bNo}
+		where bno = #{bNo} 
 	</update>
 	
 	<!-- 정보공유 디테일-->
 	<select id="selectOne1" parameterType="_int" resultType="Attachment">
 		select *
-		from board_picture <!-- b join board_picture p on b.bno = p.bno -->
-		where bno = #{bNo} and status = 'Y'
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=0
+	</select>
+	
+	<!-- 정보공유 디테일 사진 2번째거 -->
+	
+	<select id="selectPicOne1" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=1
+	</select>
+	<!-- 정보공유 디테일 사진 3번째거 -->
+	<select id="selectPicOne2" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=2
+	</select>
+	<!-- 정보공유 디테일 사진 4번째거 -->
+	<select id="selectPicOne3" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=3
 	</select>
 	
 	<insert id="insertReply1" parameterType="Reply">
@@ -138,20 +158,20 @@
 	<select id = "selectProList" resultType = "propose">
 		select *
 		from board b join propose p on b.bno = p.pno
-		where b.status = 'Y'
-		order by p.pno desc
+		where b.status = 'Y' and btype=5
+		order by p.pno desc 
 	</select>
 	
 	<select id="getListProCount" resultType="_int">
 		select count(*)
 		from board
-		where status = 'Y'
+		where status = 'Y' 
 	</select>
 
 	<select id="selectOne2" parameterType="_int" resultType="board">
 		select * 
 		from board
-		where bno = #{bNo} and status = 'Y'
+		where bno = #{bNo} and status = 'Y' and btype=1
 	</select>
 	
 	
@@ -166,5 +186,59 @@
 	<insert id="insertReplyMH" parameterType="Reply">
 		insert into Reply values(seq_rnum.nextval,  #{nContent}, sysdate, default, #{rWriter}, #{bNo})
 	</insert>
+	
+	<!-- 정보공유 수정하기 -->
+	<update id="updateComBoard" parameterType="Board">
+		update board
+		set btitle=#{bTitle}, bcontent=#{bContent} 
+		where bNo=#{bNo} and btype=1
+	</update>
+	
+	<!-- 정보공유 삭제하기 -->
+	<update id="deleteComBoard" parameterType="_int">
+		update board
+		set status = 'N'
+		where bNo = #{bNo} and btype=1
+	</update>
+	
+	<!-- 문의사항 글쓰기 -->
+	<insert id="insertProBoard" parameterType="Board">
+		insert into board
+		values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, 'user01')
+	</insert>
+	<insert id="insertProAttachment0" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, 'Y')
+	</insert>
+	<insert id="insertProAttachment" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 1, sysdate, 'Y')
+	</insert>
+	
+		<!-- 정보공유 수정하기(사진)1-->
+	<select id="selectupPOne1" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=0
+	</select>
+		<!-- 정보공유 수정하기(사진)2-->
+	<select id="selectupPOne2" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=1
+	</select>
+		<!-- 정보공유 수정하기(사진)3-->
+	<select id="selectupPOne3" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=2
+	</select>
+		<!-- 정보공유 수정하기(사진)4-->
+	<select id="selectupPOne4" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=3
+	</select>
+	
 	
 </mapper>

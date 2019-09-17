@@ -14,20 +14,18 @@ import com.kh.MNB.propose.model.vo.Propose;
 
 public interface BoardService {
 
-	int getListCount();
+	int getListNanumCount();
 
-	ArrayList<Board> selectList(PageInfo pi);
+	ArrayList<Board> selectNanumList(PageInfo pi);
 
-	int insertBoard(Board b);
+	int insertNanumBoard(Board b);
 
-	int insertAttachment(ArrayList<Attachment> aList);
+	int insertNanumAttachment(ArrayList<Attachment> aList);
 
-	int insertReply(Reply r);
+	int insertNanumReply(Reply r);
 
-	// Á¤º¸°øÀ¯
 	int getListCount1();
 
-	// Á¤º¸°øÀ¯
 	ArrayList<Board> selectList1(PageInfo pi);
 
 	int insertBoard1(Board board);
@@ -36,11 +34,11 @@ public interface BoardService {
 
 	int insertReply1(Reply r);
 
-	//µðÅ×ÀÏÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void addReadCount1(int bNo);
-	//µðÅ×ÀÏÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	ArrayList<Attachment> selectBoard1(int bNo);
+	Attachment selectBoard1(int bNo);
 
 	ArrayList<Propose> selectProList(PageInfo pi);
 
@@ -51,6 +49,28 @@ public interface BoardService {
 	ArrayList<Reply> selectUserReply(int bNo);
 
 	int insertReplyMH(Reply reply);
+
+	int updateComBoard(Board b);
+
+	int deleteComBoard(int bNo);
+
+	int insertProBoard(Board board);
+
+	int insertProAttachment(ArrayList<Attachment> aList);
+
+	Attachment selectPicBoard1(int bNo);
+
+	Attachment selectPicBoard2(int bNo);
+
+	Attachment selectPicBoard3(int bNo);
+
+	Attachment selectupPBoard1(int bNo);
+
+	Attachment selectupPBoard2(int bNo);
+
+	Attachment selectupPBoard3(int bNo);
+
+	Attachment selectupPBoard4(int bNo);
 
 
 

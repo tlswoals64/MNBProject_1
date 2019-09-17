@@ -122,9 +122,9 @@ input, textarea, select {
 }
 
 #titleImgArea {
-   width: 350px;
-   height: 200px;
-   text-align: center;
+   width: 120px;
+   height: 100px;
+   text-align: left;
    display: table-cell;
    
 }
@@ -134,7 +134,7 @@ input, textarea, select {
    cursor: pointer;
 }
 
-#contentImgArea1, #contentImgArea2, #contentImgArea3 {
+#titleImg, #contentImgArea1, #contentImgArea2, #contentImgArea3 {
    width: 120px;
    height: 100px;
    text-align: left;
@@ -155,6 +155,7 @@ input, textarea, select {
 .comm{
    vertical-align: middle;
 }
+.
 </style>
 </head>
 <body>
@@ -170,31 +171,49 @@ input, textarea, select {
       		<h2 class="subtext">정보공유</h2>
       	</div>
          <!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-         <form name='writeform' id='writeform' action='insertCom.do' method='post' ENCTYPE='multipart/form-data'>
+         <form name='writeform' id='writeform' action='insertPro.do' method='post' ENCTYPE='multipart/form-data'>
             <table class="pnaw_box" summary="">
                <tbody>
+               <tr>
+               <th>분류</th>
+               <td>
+						<select name="menuid" class="step01"
+							style="width: 100%; height: 47px;">
+
+								<option value="-1">게시판선택</option>
+								<option wf="" wfid="" value="1">계정관련 문의</option>
+
+								<option wf="" wfid="" value="2">사이트 이용관련 문의</option>
+
+								<option wf="true" wfid="79" value="3">베이비시터관련 문의</option>
+
+								<option wf="true" wfid="53" value="4">부모님관련 문의</option>
+
+								<option wf="" wfid="" value="5">기타 문의사항</option>
+						</select></td>
+						<td>
+               </tr>
                   <tr>
                      <th scope="row">제목</th>
                      <td class="pnawtd"><input name="bTitle" value="" class="inputTypeText" style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${loginUser.userId}" class="inputTypeText" maxLength="125" type="text" value="" readonly></td>
                   </tr>
-                 
-                   
-               
+
                   <tr>
                      <th scope="row">상세내용</th>
                      <td class="write pnawtd"><textarea name='bContent' style='width: 100%; height: 200px;'></textarea></td>
                   </tr>
-                  <tr>
+                    <tr>
                      <th>사진 첨부</th>
                      <td>
                         <div class="par">
-                          <div id="titleImgArea">
+                           <div id="titleImgArea" class="po">
                            <img id="titleImg" name="titleImg" width="100" height="100" tabindex="0">
                         	</div>
+                        	
                            <div id="contentImgArea1" class="po">
                               <img id="contentImg1" name="contentImg1" width="120" height="100">
                            </div>
