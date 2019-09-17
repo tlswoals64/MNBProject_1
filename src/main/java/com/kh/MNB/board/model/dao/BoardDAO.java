@@ -59,6 +59,8 @@ public class BoardDAO {
 	}
 
 
+
+
 	public ArrayList<Reply> selectNanumReplyList(int bNo) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectNanumReplyList", bNo);
 	}
@@ -78,13 +80,16 @@ public class BoardDAO {
 			result += sqlSession.update("boardMapper.updateNanumAttachment", aList.get(i));
 
 	// 정보공유
+
 	public int getListCount1() {
 		
 		return sqlSession.selectOne("boardMapper.getListComCount");
 	}
 	
 
+
 	// 정보공유
+
 	public ArrayList<Board> selectList1(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
@@ -134,11 +139,14 @@ public class BoardDAO {
 	}
 
 
+
 	//정보공유 디테일
+
 	public void addReadCount(int bNo) {
 		
 		sqlSession.update("boardMapper.updateCount1", bNo);
 	}
+
 	//정보공유 디테일
 
 	public Attachment selectBoard1(int bNo) {
@@ -157,10 +165,7 @@ public class BoardDAO {
 		
 	}
 
-	public int getListCountPro() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	public Board selectBoard2(int bNo) {
 		return sqlSession.selectOne("boardMapper.selectOne2", bNo);

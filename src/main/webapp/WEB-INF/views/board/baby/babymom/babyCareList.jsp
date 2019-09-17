@@ -316,7 +316,10 @@ padding : 5px;
 
 		<div style="width: 100%; height: 800px; display: inline-block; margin: 3% 15% 0 15%;">
 			<div id="mojibList">
-				<div class = "list">
+			
+			<form id="mdetail" action="momDetail.do" method="post">						
+			<c:forEach var="bc" items="${bclist}">
+				<div class = "list" id="detail" style="cursor:pointer;">							
 					<table>
 						<colgroup>
 							<col width="30%">
@@ -324,19 +327,21 @@ padding : 5px;
 						</colgroup>
 						<tr>
 							<th rowspan="3"><img id="searchImg" width="70px"
-								height="70px" src="resources/images/babySitter/search.png"></th>
-							<td><span>영아 1명</span>&nbsp;|&nbsp;<span>등록 시간</span></td>
+								height="70px" src="resources/images/board/babymom/${bc.changeName }"></th>
+							<td><span>${bc.bCount}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>등록 시간</span>
+							<input type="hidden" id="bNo" name="bNo" value="${bc.bNo}">
+							<input type="hidden" id="bWriter" name="bWriter" value="${bc.bWriter}">
+							</td>
 						</tr>
 						<tr>
-							<td>등하원 돕기, 실내놀이, 영어놀이 맘시터 찾습니다.</td>
+							<td>${bc.bTitle }</td>
 						</tr>
 						<tr>
-							<td><span>경기도 화성시</span>&nbsp;|&nbsp;<span>전O영</span>&nbsp;|&nbsp;<span>근무
-									시작일</span></td>
+							<td><span>${bc.address }</span>&nbsp;|&nbsp;<span>${bc.bWriter}</span>&nbsp;|&nbsp;</td>
 						</tr>
 						<tr>
 							<th>0명 지원</th>
-							<td><span>희망 시급 10000원</span>&nbsp;/&nbsp;협의가능</td>
+							<td><span>시급10000원</span>&nbsp;/&nbsp;</td>
 						</tr>
 					</table>
 					<hr>
@@ -346,19 +351,77 @@ padding : 5px;
 							<col width="70%">
 						</colgroup>
 						<tr>
-							<th>기간</th>
-							<td><span class="week">월</span> <span class="week">화</span>
-								<span class="week">수</span> <span class="week">목</span> <span
-								class="week">금</span> <span class="week">토</span> <span
-								class="week">일</span></td>
+							<th>시간</th>
+							<td><span>${bc.time}</span></td>
 						</tr>
 					</table>
-				</div>
+					
+				</div>	
+				</c:forEach>
+				</form>	
+				<script>
+				$('#detail').on("click",function(){
+					$('#mdetail').submit();
+				});
+				</script>			
 				
+				
+				<table>
+				<tr>
+			<td colspan="6" align="right" id="buttonTab">
+				<c:if test="${ !empty loginUser }">
+					&nbsp; &nbsp; &nbsp;
+					<button onclick="location.href='babymomIn.do'">글쓰기</button>
+					<button onclick="location.href='detailMemberView.do'">내정보보기</button>
+					<button onclick="location.href='pwdUpdateView.do'">비밀번호변경</button>
+					<button onclick="location.href='myboardList.do'">내가 쓴 글목록</button>
+				</c:if>
+			</td>
+		</tr>
+		
+		<!-- 페이징 처리 -->
+		<tr align="center" height="20" id="buttonTab">
+			<td colspan="6">
+			
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage <= 1 }">
+					[이전] &nbsp;
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="before" value="blist.do">
+						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					</c:url>
+					<a href="${ before }">[이전]</a> &nbsp;
+				</c:if>
+				
+				<!-- 페이지 -->
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq currentPage }">
+						<font color="red" size="4"><b>[${ p }]</b></font>
+					</c:if>
+					
+					<c:if test="${ p ne currentPage }">
+						<c:url var="pagination" value="blist.do">
+							<c:param name="page" value="${ p }"/>
+						</c:url>
+						<a href="${ pagination }">${ p }</a> &nbsp;
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					[다음]
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="blist.do">
+						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+					</c:url> 
+					<a href="${ after }">[다음]</a>
+				</c:if>
+			</td>
+		</tr>
+			</table>	
 	</div>
-	</div>
-	<div>
-		페이징<button onclick="location.href='babymomIn.do'">글쓰기</button>
 	</div>
 </div>
 </body>

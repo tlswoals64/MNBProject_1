@@ -21,7 +21,54 @@
 	from member
 	where userId =#{userId} and status='Y'
 	</select>
-
+	
+	<!-- 내정보보기 -->
+	<select id="detailMember" parameterType="string" resultType="Member">
+	select *
+  		from member
+	where userId = #{ userId }
+	</select>
+	<!-- 개인정보수정 -->
+	<update id="updateMember" parameterType="Member">
+	update member
+	set nickName=#{nickName}, email=#{email},  phone=#{phone}, address=#{address}, modify_date=sysdate
+	where userId = #{userId}
+	</update>
+	
+	<update id="myBoardUpdate" parameterType="map">
+	update board
+	set bWriter= #{nickName2}
+	where bWriter= #{nickName}
+	</update>
+	
+	<!-- 회원탈퇴  -->
+	<update id="deleteMember" parameterType="string">	
+	update member
+	set status = 'N'
+	where userId=#{id}
+	
+	</update>
+	<!-- 비밀번호 변경 -->
+	<update id="pwdUpdate" parameterType="Member">
+	update Member set 
+	userPwd = #{userPwd}
+	where userId=#{userId}
+	</update>
+	
+	<!-- 내가 쓴 글 게시판 페이징에 사용 -->
+	<select id="getmyListCount" parameterType="string" resultType="_int">
+		select count(*)
+		from board
+		where status ='Y' and bWriter=#{bWriter}
+	</select>
+	<!-- 내가 쓴 글 게시판 리스트 -->
+	<select id="myBoardList" resultType="Board">
+		select *
+		from board
+		where status ='Y' and bWriter=#{bWriter}
+		order by BNO desc
+	</select>
+	
 	<!-- 관리자 회원 리스트 받아올때 페이징에 사용 -->
 	<select id="getListCount" resultType="_int">
 		select count(*)
@@ -55,11 +102,18 @@
   			modify_Date = sysdate
   		where userId = #{ userId }
   	</update>
+  		<!-- 관리자 신고 승인 -->
+	<update id="mDeMApply" parameterType="string">
+		update member
+		set dec = dec+1
+		where userId = #{ userId }
+	</update>
+	
   	
   	<select id="idCheck" parameterType="string" resultType="_int">
 		select count(*)
 		from member
-		where userid = #{userId}
+		where userId = #{userId}
 	</select>
 	
 	<insert id = "insertMember" parameterType="Member">
@@ -73,12 +127,6 @@
 		where nickname = #{nickName}
 	</select>
   	
-	<!-- 관리자 신고 승인 -->
-	<update id="mDeMApply" parameterType="string">
-		update member
-		set dec = dec+1
-		where userId = #{ userId }
-	</update>
 
   	
   	

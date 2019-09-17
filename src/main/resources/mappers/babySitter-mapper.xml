@@ -4,13 +4,44 @@
 	<select id="getsuppotListCount" resultType = "_int">
 		select count(*)
 		from suppot_list
-		where btype = 4 and status = 'Y'
+		where bType = 4 and status = 'Y'
 	</select>
 	<select id = "selectSuppotList" resultType = "sitterSuppot">
 		select *
 		from suppot_list
 		where btype = 4 and status = 'Y'
 	</select>
+
+	<select id="getMomListCount" resultType ="_int">
+		select count(*)
+		from suppotMom_List
+		where btype = 3 and status = 'Y'
+	</select>
+	<select id="selectMomlist" resultType="Momboard">
+		select * from suppotMom_list
+		where btype = 3 and status='Y'
+	</select>
+	<insert id="insertMomBoard">
+	insert into board
+	values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, default, default, sysdate, #{bWriter})
+	</insert>
+	<insert id="insertMomAttachment" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 3, sysdate, 'Y')
+	</insert>
+	
+	<insert id="insertBcMojib" parameterType="BabySitter">
+		insert into BC_MOJIB
+		values(seq_bno.currval, #{bcActivity}, #{req}, #{bcSalary}, #{bcTime}, #{address}, #{personnel}, #{bAge}, #{bGender})
+	</insert>
+	<select id="selectDetail" parameterType="board" resultType="Momboard">
+		select *
+		from suppotMom_list
+		where bNo=#{bNo} and status='Y' and bWriter=#{bWriter}
+
+	
+	</select>
+
 	<insert id="insertSuppotBoard">
 		insert into board
 		values(seq_bno.nextval, 4, #{bTitle}, #{bContent}, sysdate, default, default, sysdate, #{bWriter})
@@ -63,4 +94,5 @@
 		insert into reply
 		values(seq_rnum.nextval, #{nContent}, sysdate, default, #{rWriter}, #{bNo})
 	</insert>
+
 </mapper>

@@ -1,12 +1,14 @@
 package com.kh.MNB.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.member.model.vo.Member;
 
@@ -60,5 +62,39 @@ public class MemberDAO {
 	public String pwdSearch(String userId) {
 		return sqlSession.selectOne("memberMapper.pwdSearch", userId);
 	}
+
+	public Member detailMember(String userId) {
+		return sqlSession.selectOne("memberMapper.detailMember", userId);
+	}
+
+	public int updateMember(Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+
+	public int pwdUpdate(Member m) {
+		return sqlSession.update("memberMapper.pwdUpdate", m);
+	}
+
+	public int getmyListCount(String bWriter) {
+		return sqlSession.selectOne("memberMapper.getmyListCount",bWriter);
+	}
+
+	public ArrayList<Board> myBoardList(PageInfo pi, String bWriter) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.myBoardList", bWriter, rowBounds);
+	}
+
+	public int deleteMember(String id) {
+		return sqlSession.update("memberMapper.deleteMember");
+	}
+
+	public int myBoardUpdate(Map<String, String> map) {
+		return sqlSession.update("memberMapper.myBoardUpdate",map);
+	}
+
+	
 
 }

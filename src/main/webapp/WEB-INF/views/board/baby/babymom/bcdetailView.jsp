@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +74,7 @@
 	<table>
 	<tr>
 	<td>
-	<h2>3세여아 돌봐주실분 구합니다.</h2>
+	<h2>${momboard.bTitle}</h2>
 	</td>
 	<td>	
 	<button onclick="" id="reportbtn">
@@ -86,7 +87,7 @@
 	<div class="UNS" >
 		<div class="_1f8P3">
 			<div class="_2EG3w" style="width: 500px; height: 420px; padding-right:30px;">
-				<img src="resources/images/board/babymom/girl.png">
+				<img width="500px" height="420px" src="resources/images/board/babymom/${momboard.changeName }">
 			</div>
 		</div>
 		<div class="_2T0ZR">
@@ -97,7 +98,7 @@
 					<table>
 					<tr>
 					<td class="ftd">신청자</td>
-					<td>김영선</td>
+					<td>${momboard.bWriter}</td>
 					</tr>
 					</table>
 					</div>
@@ -107,12 +108,12 @@
 				<div class="_1yvNS">
 					<div class="_1efBn">
 					<br>
-						서울시 서초구 강남구,안양시 동안구
+						${momboard.address}
 					</div>
 				</div>
 				<div class="_1yvNS">
 					<div class="_1qvJA">
-						희망시급:15,000원
+						희망시급: 
 					</div>
 					<br>
 				</div>
@@ -122,7 +123,7 @@
 					<div class="_3UFT6" style="justify-content: space-around;">
 						<div class="_3O6up">
 							<div class="uKalM">
-									<div>조회수 : 19592</div>
+									<div>조회수 : ${momboard.bCount}</div>
 							</div>
 						</div>						
 					</div>
@@ -156,7 +157,8 @@
 	</tr>
 	<tr>
 	<td style="text-align:left">
-	<textarea name="content" cols="110" rows="10" style="text-align:left" readonly>	
+	<textarea name="content" cols="110" rows="10" style="text-align:left" readonly>
+	${momboard.bContent}	
 	</textarea>
 	</td>
 	</tr>
@@ -169,20 +171,15 @@
 		<tr>
 		<th style="background-color:#f1f1f1;">아이 성별</th>
 		</tr>
-		<tr><td style="text-align:center;">
+		<tr>
+		<td style="text-align:center;">
         <div class="ageicon"><br>
+        	
             <img src="resources/images/board/babymom/boy.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-    		
-        </div>
-        <div class="ageicon"><br>
-            <img src="resources/images/board/babymom/girl.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-    		
-        </div>
-        <div class="ageicon"><br>
-            <img src="resources/images/board/babymom/girl.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-    		
         </div>       
-        </td></tr>
+        </td>
+        
+        </tr>
         </table>
         </div>
 	</div>
@@ -264,14 +261,18 @@
 	</div>
 	<div class="UNS">
 		<div>
+		<c:set var="req0" value="${momboard.req}"/>
+		<c:set var="req1" value="req0.split(',')"/>
+		
+		
 		 <label class="la">희망 돌보는 방식 : </label>
-         <input type="text" class="req" id="req2" value="" placeholder="예시) 부모님과 같이 돌봐주세요">
+         <input type="text" class="req" id="req2" value="req1[0]" placeholder="예시) 부모님과 같이 돌봐주세요">
          <br>
          <label class="la">희망 인터뷰 방식 :</label>
-         <input type="text" class="req" id="req3" value="" placeholder="예시) 시범채용">
+         <input type="text" class="req" id="req3" value="req1[1]" placeholder="예시) 시범채용">
          <br>
          <label class="la">희망 베이비시터 성별 : </label>
-         <input type="text" class="req" id="req1" value="" placeholder="예시) 남자">         
+         <input type="text" class="req" id="req1" value="req1[2]" placeholder="예시) 남자">         
 		</div>
 	</div>
 	

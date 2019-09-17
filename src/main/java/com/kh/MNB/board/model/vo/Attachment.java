@@ -36,6 +36,7 @@ public class Attachment {
 		this.iType = iType;
 	}
 
+
 	public Attachment(int bNo, String originName, String changeName, Date upload_Date) {
 		super();
 		this.bNo = bNo;
@@ -103,7 +104,7 @@ public class Attachment {
 	@Override
 	public String toString() {
 		return "Attachment [iNo=" + iNo + ", bNo=" + bNo + ", originName=" + originName + ", changeName=" + changeName
-				+ ", filePath=" + ", upload_Date=" + upload_Date + ", iType=" + iType + ", status=" + status
+				+  ", upload_Date=" + upload_Date + ", iType=" + iType + ", status=" + status
 				+ "]";
 	}
 

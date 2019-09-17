@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.kh.MNB.babySitter.model.dao.BabySitterDAO;
 import com.kh.MNB.babySitter.model.vo.BabySitter;
+
+import com.kh.MNB.babySitter.model.vo.Momboard;
+
 import com.kh.MNB.babySitter.model.vo.sitterSuppot;
+
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
@@ -32,6 +36,37 @@ public class BabySitterServiceImpl implements BabySitterService {
 	}
 
 	@Override
+
+	public int insertMomBoard(Board board) {
+		return bsDAO.insertMomBoard(board);
+	}
+
+	@Override
+	public int insertMomAttachment(Attachment a) {
+		return bsDAO.insertMomAttachment(a);
+	}
+
+	@Override
+	public int insertBcMojib(BabySitter bs) {
+		return bsDAO.insertBcMojib(bs);
+	}
+
+	@Override
+	public ArrayList selectMomlist(PageInfo pi) {
+		return bsDAO.selectMomlist(pi);
+	}
+
+	@Override
+	public int getMomListCount() {
+		return bsDAO.getMomListCount();
+	}
+
+	@Override
+	public Momboard selectDetail(Board board) {
+		// TODO Auto-generated method stub
+		return bsDAO.selectDetail(board);
+
+
 	public int insertSuppotBoard(Board board) {
 		return bsDAO.insertSuppotBoard(board);
 	}
@@ -79,6 +114,7 @@ public class BabySitterServiceImpl implements BabySitterService {
 	@Override
 	public int insertReply(Reply r) {
 		return bsDAO.insertReply(r);
+
 	}
 	
 	
