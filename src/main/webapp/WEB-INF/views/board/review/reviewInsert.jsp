@@ -214,7 +214,7 @@ input, textarea, select {
 	max-width:100%;
 }
 </style>
-<jsp:include page="../../../common/header.jsp"/>
+<%-- <jsp:include page=""/> --%>
 </head>
 
 <body>
@@ -372,5 +372,5 @@ input, textarea, select {
       
    </script>
 </body>
-<jsp:include page="../../../common/footer.jsp"/>
+<%-- <jsp:include page="../../../common/footer.jsp"/> --%>
 </html>

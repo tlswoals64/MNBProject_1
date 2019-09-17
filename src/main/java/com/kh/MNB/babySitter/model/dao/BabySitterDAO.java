@@ -95,12 +95,12 @@ public class BabySitterDAO {
 		return sqlSession.selectOne("babySitterMapper.selectSuppotBoard", bNo);
 	}
 
-	public ArrayList<Reply> selectReplyList(int bNo) {
-		return (ArrayList)sqlSession.selectList("babySitterMapper.selectReplyList", bNo);
+	public ArrayList<Reply> selectSuppotReplyList(int bNo) {
+		return (ArrayList)sqlSession.selectList("babySitterMapper.selectSuppotReplyList", bNo);
 	}
 
-	public int insertReply(Reply r) {
-		return sqlSession.insert("babySitterMapper.insertReply", r);
+	public int insertSuppotReply(Reply r) {
+		return sqlSession.insert("babySitterMapper.insertSuppotReply", r);
 	}
 
 	

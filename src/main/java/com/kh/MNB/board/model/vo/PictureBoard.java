@@ -17,12 +17,13 @@ public class PictureBoard {
 	private String changeName;
 	private int iType;
 	private Date upload_Date;
+	private String nickName;
 	
 	public PictureBoard() {}
 
 	public PictureBoard(int bNo, int bType, String bTitle, String bContent, Date b_CreateDate, int bCount,
 			String status, Date b_ModifyDate, String bWriter, int iNo, String originName, String changeName, int iType,
-			Date upload_Date) {
+			Date upload_Date, String nickName) {
 		super();
 		this.bNo = bNo;
 		this.bType = bType;
@@ -38,6 +39,7 @@ public class PictureBoard {
 		this.changeName = changeName;
 		this.iType = iType;
 		this.upload_Date = upload_Date;
+		this.nickName = nickName;
 	}
 
 	public int getbNo() {
@@ -151,13 +153,21 @@ public class PictureBoard {
 	public void setUpload_Date(Date upload_Date) {
 		this.upload_Date = upload_Date;
 	}
+	
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
+	public String getNickName() {
+		return nickName;
+	}
 
 	@Override
 	public String toString() {
 		return "PictureBoard [bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bContent=" + bContent
 				+ ", b_CreateDate=" + b_CreateDate + ", bCount=" + bCount + ", status=" + status + ", b_ModifyDate="
 				+ b_ModifyDate + ", bWriter=" + bWriter + ", iNo=" + iNo + ", originName=" + originName
-				+ ", changeName=" + changeName + ", iType=" + iType + ", upload_Date=" + upload_Date + "]";
+				+ ", changeName=" + changeName + ", iType=" + iType + ", upload_Date=" + upload_Date + "]" + nickName + "]";
 	}
 	
 	

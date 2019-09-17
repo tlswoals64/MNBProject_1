@@ -376,7 +376,7 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 		 }
 	 }
 
-	}
+	
    @RequestMapping("mManaList.do")
       public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
          int currentPage = 1;

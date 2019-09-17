@@ -53,7 +53,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-
 	public ArrayList<Reply> selectNanumReplyList(int bNo) {
 		return bDAO.selectNanumReplyList(bNo);
 	}
@@ -83,120 +82,126 @@ public class BoardServiceImpl implements BoardService {
 		return bDAO.insertSubNanumAttachment(insertList);
 	}
 
-
-
-	public int getListCount1() {
-		return bDAO.getListCount1();
-	}
-
-	@Override
-	public ArrayList<Board> selectList1(PageInfo pi) {
-		return bDAO.selectList1(pi);
-	}
-
-	@Override
-	public int insertBoard1(Board b) {
-		return bDAO.insertBoard1(b);
-	}
-
-	@Override
-	public int insertAttachment1(ArrayList<Attachment> aList1) {
-		System.out.println("aList1:"+aList1);
-		return bDAO.insertAttachment1(aList1);
-	}
-
-	@Override
-	public int insertReply1(Reply r) {
-		return bDAO.insertReply1(r);
-	}
-
-	@Override
-	public void addReadCount1(int bNo) {
-		bDAO.addReadCount(bNo);
-	}
-
-	@Override
-	public Attachment selectBoard1(int bNo) {
-		return bDAO.selectBoard1(bNo);
-		
-	}
-
-	@Override
-	public ArrayList<Propose> selectProList(PageInfo pi) {
-		return bDAO.selectProList(pi);
-	}
-
-	@Override
-	public int getListCountPro() {
-		return bDAO.getListCountPro();
-	}
-
-	@Override
-	public Board selectBoard2(int bNo) {
-		return bDAO.selectBoard2(bNo);
-	}
-
-
-
-	@Override
-	public ArrayList<Reply> selectUserReply(int bNo) {
-		return bDAO.selectUserReply(bNo);
-	}
-
-
-	@Override
-	public int insertReplyMH(Reply reply) {
-		return bDAO.insertReplyMH(reply);
-	}
-
-	@Override
-	public int updateComBoard(Board b) {
-		return bDAO.updateComBoard(b);
-	}
 	
-	@Override
-	public int deleteComBoard(int bNo) {
-		return bDAO.deleteComBoard(bNo);
-	}
+		//////////////////////////////////////////////////////////////////////////////////////////
 	
-	@Override
-	public int insertProBoard(Board b) {
-		return bDAO.insertProBoard(b);
-	}
 	
-	@Override
-	public int insertProAttachment(ArrayList<Attachment> aList) {
-		return bDAO.insertProAttachment1(aList);
-	}
-	
-	@Override
-	public Attachment selectPicBoard1(int bNo) {
-		return bDAO.selectPicBoard1(bNo);
-	}
-	
-	@Override
-	public Attachment selectPicBoard2(int bNo) {
-		return bDAO.selectPicBoard2(bNo);
-	}
-	@Override
-	public Attachment selectPicBoard3(int bNo) {
-		return bDAO.selectPicBoard3(bNo);	}
-	
-	@Override
-	public Attachment selectupPBoard1(int bNo) {
-		return bDAO.selectupPBoard1(bNo);
-	}
-	@Override
-	public Attachment selectupPBoard2(int bNo) {
-		return bDAO.selectupPBoard2(bNo);
-	}
-	@Override
-	public Attachment selectupPBoard3(int bNo) {
-		return bDAO.selectupPBoard3(bNo);
-	}
-	@Override
-	public Attachment selectupPBoard4(int bNo) {
-		return bDAO.selectupPBoard4(bNo);
-	}
+	 @Override
+	   public int getComListCount() {
+	      return bDAO.getComListCount();
+	   }
 
+	   @Override
+	   public ArrayList<Board> selectComList(PageInfo pi) {
+	      return bDAO.selectComList(pi);
+	   }
+
+	   @Override
+	   public int insertComBoard(Board board) {
+	      return bDAO.insertComBoard(board);
+	   }
+
+	   @Override
+	   public int insertComAttachment(ArrayList<Attachment> aList) {
+	      return bDAO.insertComAttachment(aList);
+	   }
+
+	   @Override
+	   public int insertProBoard(Board board) {
+	      return bDAO.insertProBoard(board);
+	   }
+
+	   @Override
+	   public int insertProAttachment(ArrayList<Attachment> aList) {
+	      return bDAO.insertProAttachment(aList);
+	   }
+
+	   @Override
+	   public int insertComReply(Reply r) {
+	      return bDAO.insertComReply(r);
+	   }
+
+	   @Override
+	   public void addComReadCount(int bNo) {
+	      bDAO.addComReadCount(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComPicBoard1(int bNo) {
+	      return bDAO.selectComPicBoard1(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComPicBoard2(int bNo) {
+	      return bDAO.selectComPicBoard2(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComPicBoard3(int bNo) {
+	      return bDAO.selectComPicBoard3(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComPicBoard4(int bNo) {
+	      return bDAO.selectComPicBoard4(bNo);
+	   }
+
+	   @Override
+	   public Board selectComBoard(int bNo) {
+	      
+	      return bDAO.selectComBoard(bNo);
+	   }
+
+	   @Override
+	   public int getProListCount() {
+	      return bDAO.getProListCount();
+	   }
+
+	   @Override
+	   public ArrayList<Propose> selectProList(PageInfo pi) {
+	      
+	      return bDAO.selectProList(pi);
+	   }
+
+	   @Override
+	   public Attachment selectComupPBoard1(int bNo) {
+	      return bDAO.selectComupPBoard1(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComupPBoard2(int bNo) {
+	      return bDAO.selectComupPBoard2(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComupPBoard3(int bNo) {
+	      return bDAO.selectComupPBoard3(bNo);
+	   }
+
+	   @Override
+	   public Attachment selectComupPBoard4(int bNo) {
+	      return bDAO.selectComupPBoard4(bNo);
+	   }
+
+	   @Override
+	   public int updateComBoard(Board b) {
+	      return bDAO.updateComBoard(b);
+	   }
+
+	   @Override
+	   public int deleteComBoard(int bNo) {
+	      return bDAO.deleteComBoard(bNo);
+	   }
+
+	   @Override
+	   public ArrayList<Reply> selectUserReply(int bNo) {
+	      return bDAO.selectUserReply(bNo);
+	   }
+
+	   @Override
+	   public int insertReplyMH(Reply reply) {
+	      return bDAO.insertReplyMH(reply);
+	   }
+
+	
 }
