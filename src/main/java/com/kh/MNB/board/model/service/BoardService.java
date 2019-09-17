@@ -38,9 +38,6 @@ public interface BoardService {
 	int insertSubNanumAttachment(ArrayList<Attachment> insertList);
 
 	// ������
-	int getListCount1();
-
-	// ������
 	ArrayList<Board> selectList1(PageInfo pi);
 
 	int insertBoard1(Board board);
