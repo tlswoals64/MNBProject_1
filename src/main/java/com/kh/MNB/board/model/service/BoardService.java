@@ -1,7 +1,7 @@
 package com.kh.MNB.board.model.service;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
@@ -23,6 +23,19 @@ public interface BoardService {
 	int insertNanumAttachment(ArrayList<Attachment> aList);
 
 	int insertNanumReply(Reply r);
+
+
+	ArrayList<Reply> selectNanumReplyList(int bNo);
+
+	ArrayList<PictureBoard>  selectNanumBoard(int bNo);
+
+	int updateNanumBoard(Board board);
+
+	int updateNanumAttachment(ArrayList<Attachment> aList);
+
+	int deleteNanumBoard(int bNo);
+
+	int insertSubNanumAttachment(ArrayList<Attachment> insertList);
 
 	// ������
 	int getListCount1();
