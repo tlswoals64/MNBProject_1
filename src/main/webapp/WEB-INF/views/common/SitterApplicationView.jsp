@@ -111,17 +111,22 @@
 	}
 	#address2{
 		width : 300px;
-		height : 30px;
-		border-bottom : 1px solid black;
+		height : 40px;
+		border : 1px solid white;
+		margin-bottom: 10px;
+		border-bottom : 1px solid #ecb4b5;
 	}
 	#address3{
 		width : 300px;
 		height : 40px;
-		border-bottom : 1px solid black;
+		border : 1px solid white;
+		border-bottom : 1px solid #ecb4b5;
 	}
 	#address4{
 		width : 300px;
+		border : 1px solid white;
 		height : 40px;
+		border-bottom : 1px solid #ecb4b5;
 	}
 	
 	.fNameCheckBtn{
@@ -208,7 +213,7 @@
 	    margin-right : 20px;
 	}
 	.actiCheckInput input[type="checkbox"]:checked + span{
-	    border : 2px solid #ecb4b5;
+	    border : 3px solid #ecb4b5;
 	    background : #ecb4b5;
 	    color : white;
 	}
@@ -254,9 +259,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="/header.jsp"/>
+	<jsp:include page="../common/header.jsp"></jsp:include>
+
 	<div id="Warp">
-	<form action="" method="post">
+	<form action="userBsApply.do" method="post">
 		<div id="title">베이비 시터 신청하기</div>
 
 		<fieldset id="appliArea">
@@ -265,16 +271,16 @@
 				<div class="appB">
 					아이디
 				</div>
-				<div class="appS" id="idArea">user01</div>
+				<div class="appS" id="idArea"><input type="hidden" name="userId" value="${ m.userId }">${ m.userId }</div>
 				<div class="appB">
 					이름
 				</div>
-				<div class="appS" id="nameArea">이한솔</div>
+				<div class="appS" id="nameArea">${ m.userName }</div>
 				
 				<div class="appB">
 					생년월일
 				</div>
-				<div class="appS" id="nameArea">1995년 03월 22일</div>
+				<div class="appS" id="nameArea">${ m.birth }</div>
 				
 				<div class="appB">
 					주소 <a onclick="addressPopup();"><span class="fNameCheckBtn" style="font-size: 15px;">주소검색></span></a>
@@ -282,13 +288,20 @@
 				<div class="appS">
 					<table>
 						<tr>
-	               			<td><input type="text" name="address2" id="address2" class="form-control"></td>
-	            		</tr>
-	            		<tr>
-	               			<td><input type="text" name="address3" id="address3" class="form-control"></td>
-	            		</tr>
-	            		<tr>
-	               			<td><br>상세주소<input type="text" name="address4" id="address4" class="form-control"></td>
+						<c:forTokens var="addr" items="${ m.address }" delims="/" varStatus="status">
+					              <c:if test="${ status.index eq 0}">
+					                 	 	<c:set var="address2" value="${ addr }"/>
+					                     	<div><input type="text" name="address2" id="address2" class="form-control" value= "${ addr }"></div>
+						                  </c:if>
+										  <c:if test="${ status.index eq 1 }">	
+										  	<c:set var="address3" value="${ addr }"/>				       
+											<div><input type="text" name="address3" id="address3" class="form-control" value= "${ addr }"></div>
+						                  </c:if>
+						                  <c:if test="${ status.index eq 2 }">
+						                  	<c:set var="address4" value="${ addr }"/>
+											<div><input type="text" name="address4" id="address4" class="form-control" value= "${ addr }"></div>
+						                  </c:if>
+						               </c:forTokens>
 	            		</tr>
             		</table>
 				</div>
@@ -309,19 +322,19 @@
 								</th>
 							</tr>
 							<tr class="exTableTr" id="ex1">
-								<td id="exTitle1"><input type="text" style="height : 30px;"></td>
-								<td id="exPe1"><input type="text" style="width : 190px; height : 30px;"></td>
-								<td id="exCon1"><input type="text" style="width : 280px; height : 30px;"></td>
+								<td id="exTitle1"><input type="text" style="height : 30px;" name="exT1"></td>
+								<td id="exPe1"><input type="text" style="width : 190px; height : 30px;" name="exP1"></td>
+								<td id="exCon1"><input type="text" style="width : 280px; height : 30px;" name="exC1"></td>
 							</tr>
 							<tr class="exTableTr" id="ex2">
-								<td id="exTitle2"><input type="text" style="height : 30px;"></td>
-								<td id="exPe2"><input type="text" style="width : 190px; height : 30px;"></td>
-								<td id="exCon2"><input type="text" style="width : 280px; height : 30px;"></td>
+								<td id="exTitle2"><input type="text" style="height : 30px;" name="exT2"></td>
+								<td id="exPe2"><input type="text" style="width : 190px; height : 30px;" name="exP2"></td>
+								<td id="exCon2"><input type="text" style="width : 280px; height : 30px;" name="exC2"></td>
 							</tr>
 							<tr class="exTableTr" id="ex3">
-								<td id="exTitle3"><input type="text" style="height : 30px;"></td>
-								<td id="exPe3"><input type="text" style="width : 190px; height : 30px;"></td>
-								<td id="exCon3"><input type="text" style="width : 280px; height : 30px;"></td>
+								<td id="exTitle3"><input type="text" style="height : 30px;" name="exT3"></td>
+								<td id="exPe3"><input type="text" style="width : 190px; height : 30px;" name="exP3"></td>
+								<td id="exCon3"><input type="text" style="width : 280px; height : 30px;" name="exC3"></td>
 							</tr>
 						</table>
 					</div>
@@ -330,8 +343,7 @@
 				<div class="appB">
 					간단 자기소개
 				</div>
-				<textarea class="intro" rows="20">
-				</textarea>
+				<textarea class="intro" rows="20" name="intro"></textarea>
 				
 			</div>
 		</fieldset>
@@ -340,19 +352,19 @@
 			<fieldset id="wruArea">
 				<legend class="qna">당신은 어떤분인가요?</legend>
 				<div class="wruCheckInput">
-						<input type="radio" name="wruCheck" value="1">선생님
+						<input type="radio" value="선생님" name="job">선생님
 						<div class="inputDiv">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는경우</div>
 				</div>
 				<div class="wruCheckInput">
-					<input type="radio" name="wruCheck" value="2">엄마
+					<input type="radio" value="엄마" name="job">엄마
 					<div class="inputDiv">본인의 아이를 키우며 육아 경험이 있는경우</div>
 				</div>
 				<div class="wruCheckInput">
-					<input type="radio" name="wruCheck" value="3">대학생
+					<input type="radio" value="대학생" name="job">대학생
 					<div class="inputDiv">현재 대학교에서 재학 및 휴학 중인 경우</div>
 				</div>
 				<div class="wruCheckInput">
-					<input type="radio" name="wruCheck" value="4">일반
+					<input type="radio" value="일반" name="job">일반
 					<div class="inputDiv">위 3가지 경우에 속하지 않지만 맘시터로 활동하고싶은 경우(취준생, 회사원, 프리랜서 등등)</div>
 				</div>
 			</fieldset>
@@ -363,28 +375,28 @@
 				<legend class="qna">어떤 아이를 돌볼 수 있나요?</legend>
 				<div class="bChoiceArea">
 					<label class="bChoiceCheckInput">
-						<input type="checkbox" name="bChoiceCheck" value="1">
+						<input type="checkbox" name="bType" value="신생아">
 						<span class="bChoiceCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/milkbottle.png";>
+								<img src="resources/images/sitterApply/milkbottle.png">
 							</div>
 						신생아
 						</span>
 					</label>
 					<label class="bChoiceCheckInput">
-						<input type="checkbox" name="bChoiceCheck" value="2">
+						<input type="checkbox" name="bType" value="영아">
 						<span class="bChoiceCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/pacifier.png";>
+								<img src="resources/images/sitterApply/pacifier.png">
 							</div>
 						영아
 						</span>
 					</label>
 					<label class="bChoiceCheckInput">
-						<input type="checkbox" name="bChoiceCheck" value="3">
+						<input type="checkbox" name="bType" value="유아">
 						<span class="bChoiceCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/kindergarden.png";>
+								<img src="resources/images/sitterApply/kindergarden.png">
 							</div>
 						유아
 						</span>
@@ -397,82 +409,83 @@
 				
 				<div class="activityArea">
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="1">
+						<input type="checkbox" name="activity" value="실내놀이">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/puzzle.png";>
+								<img src="resources/images/sitterApply/puzzle.png">
 							</div>
 						실내놀이
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="2">
+						<input type="checkbox" name="activity" value="등하원돕기">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/kindergarden.png";>
+								<img src="resources/images/sitterApply/kindergarden.png">
 							</div>
 						등하원돕기
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="3">
+						<input type="checkbox" name="activity" value="책읽기">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/book.png";>
+							
+								<img src="resources/images/sitterApply/book.png">
 							</div>
 						책읽기
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="4">
+						<input type="checkbox" name="activity" value="야외활동">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/soccer.png";>
+								<img src="resources/images/sitterApply/leaf.png">
 							</div>
 						야외활동
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="5">
+						<input type="checkbox" name="activity" value="한글놀이">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/english.png";>
+								<img src="resources/images/sitterApply/emperor.png">
 							</div>
 						한글놀이
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="6">
+						<input type="checkbox" name="activity" value="영어놀이">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/english.png";>
+								<img src="resources/images/sitterApply/english.png">
 							</div>
 						영어놀이
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="7">
+						<input type="checkbox" name="activity" value="학습지도">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/kindergarden.png";>
+								<img src="resources/images/sitterApply/kindergarden.png">
 							</div>
 						학습지도
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="8">
+						<input type="checkbox" name="activity" value="8">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/soccer.png";>
+								<img src="resources/images/sitterApply/soccer.png">
 							</div>
 						체육놀이
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="atiCheck" value="9">
+						<input type="checkbox" name="activity" value="9">
 						<span class="atiCheck">
 							<div class="imgdiv">
-								<img src="<%=request.getContextPath()%>/images/kindergarden.png";>
+								<img src="resources/images/sitterApply/dish.png">
 							</div>
 						밥챙겨주기
 						</span>
@@ -486,7 +499,7 @@
 		</form>
 	</div>
 	
-	<c:import url="/footer.jsp"/>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script>
          function addressPopup() {

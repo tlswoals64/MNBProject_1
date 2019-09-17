@@ -36,7 +36,7 @@ public class Attachment {
 		this.iType = iType;
 	}
 
-	
+
 	public Attachment(int bNo, String originName, String changeName, Date upload_Date) {
 		super();
 		this.bNo = bNo;

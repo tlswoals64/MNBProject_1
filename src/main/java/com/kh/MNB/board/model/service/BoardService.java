@@ -1,7 +1,7 @@
 package com.kh.MNB.board.model.service;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
@@ -24,8 +24,18 @@ public interface BoardService {
 
 	int insertNanumReply(Reply r);
 
-	// ������
-	int getListCount1();
+
+	ArrayList<Reply> selectNanumReplyList(int bNo);
+
+	ArrayList<PictureBoard>  selectNanumBoard(int bNo);
+
+	int updateNanumBoard(Board board);
+
+	int updateNanumAttachment(ArrayList<Attachment> aList);
+
+	int deleteNanumBoard(int bNo);
+
+	int insertSubNanumAttachment(ArrayList<Attachment> insertList);
 
 	// ������
 	ArrayList<Board> selectList1(PageInfo pi);
@@ -40,7 +50,7 @@ public interface BoardService {
 	void addReadCount1(int bNo);
 	//������������
 
-	ArrayList<Attachment> selectBoard1(int bNo);
+	Attachment selectBoard1(int bNo);
 
 	ArrayList<Propose> selectProList(PageInfo pi);
 
@@ -52,10 +62,32 @@ public interface BoardService {
 
 	int insertReplyMH(Reply reply);
 
+	int updateComBoard(Board b);
+
+	int deleteComBoard(int bNo);
+
+	int insertProBoard(Board board);
+
+	int insertProAttachment(ArrayList<Attachment> aList);
+
+	Attachment selectPicBoard1(int bNo);
+
+	Attachment selectPicBoard2(int bNo);
+
+	Attachment selectPicBoard3(int bNo);
+
+	Attachment selectupPBoard1(int bNo);
+
+	Attachment selectupPBoard2(int bNo);
+
+	Attachment selectupPBoard3(int bNo);
+
+	Attachment selectupPBoard4(int bNo);
 
 
 
 
 
-	
+
+
 }

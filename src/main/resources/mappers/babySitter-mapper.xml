@@ -11,6 +11,7 @@
 		from suppot_list
 		where btype = 4 and status = 'Y'
 	</select>
+
 	<select id="getMomListCount" resultType ="_int">
 		select count(*)
 		from suppotMom_List
@@ -40,4 +41,58 @@
 
 	
 	</select>
+
+	<insert id="insertSuppotBoard">
+		insert into board
+		values(seq_bno.nextval, 4, #{bTitle}, #{bContent}, sysdate, default, default, sysdate, #{bWriter})
+	</insert>
+	<insert id="insertSuppotAttachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, default)
+	</insert>
+	<insert id = "insertSuppot">
+		insert into bc_suppot
+		values(seq_bno.currval, #{bcCarrer}, #{bcSalary}, <!-- #{bcTime} -->'time', #{address}, #{bcactivity})
+	</insert>
+	
+ 	<update id="updateSuppotBoard">
+		update board
+		set bTitle = #{bTitle}, bContent = #{bContent}, b_modifydate = sysdate
+		where bNo = #{bNo}
+	</update>
+	<update id="updateAttachment">
+		update board_picture
+		set originname = #{originName}, changename = #{changeName}, upload_date = sysdate
+		where bNo = #{bNo}
+	</update>
+	<update id="updateSuppot">
+		update bc_suppot
+		set bccarrer = #{bcCarrer}, salary = #{bcSalary}, address = #{address}
+		where bNo = #{bNo}
+	</update>
+	
+	<select id="selectSuppotBoard" resultType = "sitterSuppot">
+		select * 
+		from suppot_list
+		where bno = #{bNo} and status = 'Y'
+	</select>
+	
+	<update id="addReadCount">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo}
+	</update>
+	
+	<select id="selectReplyList" parameterType="_int" resultType="Reply">
+		select *
+		from reply
+		where bno = #{bNo}
+		order by rnum desc
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		insert into reply
+		values(seq_rnum.nextval, #{nContent}, sysdate, default, #{rWriter}, #{bNo})
+	</insert>
+
 </mapper>
