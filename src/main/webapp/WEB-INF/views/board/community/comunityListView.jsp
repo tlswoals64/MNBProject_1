@@ -98,18 +98,14 @@
             <!-- 리스트가져오기 -->
            
          </thead> 
-        <c:forEach var="b" items="${ list }">
+        <c:forEach var="b" items="${ list1 }">
        
-		<tr>
-			<td align="center">${ b.bNo }</td>
+		<tr onclick="comDetail(this);">
+			<td align="center" id="bNo">${ b.bNo }</td>
 			
-			<td align="left">
-					 <c:url var="bdetail" value="bdetail.do">
-						<c:param name="bNo" value="${ b.bNo }"/>
-						<c:param name="page" value="${ pi.currentPage }"/>
-					</c:url> 
-					<a href="${ bdetail }">${ b.bTitle }</a>
-				<%-- <c:if test="${ empty loginUser }">
+			<td align="left"> 
+				${ b.bTitle }
+			<%-- <c:if test="${ empty loginUser }">
 					${ b.bTitle }		
 				</c:if> --%> 
 			</td>
@@ -120,30 +116,37 @@
 			
 		
 		</tr>
+		<script>
+			function comDetail(v){
+				var bNo=$(v).children("#bNo").text();
+				console.log(bNo);
+			location.href="detailCom.do?bNo="+ bNo; 
+			}
+		</script>
 		</c:forEach>
 		<!-- 페이징 처리 -->
 		<tr align="center" height="20" id="buttonTab">
 			<td colspan="6">
 			
 				<!-- [이전] -->
-				<c:if test="${ pi.currentPage <= 1 }">
+				<c:if test="${ pi1.currentPage <= 1 }">
 					[이전] &nbsp;
 				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="blist.do">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+				<c:if test="${ pi1.currentPage > 1 }">
+					<c:url var="before" value="comListView.do">
+						<c:param name="page" value="${ pi1.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
 				</c:if>
 				
 				<!-- 페이지 -->
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:forEach var="p" begin="${ pi1.startPage }" end="${ pi1.endPage }">
 					<c:if test="${ p eq currentPage }">
 						<font color="red" size="4"><b>[${ p }]</b></font>
 					</c:if>
 					
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="blist.do">
+						<c:url var="pagination" value="comListView.do">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -151,12 +154,12 @@
 				</c:forEach>
 				
 				<!-- [다음] -->
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
+				<c:if test="${ pi1.currentPage >= pi1.maxPage }">
 					[다음]
 				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
+				<c:if test="${ pi1.currentPage < pi1.maxPage }">
 					<c:url var="after" value="blist.do">
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						<c:param name="page" value="${ pi1.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
 				</c:if>
@@ -183,7 +186,7 @@
       </div>
 
           <div align="right">
-         <button onclick="location.href='binsertView.do'"
+         <button onclick="location.href='inCom.do'"
             id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
   border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
     	  </div> 

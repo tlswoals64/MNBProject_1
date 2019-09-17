@@ -187,10 +187,11 @@ height : 40px;
 
 						<tr class="first">
 							<th>희망 아이유형</th>
-							<td class="pnawtd"><select class="insertinput po" style="width: 150px;"
-								name='category' id='Smallclassification'>
-									<option>선택</option>
-							</select></td>
+							<td class="pnawtd">
+								<select class="insertinput po" style="width: 150px;" name='category' id='Smallclassification'>
+									<option value = "">선택</option> 
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row">제목</th>

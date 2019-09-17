@@ -15,8 +15,6 @@ public interface MemberService {
 	
 	ArrayList<Member> selectmemberManaList(PageInfo pi); //member list ȸ�� ������
 
-
-
 	int insertMember(Member m);
 
 	int checkNickName(String nickname);
@@ -30,5 +28,7 @@ public interface MemberService {
 	Member memberLogin(Member m);
 
 	String idSearch(Member m);
+
+	String pwdSearch(String userId);
 	
 }

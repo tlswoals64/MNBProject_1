@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
 <style>
 	
@@ -37,7 +38,7 @@
 	.header_nav_wrap ul li {float:left; font-size:20px; font-weight:bold;margin-right:68px;}
 	.header_nav_wrap ul li:last-child {float:left; font-size:20px; font-weight:bold;margin-right:0px;}
 </style>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -51,7 +52,6 @@
 			<ul>
 				<li><button id="manager-btn" onclick="location.href='chat.do';">채팅 가기</button></li>
 				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
-
 				<li><A href='loginView.do'>LOGIN</a></li>
 				<li><A href="memberSingUp.do">JOIN</a></li>
 
@@ -79,6 +79,7 @@
 				<li><A href='bIntro.do'>베이비시터</a></li>
 				<li><A href="cIntro.do">커뮤니티</a></li>
 				<li><A href="fListView.do">자주묻는질문</a></li>
+				<li><A href="proListView.do">문의사항</a></li>
 			</ul>
 		</div>
 	</div>

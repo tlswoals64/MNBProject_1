@@ -49,8 +49,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .content_wrap {width:1200px; margin:0 auto; margin-top:100px;}
 .content_wrap ul li {float:left;width:49%;}
 .content_wrap ul li:first-child {margin-right:1%;width:49%;}
-.content_notice {width:100%; height:225px;background-color:#fff;border:1px #e0dfdf solid;margin-right:1%}
-.content_notice2 {width:100%; height:225px;background-color:#fff;border:1px #e0dfdf solid;}
+.content_notice {width:100%; height:300px;background-color:#fff;border:1px #e0dfdf solid;margin-right:1%}
+.content_notice2 {width:100%; height:300px;background-color:#fff;border:1px #e0dfdf solid;}
 .cont_name {color:#3360a9; font-size:18px; font-weight:600;padding:15px 0 15px 20px;border-bottom:1px #e0dfdf solid;font-family: 'NanumSquare'}
 .notice_cont {padding:15px 20px 15px 20px;}
 .cont_more {float:right;padding-right:20px;padding-top:5px;}
@@ -67,9 +67,11 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div class="boardchoose_wrap">
 		<ul>
 
-			<li><a href="#"><img src="resources/images/board/communityIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:480px;font-size:20px;line-height:115%">커뮤니티바로가기</h5></a></li>
-			<li><a href="blist.do"><img src="resources/images/board/nanumIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:1100px;font-size:20px;line-height:115%">무료나눔바로가기</h5></a></li>
+
+			<li><a href="comListView.do"><img src="resources/images/board/communityIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:670px;font-size:20px;line-height:115%">커뮤니티바로가기</h5></a></li>
+			<li><a href="bNanumlist.do"><img src="resources/images/board/nanumIntro.png" width="500" height="550"><h5 style="position:absolute;top:633px;left:1270px;font-size:20px;line-height:115%">무료나눔바로가기</h5></a></li>
 			      
+
 		</ul>
 	</div>
 	</div>
@@ -84,7 +86,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 커뮤니티 게시판 " 
 				</div>
 				<div class="notice_cont">
-					<li class="pro_title">판매자정보</li>
+				게시글
 				</div>
 			</div>
 		</li>
@@ -94,7 +96,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 무료나눔 게시판 " 
 				</div>
 				<div class="notice_cont">
-						<li class="pro_title">판매자정보</li>
+				게시글
 				</div>	
 			</div>
 		</li>

@@ -75,11 +75,11 @@
   <div class="logintext"><h1 style="text-align:center">아이디 찾기</h1></div>
   <br>
   <div>
-  <form action="idSearch.do" class="login-container" method="post">
+  <form action="pwdIdCheck.do" class="login-container" method="post">
 	<div class="logintext"><input type="text" value="${searchId}"></div><br>
 	<br>
     <div class="logintext">
-    <input type="submit" value="아이디 찾기" id="btn2">&nbsp;&nbsp;<input type="button" onclick="back();" value="취소" id="btn2">
+    <input type="submit" value="비밀번호 찾기" id="btn2">&nbsp;&nbsp;<input type="button" onclick="back();" value="취소" id="btn2">
     </div> 
    </form>
     </div>

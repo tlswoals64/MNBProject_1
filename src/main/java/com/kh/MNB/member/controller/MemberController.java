@@ -188,6 +188,7 @@ public class MemberController {
    //-------------------------관리자 페이지로 이동 ---------------------------
    @RequestMapping("manaHome.do")
    public String test() {
+
 	   
 	   System.out.println("들어왔니?");
       return "manager/managermainView";
