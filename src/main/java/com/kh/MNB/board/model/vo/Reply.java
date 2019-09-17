@@ -11,7 +11,6 @@ public class Reply {
 	private Date nCreate_Date;
 	private String status;
 	
-
 	public Reply() {}
 
 

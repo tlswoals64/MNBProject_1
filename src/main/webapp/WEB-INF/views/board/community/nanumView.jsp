@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -347,39 +347,49 @@
 				<li>나눔게시판</li>
 			</ul>
 		</div>
-		
+
 		<div class="bbs">
-		<c:forEach items="${ list }" var="l" varStatus="s">
-			<c:if test="${ s.count % 4 != 3 }">
-				<div class="g_box">
-					<p>
-						<a href="dBoard.do"><img
-							src="resources/images/board/${ l.changeName }"></a>
-					</p>
-					<ul>
-						<h2>${ l.bTitle }</h2>
-						<h3>${ l.bWriter }</h3>
-						<span>${ l.b_CreateDate }</span>
-					</ul>
-				</div>
+			<c:forEach items="${ list }" var="l" varStatus="s">
+				<c:if test="${ s.count % 4 != 3 }">
+					<div class="g_box">
+						<p>
+							<c:url var="bdetail" value="dBoard.do">
+								<c:param name="bNo" value="${ l.bNo }" />
+								<%--   <c:param name="page" value="${ pi.currentPage }"/> --%>
+							</c:url>
+							<a href="${ bdetail }">
+								<img src="resources/images/board/${ l.changeName }">
+							</a>
+						</p>
+						<ul>
+							<h2>${ l.bTitle }</h2>
+							<h3>${ l.bWriter }</h3>
+							<span>${ l.b_CreateDate }</span>
+						</ul>
+					</div>
+				</c:if>
+				<c:if test="${ s.count % 4 == 3 }">
+					<div class="g_box">
+						<p>
+							<c:url var="bdetail" value="dBoard.do">
+								<c:param name="bNo" value="${ l.bNo }" />
+								<%--   <c:param name="page" value="${ pi.currentPage }"/> --%>
+							</c:url>
+							<a href="${ bdetail }">
+								<img src="resources/images/board/${ l.changeName }">
+							</a>
+						</p>
+						<ul>
+							<h2>${ l.bTitle }</h2>
+							<h3>${ l.bWriter }</h3>
+							<span>${ l.b_CreateDate }</span>
+						</ul>
+					</div>
+		</div>
+		<div class="bbs">
 			</c:if>
-			<c:if test="${ s.count % 4 == 3 }">
-				<div class="g_box">
-					<p>
-						<a href="dBoard.do"><img
-							src="resources/images/board/${ l.changeName }"></a>
-					</p>
-					<ul>
-						<h2>${ l.bTitle }</h2>
-						<h3>${ l.bWriter }</h3>
-						<span>${ l.b_CreateDate }</span>
-					</ul>
-				</div>
-				</div>
-				<div class="bbs">
-			</c:if>
-		</c:forEach>
-		
+			</c:forEach>
+
 		</div>
 
 		<div class="btn">
@@ -390,15 +400,51 @@
 
 		<div class="paging">
 			<ul>
-				<li class="off"><<</li>
-				<li class="on">1</li>
-				<li class="off">2</li>
-				<li class="off">3</li>
-				<li class="off">>></li>
+				<li class="off">
+					<c:if test="${ pi.currentPage <= 1 }">
+               			&lt;&lt; &nbsp; 
+            		</c:if> 
+            		<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="nBoard.do">
+							<c:param name="page" value="${ pi.currentPage - 1 }" />
+						</c:url>
+						<a href="${ before }">&lt;&lt; </a> 
+						
+						&nbsp;
+            		</c:if>
+            	</li>
+
+				<li class="off">
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq currentPage }">
+							<font color="pink"><b>[${ p }]</b></font>
+						</c:if>
+
+						<c:if test="${ p ne currentPage }">
+							<c:url var="pagination" value="nBoard.do">
+								<c:param name="page" value="${ p }" />
+								<!-- blist.do?page=${p}값   -->
+							</c:url>
+							<a href="${ pagination }">${ p }</a>
+						</c:if>
+					</c:forEach>
+				</li>
+
+				<li class="off">
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+              			&gt;&gt; &nbsp;
+            		</c:if> 
+            		<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="nBoard.do">
+							<c:param name="page" value="${ pi.currentPage + 1 }" />
+						</c:url>
+						<a href="${ after }">&gt;&gt; </a>&nbsp;
+            		</c:if>
+            	</li>
 			</ul>
 
 		</div>
-		<div class="search">
+		<!-- <div class="search">
 			<select>
 				<option>제목+내용</option>
 				<option>제목</option>
@@ -407,11 +453,14 @@
 			</select> <input type="text" placeholder="검색어를 입력하세요"> <input
 				type="button" value="검색">
 		</div>
-
+ -->
 	</div>
 
 	<!-- // 게시판 -->
 
+	<script>
+		
+	</script>
 
 
 	<div class="both"></div>

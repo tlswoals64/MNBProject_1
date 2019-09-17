@@ -170,7 +170,7 @@ input, textarea, select {
       		<h2 class="subtext">무료나눔 게시판 작성</h2>
       	</div>
          <!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-         <form name='writeform' id='writeform' action='insertBoard.do' method='post' ENCTYPE='multipart/form-data'>
+         <form name='writeform' id='writeform' action='insertNanumBoard.do' method='post' ENCTYPE='multipart/form-data'>
             <table class="pnaw_box" summary="">
                <tbody>
                   <tr>
@@ -179,7 +179,7 @@ input, textarea, select {
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="신재민" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${ board[0].bWriter }" class="inputTypeText" maxLength="125" type="text" readonly></td>
                   </tr>
                   <tr>
                      <th scope="row">메인 이미지</th>

@@ -58,13 +58,33 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertNanumReply", r);
 	}
 
-	// ��������
+
+	public ArrayList<Reply> selectNanumReplyList(int bNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectNanumReplyList", bNo);
+	}
+
+	public ArrayList<PictureBoard>  selectNanumBoard(int bNo) {
+		return 	 (ArrayList)sqlSession.selectList("boardMapper.selectNanumOne", bNo);
+	}
+
+	public int updateNanumBoard(Board board) {
+		return sqlSession.update("boardMapper.updateNanumBoard", board);
+	}
+
+	public int updateNanumAttachment(ArrayList<Attachment> aList) {
+		
+		int result = 0;
+		for(int i = 0; i < aList.size(); i++) {
+			result += sqlSession.update("boardMapper.updateNanumAttachment", aList.get(i));
+
+	// 정보공유
 	public int getListCount1() {
 		
 		return sqlSession.selectOne("boardMapper.getListComCount");
 	}
 	
-	// ��������
+
+	// 정보공유
 	public ArrayList<Board> selectList1(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
@@ -79,27 +99,47 @@ public class BoardDAO {
 
 	public int insertAttachment1(ArrayList<Attachment> aList1) {
 		int result = 0;
-		
-		  for(int i = 0; i < aList1.size(); i++) { if(i == 0) {
-		  System.out.println(aList1.get(0)); result =
-		  sqlSession.insert("boardMapper.insertComAttachment0", aList1.get(0)); } else
-		  { System.out.println(aList1.get(i)); result =
-		  sqlSession.insert("boardMapper.insertComAttachment", aList1.get(i)); } }
-		
+
+		for(int i = 0; i < aList1.size(); i++) {
+			if(i == 0) {
+				result = sqlSession.insert("boardMapper.insertComAttachment0", aList1.get(0));
+			}
+			else {
+				result = sqlSession.insert("boardMapper.insertComAttachment", aList1.get(i));
+			}
+
+		}
 		
 		return result;
 	}
+
+
+	public int deleteNanumBoard(int bNo) {
+		return sqlSession.update("boardMapper.deleteNanumBoard", bNo);
+	}
+
+	public int insertSubNanumAttachment(ArrayList<Attachment> insertList) {
+		int result = 0;
+		for(int i = 0; i < insertList.size(); i++) {
+			result += sqlSession.update("boardMapper.insertSubNanumAttachment", insertList.get(i));
+		}
+		
+		return result;
+	}
+
+
 	
 	public int insertReply1(Reply r) {
 		return sqlSession.insert("boardMapper.insertReply1", r);
 	}
 
-	//�������� ������
+
+	//정보공유 디테일
 	public void addReadCount(int bNo) {
 		
 		sqlSession.update("boardMapper.updateCount1", bNo);
 	}
-	//�������� ������
+	//정보공유 디테일
 
 	public Attachment selectBoard1(int bNo) {
 		Attachment list =  sqlSession.selectOne("boardMapper.selectOne1",bNo);
@@ -211,6 +251,7 @@ public class BoardDAO {
 	
 	
 	
+
 
 
 

@@ -1,12 +1,12 @@
 package com.kh.MNB.board.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.MNB.board.model.dao.BoardDAO;
-
 import com.kh.MNB.board.model.vo.Attachment;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
@@ -53,6 +53,38 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+
+	public ArrayList<Reply> selectNanumReplyList(int bNo) {
+		return bDAO.selectNanumReplyList(bNo);
+	}
+
+	@Override
+	public ArrayList<PictureBoard>  selectNanumBoard(int bNo) {
+		return bDAO.selectNanumBoard(bNo);
+	}
+
+	@Override
+	public int updateNanumBoard(Board board) {
+		return bDAO.updateNanumBoard(board);
+	}
+
+	@Override
+	public int updateNanumAttachment(ArrayList<Attachment> aList) {
+		return bDAO.updateNanumAttachment(aList);
+	}
+
+	@Override
+	public int deleteNanumBoard(int bNo) {
+		return bDAO.deleteNanumBoard(bNo);
+	}
+
+	@Override
+	public int insertSubNanumAttachment(ArrayList<Attachment> insertList) {
+		return bDAO.insertSubNanumAttachment(insertList);
+	}
+
+
+
 	public int getListCount1() {
 		return bDAO.getListCount1();
 	}
@@ -116,7 +148,7 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReplyMH(Reply reply) {
 		return bDAO.insertReplyMH(reply);
 	}
-	
+
 	@Override
 	public int updateComBoard(Board b) {
 		return bDAO.updateComBoard(b);
@@ -166,4 +198,5 @@ public class BoardServiceImpl implements BoardService {
 	public Attachment selectupPBoard4(int bNo) {
 		return bDAO.selectupPBoard4(bNo);
 	}
+
 }
