@@ -22,13 +22,11 @@ public class MailHandler {
 
 	public void setSubject(String subject) throws MessagingException {
 		messageHelper.setSubject(subject);
-
 		// 이메일 타이틀
 	}
 
 	public void setText(String htmlContent) throws MessagingException {
 		messageHelper.setText(htmlContent, true);
-
 		// 이메일 TEXT 부분
 	}
 

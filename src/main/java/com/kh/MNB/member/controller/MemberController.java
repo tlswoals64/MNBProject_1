@@ -110,11 +110,10 @@ public class MemberController {
 	   
 	   @RequestMapping(value = "sendMail.do", method = RequestMethod.POST)
 	   @ResponseBody
-	   public boolean sendMail(HttpSession session, @RequestParam String email) {
+	   public String sendMail(HttpSession session, @RequestParam String email) {
 	      String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
 	      randomCode = randomCode.substring(0, 6);
 	      String joinCode = String.valueOf(randomCode);
-	      session.setAttribute("joinCode", joinCode);
 	      
 	      System.out.println(joinCode);
 	      
@@ -122,10 +121,16 @@ public class MemberController {
 	      StringBuilder sb = new StringBuilder();
 	      sb.append("회원가입 승인 번호는 ").append(joinCode).append(" 입니다.");
 	      
-	      return mService.send(subject, sb.toString(), "seok1721@gamil.com", email);
+	      
+	      boolean result = mService.send(subject, sb.toString(), "seok1721@gamil.com", email);
+	      if(result) {
+	    	  return joinCode;
+	      } else {
+	    	  return "fail";
+	      }
 	   }
 		
-	//---------로그인화면이동----------
+	   //---------로그인화면이동----------
 		@RequestMapping("loginView.do")
 		public String loginView() {
 			return "login/loginView";
@@ -183,7 +188,7 @@ public class MemberController {
 		public String pwdIdCheckView() {
 			return "login/pwdIdCheckView";
 		}
-//		비밀번호 찾기전 아이디 체크		
+		//비밀번호 찾기전 아이디 체크		
 		@RequestMapping(value="pwdIdSearch.do", method=RequestMethod.POST)
 		public String pwdSearch(@RequestParam("userId") String userId, Model model) {
 			
@@ -229,7 +234,8 @@ public class MemberController {
 	         mv.setViewName("manager/managerMemberManaListView");
 	      }
 	      else {
-	         throw new MemberException("�Խñ� ��ü ��ȸ�� �����Ͽ����ϴ�.");
+	         throw new MemberException(""
+	         		+ "");
 	      }
 	      
 	      return mv;

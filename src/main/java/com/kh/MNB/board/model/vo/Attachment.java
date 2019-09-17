@@ -36,6 +36,14 @@ public class Attachment {
 		this.iType = iType;
 	}
 
+	public Attachment(int bNo, String originName, String changeName, Date upload_Date) {
+		super();
+		this.bNo = bNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.upload_Date = upload_Date;
+	}
+
 	public int getiNo() {
 		return iNo;
 	}

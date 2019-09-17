@@ -19,16 +19,15 @@ public class sitterSuppot {
 	private String address;
 	private String bcActivity;
 	private int iNo;
-	private String originalName;
+	private String originName;
 	private String changeName;
 	private Date upload_Date;
 	
 	public sitterSuppot() {}
-	
 
 	public sitterSuppot(int rNo, int bNo, int bType, String bTitle, String bContent, int bCount, String status,
 			Date b_CreateDate, Date b_ModifyDate, String bWriter, String bCcarrer, String salary, String time,
-			String address, String bcActivity, int iNo, String originalName, String changeName, Date upload_Date) {
+			String address, String bcActivity, int iNo, String originName, String changeName, Date upload_Date) {
 		super();
 		this.rNo = rNo;
 		this.bNo = bNo;
@@ -46,26 +45,9 @@ public class sitterSuppot {
 		this.address = address;
 		this.bcActivity = bcActivity;
 		this.iNo = iNo;
-		this.originalName = originalName;
+		this.originName = originName;
 		this.changeName = changeName;
 		this.upload_Date = upload_Date;
-	}
-
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getBcActivity() {
-		return bcActivity;
-	}
-
-	public void setBcActivity(String bcActivity) {
-		this.bcActivity = bcActivity;
 	}
 
 	public int getrNo() {
@@ -172,6 +154,22 @@ public class sitterSuppot {
 		this.time = time;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getBcActivity() {
+		return bcActivity;
+	}
+
+	public void setBcActivity(String bcActivity) {
+		this.bcActivity = bcActivity;
+	}
+
 	public int getiNo() {
 		return iNo;
 	}
@@ -180,12 +178,12 @@ public class sitterSuppot {
 		this.iNo = iNo;
 	}
 
-	public String getOriginalName() {
-		return originalName;
+	public String getOriginName() {
+		return originName;
 	}
 
-	public void setOriginalName(String originalName) {
-		this.originalName = originalName;
+	public void setOriginName(String originName) {
+		this.originName = originName;
 	}
 
 	public String getChangeName() {
@@ -204,17 +202,13 @@ public class sitterSuppot {
 		this.upload_Date = upload_Date;
 	}
 
-
 	@Override
 	public String toString() {
 		return "sitterSuppot [rNo=" + rNo + ", bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bContent="
 				+ bContent + ", bCount=" + bCount + ", status=" + status + ", b_CreateDate=" + b_CreateDate
 				+ ", b_ModifyDate=" + b_ModifyDate + ", bWriter=" + bWriter + ", bCcarrer=" + bCcarrer + ", salary="
 				+ salary + ", time=" + time + ", address=" + address + ", bcActivity=" + bcActivity + ", iNo=" + iNo
-				+ ", originalName=" + originalName + ", changeName=" + changeName + ", upload_Date=" + upload_Date
-				+ "]";
+				+ ", originName=" + originName + ", changeName=" + changeName + ", upload_Date=" + upload_Date + "]";
 	}
-
-	
 	
 }

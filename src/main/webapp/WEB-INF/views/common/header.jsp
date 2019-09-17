@@ -54,6 +54,7 @@
 				<li><A href="memberSingUp.do">JOIN</a></li>
 
 				<li><A href="#">베이비시터등록</a></li>
+				<li><A href="noteList.do">쪽지</a></li>
 			</ul>
 			</c:if>
 			<c:if test="${ !empty sessionScope.loginUser }">
@@ -62,6 +63,7 @@
 				<li><A href='myPageView.do'>마이페이지</a></li>
 				<li><A href="logout.do">로그아웃</a></li>
 				<li><A href="#">베이비시터등록</a></li>
+				<li><A href="noteList.do">쪽지</a></li>
 			</ul>
 			</c:if>
 		</div>

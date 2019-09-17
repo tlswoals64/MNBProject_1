@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -232,10 +233,10 @@ input, textarea, select {
 	<div class="boardbox">
 		<div class="boxrow">
 			<div class="boxrow-top">
-				<pre class="subtext">베이비시터 지원</pre>
+				<pre class="subtext">베이비시터 지원 수정</pre>
 			</div>
 			<!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-			<form action='insertSuppot.do' name='writeform' id='writeform'
+			<form action='suppotUpdate.do' name='writeform' id='writeform'
 				method='post' ENCTYPE='Multipart/form-data'>
 				<table class="pnaw_box" summary="">
 					<tbody>
@@ -351,8 +352,9 @@ input, textarea, select {
 									<input type="file" id="inputimg" name="inputimg"
 										onchange="LoadImg(this,1);">
 								</div>
+								<input type = "hidden" name = "bNo" value = "${ suppot.bNo }">
+								<input type="hidden" name="page" value="${ page }">
 							</td>
-
 						</tr>
 					</tbody>
 				</table>
