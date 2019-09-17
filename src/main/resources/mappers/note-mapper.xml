@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="fnaMapper">
+<mapper namespace="noteMapper">
 
+	<select id="getNoteListCount" resultType = "_int">
+		select count(*)
+		from note
+		where status = 'Y'
+	</select>
 	
+	<select id = "selectNoteList" resultType = "Note">
+		select *
+		from note
+		where status = 'Y'
+	</select>
+	
+	<insert id="insertNote">
+		insert into note
+		values(seq_nno.nextval, #{nTitle}, #{nContent}, #{send}, #{respon}, default, default, sysdate)
+	</insert>
+	
+	<update id="updateRead">
+		update note
+		set read = 'Y'
+		where nno = #{nNo}
+	</update>
+	
+	<select id="selectNote" resultType="Note">
+		select *
+		from note
+		where nno = #{nNo}
+	</select>
 	
 </mapper>

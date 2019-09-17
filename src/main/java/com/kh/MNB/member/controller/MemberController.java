@@ -109,81 +109,105 @@ public class MemberController {
          }
       }
       
-      @RequestMapping(value = "sendMail.do", method = RequestMethod.POST)
-      @ResponseBody
-      public boolean sendMail(HttpSession session, @RequestParam String email) {
-         String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
-         randomCode = randomCode.substring(0, 6);
-         String joinCode = String.valueOf(randomCode);
-         session.setAttribute("joinCode", joinCode);
-         
-         System.out.println(joinCode);
-         
-         String subject = "회원 가입 승인번호 입니다.";
-         StringBuilder sb = new StringBuilder();
-         sb.append("회원가입 승인 번호는 ").append(joinCode).append(" 입니다.");
-         
-         return mService.send(subject, sb.toString(), "seok1721@gamil.com", email);
-      }
+	   @RequestMapping(value = "sendMail.do", method = RequestMethod.POST)
+	   @ResponseBody
+	   public String sendMail(HttpSession session, @RequestParam String email) {
+	      String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+	      randomCode = randomCode.substring(0, 6);
+	      String joinCode = String.valueOf(randomCode);
+	      
+	      System.out.println(joinCode);
+	      
+	      String subject = "회원 가입 승인번호 입니다.";
+	      StringBuilder sb = new StringBuilder();
+	      sb.append("회원가입 승인 번호는 ").append(joinCode).append(" 입니다.");
+	      
+	      
+	      boolean result = mService.send(subject, sb.toString(), "seok1721@gamil.com", email);
+	      if(result) {
+	    	  return joinCode;
+	      } else {
+	    	  return "fail";
+	      }
+	   }
       
-   //---------로그인화면이동----------
-      @RequestMapping("loginView.do")
-      public String loginView() {
-         return "login/loginView";
-      }
-      //-----------로그인 --------------
-      @RequestMapping(value="login.do", method=RequestMethod.POST)
-      public String MemberLogin(Member m, Model model) {
-         System.out.println(m.getUserId());
-         
-         Member loginUser = mService.memberLogin(m);      
-          if (loginUser != null) {
-             if(loginUser.getUserId().equals("admin")) {
-                model.addAttribute("loginUser", loginUser);
-                return "manager/managermainView";
-             }else {
-             model.addAttribute("loginUser", loginUser); 
-             return "redirect:index.jsp";
-             }
-          } else {
-             throw new MemberException("로그인에 실패하였습니다.");
-         }
-          
-      }
+	   //---------로그인화면이동----------
+		@RequestMapping("loginView.do")
+		public String loginView() {
+			return "login/loginView";
+		}
+		//-----------로그인 --------------
+		@RequestMapping(value="login.do", method=RequestMethod.POST)
+		public String MemberLogin(Member m, Model model) {
+			System.out.println(m.getUserId());
+			
+			Member loginUser = mService.memberLogin(m);	
+			if (bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {			
+				 if(loginUser.getUserId().equals("admin")) {
+					 model.addAttribute("loginUser", loginUser);
+					 return "manager/managermainView";
+				 }else {
+				 model.addAttribute("loginUser", loginUser); 
+				 return "redirect:index.jsp";
+				 }
+			 } else {
+				 throw new MemberException("로그인에 실패하였습니다.");
+			}
+			 
+		}
       
-      // ---------- 로그아웃 ----------
-      @RequestMapping("logout.do")
-      public String logout(SessionStatus status) {
-         // SessionStatus : 커맨드 객체로 세션 상태를 관리할 수 있음
-         status.setComplete();
-         return "redirect:index.jsp";
-      }
+		// ---------- 로그아웃 ----------
+		@RequestMapping("logout.do")
+		public String logout(SessionStatus status) {
+			// SessionStatus : 커맨드 객체로 세션 상태를 관리할 수 있음
+			status.setComplete();
+			return "redirect:index.jsp";
+		}
       
-      //---------- 아이디 찾기 ----------
-      @RequestMapping("idSearchView.do")
-      public String idSearchView() {
-         return "login/idSearchView";
-      }
-      @RequestMapping(value="idSearch.do", method=RequestMethod.POST)
-      public String idSearch(@ModelAttribute Member m, Model model) {
-         System.out.println(m);
-         
-         String id= mService.idSearch(m);
-         System.out.println(id);
-         if(id !=null) {
-            model.addAttribute("searchId", id);
-            return "login/idSearchResult";
-         }else {
-            throw new MemberException("아이디 찾기에 실패하였습니다.");
-         }
-      }
+		//---------- 아이디 찾기 ----------
+		@RequestMapping("idSearchView.do")
+		public String idSearchView() {
+			return "login/idSearchView";
+		}
+		@RequestMapping(value="idSearch.do", method=RequestMethod.POST)
+		public String idSearch(@ModelAttribute Member m, Model model) {
+			System.out.println(m);
+			
+			String id= mService.idSearch(m);
+			System.out.println(id);
+			if(id !=null) {
+				model.addAttribute("searchId", id);
+				return "login/idSearchResult";
+			}else {
+				throw new MemberException("아이디 찾기에 실패하였습니다.");
+			}
+		}
       
       
-      //--------- 비밀번호 찾기-----------
-      @RequestMapping("pwdIdCheck.do")
-      public String pwdIdCheckView() {
-         return "login/pwdIdCheckView";
-      }
+		//--------- 비밀번호 찾기-----------
+		@RequestMapping("pwdIdCheck.do")
+		public String pwdIdCheckView() {
+			return "login/pwdIdCheckView";
+		}
+		//비밀번호 찾기전 아이디 체크		
+		@RequestMapping(value="pwdIdSearch.do", method=RequestMethod.POST)
+		public String pwdSearch(@RequestParam("userId") String userId, Model model) {
+			
+			System.out.println(userId);
+			String result= mService.pwdSearch(userId);
+			
+			if(result!=null) {
+			model.addAttribute("pwdSearch", result);
+			return "login/pwdSearchForm";
+			}else {
+				throw new MemberException("아이디 찾기에 실패하였습니다.");
+			}			
+		}
+		
+		@RequestMapping("pwdSerach.do")
+		public String pwdSearch() {
+			return "login/pwdChange";
+		}
    
    //-------------------------관리자 페이지로 이동 ---------------------------
    @RequestMapping("manaHome.do")
@@ -196,8 +220,7 @@ public class MemberController {
    
    @RequestMapping("myPageView.do")
    public String myPage() {
-	   
-	   return "member/myPageMainView";
+	   	   return "member/myPageMainView";
    }
 
    @RequestMapping("mManaList.do")
@@ -224,7 +247,6 @@ public class MemberController {
          
          return mv;
       }
-   
 
    // ȸ������ ������ ������
    @RequestMapping("mUserDetail.do")

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -419,44 +420,94 @@ padding : 5px;
 
 		<div style="width: 100%; height: 1500px; display: inline-block; margin-top: 3%;">
 			<div id="mojibList">
-				<div class = "list">
-					<table summary="베이비시터 중 구직글을 작성한 리스트">
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tr>
-							<th rowspan="3"><img id="searchImg" width="70px"
-								height="70px" src="resources/images/babySitter/search.png"></th>
-							<td><span>영아 1명</span>&nbsp;|&nbsp;<span>등록 시간</span></td>
-						</tr>
-						<tr>
-							<td>등하원 돕기, 실내놀이, 영어놀이 맘시터 찾습니다.</td>
-						</tr>
-						<tr>
-							<td><span>경기도 화성시</span>&nbsp;|&nbsp;<span>전O영</span>&nbsp;|&nbsp;<span>근무
-									시작일</span></td>
-						</tr>
-						<tr>
-							<th>0명 지원</th>
-							<td><span>희망 시급 10000원</span>&nbsp;/&nbsp;협의가능</td>
-						</tr>
-					</table>
-					<hr>
-					<table>
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tr>
-							<th>기간</th>
-							<td><span class="week">월</span> <span class="week">화</span>
-								<span class="week">수</span> <span class="week">목</span> <span
-								class="week">금</span> <span class="week">토</span> <span
-								class="week">일</span></td>
-						</tr>
-					</table>
-				</div>
+				<c:forEach var="s" items="${ list }">
+					<c:if test="${ !empty loginUser }">
+						<c:url var="suppotDetail" value="suppotDetail.do">
+							<c:param name="bNo" value="${ s.bNo }" />
+							<c:param name="page" value="${ pi.currentPage }" />
+						</c:url>
+						<a href=${ suppotDetail }>
+							<div class="list">
+								<table summary="베이비시터 중 구직글을 작성한 리스트">
+									<colgroup>
+										<col width="30%">
+										<col width="70%">
+									</colgroup>
+									<tr>
+										<th rowspan="4"><img id="searchImg" width="70px"
+											height="70px" src="resources/images/babySitter/suppot/${ s.changeName }"></th>
+										<td><span>${ s.bWriter }</span>&nbsp;| &nbsp;<span>${ s.b_CreateDate }</span></td>
+									</tr>
+									<tr>
+										<td>${ s.bTitle }</td>
+									</tr>
+									<tr>
+										<td>
+											<span>${ s.address }</span>
+										</td>
+									</tr>
+									<tr>
+										<td><span></span>&nbsp;/&nbsp;${ s.salary }</td>
+									</tr>
+								</table>
+								<hr>
+								<table>
+									<colgroup>
+										<col width="30%">
+										<col width="70%">
+									</colgroup>
+									<tr>
+										<th>기간</th>
+										<td><span class="week">월</span> <span class="week">화</span>
+											<span class="week">수</span> <span class="week">목</span> <span
+											class="week">금</span> <span class="week">토</span> <span
+											class="week">일</span></td>
+									</tr>
+								</table>
+							</div>
+						</a>
+					</c:if>
+					<c:if test="${ empty loginUser }">
+						<div class="list">
+							<table summary="베이비시터 중 구직글을 작성한 리스트">
+								<colgroup>
+									<col width="30%">
+									<col width="70%">
+								</colgroup>
+								<tr>
+									<th rowspan="4"><img id="searchImg" width="70px"
+										height="70px" src="resources/images/babySitter/suppot/${ s.changeName }"></th>
+									<td><span>${ s.bWriter }</span>&nbsp;| &nbsp;<span>${ s.b_CreateDate }</span></td>
+								</tr>
+								<tr>
+									<td>${ s.bTitle }</td>
+								</tr>
+								<tr>
+									<td>
+										<span>${ s.address }</span>
+									</td>
+								</tr>
+								<tr>
+									<td><span></span>&nbsp;/&nbsp;${ s.salary }</td>
+								</tr>
+							</table>
+							<hr>
+							<table>
+								<colgroup>
+									<col width="30%">
+									<col width="70%">
+								</colgroup>
+								<tr>
+									<th>기간</th>
+									<td><span class="week">월</span> <span class="week">화</span>
+										<span class="week">수</span> <span class="week">목</span> <span
+										class="week">금</span> <span class="week">토</span> <span
+										class="week">일</span></td>
+								</tr>
+							</table>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 			<div id="map" style="height: 100%;"></div>
 		</div>
@@ -495,4 +546,4 @@ padding : 5px;
 		<jsp:include page="../../../common/footer.jsp"></jsp:include>
 	</footer>
 </body>
-</html>
+</html>  
