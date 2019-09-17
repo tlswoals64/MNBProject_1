@@ -268,7 +268,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   	function getReplyList(){
 	   		var bNo = ${board[0].bNo};
 	   		$.ajax({
-	   			url: "rList.do",
+	   			url: "rNanumList.do",
 	   			data: {bNo:bNo},
 	   			dataType: "json",
 	   			success: function(data){
