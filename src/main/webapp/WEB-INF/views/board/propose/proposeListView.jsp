@@ -90,6 +90,7 @@
          <thead>
             <tr style="background-color:pink">
                <th>번호</th>
+               <th>분류 </th>
                <th class="title">제목</th>
                <th>글쓴이</th>
                <th>답변여부</th>   
@@ -102,7 +103,7 @@
        
 		<tr onclick="comDetail(this);">
 			<td align="center" id="bNo">${ b.bNo }</td>
-			
+			<td>분류</td>
 			<td align="left"> 
 				${ b.bTitle }
 			<%-- <c:if test="${ empty loginUser }">
@@ -186,7 +187,7 @@
       </div>
 
           <div align="right">
-         <button onclick="location.href='inCom.do'"
+         <button onclick="location.href='inPro.do'"
             id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
   border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
     	  </div> 

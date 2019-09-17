@@ -101,6 +101,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertAttachment1(ArrayList<Attachment> aList1) {
+		System.out.println("aList1:"+aList1);
 		return bDAO.insertAttachment1(aList1);
 	}
 
@@ -115,7 +116,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Attachment> selectBoard1(int bNo) {
+	public Attachment selectBoard1(int bNo) {
 		return bDAO.selectBoard1(bNo);
 		
 	}
@@ -146,6 +147,56 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertReplyMH(Reply reply) {
 		return bDAO.insertReplyMH(reply);
+	}
+
+	@Override
+	public int updateComBoard(Board b) {
+		return bDAO.updateComBoard(b);
+	}
+	
+	@Override
+	public int deleteComBoard(int bNo) {
+		return bDAO.deleteComBoard(bNo);
+	}
+	
+	@Override
+	public int insertProBoard(Board b) {
+		return bDAO.insertProBoard(b);
+	}
+	
+	@Override
+	public int insertProAttachment(ArrayList<Attachment> aList) {
+		return bDAO.insertProAttachment1(aList);
+	}
+	
+	@Override
+	public Attachment selectPicBoard1(int bNo) {
+		return bDAO.selectPicBoard1(bNo);
+	}
+	
+	@Override
+	public Attachment selectPicBoard2(int bNo) {
+		return bDAO.selectPicBoard2(bNo);
+	}
+	@Override
+	public Attachment selectPicBoard3(int bNo) {
+		return bDAO.selectPicBoard3(bNo);	}
+	
+	@Override
+	public Attachment selectupPBoard1(int bNo) {
+		return bDAO.selectupPBoard1(bNo);
+	}
+	@Override
+	public Attachment selectupPBoard2(int bNo) {
+		return bDAO.selectupPBoard2(bNo);
+	}
+	@Override
+	public Attachment selectupPBoard3(int bNo) {
+		return bDAO.selectupPBoard3(bNo);
+	}
+	@Override
+	public Attachment selectupPBoard4(int bNo) {
+		return bDAO.selectupPBoard4(bNo);
 	}
 
 }

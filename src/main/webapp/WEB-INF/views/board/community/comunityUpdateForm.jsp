@@ -1,76 +1,7 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	#boardUpdateTable{margin: auto; border-collapse: collapse; border-left: hidden; border-right: hidden;}
-	#boardUpdateTable tr td{padding: 5px;}
-</style>
-</head>
-<body>
-	
-	
-	<h1 align="center">게시글 수정</h1>
-	
-	<!-- 첨부파일도 수정 할 수도 있으니 Multipart/form-data encType 지정 -->
-	<form action="bupdate.do" method="post" enctype="Multipart/form-data">
-		<input type="hidden" name="page" value="${ page }">
-		<input type="hidden" name="bId" value="${ board.bNo }">
-		<input type="hidden" name="renameFileName" value="${ board.renameFile }">
-	
-		<table id="boardUpdateTable" border="1">
-			<tr>
-				<th>제목</th>
-				<td>
-					<input type="text" size="80" name="bTitle" value="${ board.bTitle }">
-				</td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>
-					<input type="text" name="bWriter" readonly value="${ board.bWriter }" style="background: lightgrey;">
-				</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea rows="10" cols="80" name="bContent">${ board.bContent }</textarea></td>
-			</tr>
-			
-			 <tr>
-				<th>첨부파일</th>
-				<td>
-					<input type="file" name="reloadFile">
-					<img src="resources/images/board/${board.changeName }" width="200" height="200">
-					<c:if test="${ !empty board.originName }">
-						<br>현재 업로드한 파일 : 
-						 <a href="${ contextPath }/resources/buploadFiles/${ board.renameFile }" download="${ board.originalFile }"> <!-- download는 지정해주지 않으면 바뀐 이름으로 받게되고 지정해주면 등록했던 파일 이름으로 다운 받아진다.  -->
-							${ board.originalFile }
-						</a> 
-					</c:if>
-					<br>
-				</td>
-			</tr> 
-			
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="수정하기"> &nbsp;
-					<c:url var="blist" value="blist.do">
-						<c:param name="page" value="${ page }"/>
-					</c:url>
-					<button type="button" onclick="location.href='${ comListView }'">목록으로</button>
-					<button type="button" onclick="location.href='javascript:history.go(-1);'">이전페이지로</button>
-				</td>
-			</tr>
-		</table>
-	</form>
-</body>
-</html> --%>
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,8 +11,8 @@
  <link rel="stylesheet" href="/resources/css/bootstrap.css"> 
 <style>
 
-@import url("resources/css/font.css");
-@import url("resources/css/bootstrap.css");
+ @import url("resources/css/comunity/font.css");
+@import url("resources/css/comunity/bootstrap.css"); 
 
 label{
    margin: 0;
@@ -194,9 +125,9 @@ input, textarea, select {
 }
 
 #titleImgArea {
-   width: 350px;
-   height: 200px;
-   text-align: center;
+   width: 120px;
+   height: 100px;
+   text-align: left;
    display: table-cell;
    
 }
@@ -206,7 +137,7 @@ input, textarea, select {
    cursor: pointer;
 }
 
-#contentImgArea1, #contentImgArea2, #contentImgArea3 {
+#titleImg,#contentImgArea1, #contentImgArea2, #contentImgArea3 {
    width: 120px;
    height: 100px;
    text-align: left;
@@ -227,6 +158,9 @@ input, textarea, select {
 .comm{
    vertical-align: middle;
 }
+.pnaw_box th{
+	background-color: pink;
+}
 </style>
 </head>
 <body>
@@ -242,37 +176,46 @@ input, textarea, select {
       		<h2 class="subtext">정보공유게시판 수정하기</h2>
       	</div>
          <!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-         <form name='writeform' id='writeform' action='insertCom.do' method='post' ENCTYPE='multipart/form-data'>
+       <form action="comupdate.do" method="post" enctype="Multipart/form-data">
+		<input type="hidden" name="bNo" value="${ board123.bNo }">
+	<%-- 	<input type="hidden" name="renameFileName" value="${ board.renameFile }"> --%>
             <table class="pnaw_box" summary="">
                <tbody>
                   <tr>
                      <th scope="row">제목</th>
-                     <td class="pnawtd"><input name="bTitle" value="${board.bTitle }" class="inputTypeText" style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
+                     <td class="pnawtd"><input name="bTitle" value="${board123.bTitle }" class="inputTypeText" style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="${board.bWriter }" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${board123.bWriter }" class="inputTypeText" maxLength="125" type="text" readonly></td>
                   </tr>
                  
-                   
-                    
-                      
-                   
-               			
-                  <tr>
-                  
+              <tr>
                      <th scope="row">상세내용</th>
-                     
-                     <td class="write pnawtd"><textarea name='bContent' style='width: 100%; height: 200px;'>${board.bContent } </textarea>
-                     <img src="resources/images/board/${board.changeName }" width="200" height="200">
-                     </td>
-                  </tr>
-                  
+                     <td class="write pnawtd">
+							<!-- textarea 읽기만 가능하게 하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+			<c:if test="${ !empty board.changeName }">
+			<img src="resources/images/board/${board.changeName}" width="200" height="200">  
+			</c:if>
+			<c:if test="${ !empty board2.changeName }"> 
+				<img src="resources/images/board/${board2.changeName}" width="200" height="200">  
+				</c:if>
+				<c:if test="${ !empty board3.changeName }"> 
+				<img src="resources/images/board/${board3.changeName}" width="200" height="200">  
+		</c:if>
+				<c:if test="${ !empty board4.changeName }"> 
+				<img src="resources/images/board/${board4.changeName}" width="200" height="200"> 
+				</c:if>
+				<textarea name="content"style='width: 100%; height: 200px;'>${board123.bContent } 
+				</textarea>
+			</td>
+		  </tr>
+               
                   <tr>
                      <th>사진 첨부</th>
                      <td>
                         <div class="par">
-                          <div id="titleImgArea">
+                           <div id="titleImgArea" class="po">
                            <img id="titleImg" name="titleImg" width="100" height="100" tabindex="0">
                         	</div>
                         	
@@ -294,7 +237,7 @@ input, textarea, select {
             </table>
             <div class="joinbox" style="max-width: 100%;">
                <ul class="ul01">
-                  <li><input class="inputbox02 btn btn-outline-dark" type="button" value="등록" onclick="register();"></li>
+                  <li><input class="inputbox02 btn btn-outline-dark" type="submit" value="등록" onclick="register();" ></li>
                   <li><input class="inputbox02 btn btn-outline-dark" type="button" value="취소" onclick="javascript:history.back()"></li>
                </ul>
             </div>

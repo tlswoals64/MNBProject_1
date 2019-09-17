@@ -190,6 +190,7 @@
             id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
   border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
     	  </div> 
+   
       </div>
       </div>
       <script>

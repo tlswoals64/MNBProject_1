@@ -83,6 +83,7 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.getListComCount");
 	}
 	
+
 	// 정보공유
 	public ArrayList<Board> selectList1(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -98,12 +99,12 @@ public class BoardDAO {
 
 	public int insertAttachment1(ArrayList<Attachment> aList1) {
 		int result = 0;
+
 		for(int i = 0; i < aList1.size(); i++) {
 			if(i == 0) {
 				result = sqlSession.insert("boardMapper.insertComAttachment0", aList1.get(0));
 			}
 			else {
-			
 				result = sqlSession.insert("boardMapper.insertComAttachment", aList1.get(i));
 			}
 
@@ -132,6 +133,7 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertReply1", r);
 	}
 
+
 	//정보공유 디테일
 	public void addReadCount(int bNo) {
 		
@@ -139,8 +141,8 @@ public class BoardDAO {
 	}
 	//정보공유 디테일
 
-	public ArrayList<Attachment> selectBoard1(int bNo) {
-		ArrayList<Attachment> list =  (ArrayList)sqlSession.selectList("boardMapper.selectOne1",bNo);
+	public Attachment selectBoard1(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectOne1",bNo);
 		
 		return list;
 	}
@@ -170,6 +172,79 @@ public class BoardDAO {
 
 	public int insertReplyMH(Reply reply) {
 		return sqlSession.insert("boardMapper.insertReplyMH", reply);
+	}
+
+	public int updateComBoard(Board b) {
+		return sqlSession.update("boardMapper.updateComBoard", b);
+	}
+
+	public int deleteComBoard(int bNo) {
+		return sqlSession.update("boardMapper.deleteComBoard", bNo);
+	}
+
+	//���ǻ��� �μ�Ʈ
+	public int insertProBoard(Board b) {
+		return sqlSession.insert("boardMapper.insertProBoard", b);
+	}
+
+	public int insertProAttachment1(ArrayList<Attachment> aList) {
+		int result = 0;
+		for(int i = 0; i < aList.size(); i++) {
+			if(i == 0) {
+				result = sqlSession.insert("boardMapper.insertProAttachment0", aList.get(0));
+			}
+			else {
+			
+				result = sqlSession.insert("boardMapper.insertProAttachment", aList.get(i));
+			}
+		}
+		
+		return result;
+	}
+
+	//�������� ������ ���� 2��°��
+	public Attachment selectPicBoard1(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectPicOne1",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectPicBoard2(int bNo) {
+	Attachment list =  sqlSession.selectOne("boardMapper.selectPicOne2",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectPicBoard3(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectPicOne3",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectupPBoard1(int bNo) {
+		
+		Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne1",bNo);
+		
+		return list;
+	
+	}
+
+	public Attachment selectupPBoard2(int bNo) {
+		Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne2",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectupPBoard3(int bNo) {
+	Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne3",bNo);
+		
+		return list;
+	}
+
+	public Attachment selectupPBoard4(int bNo) {
+	Attachment list =  sqlSession.selectOne("boardMapper.selectupPOne4",bNo);
+		
+		return list;
 	}
 
 	

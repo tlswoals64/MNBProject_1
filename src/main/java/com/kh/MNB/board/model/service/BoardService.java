@@ -50,7 +50,7 @@ public interface BoardService {
 	void addReadCount1(int bNo);
 	//������������
 
-	ArrayList<Attachment> selectBoard1(int bNo);
+	Attachment selectBoard1(int bNo);
 
 	ArrayList<Propose> selectProList(PageInfo pi);
 
@@ -62,10 +62,32 @@ public interface BoardService {
 
 	int insertReplyMH(Reply reply);
 
+	int updateComBoard(Board b);
+
+	int deleteComBoard(int bNo);
+
+	int insertProBoard(Board board);
+
+	int insertProAttachment(ArrayList<Attachment> aList);
+
+	Attachment selectPicBoard1(int bNo);
+
+	Attachment selectPicBoard2(int bNo);
+
+	Attachment selectPicBoard3(int bNo);
+
+	Attachment selectupPBoard1(int bNo);
+
+	Attachment selectupPBoard2(int bNo);
+
+	Attachment selectupPBoard3(int bNo);
+
+	Attachment selectupPBoard4(int bNo);
 
 
 
 
 
-	
+
+
 }
