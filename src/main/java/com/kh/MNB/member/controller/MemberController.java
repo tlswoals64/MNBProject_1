@@ -40,74 +40,75 @@ import com.kh.MNB.memo.model.vo.Memo;
 
 @Controller
 public class MemberController {
-	@Autowired
-	MemberService mService;
-	
-	@Autowired
-	MemoService memoService;
-	
+   @Autowired
+   MemberService mService;
+   
+   @Autowired
+   MemoService memoService;
+   
 
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
-	
-	
-	   @RequestMapping("memberSingUp.do")
-	   public String memberSingUp() {
-	      return "member/singUpForm";
-	   }
-	   
-	   @RequestMapping("dupid.do")
-	   public ModelAndView idDuplicateCheck(ModelAndView mv, String id) {
-	      Map<String, Boolean> map = new HashMap<String, Boolean>();
-	      boolean isUsable = mService.checkIdDup(id) == 0 ? true : false;
-	      
-	      map.put("isUsable", isUsable);
-	      mv.addAllObjects(map);
-	      mv.setViewName("jsonView");
-	      
-	      return mv;
-	   }
-	   
-	   @RequestMapping("isNick.do")
-	   public void idDuplicateCheck(HttpServletResponse response, String nickname) throws IOException {
-	      
-	      boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false; 
-	      
-	      response.getWriter().print(checkNickName);
-	   }
-	   
-	   // 회원가입
-	   @RequestMapping("minsert.do")
-	   public String memberInsert(@ModelAttribute Member m, @RequestParam("address") String address, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, @RequestParam("addEmail") String addEmail) {
-	      
-	      System.out.println(m);
-	      
-	      /*
-	         1. 결과 값을 받아보면 할글이 깨짐
-	            스프링에서 제공하는 필터를 이용해서 요청 시 전달 받는 값에 한글이 있을 경우 인코딩 하는 것 추가
-	            
-	         2. 비밀번호 평문
-	            bcrypt : 스프링 시큐리티 모듈에서 제공하는 암호화 방식
-	      */
-	      
-	      String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
-	      // encPwd : 암호화된 비밀번호
-	      m.setUserPwd(encPwd);
-	      String email = m.getEmail() + "@" + addEmail;
-	      m.setEmail(email);
-	      m.setAddress(address + "/" + detailAddress + "/" + extraAddress);
-	      
-	      System.out.println(m);
-	      int result = mService.insertMember(m);
-	      
-	      if(result > 0) {
-	         return "redirect:index.jsp";
-	         
-	      } else {
-	         throw new MemberException("회원가입에 실패하였습니다.");
-	      }
-	   }
-	   
+   @Autowired
+   private BCryptPasswordEncoder bcryptPasswordEncoder;
+   
+   private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+   
+      @RequestMapping("memberSingUp.do")
+      public String memberSingUp() {
+         return "member/singUpForm";
+      }
+      
+      @RequestMapping("dupid.do")
+      public ModelAndView idDuplicateCheck(ModelAndView mv, String id) {
+         Map<String, Boolean> map = new HashMap<String, Boolean>();
+         boolean isUsable = mService.checkIdDup(id) == 0 ? true : false;
+         
+         map.put("isUsable", isUsable);
+         mv.addAllObjects(map);
+         mv.setViewName("jsonView");
+         
+         return mv;
+      }
+      
+      @RequestMapping("isNick.do")
+      public void idDuplicateCheck(HttpServletResponse response, String nickname) throws IOException {
+         
+         boolean checkNickName = mService.checkNickName(nickname) == 0 ? true : false; 
+         
+         response.getWriter().print(checkNickName);
+      }
+      
+      // 회원가입
+      @RequestMapping("minsert.do")
+      public String memberInsert(@ModelAttribute Member m, @RequestParam("address") String address, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, @RequestParam("addEmail") String addEmail) {
+         
+         System.out.println(m);
+         
+         /*
+            1. 결과 값을 받아보면 할글이 깨짐
+               스프링에서 제공하는 필터를 이용해서 요청 시 전달 받는 값에 한글이 있을 경우 인코딩 하는 것 추가
+               
+            2. 비밀번호 평문
+               bcrypt : 스프링 시큐리티 모듈에서 제공하는 암호화 방식
+         */
+         
+         String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+         // encPwd : 암호화된 비밀번호
+         m.setUserPwd(encPwd);
+         String email = m.getEmail() + "@" + addEmail;
+         m.setEmail(email);
+         m.setAddress(address + "/" + detailAddress + "/" + extraAddress);
+         
+         System.out.println(m);
+         int result = mService.insertMember(m);
+         
+         if(result > 0) {
+            return "redirect:index.jsp";
+            
+         } else {
+            throw new MemberException("회원가입에 실패하였습니다.");
+         }
+      }
+      
 	   @RequestMapping(value = "sendMail.do", method = RequestMethod.POST)
 	   @ResponseBody
 	   public String sendMail(HttpSession session, @RequestParam String email) {
@@ -129,7 +130,7 @@ public class MemberController {
 	    	  return "fail";
 	      }
 	   }
-		
+      
 	   //---------로그인화면이동----------
 		@RequestMapping("loginView.do")
 		public String loginView() {
@@ -154,7 +155,7 @@ public class MemberController {
 			}
 			 
 		}
-		
+      
 		// ---------- 로그아웃 ----------
 		@RequestMapping("logout.do")
 		public String logout(SessionStatus status) {
@@ -162,7 +163,7 @@ public class MemberController {
 			status.setComplete();
 			return "redirect:index.jsp";
 		}
-		
+      
 		//---------- 아이디 찾기 ----------
 		@RequestMapping("idSearchView.do")
 		public String idSearchView() {
@@ -181,8 +182,8 @@ public class MemberController {
 				throw new MemberException("아이디 찾기에 실패하였습니다.");
 			}
 		}
-		
-		
+      
+      
 		//--------- 비밀번호 찾기-----------
 		@RequestMapping("pwdIdCheck.do")
 		public String pwdIdCheckView() {
@@ -207,99 +208,104 @@ public class MemberController {
 		public String pwdSearch() {
 			return "login/pwdChange";
 		}
-		
-	
-	//------------------------- ������ �κ� ---------------------------
-	@RequestMapping("manaHome.do")
-	public String test() {
-		return "manager/managermainView";
-	}
+   
+   //-------------------------관리자 페이지로 이동 ---------------------------
+   @RequestMapping("manaHome.do")
+   public String test() {
 
-	@RequestMapping("mManaList.do")
-	   public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
-	      int currentPage = 1;
-	      if(page != null) {
-	         currentPage = page;
-	      }
-	      
-	      int listCount = mService.getListCount(); // ��ü ������ ��
-	      
-	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ������������ ����
-	      
-	      ArrayList<Member> list = mService.selectmemberManaList(pi);
-	      
-	      if(list != null) {
-	         mv.addObject("list", list);
-	         mv.addObject("pi", pi);
-	         mv.setViewName("manager/managerMemberManaListView");
-	      }
-	      else {
-	         throw new MemberException(""
-	         		+ "");
-	      }
-	      
-	      return mv;
-	   }
-	
+	   
+	   System.out.println("들어왔니?");
+      return "manager/managermainView";
+   }
+   
+   @RequestMapping("myPageView.do")
+   public String myPage() {
+	   	   return "member/myPageMainView";
+   }
 
-	// ȸ������ ������ ������
-	@RequestMapping("mUserDetail.do")
-	public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {
-		String userId = request.getParameter("userId");
-		Member m = mService.selectUserDetail(userId);
-		if(userId != null) {
-			mv.addObject("m", m);
-			mv.setViewName("manager/managerMemberManaDetailView");
-		}
-		else {
-			throw new MemberException("ȸ������ ��ȸ�� �����Ͽ����ϴ�.");
-		}
-		return mv;
-	}
-	
-	// ȸ������ ������ �������� �޸�ҷ����� �Լ�
-	@RequestMapping("memo.do")
-	public void getReplyList(HttpServletResponse response, String userId) throws IOException {
-		ArrayList<Memo> memoList = memoService.selectUserMemo(userId);
-		for(Memo m : memoList) {
-			m.setContent(URLEncoder.encode(m.getContent(), "utf-8"));
-		}
-		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(memoList, response.getWriter());
-	}
-	
-	// �޸� �߰�
-	@RequestMapping("addMemo.do")
-	public void insertReply(HttpServletResponse response, String mContent, String userId) throws IOException {
-		
-		Memo memo = new Memo();
-		memo.setUserId(userId);
-		memo.setContent(mContent);
-		
-		int result = memoService.insertMemo(memo);
-		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(result, response.getWriter());
-		
-	}
-	
-	// ȸ������
-	@RequestMapping("mUserUpdate.do")
-	public String mUserUpdate(HttpServletRequest request, Member m,
-								   @RequestParam("address2") String address2,
-								   @RequestParam("address3") String address3,
-								   @RequestParam("address4") String address4) {
-		
-		m.setAddress(address2 + "/" + address3+ "/" + address4);
-		
-		int result = mService.mUserUpdate(m);
-		if(result > 0) {
-			return "redirect:mUserDetail.do?userId=" + m.getUserId();
-		}
-		else {
-			throw new MemberException("ȸ������ ������ �����Ͽ����ϴ�.");
-		}
-	}
-	
+   @RequestMapping("mManaList.do")
+      public ModelAndView manaList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+         int currentPage = 1;
+         if(page != null) {
+            currentPage = page;
+         }
+         
+         int listCount = mService.getListCount(); // ��ü ������ ��
+         
+         PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // ������������ ����
+         
+         ArrayList<Member> list = mService.selectmemberManaList(pi);
+         
+         if(list != null) {
+            mv.addObject("list", list);
+            mv.addObject("pi", pi);
+            mv.setViewName("manager/managerMemberManaListView");
+         }
+         else {
+            throw new MemberException("�Խñ� ��ü ��ȸ�� �����Ͽ����ϴ�.");
+         }
+         
+         return mv;
+      }
+
+   // ȸ������ ������ ������
+   @RequestMapping("mUserDetail.do")
+   public ModelAndView mUserDetail(HttpServletRequest request, ModelAndView mv) {
+      String userId = request.getParameter("userId");
+      Member m = mService.selectUserDetail(userId);
+      if(userId != null) {
+         mv.addObject("m", m);
+         mv.setViewName("manager/managerMemberManaDetailView");
+      }
+      else {
+         throw new MemberException("ȸ������ ��ȸ�� �����Ͽ����ϴ�.");
+      }
+      return mv;
+   }
+   
+   // ȸ������ ������ �������� �޸�ҷ����� �Լ�
+   @RequestMapping("memo.do")
+   public void getReplyList(HttpServletResponse response, String userId) throws IOException {
+      ArrayList<Memo> memoList = memoService.selectUserMemo(userId);
+      for(Memo m : memoList) {
+         m.setContent(URLEncoder.encode(m.getContent(), "utf-8"));
+      }
+      
+      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+      gson.toJson(memoList, response.getWriter());
+   }
+   
+   // �޸� �߰�
+   @RequestMapping("addMemo.do")
+   public void insertReply(HttpServletResponse response, String mContent, String userId) throws IOException {
+      
+      Memo memo = new Memo();
+      memo.setUserId(userId);
+      memo.setContent(mContent);
+      
+      int result = memoService.insertMemo(memo);
+      
+      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+      gson.toJson(result, response.getWriter());
+      
+   }
+   
+   // ȸ������
+   @RequestMapping("mUserUpdate.do")
+   public String mUserUpdate(HttpServletRequest request, Member m,
+                           @RequestParam("address2") String address2,
+                           @RequestParam("address3") String address3,
+                           @RequestParam("address4") String address4) {
+      
+      m.setAddress(address2 + "/" + address3+ "/" + address4);
+      
+      int result = mService.mUserUpdate(m);
+      if(result > 0) {
+         return "redirect:mUserDetail.do?userId=" + m.getUserId();
+      }
+      else {
+         throw new MemberException("ȸ������ ������ �����Ͽ����ϴ�.");
+      }
+   }
+   
 }

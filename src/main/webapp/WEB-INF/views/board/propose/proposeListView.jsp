@@ -75,10 +75,10 @@
 <div class="frame">
 
        <div class="sidebar">
-      <h2>커뮤니티</h2>
+      <h2>문의사항</h2>
       <ul>
-         <li>커뮤니티</li>
-         <li>나눔게시판</li>
+         <li>문의사항</li>
+         <li>자주묻는질문</li>
       </ul>
    </div>
       
@@ -90,9 +90,10 @@
          <thead>
             <tr style="background-color:pink">
                <th>번호</th>
+               <th>분류 </th>
                <th class="title">제목</th>
                <th>글쓴이</th>
-               <th>조회수</th>   
+               <th>답변여부</th>   
                <th>작성 일</th>
             </tr>
             <!-- 리스트가져오기 -->
@@ -102,7 +103,7 @@
        
 		<tr onclick="comDetail(this);">
 			<td align="center" id="bNo">${ b.bNo }</td>
-			
+			<td>분류</td>
 			<td align="left"> 
 				${ b.bTitle }
 			<%-- <c:if test="${ empty loginUser }">
@@ -111,7 +112,7 @@
 			</td>
 			
 			<td align="center">${ b.bWriter }</td>
-			<td align="center">${ b.bCount }</td>
+			<td align="center">${ b.Re }</td>
 			<td align="center">${ b.b_CreateDate }</td>
 			
 		
@@ -120,7 +121,7 @@
 			function comDetail(v){
 				var bNo=$(v).children("#bNo").text();
 				console.log(bNo);
-			location.href="detailCom.do?bNo="+ bNo; 
+				location.href="detailCom.do?bNo="+ bNo;
 			}
 		</script>
 		</c:forEach>
@@ -133,7 +134,7 @@
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi1.currentPage > 1 }">
-					<c:url var="before" value="comListView.do">
+					<c:url var="before" value="proListView.do">
 						<c:param name="page" value="${ pi1.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
@@ -146,7 +147,7 @@
 					</c:if>
 					
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="comListView.do">
+						<c:url var="pagination" value="proListView.do">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -158,7 +159,7 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi1.currentPage < pi1.maxPage }">
-					<c:url var="after" value="blist.do">
+					<c:url var="after" value="proListView.do">
 						<c:param name="page" value="${ pi1.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
@@ -186,11 +187,10 @@
       </div>
 
           <div align="right">
-         <button onclick="location.href='inCom.do'"
+         <button onclick="location.href='inPro.do'"
             id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
   border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
     	  </div> 
-   
       </div>
       </div>
       <script>

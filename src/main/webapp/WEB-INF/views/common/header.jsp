@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
 <style>
 	
@@ -49,6 +50,7 @@
 		<div class="header_btn">
 			<c:if test="${ empty sessionScope.loginUser }">
 			<ul>
+				<li><button id="manager-btn" onclick="location.href='chat.do';">채팅 가기</button></li>
 				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
 				<li><A href='loginView.do'>LOGIN</a></li>
 				<li><A href="memberSingUp.do">JOIN</a></li>
@@ -59,11 +61,13 @@
 			</c:if>
 			<c:if test="${ !empty sessionScope.loginUser }">
 			<ul>
+				<li><button id="manager-btn" onclick="location.href='chat.do';">채팅 가기</button></li>
 				<li><button id="manager-btn" onclick="location.href='manaHome.do';">관리자 페이지로 가기</button></li>
 				<li><A href='myPageView.do'>마이페이지</a></li>
 				<li><A href="logout.do">로그아웃</a></li>
-				<li><A href="#">베이비시터등록</a></li>
+				<li><A href="sitterApplyPage.do">베이비시터등록</a></li>
 				<li><A href="noteList.do">쪽지</a></li>
+
 			</ul>
 			</c:if>
 		</div>
@@ -78,6 +82,7 @@
 				<li><A href='bIntro.do'>베이비시터</a></li>
 				<li><A href="cIntro.do">커뮤니티</a></li>
 				<li><A href="fListView.do">자주묻는질문</a></li>
+				<li><A href="proListView.do">문의사항</a></li>
 			</ul>
 		</div>
 	</div>

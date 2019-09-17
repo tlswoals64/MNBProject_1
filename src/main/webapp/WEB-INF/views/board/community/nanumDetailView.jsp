@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 
 @import url('font.css');
 
-body {margin:0;padding:0;  text-decoration:none; font-family:"NanumSquare","NanumMyeongjo","malgun","³ª´®°íµñ", "NanumGothic", "µ¸¿ò", "Dotum", "±¼¸²", "Gulim", "Sans-serif","Roboto"; font-size:13px; letter-spacing:-1px; background:#fff;line-height:160%}
+body {margin:0;padding:0;  text-decoration:none; font-family:"NanumSquare","NanumMyeongjo","malgun","ë‚˜ëˆ”ê³ ë”•", "NanumGothic", "ë‹ì›€", "Dotum", "êµ´ë¦¼", "Gulim", "Sans-serif","Roboto"; font-size:13px; letter-spacing:-1px; background:#fff;line-height:160%}
 div,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,th,td,dd,dl {margin:0;padding:0;}
 html{ }
 img{border:0; vertical-align:middle;}
@@ -58,7 +59,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .replyArea td {}
 
 
-/*»óÇ°¸í »óÇ°¼Ò°³µîµî*/
+/*ìƒí’ˆëª… ìƒí’ˆì†Œê°œë“±ë“±*/
 .product_info {padding:10px;min-height: 486px;}
 .product_info h2 {font-size:20px;margin-bottom:20px;}
 .product_info ul li {float:left;margin-bottom:20px;margin-right:20px;}
@@ -77,32 +78,32 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div class="both"></div>
 	
 	
-	<	<div class="content">	
+		<div class="content">	
 		<div class="nanum_view">
 			<ul>
 				<li>
 					<table>
 						<tr>
 							<th colspan ="5">
-								<img src="resources/images/main/main_img_01.png" width="480" height="380" class="large" />
+								<img src="resources/images/board/${ board[0].changeName }" width="480" height="380" class="large" />
 							</th>
 						</tr>
 						<tr>
 							<td class="small">
-								<a href="resources/images/main/main_img_02.png"><img src="resources/images/main/main_img_02.png" width="480" height="380"/></a>
-								<p>»ï¼º 21x<br>&#8361;500
+								<a href="resources/images/board/${ board[0].changeName }"><img src="resources/images/board/${ board[0].changeName }" width="480" height="380"/></a>
+								<p>ì‚¬ì§„1<br>
 							</td>	
 							<td class="small">
-								<a href="resources/images/main/main_img_03.png"><img src="resources/images/main/main_img_03.png" width="480" height="380"/></a>
-								<p>»ï¼º 21x<br>&#8361;500
+								<a href="resources/images/board/${ board[1].changeName }"><img src="resources/images/board/${ board[1].changeName }" width="480" height="380"/></a>
+								<p>ì‚¬ì§„2<br>
 							</td>
 							<td class="small">
-								<a href="resources/images/main/main_img_01.png"><img src="resources/images/main/main_img_01.png" width="480" height="380"/></a>
-								<p>»ï¼º 21x<br>&#8361;500
+								<a href="resources/images/board/${ board[2].changeName }"><img src="resources/images/board/${ board[2].changeName }" width="480" height="380"/></a>
+								<p>ì‚¬ì§„3<br>
 							</td>
 							<td class="small">
-								<a href="resources/images/main/main_img_02.png"><img src="resources/images/main/main_img_02.png" width="480" height="380"/></a>
-								<p>»ï¼º 21x<br>&#8361;500
+								<a href="resources/images/board/${ board[3].changeName }"><img src="resources/images/board/${ board[3].changeName }" width="480" height="380"/></a>
+								<p>ì‚¬ì§„4<br>
 							</td>
 						</tr>
 					</table>
@@ -120,43 +121,36 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	</script>
 				</li>
 				
-				
-				
-				
-				
-				
-				
 		<li>
 			<div class="product_info">
-				<h2>»óÇ°¾È³»
+				<h2>ìƒí’ˆì•ˆë‚´
 				<span style="float:right;"><img src="resources/images/board/singo.png"></span></h2>
 				<ul>
-					<li class="pro_title">ÆÇ¸ÅÀÚÁ¤º¸</li>
-					<li>¾ÆÀÌµğ</li>
-					<li>ÀÌ¸ŞÀÏ</li>
+					<li class="pro_title">ì œëª©</li>
+					<li> ${ board[0].bTitle }</li>
 				</ul>
 				<p class="both"></p>
 				<ul>
-					<li class="pro_title">°Å·¡¹æ¹ı</li>
-					<li>¾ÆÀÌµğ</li>
+					<li class="pro_title">ì‘ì„±ì</li>
+					<li> ${ board[0].bWriter }</li>
 				</ul>
 				<p class="both"></p>
 				<ul>
-					<li class="pro_title">¹è¼Û¹æ¹ı</li>
-					<li>ÆÇ¸ÅÀÚ¿Í Á÷Á¢¿¬¶ôÇÏ¼¼¿ä.</li>
+					<li class="pro_title">ì‘ì„±ë‚ ì§œ</li>
+					<li>${ board[0].upload_Date }</li>
 				</ul>
 				<p class="both"></p>
-				<p class="info_txt"><span>Á÷Á¢°Å·¡½Ã ¾Æ·¡ »çÇ×¿¡ À¯ÀÇÇØÁÖ¼¼¿ä.</span><br>
-				ºÒÈ®½ÇÇÑ ÆÇ¸ÅÀÚ(º»ÀÎ ¹ÌÀÎÁõ, ÇØ¿ÜIP, »ç±âÀÇ½É ÀüÈ­¹øÈ£)ÀÇ ¹°°ÇÀº ±¸¸ÅÇÏÁö ¸»¾ÆÁÖ¼¼¿ä.<br>
-				ÆÇ¸ÅÀÚ¿ÍÀÇ ¿¬¶ôÀº ¸Ş½ÅÀúº¸´Ù´Â ÀüÈ­, ¸ŞÀÏ µîÀ» ÀÌ¿ëÇÏ½Ã°í °³ÀÎÁ¤º¸ À¯Ãâ¿¡ ÁÖÀÇÇÏ¼¼¿ä.<br>
-				°èÁÂÀÌÃ¼ ½Ã ¼±ÀÔ±İÀ» À¯µµÇÒ °æ¿ì ¾ÈÀüÇÑ °Å·¡ÀÎÁö ´Ù½Ã ÇÑ ¹ø È®ÀÎÇØÁÖ¼¼¿ä.</p>
+				<p class="info_txt"><span>ì§ì ‘ê±°ë˜ì‹œ ì•„ë˜ ì‚¬í•­ì— ìœ ì˜í•´ì£¼ì„¸ìš”.</span><br>
+				ë¶ˆí™•ì‹¤í•œ íŒë§¤ì(ë³¸ì¸ ë¯¸ì¸ì¦, í•´ì™¸IP, ì‚¬ê¸°ì˜ì‹¬ ì „í™”ë²ˆí˜¸)ì˜ ë¬¼ê±´ì€ êµ¬ë§¤í•˜ì§€ ë§ì•„ì£¼ì„¸ìš”.<br>
+				íŒë§¤ìì™€ì˜ ì—°ë½ì€ ë©”ì‹ ì €ë³´ë‹¤ëŠ” ì „í™”, ë©”ì¼ ë“±ì„ ì´ìš©í•˜ì‹œê³  ê°œì¸ì •ë³´ ìœ ì¶œì— ì£¼ì˜í•˜ì„¸ìš”.<br>
+				ê³„ì¢Œì´ì²´ ì‹œ ì„ ì…ê¸ˆì„ ìœ ë„í•  ê²½ìš° ì•ˆì „í•œ ê±°ë˜ì¸ì§€ ë‹¤ì‹œ í•œ ë²ˆ í™•ì¸í•´ì£¼ì„¸ìš”.</p>
 
-				<p class="order_txt">* °Å·¡Àü ÇÊµ¶! ÁÖÀÇÇÏ¼¼¿ä!<br>
-* ¿¬¶ôÃ³°¡ ¾øÀÌ ¿ÜºÎ¸µÅ©, Ä«Ä«¿ÀÅå, ´ñ±Û·Î¸¸ °Å·¡ÇÒ ¶§<br>
-* ¿¬¶ôÃ³ ¹× °èÁÂ¹øÈ£¸¦ »çÀÌ¹öÄ°°ú ´õÄ¡Æ®·Î ²À Á¶È¸ÇØº¸±â<br>
-* ¾÷Ã¼ÀÎ Ã´ À§ÀåÇÏ¿© ½ÅºĞÁõ°ú »ç¾÷ÀÚµî·ÏÁõÀ» º¸³»´Â °æ¿ì<br>
-* °í°¡ÀÇ ¹°Ç°(ÈŞ´ëÆù,ÀüÀÚ±â±â)µî¸¸ ÆÇ¸ÅÇÏ°í ÃÖ±Ù(1ÁÖÀÏ ³») °Ô½Ã±Û¸¸ ÀÖÀ» ¶§<br>
-* ÇØ¿ÜÁ÷±¸·Î ¸é¼¼¹ŞÀº ¹°Ç°À» ÆÇ¸ÅÇÏ´Â ÇàÀ§´Â ºÒ¹ıÀÔ´Ï´Ù.</p>
+				<p class="order_txt">* ê±°ë˜ì „ í•„ë…! ì£¼ì˜í•˜ì„¸ìš”!<br>
+* ì—°ë½ì²˜ê°€ ì—†ì´ ì™¸ë¶€ë§í¬, ì¹´ì¹´ì˜¤í†¡, ëŒ“ê¸€ë¡œë§Œ ê±°ë˜í•  ë•Œ<br>
+* ì—°ë½ì²˜ ë° ê³„ì¢Œë²ˆí˜¸ë¥¼ ì‚¬ì´ë²„ìº…ê³¼ ë”ì¹˜íŠ¸ë¡œ ê¼­ ì¡°íšŒí•´ë³´ê¸°<br>
+* ì—…ì²´ì¸ ì²™ ìœ„ì¥í•˜ì—¬ ì‹ ë¶„ì¦ê³¼ ì‚¬ì—…ìë“±ë¡ì¦ì„ ë³´ë‚´ëŠ” ê²½ìš°<br>
+* ê³ ê°€ì˜ ë¬¼í’ˆ(íœ´ëŒ€í°,ì „ìê¸°ê¸°)ë“±ë§Œ íŒë§¤í•˜ê³  ìµœê·¼(1ì£¼ì¼ ë‚´) ê²Œì‹œê¸€ë§Œ ìˆì„ ë•Œ<br>
+* í•´ì™¸ì§êµ¬ë¡œ ë©´ì„¸ë°›ì€ ë¬¼í’ˆì„ íŒë§¤í•˜ëŠ” í–‰ìœ„ëŠ” ë¶ˆë²•ì…ë‹ˆë‹¤.</p>
 			</div>
 		</li>
 
@@ -170,7 +164,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		
 		<div class="nanum_content">
 			<ul>
-				<li>³»¿ë</li>
+				<li>${ board[0].bContent }</li>
 			</ul>
 		</div>
 		
@@ -180,20 +174,30 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 			<div class = "replyWriterArea">
 			
 			<div class = "replySelectArea">
-				<table id = "replySelectTable">
+			 <table class="replyTable" id="rtb">
+			<h2> ëŒ“ê¸€ </h2>			
+	   		<thead>
+	   			<tr><td colspan="2">
+	   				<b id="rCount"></b>
+	   			</tr>
+	   		</thead>
+	   		<tbody>
+	   			
+	   		</tbody>
+	   </table>
+			 	<table id = "replySelectTable">
 					
-			<h2> ´ñ±Û </h2>			
 							<tr>
-								<td style="width:100px; font-size:20px;padding-top:10px;">°íºê¸£</td> 
-								<td style="width:200px; font-size:20px;padding-top:10px;">2019-08-06</td>
+								<td style="width:100px; font-size:20px;padding-top:10px;">${rWriter}</td> 
+								<td style="width:200px; font-size:20px;padding-top:10px;">${nCreate_Date}</td>
 							</tr>
 							<tr>
-								<td style="width:600px;text-align: left; padding-left: 20px; font-size:15px; padding-top: 5px;">¸ÇÆ¼½º »õ¿ì µü¹ã?!</td>
+								<td style="width:600px;text-align: left; padding-left: 20px; font-size:15px; padding-top: 5px;">${nContent}</td>
 							</tr>
 						
 					
 					
-				</table>
+				</table> 
 			</div>
 
 	
@@ -201,8 +205,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 
 				<div class="comment_wrap">
 					<div class="comment_text"	>
-						<textarea id="replyContent" rows="3" cols="80" class="form-control" placeholder="´ñ±ÛÀ» ÀÔ·ÂÇÏ¼¼¿ä." style="width: 750px;height: 90px; margin:0 auto; margin-top: 20px;display: inline-block; resize: none;position:relative; box-shadow: -1px 0px 15px 1px #9d9a9a;"></textarea>
-						<input type="button" id="addReply" style="width:100px; height:90px;color:#000; background-color:#FFC0CB;border:0;position: absolute;left: 915px; margin-top: 20px;" value="´ñ±Û¾²±â">
+						<textarea id="replyContent" rows="3" cols="80" class="form-control" placeholder="ëŒ“ê¸€ì„ ì…ë ¥í•˜ì„¸ìš”." style="width: 750px;height: 90px; margin:0 auto; margin-top: 20px;display: inline-block; resize: none;position:relative; box-shadow: -1px 0px 15px 1px #9d9a9a;"></textarea>
+						<input type="button" id="addReply" style="width:100px; height:90px;color:#000; background-color:#FFC0CB;border:0;position: absolute;left: 1105px; margin-top: 20px;" value="ëŒ“ê¸€ì“°ê¸°">
 					</div>
 				</div>
 				
@@ -213,40 +217,56 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 			
 		</div>
 		
-		 <script>
+		<div class="both"></div>
+	
+	    <c:url var="updateNanumView" value="nanumUpdateView.do">
+         <c:param name="bNo" value="${ board[0].bNo }"/><!--  -->
+        <%--  <c:param name="page" value="${ page }"/> --%>
+      </c:url>
+      <c:url var="deleteNanumView" value="deleteNanumBoard.do">
+         <c:param name="bNo" value="${ board[0].bNo }"/>
+      </c:url>	
+      <c:url var="nBoard" value="nBoard.do"> 
+         <c:param name="page" value="${ page }"/>
+      </c:url> 
+      <!-- ì¸ë±ìŠ¤ ë²ˆí˜¸ì¢€ ìƒê°í•˜ì…ˆ ì”¨ë²Œìƒˆi -->
+
+		
+		<script>
 	   	$(function(){
 	   		getReplyList();
-	   		
+	   			
 	   		setInterval(function(){
 	   			getReplyList();
 	   		}, 10000);
 	   	});
+	  
 	 	$("#addReply").on("click", function(){
-	   		var rContent = $("#replyContent").val();
-	   		var refBno = ${board.bNo};
-	   		
-	   		$.ajax({
-	   			url: "addReply.do",
-	   			data: {nContent:nContent, refBno:refBno},
-	   			type: "post",
+	   		var nContent = $("#replyContent").val();
+	   		var refBno = ${board[0].bNo};
+	   		 
+	   		 $.ajax({
+	   			url: "addNanumReply.do",
+	   			data: {nContent:nContent, bNo:refBno},
+	   			type: "get",
 	   			success: function(data){
 	   				
 	   				if(data == "success"){
 	   					$("#replyContent").val("");
 	   					getReplyList();
-	   				}
+	   				} 
 	   				else{
-	   					alert("´ñ±Ûµî·Ï¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+	   					alert("ëŒ“ê¸€ë“±ë¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 	   					$("#replyContent").val("");
 	   				}
 	   				
 	   			}
-	   		});
-	   	});
+	   		}); 
+	   	}); 
 	 	
-	  	// ´ñ±Û ¸®½ºÆ® ajax
+	  	// ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ ajax
 	   	function getReplyList(){
-	   		var bNo = ${board.bNo};
+	   		var bNo = ${board[0].bNo};
 	   		$.ajax({
 	   			url: "rList.do",
 	   			data: {bNo:bNo},
@@ -260,14 +280,14 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   				var $rContent;
 	   				var $rCreateDate;
 	   				
-	   				$("#rCount").text("´ñ±Û (" + data.length + ")");
+	   				$("#rCount").text("ëŒ“ê¸€ (" + data.length + ")");
 	   				
 	   				if(data.length > 0){
 	   					for(var i in data){
 	   						$tr = $("<tr>");
 	   						$rWriter =  $("<td width='100'>").text(data[i].rWriter);
-	   					    $rContent = $("<td>").text(decodeURIComponent(data[i].rContent.replace(/\+/g, " ")));
-	   					    $rCreateDate =  $("<td width='100'>").text(data[i].rCreateDate);
+	   					    $rContent = $("<td>").text(decodeURIComponent(data[i].nContent.replace(/\+/g, " ")));
+	   					    $rCreateDate =  $("<td width='100'>").text(data[i].nCreate_Date);
 	   					    
 	   					    $tr.append($rWriter);
 		   					$tr.append($rContent);
@@ -277,7 +297,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   				}
 	   				else{
 	   					$tr = $("<tr>");
-	   					$rContent = $("<td colspan='3'>").text("µî·ÏµÈ ´ñ±ÛÀÌ ¾ø½À´Ï´Ù.");
+	   					$rContent = $("<td colspan='3'>").text("ë“±ë¡ëœ ëŒ“ê¸€ì´ ì—†ìŠµë‹ˆë‹¤.");
 	   		
 					   	$tr.append($rContent);
 						$tableBody.append($tr);
@@ -285,16 +305,24 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   			}
 	  	 	});
 	   	}
-	 	
+	 	 
 	 	</script>
 	 	
 
 	<div class="both"></div>
-	
+	    <c:if test="${ loginUser.userId eq board[0].bWriter }"> 
+	<p align="center">
+            <button onclick="location.href='${ updateNanumView }'" >ìˆ˜ì •í•˜ê¸°</button>
+            <button onclick="location.href='${ deleteNanumView }'">ì‚­ì œí•˜ê¸°</button>
+ 	</p>
+      </c:if>   
+	 <c:if test="${ loginUser.userId ne board[0].bWriter }"> 
 	 <p align="center">
-      <button onclick="location.href='home.do'">½ÃÀÛ ÆäÀÌÁö·Î ÀÌµ¿</button>
-      <button onclick="location.href='${ blist }'">¸ñ·Ï º¸±â·Î ÀÌµ¿</button>
+	 
+      <button onclick="location.href=' index.jsp '">ì‹œì‘ í˜ì´ì§€ë¡œ ì´ë™</button>
+      <button onclick="location.href=' views/board/community/nanumView.jsp'">ëª©ë¡ ë³´ê¸°ë¡œ ì´ë™</button>
    </p>
+   </c:if>
    	
    	<div class="both"></div>
 
