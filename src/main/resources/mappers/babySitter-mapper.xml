@@ -37,10 +37,13 @@
 	<select id="selectDetail" parameterType="board" resultType="Momboard">
 		select *
 		from suppotMom_list
-		where bNo=#{bNo} and status='Y' and bWriter=#{bWriter}
-
-	
+		where bNo=#{bNo} and status='Y'
 	</select>
+	<update id="addMomReadCount">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo}
+	</update>
 
 	<insert id="insertSuppotBoard">
 		insert into board

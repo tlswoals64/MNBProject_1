@@ -3,29 +3,46 @@ package com.kh.MNB.reView.model.vo;
 public class ReView {
 	
 	private int bNo;
-	private int BEva;
+	private int bEva;
+	
 	public ReView() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
+
+	
 	public ReView(int bNo, int bEva) {
 		super();
 		this.bNo = bNo;
-		BEva = bEva;
+		this.bEva = bEva;
 	}
+
+
 	public int getbNo() {
 		return bNo;
 	}
+
+
 	public void setbNo(int bNo) {
 		this.bNo = bNo;
 	}
-	public int getBEva() {
-		return BEva;
+
+
+	public int getbEva() {
+		return bEva;
 	}
-	public void setBEva(int bEva) {
-		BEva = bEva;
+
+
+	public void setbEva(int bEva) {
+		this.bEva = bEva;
+	}
+
+
+	@Override
+	public String toString() {
+		return "ReView [bNo=" + bNo + ", bEva=" + bEva + "]";
 	}
 	
+	
+
 	
 	
 

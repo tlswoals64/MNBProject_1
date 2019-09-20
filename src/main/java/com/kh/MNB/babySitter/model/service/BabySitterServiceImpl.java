@@ -61,11 +61,7 @@ public class BabySitterServiceImpl implements BabySitterService {
 		return bsDAO.getMomListCount();
 	}
 
-	@Override
-	public Momboard selectDetail(Board board) {
-		// TODO Auto-generated method stub
-		return bsDAO.selectDetail(board);
-	}
+
 
 	public int insertSuppotBoard(Board board) {
 		return bsDAO.insertSuppotBoard(board);
@@ -116,6 +112,20 @@ public class BabySitterServiceImpl implements BabySitterService {
 		return bsDAO.insertSuppotReply(r);
 
 	}
-	
+
+	@Override
+	public Momboard selectDetail(int bNo) {
+		
+		return bsDAO.selectDetail(bNo);
+	}
+
+	@Override
+	public void addMomReadCount(int bNo) {
+		bsDAO.addMomReadCount(bNo);
+		
+	}
+
+
+
 	
 }

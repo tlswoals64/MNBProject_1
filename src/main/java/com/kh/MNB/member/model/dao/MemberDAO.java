@@ -95,6 +95,18 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.myBoardUpdate",map);
 	}
 
+	public Board boardType(int bNo) {
+		return sqlSession.selectOne("memberMapper.boardType", bNo);
+	}
+
+	public int pwdcUpdate(Member m) {
+		return sqlSession.update("memberMapper.pwdcUpdate", m);
+	}
+
+	public String pwdMemberSearch(Member m) {
+		return sqlSession.selectOne("memberMapper.pwdMemberSearch",m);
+	}
+
 	
 
 }

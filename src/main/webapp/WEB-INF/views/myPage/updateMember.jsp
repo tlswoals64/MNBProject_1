@@ -199,7 +199,7 @@ vertical-align: top;
 		
 						<input id = "email" class = "joininput email" name = "email" type = "text" oninvalid="이메일을 입력하시오." required>
 						@ <input id = "addEmail" class = "joininput addEmail" name = "addEmail" type = "text" required>
-						<select id ="emailOption" class = "joininput emailOption" style = "width : 160px; height : 35px; font-size : 14px; margin-left : 10px;">
+						<select id ="emailOption" class = "joininput emailOption" style = "width : 160px; height : 35px; font-size : 14px; margin-left : 10px;" onchange="option();">
 							<option value = "" selected>이메일 선택</option>
 							<option value = "naver.com">naver.com</option>
 							<option value = "daum.net">daum.net</option>
@@ -239,6 +239,7 @@ vertical-align: top;
 	</form>
 
 	<script>
+		var checkCode = "";
 		function execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
@@ -285,21 +286,22 @@ vertical-align: top;
 		}
 		
 		/***************************************************** 이메일 인증 *******************************************************/
-		var joinCode = "";
+		
  		function sendMail(){
 			var email = $("#email").val() + '@' + $("#addEmail").val();
 			var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 			
 			if(re.test(email)){
 				$.ajax({
-					url: "sendMail.do",
+					url: "updateSendMail.do",
 					data: {email : email},
 					type: "POST",
 					success: function(data){
-						if(data === true){
-							joinCode = <%= session.getAttribute("joinCode") %>;
-						} else{
+						if(data === 'fail'){
 							alert("실패!");
+						} else{
+							checkCode= data;
+							console.log(checkCode);
 						}
 					}, error : function(jqxhr, textStatus, errorThrown){
 						console.log("메일 전송 실패");
@@ -314,7 +316,16 @@ vertical-align: top;
 				alert("올바른 메일 형식이 아닙니다.");
 			}
 		}
-		
+ 		function option(){
+			var selectOption = $("#emailOption").children("option:selected").val();
+			console.log(selectOption);
+			if(selectOption != "self"){
+				$("#addEmail").val(selectOption);
+			} else {
+				$("#addEmail").val("");
+				$("#addEmail").focus();
+			}
+		}
 		 /***************************************************** 체크 확인 *******************************************************/
 		$(function(){
 			// 닉네임 확인
@@ -355,15 +366,15 @@ vertical-align: top;
 		// 인증번호 확인
 		$("#emailCheckNumber").blur(function(){
 			var emailCheckNumber = $("#emailCheckNumber").val();
-			
-			if(emailCheckNumber == joinCode){
+			console.log(checkCode);
+			if(emailCheckNumber == checkCode){
 				$(".guide.email.error").hide();
-				$(".guide.eamil.ok").show();
-				$("#eamilCheck").val(1);
+				$(".guide.email.ok").show();
+				$("#emailCheck").val(1);
 			} else{
 				$(".guide.email.ok").hide();
-				$(".guide.eamil.error").show();
-				$("#eamilCheck").val(1);
+				$(".guide.email.error").show();
+				$("#emailCheck").val(0);
 			}
 		});		
 		// 폰번호 정규식 확인
@@ -388,11 +399,11 @@ vertical-align: top;
 				return false;
 			}
 			
-			/* if ($("#emailCheck").val() == 0) {
+			 if ($("#emailCheck").val() == 0) {
 				alert("이메일 인증을 해주세요");
 				$("#email").focus();
 				return false;
-			} */
+			} 
 			
 			if ($("#addressCheck").val() == 0) {
 				alert("주소를 입력해주세요.");

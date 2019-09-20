@@ -47,6 +47,16 @@ public interface MemberService {
 
 	int myBoardupdate(Map<String, String> map);
 
+	Board boardType(int bNo);
+
+	boolean checkSend(String subject, String string, String string2, String email);
+
+	boolean pwdSend(String subject, String string, String string2, String email);
+
+	int pwdcUpdate(Member m);
+
+	String pwdMemberSearch(Member m);
+	
 
 
 	

@@ -22,6 +22,12 @@
 	.ltable{
 		margin:auto;
 	}
+	#id, #nametext, #emailtext, #birthday, #cNum {
+	width: 310px;
+	height: 30px;
+	font-size: large;
+	border-radius: 12px;
+}
 
 }
 </style>
@@ -50,7 +56,7 @@
 </div>
 <script>
 function back(){
-	location.href="javascript:history.go(-1);";	
+	location.href="loginView.do";	
 }
 </script>
 <jsp:include page="../common/footer.jsp"/>

@@ -78,6 +78,8 @@ public class BabySitterController
    public String suppotInsert() {
       return "board/baby/babySitter/suppotInsert";
    }
+   
+   //베이비시터 모집 리스트
    @RequestMapping("babymom.do")
    public ModelAndView BabyCareList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 	   int currentPage = 1;
@@ -86,13 +88,13 @@ public class BabySitterController
 	   }
 	   int listCount= bsService.getMomListCount();
 	   PageInfo pi= Pagination.getPageInfo(currentPage, listCount);
-	   ArrayList bclist = bsService.selectMomlist(pi);
+	   ArrayList<Momboard> bclist = bsService.selectMomlist(pi);
 	   if(bclist !=null) {
 		   mv.addObject("bclist", bclist);
 		   mv.addObject("pi", pi);
 		   mv.setViewName("board/baby/babymom/babyCareList");
 	   }else {
-		   throw new BabySitterException("게시글 작성에 실패하였습니다.");
+		   throw new BabySitterException("게시글 리스트 조회에 실패하였습니다.");
 	   }
       return mv;
    }
@@ -105,32 +107,25 @@ public class BabySitterController
       return "board/baby/babymom/bcdetailView";
    }
    
-
-   
-   
-   
-   @RequestMapping(value="momDetail.do", method=RequestMethod.POST)
-   public ModelAndView momDetail(@RequestParam("bNo") int bNo, @RequestParam("bWriter") String bWriter,ModelAndView mv) {
-	   System.out.println(bWriter);
-	   Board board = new Board();
-	   board.setbNo(bNo);
-	   board.setbWriter(bWriter);
-	   System.out.println(board.getbNo());
-	   System.out.println(board.getbWriter());
-	   Momboard momboard = bsService.selectDetail(board);
+//베이비시터모집 디테일
+   @RequestMapping("momDetail.do")
+   public ModelAndView momDetail(@RequestParam("bNo") int bNo, ModelAndView mv) {
+	   bsService.addMomReadCount(bNo);
+	   Momboard momboard = bsService.selectDetail(bNo);
 	   System.out.println(momboard);
+	  
+	   
 	   if(momboard!=null) {
-		   mv.addObject("momboard", momboard).setViewName("board/baby/babymom/bcdetailView");
+		   mv.addObject("momboard", momboard)
+		   .setViewName("board/baby/babymom/bcdetailView");
 	   }else {
 		   throw new BabySitterException("게시글 조회에 실패하였습니다."); 
 	   }
- 
 	   return mv;
-	   
+	
+		
    }
-   
-   
-   
+//베이비시터모집 글쓰기
    @RequestMapping(value="babymominsert.do", method=RequestMethod.POST)
    public String insertMom(@ModelAttribute Momboard b,  @RequestParam("time1") String time1, @RequestParam("time2") String time2,
 		   				   @RequestParam("postNum") String postNum, @RequestParam("addr1") String addr1, @RequestParam("addr2") String addr2, @RequestParam("addr3") String addr3,
@@ -138,11 +133,8 @@ public class BabySitterController
 		   				   @RequestParam("age1") String age1, @RequestParam(value="age2", required=false) String age2, @RequestParam(value="age3", required=false) String age3,
 		   				   @RequestParam Map<String, String> params, @RequestParam(value="active", required=false) String[] active, @RequestParam(value="req1", required=false) String req1, @RequestParam(value="req2", required=false) String req2, @RequestParam(value="req3", required=false) String req3,
 		   				   @RequestParam("uploadFile") MultipartFile contentImg, HttpServletRequest request) {
-	   
-	   
-	    
-		Member member = (Member)request.getSession().getAttribute("loginUser");
-		
+	   	    
+		Member member = (Member)request.getSession().getAttribute("loginUser");		
 		
 		b.setbWriter(member.getNickName());
 		int bType=3;
@@ -165,7 +157,7 @@ public class BabySitterController
 	   b.setbAge(bAge);
 	   String time = time1 +" ~ " + time2;
 	   b.setBcTime(time);
-	   String address= postNum + " "+ addr1 +" "+ addr2 +" "+ addr3;
+	   String address= addr1 +"/"+ addr2 +"/"+ addr3;
 	   b.setAddress(address);
 	   String bActive = "";
 	   for(int i=0; i<active.length;i++) {
@@ -179,7 +171,7 @@ public class BabySitterController
 	   String req = req1 + "," + req2 + "," +req3;
 	   b.setReq(req);
 	   
-	   Board board = new Board(b.getbNo(), 3, b.getbTitle(), member.getNickName(),b.getbContent(), 0, null, null, null);
+	   Board board = new Board(b.getbNo(), 3, b.getbTitle(), member.getUserId(),b.getbContent(), 0, null, null, null);
 	   Attachment Attachment = new Attachment(b.getbNo(), b.getOriginName(), b.getChangeName(), null);
 	   BabySitter babySitter = new BabySitter(b.getBcSalary(), b.getBcTime(),b.getBcActivity(),b.getReq(),b.getbNo(),b.getAddress(),b.getPersonnel(),b.getbAge(),b.getbGender());
 	   

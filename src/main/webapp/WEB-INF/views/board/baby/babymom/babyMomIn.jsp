@@ -249,7 +249,7 @@ input, textarea, select {
                   </tr>
                    <tr>
                      <th scope="row">희망 급여</th>
-                     <td class="pnawtd"><input type="text" name="salary" placeholder="ex) 시급10000원 " id="salary" style="height:30px; font-size:13px;"></td>
+                     <td class="pnawtd"><input type="text" name="bcSalary" placeholder="ex) 시급10000원 " id="salary" style="height:30px; font-size:13px;"></td>
                   </tr>
                   <tr>
                   	<th>주소</th>
@@ -329,7 +329,7 @@ input, textarea, select {
                  
                   <tr>
                      <th scope="row">상세내용</th>
-                     <td class="write pnawtd"><textarea name='bContent' required="required" style='width: 90%; height: 200px;'></textarea></td>
+                     <td class="write pnawtd"><textarea name='bContent' required="required" style='width: 90%; height: 200px; resize:none;'></textarea></td>
                   </tr>
                   <tr class="first">
                      <th>성별</th>
