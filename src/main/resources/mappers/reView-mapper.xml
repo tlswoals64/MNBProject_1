@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reViewMapper">
+
+	<insert id="insertReview" parameterType="Board">
+		insert into board
+		values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, default, default, sysdate, #{bWriter})
+	
+	</insert>
+
+	<insert id="insertReviewAt" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 8, sysdate, 'Y')
+	
+	</insert>
+
+	<insert id="insertReviewRV" parameterType="ReView">
+		insert into review
+		values(seq_bno.currval, #{bEva})
+	</insert>
+
+	<select id="selectgrList" resultType = "_int">
+		select count(*)
+		from review
+	</select>	
+		<select id = "getselectRvlist" resultType = "Board">
+		select *
+		from review_list
+		where status = 'Y'
+		order by bno DESC
+	</select>
+	
+ 	<update id="addReviewCount">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo}
+	</update>
+	
+	<select id="selectReViewDetail" parameterType="ReVi" resultType="ReVi">
+		select *
+		from review_list
+		where bNo=#{bNo}
+	</select>
+
+	
+	<select id="selectReViewUpdate" parameterType="ReVi" resultType="ReVi">
+		select *
+		from review_list
+		where bNo=#{bNo}
+	</select>
+	
+	<update id="updateRvBoard" parameterType="Board">
+		update board
+		set bTitle = #{bTitle}, bContent = #{bContent}, b_modifydate = sysdate
+		where bNo = #{bNo} 	
+	</update>
+	<update id="updateRvAttachment" parameterType="Board">
+		update board_picture
+		set originName = #{originName}, changeName = #{changeName}, upload_date = sysdate
+		where bNo = #{bNo}
+	</update>
+	<update id="updateReView" parameterType="Board">
+		update Review
+		set bEva = #{bEva}
+	</update>
+	<update id="deleteReView">
+	
+	update board
+	set status='N'
+	where bNo = #{bNo}
+	
+	</update>
+	<update id="deleteImgReView">
+
+	update board_picture
+	set status='N'
+	where bNo = #{bNo}
+	
+	</update>
+	
+	
+
+ 	
+ 	
+</mapper>
