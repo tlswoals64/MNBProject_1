@@ -368,8 +368,8 @@ textarea{
 	<div id="header">
 		<b>MnB(Mom And Bebe) 관리자 홈페이지</b>
 		<div class="buttonArea">
-			<button type="button" class="homBtn">home</button>
-			<button type="button" class="logOutBtn">로그아웃</button>
+			<button type="button" class="homBtn" onclick="location.href='managerMainHome.do'">home</button>
+			<button type="button" class="logOutBtn" onclick="location.href='logout.do'">로그아웃</button>
 		</div>
 	</div>
 	<div class="wrap">
@@ -414,6 +414,12 @@ textarea{
 					<li class="nav2Menu">
 						<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 					</li>
+					 <li class="nav2Menu">
+			        	<div id="boardFaQ" onclick="location.href='mFaqList.do'">FAQ게시판</div>
+			        </li>
+			        <li class="nav2Menu">
+			        	<div id="boardPro" onclick="location.href='mNoticeList.do'">공지사항</div>
+			        </li>
 				</ul>
 			</div>
 		</nav>

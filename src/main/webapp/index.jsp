@@ -126,4 +126,39 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	
    <jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>
  </body>
+
+ <script>
+ (function() {
+	   var m = '${ loginUser }';
+		var dec = '${ loginUser.dec }';
+		var dec_date = '${ loginUser.dec_date }';
+		
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var day = date.getDate();
+	
+		if((day + "").length < 2){
+			day = "0" + day;
+		}
+		
+		var getToday = year + "-" + month + "-" + day;
+	    var dec_dateUse = dec_date.split('-');
+
+	    var getTodayUse = getToday.split('-');
+	                 
+	        var startDateCompare = new Date(dec_dateUse[0], parseInt(dec_dateUse[1])-1, dec_dateUse[2]);
+	        var endDateCompare = new Date(getTodayUse[0], parseInt(getTodayUse[1])-1, getTodayUse[2]);
+		
+		
+		if(dec_date !="" && (startDateCompare.getTime() > endDateCompare.getTime()) && dec == 5){
+			alert('블랙리스트회원입니다. ' + dec_date + '까지 댓글 및 게시글작성을 이용할수없습니다.');
+		}
+		if(dec_date != "" && !(startDateCompare.getTime() > endDateCompare.getTime())){
+			alert('블랙리스트회원이 해제되었습니다.');
+			location.href='blackListCancle.do';
+		}
+ }());
+
+ </script>
 </html>

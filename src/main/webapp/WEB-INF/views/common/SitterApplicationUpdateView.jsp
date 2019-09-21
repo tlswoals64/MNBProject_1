@@ -262,7 +262,7 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
 	<div id="Warp">
-	<form action="userBsApply.do" method="post">
+	<form action="userBsApplyUpdate.do" method="post">
 		<div id="title">베이비 시터 신청하기</div>
 
 		<fieldset id="appliArea">
@@ -321,21 +321,83 @@
 									돌봄 내용
 								</th>
 							</tr>
-							<tr class="exTableTr" id="ex1">
-								<td id="exTitle1"><input type="text" style="height : 30px;" name="exT1"></td>
-								<td id="exPe1"><input type="text" style="width : 190px; height : 30px;" name="exP1"></td>
-								<td id="exCon1"><input type="text" style="width : 280px; height : 30px;" name="exC1"></td>
-							</tr>
-							<tr class="exTableTr" id="ex2">
-								<td id="exTitle2"><input type="text" style="height : 30px;" name="exT2"></td>
-								<td id="exPe2"><input type="text" style="width : 190px; height : 30px;" name="exP2"></td>
-								<td id="exCon2"><input type="text" style="width : 280px; height : 30px;" name="exC2"></td>
-							</tr>
-							<tr class="exTableTr" id="ex3">
-								<td id="exTitle3"><input type="text" style="height : 30px;" name="exT3"></td>
-								<td id="exPe3"><input type="text" style="width : 190px; height : 30px;" name="exP3"></td>
-								<td id="exCon3"><input type="text" style="width : 280px; height : 30px;" name="exC3"></td>
-							</tr>
+							
+							<c:forTokens var="caring" items="${ b.caring }" delims="/"
+										varStatus="status">
+										<c:if test="${ status.index ne 0}">
+											<tr class="exTableTr" id="ex1">
+												<td id="exTitle1"><input type="text" style="height : 30px;" name="exT1"></td>
+												<td id="exPe1"><input type="text" style="width : 190px; height : 30px;" name="exP1"></td>
+												<td id="exCon1"><input type="text" style="width : 280px; height : 30px;" name="exC1"></td>
+											</tr>
+										</c:if>
+										<c:if test="${ status.index eq 0}">
+											<tr class="exTableTr" id="ex1">
+												<c:forTokens var="tdcaring" items="${caring}" delims="@!"
+													varStatus="status">
+													<c:if test="${ status.index eq 0}">
+														<td class="exTitleTd" id="exTitle1"><input type="text" style="height : 30px;" name="exT1" value="${ tdcaring }"></td>
+													</c:if>
+												
+													<c:if test="${ status.index eq 1}">
+														<td class="exPeTd" id="exPe1"><input type="text" style="width : 190px; height : 30px;" name="exP1" value="${ tdcaring }"></td>
+													</c:if>
+													<c:if test="${ status.index eq 2}">
+														<td class="exConTd" id="exCon1"><input type="text" style="width : 280px; height : 30px;" name="exC1" value ="${ tdcaring }"></td>
+													</c:if>
+												</c:forTokens>
+											</tr>
+										</c:if>
+								
+										<c:if test="${ status.index eq 1}">
+											<tr class="exTableTr" id="ex2">
+												<c:forTokens var="tdcaring" items="${caring}" delims="@!"
+													varStatus="status">
+													<c:if test="${ status.index eq 0}">
+														<td class="exTitleTd" id="exTitle2"><input type="text" style="height : 30px;" name="exT2" value="${ tdcaring }"></td>
+													</c:if>
+													<c:if test="${ status.index eq 1}">
+														<td class="exPeTd" id="exPe2"><input type="text" style="width : 190px; height : 30px;" name="exP2" value="${ tdcaring }"></td>
+													</c:if>
+													<c:if test="${ status.index eq 2}">
+														<td class="exConTd" id="exCon2"><input type="text" style="width : 280px; height : 30px;" name="exC2" value="${ tdcaring }"></td>
+													</c:if>
+												</c:forTokens>
+											</tr>
+										</c:if>
+										<c:if test="${ status.index ne 1}">
+											<tr class="exTableTr" id="ex2">
+												<td id="exTitle2"><input type="text" style="height : 30px;" name="exT2"></td>
+												<td id="exPe2"><input type="text" style="width : 190px; height : 30px;" name="exP2"></td>
+												<td id="exCon2"><input type="text" style="width : 280px; height : 30px;" name="exC2"></td>
+											</tr>
+										</c:if>
+										<c:if test="${ status.index eq 2}">
+											<tr class="exTableTr" id="ex3">
+												<c:forTokens var="tdcaring" items="${caring}" delims="@!"
+													varStatus="status">
+													<c:if test="${ status.index eq 3}">
+														<td class="exTitleTd" id="exTitle1"><input type="text" style="height : 30px;" name="exT3" value="${ tdcaring }"></td>
+													</c:if>
+													<c:if test="${ status.index eq 3}">
+														<td class="exPeTd" id="exPe1"><input type="text" style="width : 190px; height : 30px;" name="exP3" value="${ tdcaring }"></td>
+													</c:if>
+													<c:if test="${ status.index eq 3}">
+														<td class="exConTd" id="exCon1"><input type="text" style="width : 280px; height : 30px;" name="exC3" value="${ tdcaring }"></td>
+													</c:if>
+												</c:forTokens>
+											</tr>
+										</c:if>
+										<c:if test="${ status.index ne 2}">
+											<tr class="exTableTr" id="ex3">
+												<td id="exTitle3"><input type="text" style="height : 30px;" name="exT3"></td>
+												<td id="exPe3"><input type="text" style="width : 190px; height : 30px;" name="exP3"></td>
+												<td id="exCon3"><input type="text" style="width : 280px; height : 30px;" name="exC3"></td>
+											</tr>
+										</c:if>
+									</c:forTokens>
+									
+
 						</table>
 					</div>
 				</div>
@@ -343,7 +405,7 @@
 				<div class="appB">
 					간단 자기소개
 				</div>
-				<textarea class="intro" rows="20" name="intro"></textarea>
+				<textarea class="intro" rows="20" name="intro">${ b.intro}</textarea>
 				
 			</div>
 		</fieldset>
@@ -494,7 +556,7 @@
 			</fieldset>
 		</div>
 		
-		<button type="button" id="insertBtn">신청하기</button>
+		<button type="button" id="insertBtn">수정하기</button>
 		<button type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo'">취소하기</button>
 		</form>
 	</div>
@@ -502,16 +564,14 @@
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 
-<script>
-	(function() { 
-		var check = '${ check }';
-		if(check == '0'){
-			alert("이미 신청서를 작성하셨습니다. 신청결과는 마이페이지에서 확인하실수있습니다.");
-			location.href = 'myPageView.do';
-		}
-	}());
-</script>
 
+<script>
+(function() {
+	   var caring = '${ b.caring }';
+	   console.log(caring==null);
+}());
+
+</script>
 
 <script>
  	$('#insertBtn').click(function(){
@@ -534,7 +594,7 @@
 			alert("활동 가능 유형을 체크해주세요!");
 		}
 		if(bType && job && activity){
-			alert("베이비시터 신청서 작성이 완료되었습니다 :-)");
+			alert("베이비시터 신청서 재신청이 완료되었습니다 :-)");
 			$("#insertBtn").attr('type', 'submit');
 		} 
 

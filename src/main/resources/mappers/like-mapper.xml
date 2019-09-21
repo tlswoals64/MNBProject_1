@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="likeMapper">
 
+	<select id="likeCheck" resultType="_int" parameterType="LikeTb">
+		select count(*)
+		from liketb
+		where userId = #{ userId }
+	</select>
 	
+	<insert id="likeAddBoard" parameterType="LikeTb">
+		insert into liketb
+		values(seq_lno.nextval, default, #{ userId }, #{ bNo })
+	</insert>
 	
+	<delete id="likeCancleBoard" parameterType="LikeTb">
+		delete from likeTb
+		where bNo = #{ bNo }
+	</delete>
 </mapper>

@@ -232,7 +232,91 @@
 		margin-left : 250px;
 	}
 	/************************************************/
+	
+	
+	/***************************** table 영역 ******************************/
+	.tableDiv{
+		display : inline-block;
+		width : 450px;
+		/* border-top : 5px solid #CEE3F6;
+		border-bottom : 5px solid #CEE3F6; */
+		margin-left : 30px;
+		margin-top : 50px;
+		padding-left : 20px;
+		padding-bottom : 20px;
+	}
+	.tableDTh{
+		padding-left : 10px;
+		height: 50px;
+		background : rgb(240,240,240);
+		text-align : center;
+	}
+	td{
+		padding-left : 10px;
+		height: 70px;
+		width : 100px;
+	}
+	tr{
+		border-top : 1px solid rgb(240,240,240);
+		border-bottom : 1px solid rgb(240,240,240);
+		background : white;
+	}
+	.tableB{
+		margin-top : 10px;
+		margin-bottom : 10px;
+		font-weight : bold;
+		font-size : 25px;
+	}
+	
+	.todaImgArea{
+		display : inline-block;
+		margin-top : 30px;
+		width : 120px;
+		height : 100px;
+	}
+	
+	.todayImg{
+		width : 90%;
+		height : 100%;
+	}
+	.todayDiv{
+		display : inline-block;
+		width : 320px;
+		padding-left:120px;
+		font-size : 18px;
+		font-weight : bold;
+	}
+	
+	.todayArea{
+		margin-top : 20px;
+		margin-left : 150px;
+		width : 1000px;
+		border : 5px solid #CEE3F6;
+	}
+	.todayB{
+		margin-left : 50px;
+		margin-right : 50px;
+		margin-top : 10px;
+		margin-bottom : 10px;
+		font-weight : bold;
+		font-size : 30px;
+		text-align : center;
+		background : rgb(240,240,240);
+ 	}
+ 	
+ 	.countArea{
+ 		padding-left : 10px;
+ 		font-size : 70px;
+ 	}
+ 	.tableDeTh{
+ 		width : 200px;
+ 		padding-left : 10px;
+		height: 50px;
+ 		background : rgb(240,240,240);
+ 		text-align : center;
+ 	}
 </style>
+
 <head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -249,8 +333,8 @@
 	<div id="header">
 		<b>MnB(Mom And Bebe) 관리자 홈페이지</b>
 		<div class="buttonArea">
-			<button type="button" class="homBtn">home</button>
-			<button type="button" class="logOutBtn">로그아웃</button>
+			<button type="button" class="homBtn" onclick="location.href='managerMainHome.do'">home</button>
+			<button type="button" class="logOutBtn" onclick="location.href='logout.do'">로그아웃</button>
 		</div>
 	</div>
 	<div class="wrap">
@@ -287,13 +371,95 @@
 			        <li class="nav2Menu">
 			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
 			        </li>
+			         <li class="nav2Menu">
+			        	<div id="boardFaQ" onclick="location.href='mFaqList.do'">FAQ게시판</div>
+			        </li>
+			        <li class="nav2Menu">
+			        	<div id="boardPro" onclick="location.href='mNoticeList.do'">공지사항</div>
+			        </li>
 			    </ul>
 			</div>
 		</nav>	
 		
 		<div class="content">
-			<div id="deListB">ooo 관리자님이 접속했습니다.</div>
-			
+			<div id="deListB">${ loginUser.userName } 관리자님이 접속했습니다.</div>
+			<div class="todayArea">
+				<div class="todayB">TODAY</div>
+				<div class="todayDiv" id="newM">
+					<div class="todaImgArea">
+						<img class="todayImg" src="resources/images/main/user.png">
+						신규 가입자
+					</div>
+					<div class="countArea">
+					${ userCount }
+					</div>
+				</div>
+				<div class="todayDiv" id="newD">
+					<div class="todaImgArea">
+						<img class="todayImg" src="resources/images/board/warning.png">
+						신고 게시글 수
+					</div>
+					<div class="countArea">
+					${ decCount }
+					</div>
+				</div> 
+				<div class="todayDiv" id="newQ">
+					<div class="todaImgArea">
+						<img class="todayImg" src="resources/images/manager/question.png">
+						문의사항 수
+					</div>
+					<div class="countArea">
+					${ qnaCount }
+					</div>
+				</div>
+			</div>
+			<div id="tableArea">
+				<div class="tableDiv" id="memberJoinArea">
+					<div class="tableB">신규 가입자</div>
+					<table class="tableD" id="memberJoinTable">
+						<thead>
+							<tr class="tableDTr">
+								<th class="tableDTh">아이디</th>
+								<th class="tableDTh">이름</th>
+								<th class="tableDTh">닉네임</th>
+								<th class="tableDTh">가입날짜</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="tableDiv" id="decArea">
+					<div class="tableB">신고 글</div>
+					<table class="tableD" id="decTable">
+						<thead>
+							<tr class="tableDTr">
+								<th class="tableDeTh">제목</th>
+								<th class="tableDTh" >작성자</th>
+								<th class="tableDTh">신고날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="tableDiv" id="qnaArea">
+					<div class="tableB">문의사항 글</div>
+					<table class="tableD" id="qnaTable">
+						<thead>
+							<tr class="tableDTr">
+								<th class="tableDeTh">제목</th>
+								<th class="tableDTh" >작성자</th>
+								<th class="tableDTh">문의날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
 			
 		</div>
 	</div>
@@ -314,5 +480,87 @@
         });
     });
 </script>
+<script>
+			function topList(){
+				$.ajax({
+					url: "mUsertopList.do",
+					dataType: "json",
+					success: function(data){
+						$tableBody = $("#memberJoinTable tbody");
+						$tableBody.html("");
+						
+						for(var i in data){
+							var $tr = $("<tr>");
+							var $userId = $("<td>").text(data[i].userId);
+							var $userName = $("<td>").text(decodeURIComponent(data[i].userName));
+							var $nickName = $("<td>").text(decodeURIComponent(data[i].nickName));
+							var $enroll_date = $("<td>").text(data[i].enroll_Date);
+			
+							
+							$tr.append($userId);
+							$tr.append($userName);
+							$tr.append($nickName);
+							$tr.append($enroll_date);
+							
+							$tableBody.append($tr);
+						}
+					}
+				});
+				$.ajax({
+					url: "mDectopList.do",
+					dataType: "json",
+					success: function(data){
+						$tableBody = $("#decTable tbody");
+						$tableBody.html("");
+						
+						for(var i in data){
+							var $tr = $("<tr>");
+							var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
+							var $bWriter = $("<td>").text(decodeURIComponent(data[i].bWriter));
+							var $b_CreateDate = $("<td>").text(data[i].b_CreateDate);
+			
+							
+							$tr.append($bTitle);
+							$tr.append($bWriter);
+							$tr.append($b_CreateDate);
+							
+							$tableBody.append($tr);
+						}
+					}
+				});
+				$.ajax({
+					url: "mQnatopList.do",
+					dataType: "json",
+					success: function(data){
+						$tableBody = $("#qnaTable tbody");
+						$tableBody.html("");
+						
+						for(var i in data){
+							var $tr = $("<tr>");
+							var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
+							var $bWriter = $("<td>").text(decodeURIComponent(data[i].bWriter));
+							var $b_CreateDate = $("<td>").text(data[i].b_CreateDate);
+			
+							
+							$tr.append($bTitle);
+							$tr.append($bWriter);
+							$tr.append($b_CreateDate);
+							
+							$tableBody.append($tr);
+						}
+					}
+				});
+			}
+			
+			$(function(){
+				topList();
+				
+				setInterval(function(){
+					topList();
+					
+				}, 10000);
+			});
+</script>
+
 
 </html>

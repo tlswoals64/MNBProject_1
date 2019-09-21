@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.member.model.vo.Member;
 
 
@@ -46,6 +47,20 @@ public interface MemberService {
 	int deleteMember(String id);
 
 	int myBoardupdate(Map<String, String> map);
+
+	BSApply myPageBsaCheck(Member m);
+
+	Member myPageInfo(Member m);
+
+	void blackListCancle(Member m);
+
+	int mUserCount();
+
+	int mDecCount();
+
+	int mQnacCount();
+
+	ArrayList<Member> seletMUserTopList();
 
 
 
