@@ -215,7 +215,7 @@ input, textarea, select {
 }
 
 </style>
-<%-- <jsp:include page=""/> --%>
+<jsp:include page="../../common/header.jsp"/>
 </head>
 
 <body>
@@ -267,7 +267,7 @@ input, textarea, select {
             </table>
             <div class="joinbox" style="max-width: 90%;">
                <ul class="ul01">
-                  <li><input class="inputbtn" type="submit" value="등록"></li>
+                  <li><input class="inputbtn" type="button" value="등록" onclick="sub();"></li>
                   <li><input class="inputbtn" type="button" value="취소" onclick="javascript:history.back()"></li>
                </ul>
             </div>
@@ -292,7 +292,19 @@ input, textarea, select {
 	       reader.readAsDataURL(value.files[0]);
 	}
 	}
+   
+      function sub(){
+   	      var form = $('#writeform');
+   	      var check = true;
       
+   	   if (check) {
+           answer = confirm("작성한 글을 등록 하시겠습니까?");
+           if (answer == true) {
+              form.submit();
+           }
+        }
+      }
    </script>
 </body>
+<jsp:include page="../../common/footer.jsp"/>
 </html>

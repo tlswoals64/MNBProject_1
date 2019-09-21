@@ -49,10 +49,10 @@ table{
 }
 
 </style>
+<jsp:include page="../../common/header.jsp"/>
 </head>
 
 <body>
-<jsp:include page="../../common/header.jsp"/>
 <div style="height:50px;"></div>
 <div style="width:100%; text-align:center;">
 <div class="wrap">
@@ -150,7 +150,7 @@ table{
 	<button onclick="location.href='reViewInView.do';">글쓰기</button>
 </div>
 </div>
-<jsp:include page="../../common/footer.jsp"/>
-</body>
 
+</body>
+<jsp:include page="../../common/footer.jsp"/>
 </html>

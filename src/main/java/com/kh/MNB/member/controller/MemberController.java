@@ -434,7 +434,7 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	//게시글 상세페이지
 	@RequestMapping(value="myBoardDetail.do",method = RequestMethod.GET)
 	public String myBoardDetail(@RequestParam("bNo") int bNo, RedirectAttributes redirect) {
-		
+		int page= 1;
 		
 		Board board= mService.boardType(bNo);
 		if(board!=null){
@@ -445,10 +445,12 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 		}
 		else if(board.getbType()==2) {
 			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);
 			return "redirect:dBoard.do";
 		}
 		else if(board.getbType()==3) {
 			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);
 			return "redirect:momDetail.do";
 		}
 		else if(board.getbType()==4) {
@@ -464,7 +466,9 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 			
 		}
 		else if(board.getbType()==8) {
-			
+			redirect.addAttribute("bNo", bNo);	
+			redirect.addAttribute("page", page);
+			return "redirect:detailReview.do";
 		}
 		
 		}else {

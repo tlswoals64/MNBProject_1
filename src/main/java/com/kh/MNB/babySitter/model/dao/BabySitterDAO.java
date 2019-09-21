@@ -105,6 +105,33 @@ public class BabySitterDAO {
 		
 	}
 
+	public Momboard momboardUpdateForm(int bNo) {
+		return sqlSession.selectOne("babySitterMapper.momboardUpdateForm", bNo);
+	}
+
+	public int upDateMomBoard(Board board) {
+		return sqlSession.update("babySitterMapper.upDateMomBoard", board);
+		
+	}
+
+	public int upDateMomAttachment(Attachment attachment) {
+		return sqlSession.update("babySitterMapper.upDateMomAttachment", attachment);
+	}
+
+	public int upDateBcMojib(BabySitter babySitter) {
+		return sqlSession.update("babySitterMapper.upDateBcMojib", babySitter);
+	}
+
+
+	public int insertMomReply(Reply r) {
+		return sqlSession.insert("babySitterMapper.selectMomReplyList", r);
+	}
+
+	public ArrayList<Reply> selectMomReplyList(int bNo) {
+		
+		return (ArrayList)sqlSession.selectList("babySitterMapper.insertMomReply", bNo);
+	}
+
 	
 	
 }

@@ -216,7 +216,7 @@ input, textarea, select {
 }
 
 </style>
-<%-- <jsp:include page=""/> --%>
+<jsp:include page="../../common/header.jsp"/>
 </head>
 
 <body>
@@ -340,4 +340,5 @@ input, textarea, select {
       
    </script>
 </body>
+<jsp:include page="../../common/footer.jsp"/>
 </html>

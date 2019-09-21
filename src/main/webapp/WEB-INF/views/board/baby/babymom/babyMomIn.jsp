@@ -521,6 +521,12 @@ input, textarea, select {
       </div>
    </div>
    <script> 
+   
+
+   $("#inputimg").hide();
+   $("#contentImgArea1").click(function() {
+       $("#inputimg").click();
+    });
    $(document).ready(function(){
 	  $("input[type='checkbox']").on("click",function(){
 		  var count = $("input:checked[type='checkbox']").length;		  

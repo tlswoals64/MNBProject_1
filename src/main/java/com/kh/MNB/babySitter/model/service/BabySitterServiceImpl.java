@@ -125,6 +125,36 @@ public class BabySitterServiceImpl implements BabySitterService {
 		
 	}
 
+	@Override
+	public Momboard momboardUpdateForm(int bNo) {
+		return bsDAO.momboardUpdateForm(bNo);
+	}
+
+	@Override
+	public int upDateMomBoard(Board board) {
+		return bsDAO.upDateMomBoard(board);
+	}
+
+	@Override
+	public int upDateMomAttachment(Attachment attachment) {
+		return bsDAO.upDateMomAttachment(attachment);
+	}
+
+	@Override
+	public int upDateBcMojib(BabySitter babySitter) {
+		return bsDAO.upDateBcMojib(babySitter);
+	}
+
+	@Override
+	public ArrayList<Reply> selectMomReplyList(int bNo) {
+		return bsDAO.selectMomReplyList(bNo);
+	}
+
+	@Override
+	public int insertMomReply(Reply r) {
+		return bsDAO.insertMomReply(r);
+	}
+
 
 
 	

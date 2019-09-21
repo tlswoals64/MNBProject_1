@@ -486,6 +486,10 @@
          <input type="text" class="req" id="req1" value="${req1[2]}" placeholder="예시) 남자">         
 		</div>
 	</div>
+
+	
+	</div>
+	
 	<div class="UNS">
 	<c:if test="${ loginUser.nickName eq momboard.bWriter }">
          <div class="joinbox" style="max-width: 90%; margin: 20px auto;">
@@ -506,8 +510,7 @@
       </c:if>
 	
 	</div>
-	
-</div>
+
 
 
 

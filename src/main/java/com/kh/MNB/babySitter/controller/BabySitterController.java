@@ -109,7 +109,7 @@ public class BabySitterController
    
 //베이비시터모집 디테일
    @RequestMapping("momDetail.do")
-   public ModelAndView momDetail(@RequestParam("bNo") int bNo, ModelAndView mv) {
+   public ModelAndView momDetail(@RequestParam("bNo") int bNo, @RequestParam("page") int page,  ModelAndView mv) {
 	   bsService.addMomReadCount(bNo);
 	   Momboard momboard = bsService.selectDetail(bNo);
 	   System.out.println(momboard);
@@ -117,6 +117,7 @@ public class BabySitterController
 	   
 	   if(momboard!=null) {
 		   mv.addObject("momboard", momboard)
+		   .addObject("page", page)
 		   .setViewName("board/baby/babymom/bcdetailView");
 	   }else {
 		   throw new BabySitterException("게시글 조회에 실패하였습니다."); 
@@ -223,8 +224,144 @@ public class BabySitterController
 			return renameFileName;
 		
 		}
+		//베이비시터모집 수정뷰
+		@RequestMapping("momboardUpdateForm.do")
+		public ModelAndView momboardUpdateForm(ModelAndView mv, @RequestParam("bNo") int bNo, @RequestParam("page") int page) {
+			Momboard momboard = bsService.momboardUpdateForm(bNo);
+			System.out.println(momboard);
+			if(momboard!=null) {
+				mv.addObject(momboard)
+				.addObject("page",page)
+				.setViewName("board/baby/babymom/babyMomUpdate");
+			}else {
+				throw new BabySitterException("게시글 수정에 실패하였습니다.");
+			}
+			
+			return mv;
+		}
+		//베이비시터모집 수정
+		@RequestMapping("babymomUpdate.do")
+		public ModelAndView momUpdate(@ModelAttribute Momboard b,  @RequestParam("time1") String time1, @RequestParam("time2") String time2,
+		   @RequestParam("postNum") String postNum, @RequestParam("addr1") String addr1, @RequestParam("addr2") String addr2, @RequestParam("addr3") String addr3,
+		   @RequestParam("gender1") String gender1, @RequestParam(value="gender2", required=false) String gender2, @RequestParam(value="gender3", required=false) String gender3,
+		   @RequestParam("age1") String age1, @RequestParam(value="age2", required=false) String age2, @RequestParam(value="age3", required=false) String age3,
+		   @RequestParam Map<String, String> params, @RequestParam(value="active", required=false) String[] active, @RequestParam(value="req1", required=false) String req1, @RequestParam(value="req2", required=false) String req2, @RequestParam(value="req3", required=false) String req3,
+		   @RequestParam(value = "inputimg", required = false) MultipartFile titleImg, HttpServletRequest request, @RequestParam("page") int page,ModelAndView mv) {
+			
+			Member member = (Member)request.getSession().getAttribute("loginUser");		
+			
+			b.setbWriter(member.getNickName());
+			int bType=3;
+			b.setbType(bType);
+		   String bGender =gender1;
+		   if(gender2!=null) {
+			   bGender += ","+ gender2;
+			   if(gender3!=null){
+				   bGender +="," + gender3;
+			   }
+		   }
+		   b.setbGender(bGender);
+		   String bAge = age1;
+		   if(age2!=null) {
+			   bAge += ","+ age2;
+			   if(age3!=null){
+				   bAge +="," + age3;
+			   }
+		   }
+		   b.setbAge(bAge);
+		   String time = time1 +" ~ " + time2;
+		   b.setBcTime(time);
+		   String address= addr1 +"/"+ addr2 +"/"+ addr3;
+		   b.setAddress(address);
+		   String bActive = "";
+		   for(int i=0; i<active.length;i++) {
+			   if(i<active.length-1) {
+			   bActive += active[i]+",";
+			   }else if(i==active.length-1) {
+				   bActive += active[i];
+			   }		   
+		   }
+		   b.setBcActivity(bActive);
+		   String req = req1 + "," + req2 + "," +req3;
+		   b.setReq(req);
+		   
+		   Board board = new Board(b.getbNo(), 3, b.getbTitle(), member.getUserId(),b.getbContent(), 0, null, null, null);
+		   Attachment Attachment = new Attachment(b.getbNo(), b.getOriginName(), b.getChangeName(), null);
+		   BabySitter babySitter = new BabySitter(b.getBcSalary(), b.getBcTime(),b.getBcActivity(),b.getReq(),b.getbNo(),b.getAddress(),b.getPersonnel(),b.getbAge(),b.getbGender());
+		  
+			if(titleImg != null && !titleImg.isEmpty()) { // 등록되있는 파일이 있을 경우
+				if(b.getChangeName() != null) {
+					deleteMomFile(b.getChangeName(), request);
+				}				
+				String renameFileName = saveFile(titleImg, request);
+				if(renameFileName != null) {
+					Attachment.setOriginName(titleImg.getOriginalFilename());
+					Attachment.setChangeName(renameFileName);
+				}
+			}
+			
+			
+			System.out.println(b);
+			System.out.println(board);
+			System.out.println(Attachment);
+			System.out.println(babySitter);
+			
+			int result=0;
+			int result1 = bsService.upDateMomBoard(board);		
+			int result2 = bsService.upDateMomAttachment(Attachment);
+			int result3 = bsService.upDateBcMojib(babySitter);
+			result= result1+result2+result3;
+			if(result>2) {  
+					mv.addObject("page", page)
+				  .setViewName("redirect:momDetail.do?bNo=" + b.getbNo());
+			}else {
+				throw new BabySitterException("게시글 작성에 실패하였습니다.");
+			}
+			return mv;
+		}
 
+		
+		public void deleteMomFile(String fileName, HttpServletRequest request) {
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = root + "\\images\\board\\babymom";
+			
+			File f = new File(savePath + "\\" + fileName);
+			
+			if(f.exists()) {
+				f.delete();
+			}
+		}
+		@RequestMapping("rMomList.do")
+		public void getMomReplyList(HttpServletResponse response, int bNo) throws Exception {
+			ArrayList<Reply> rlist = bsService.selectMomReplyList(bNo);
+			
+			for(Reply r : rlist) {
+				r.setnContent(URLEncoder.encode(r.getnContent(), "utf-8"));
+			}
+			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(rlist, response.getWriter());
+		}
+		
+		@RequestMapping("addMomReply.do")
+		public String insertMomReply(@ModelAttribute Reply r, HttpSession session) throws IOException {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			r.setrWriter(loginUser.getNickName());
+			System.out.println(r);
+			
+			int result = bsService.insertMomReply(r);
+			
+			if(result > 0) {
+				return "success";
+			}
+			else {
+				throw new BoardException("댓글 작성에 실패하였습니다.");
+			}
 
+		}
+		
+		
+		
    // 베이비시터 지원 상세 페이지
 	@RequestMapping("suppotDetail.do")
 	public ModelAndView suppotDetail(@RequestParam("bNo") int bNo, @RequestParam("page") int page, ModelAndView mv) {

@@ -18,6 +18,9 @@
 	display: flex;
 	flex-wrap: nowrap;
 }
+.replyArea {width:1200px; margin-bottom:65px; margin:0 auto; margin-top:20px; }
+.replyArea h2 {pont-size:12px; border-bottom:2px solid #dfdfdf; padding-bottom:10px;}
+.replyArea td {}
 
 .ftd {
 	width: 80px;
@@ -86,6 +89,7 @@
 }
 
 </style>
+<jsp:include page="../../common/header.jsp"/>
 </head>
 <body>
 	
@@ -246,10 +250,47 @@
 				<ul class="ul01">
 					<li><input class="inputbtn" type="button" value="수정" onclick="location.href='${ reviewUpdateView }'"></li>
 					<li><input class="inputbtn" type="button" value="삭제" onclick="location.href='${ reviewDelete }'"></li>
-					<li><input class="inputbtn" type="button" value="취소" onclick="javascript:history.back()"></li>
+					<li><input class="inputbtn" type="button" value="취소" onclick="back();"></li>
 				</ul>
 			</div>
 		</c:if>
+		
+		<div class = "replyArea">
+			<div class = "replyWriterArea">
+			
+			<div class = "replySelectArea">
+			 <table class="replyTable" id="rtb">
+			<h2> 댓글 </h2>			
+	   		<thead>
+	   			<tr><td colspan="2">
+	   				<b id="rCount"></b>
+	   			</tr>
+	   		</thead>
+	   		<tbody>
+	   			
+	   		</tbody>
+	   </table>
+			 	<table id = "replySelectTable">					
+							<tr>
+								<td style="width:100px; font-size:20px;padding-top:10px;">${rWriter}</td> 
+								<td style="width:200px; font-size:20px;padding-top:10px;">${nCreate_Date}</td>
+							</tr>
+							<tr>
+								<td style="width:600px;text-align: left; padding-left: 20px; font-size:15px; padding-top: 5px;">${nContent}</td>
+							</tr>					
+				</table> 
+			</div>
+		<div class="comment_wrap">
+					<div class="comment_text"	>
+						<textarea id="replyContent" rows="3" cols="80" class="form-control" placeholder="댓글을 입력하세요." style="width: 750px;height: 90px; margin:0 auto; margin-top: 20px;display: inline-block; resize: none;position:relative; box-shadow: -1px 0px 15px 1px #9d9a9a;"></textarea>
+						<input type="button" id="addReply" style="width:100px; height:90px;color:#000; background-color:#FFC0CB;border:0;position: absolute;left: 1105px; margin-top: 20px;" value="댓글쓰기">
+					</div>
+				</div>
+				
+			</div>
+			
+			
+		</div>
 </div>
 </form>
 
@@ -264,4 +305,5 @@ function back(){
 
 
 </body>
+<jsp:include page="../../common/footer.jsp"/>
 </html>
