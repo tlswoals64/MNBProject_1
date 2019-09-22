@@ -46,7 +46,7 @@ public class BabySitter {
   
 	// 전체생성자
 	public BabySitter(String bcCarrer, String bcSalary, String bcDay, String bcTime, String bcActivity, String req,
-			int bNo, String address, int personnel, String bAge, String bgender) {
+			int bNo, String address, int personnel, String bAge, String bGender) {
 		super();
 		this.bcCarrer = bcCarrer;
 		this.bcSalary = bcSalary;

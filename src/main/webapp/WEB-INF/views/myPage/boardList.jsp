@@ -27,7 +27,7 @@ textarea{line-height:18px;font-size:12px;color:inherit}
 .board_search > li label{margin:0 0 0 3px}
 
 /** orderTable **/
-.board_list{font-size:12px;color:#777}
+.board_list{font-size:15px;color:#777}
 .board_list thead tr th{height:30px;color:#fff;font-weight:bold;background:#333;vertical-align:middle}
 .board_list tbody tr td{padding:10px;text-align:center;line-height:18px;border-bottom:solid 1px #eee;vertical-align:middle}
 .board_list tbody tr .tLeft{text-align:left}
@@ -36,6 +36,7 @@ textarea{line-height:18px;font-size:12px;color:inherit}
 .board_list tbody tr:hover td{background:#fafafa}
 table{
 	width:100%;
+	height:400px;
 	border:0;
 	border-spacing:0;
 	padding:0px;
@@ -52,15 +53,10 @@ table{
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
+<div style="height:30px;"></div>
 <div style="width:100%; text-align:center;">
-<div class="wrap">
 
-	<ul class="board_search">
-		<li><input type="radio" name="searchtype" id="search01" checked="checked" /><label for="search01">이름</label></li>
-		<li><input type="radio" name="searchtype" id="search02" /><label for="search02">제목</label></li>
-		<li><input type="radio" name="searchtype" id="search03" /><label for="search03">내용</label></li>
-		<li><input type="text" title="검색어를 입력하세요" /><input type="submit" value="검색" /></li>
-	</ul>
+<div class="wrap">
 
 	<table summary="공지사항을 나타낸 표" class="board_list">
 		<caption>공지사항</caption>
@@ -143,6 +139,12 @@ table{
 			</td>
 		</tr>
 	</table>
+	<ul class="board_search">
+		<li><input type="radio" name="searchtype" id="search01" checked="checked" /><label for="search01">이름</label></li>
+		<li><input type="radio" name="searchtype" id="search02" /><label for="search02">제목</label></li>
+		<li><input type="radio" name="searchtype" id="search03" /><label for="search03">내용</label></li>
+		<li><input type="text" title="검색어를 입력하세요" /><input type="submit" value="검색" /></li>
+	</ul>
 	
 </div>
 </div>

@@ -217,10 +217,9 @@ padding : 5px;
 </style>
 </head>
 <body>
-	<nav>
 		<jsp:include page="../../../common/header.jsp"></jsp:include>
-	</nav>
 
+<div style="height:50px;"></div>
 	<div id="bigForm">
 		<div id="headview">
 			<h2 class="headline headh2">
@@ -317,13 +316,13 @@ padding : 5px;
 		<div style="width: 100%; height: 800px; display: inline-block; margin: 3% 15% 0 15%;">
 			<div id="mojibList">		
 			<c:forEach var="bc" items="${ bclist }">
-					<c:if test="${ !empty loginUser }">
+					<c:if test="${ !empty loginUser  && loginUser.dec != 5 }">
 						<c:url var="momDetail" value="momDetail.do">
 							<c:param name="bNo" value="${ bc.bNo }" />
 							<c:param name="page" value="${ pi.currentPage }" />
 						</c:url>
 						<a href=${ momDetail }>
-				<div class = "list" id="detail" style="cursor:pointer;">											
+				<div class = "list" id="detail" style="cursor:pointer; font-size:14px;">											
 					<table>
 						<colgroup>
 							<col width="30%">
@@ -362,7 +361,7 @@ padding : 5px;
 				</div>
 				</a>
 				</c:if>
-				<c:if test="${ empty loginUser }">
+				<c:if test="${ empty loginUser || loginUser.dec == 5 }">
 				<div class = "list" id="detail" style="cursor:pointer;">											
 					<table>
 						<colgroup>
@@ -408,13 +407,7 @@ padding : 5px;
 			<td colspan="6" align="right" id="buttonTab">
 				<c:if test="${ !empty loginUser }">
 					&nbsp; &nbsp; &nbsp;
-					<button onclick="location.href='babymomIn.do'">글쓰기</button>
-					<button onclick="location.href='detailMemberView.do'">내정보보기</button>
-					<button onclick="location.href='pwdUpdateView.do'">비밀번호변경</button>
-					<button onclick="location.href='myboardList.do'">내가 쓴 글목록</button>
-					<button onclick="location.href='reViewList.do'">리뷰리스트</button>
-					<button onclick="location.href='reViewDeView.do'">리뷰디테일</button>
-					<button onclick="location.href='reViewInView.do'">리뷰 글쓰기</button>
+					<button onclick="location.href='babymomIn.do'">글쓰기</button>					
 				</c:if>
 			</td>
 		</tr>

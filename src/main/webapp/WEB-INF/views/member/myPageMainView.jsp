@@ -178,46 +178,46 @@
 	<div class="wrap">
 		<div id="myPageB">MY PAGE</div>
 		<div class="myInfo">
-			<div id="userName">ㅇㅇㅇ님, 안녕하세요!</div>
+			<div id="userName">${loginUser.userName}님, 안녕하세요!</div>
 			<table class="myInfoTable">
 				<tr class="myInfoTr">
 					<th class="myInfoTh">아이디</th>
-					<td class="myInfoTd" colspan="3">user01</td>
+					<td class="myInfoTd" colspan="3">${loginUser.userId}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">닉네임</th>
-					<td class="myInfoTd">유저</td>
+					<td class="myInfoTd">${loginUser.nickName}</td>
 					<th class="myInfoTh">회원등급</th>
-					<td class="myInfoTd">일반 회원</td>
+					<td class="myInfoTd">${loginUser.memberType}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">생년월일</th>
-					<td class="myInfoTd">1995.03.22</td>
+					<td class="myInfoTd">${loginUser.birth}</td>
 					<th class="myInfoTh">성별</th>
-					<td class="myInfoTd">여자</td>
+					<td class="myInfoTd">${loginUser.gender}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">이메일</th>
-					<td class="myInfoTd" colspan="3">users01@naver.com</td>
+					<td class="myInfoTd" colspan="3">${loginUser.email}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">핸드폰번호</th>
-					<td class="myInfoTd" colspan="3">010-1111-1111</td>
+					<td class="myInfoTd" colspan="3">${loginUser.phone}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">주소</th>
-					<td class="myInfoTd" colspan="3">서울특별시 강남구 테헤란로14길 6 남도빌딩 </td>
+					<td class="myInfoTd" colspan="3">${loginUser.address } </td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">가입 날짜</th>
-					<td class="myInfoTd" colspan="3">2019.06.01</td>
+					<td class="myInfoTd" colspan="3">${loginUser.enroll_Date }</td>
 				</tr>
 			</table>
 		</div>
 		<div class="myInfoBtnArea">
 			<table class="btnTable">
 				<tr class="btnTr">
-					<td class="btnTd">
+					<td class="btnTd" onclick="location.href='detailMemberView.do'" style="cursor:pointers">
 						<div class="imgdiv">
 							<img src="resources/images/main/user.png">
 						</div>
@@ -225,6 +225,12 @@
 							내 정보 수정
 						</div>
 					</td>
+	<!-- 		
+					<button onclick="location.href='pwdUpdateView.do'">비밀번호변경</button>
+					<button 내가 쓴 글목록</button>
+					<button onclick="location.href='reViewList.do'">리뷰리스트</button>
+					<button onclick="location.href='reViewDeView.do'">리뷰디테일</button>
+					<button onclick="location.href='reViewInView.do'">리뷰 글쓰기</button> -->
 					<td class="btnTd">
 						<div class="imgdiv">
 							<img src="resources/images/main/favorite.png">
@@ -233,7 +239,7 @@
 							좋아요 게시글 보기
 						</div>
 					</td>
-					<td class="btnTd">
+					<td class="btnTd" onclick="location.href='myboardList.do'" style="cursor:pointers">
 						<div class="imgdiv">
 							<img src="resources/images/main/document.png">
 						</div>

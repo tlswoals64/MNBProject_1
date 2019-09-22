@@ -391,7 +391,7 @@ public class MemberController {
 	public ModelAndView updateMemberView(HttpSession session, ModelAndView mv) {
 		  
 		Member m = (Member)session.getAttribute("loginUser");
-		mv.addObject("loginUser", m);
+		mv.addObject("m", m);
 		mv.setViewName("myPage/updateMember");
 		
 		return mv;
@@ -457,9 +457,9 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 		Board board= mService.boardType(bNo);
 		if(board!=null){
 		if(board.getbType()==1) {
-			
-		}else if(board.getbType()==1) {
-			
+			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);			
+			return "redirect:detailCom.do";
 		}
 		else if(board.getbType()==2) {
 			redirect.addAttribute("bNo", bNo);
@@ -472,6 +472,10 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 			return "redirect:momDetail.do";
 		}
 		else if(board.getbType()==4) {
+			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);
+			return "redirect:suppotDetail.do";
+			
 			
 		}
 		else if(board.getbType()==5) {

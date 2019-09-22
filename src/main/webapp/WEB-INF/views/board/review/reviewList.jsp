@@ -27,7 +27,7 @@ textarea{line-height:18px;font-size:12px;color:inherit}
 .board_search > li label{margin:0 0 0 3px}
 
 /** orderTable **/
-.board_list{font-size:12px;color:#777}
+.board_list{font-size:15px;color:#777}
 .board_list thead tr th{height:30px;color:#fff;font-weight:bold;background:#333;vertical-align:middle}
 .board_list tbody tr td{padding:10px;text-align:center;line-height:18px;border-bottom:solid 1px #eee;vertical-align:middle}
 .board_list tbody tr .tLeft{text-align:left}
@@ -39,6 +39,7 @@ table{
 	border:0;
 	border-spacing:0;
 	padding:0px;
+	
 	
 }
 .wrap{
@@ -57,12 +58,7 @@ table{
 <div style="width:100%; text-align:center;">
 <div class="wrap">
 
-	<ul class="board_search">
-		<li><input type="radio" name="searchtype" id="search01" checked="checked" /><label for="search01">이름</label></li>
-		<li><input type="radio" name="searchtype" id="search02" /><label for="search02">제목</label></li>
-		<li><input type="radio" name="searchtype" id="search03" /><label for="search03">내용</label></li>
-		<li><input type="text" title="검색어를 입력하세요" /><input type="submit" value="검색" /></li>
-	</ul>
+	
 
 	<table summary="공지사항을 나타낸 표" class="board_list">
 		<caption>공지사항</caption>
@@ -87,14 +83,14 @@ table{
 			<td align="center">${ b.bNo }</td>
 			
 			<td align="left" onclick =>
-				<c:if test="${ !empty loginUser }">
+				<c:if test="${ !empty loginUser && loginUser.dec != 5 }">
 					<c:url var="detailReview" value="detailReview.do">
 						<c:param name="bNo" value="${ b.bNo }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
 					<a href="${ detailReview }">${ b.bTitle }</a>
 				</c:if>
-				<c:if test="${ empty loginUser }">
+				<c:if test="${ empty loginUser || loginUser.dec == 5 }">
 					${ b.bTitle }		
 				</c:if>
 			</td>			
@@ -147,6 +143,12 @@ table{
 			</td>
 		</tr>
 	</table>
+	<ul class="board_search">
+		<li><input type="radio" name="searchtype" id="search01" checked="checked" /><label for="search01">이름</label></li>
+		<li><input type="radio" name="searchtype" id="search02" /><label for="search02">제목</label></li>
+		<li><input type="radio" name="searchtype" id="search03" /><label for="search03">내용</label></li>
+		<li><input type="text" title="검색어를 입력하세요" /><input type="submit" value="검색" /></li>
+	</ul>
 	<button onclick="location.href='reViewInView.do';">글쓰기</button>
 </div>
 </div>

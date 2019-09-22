@@ -79,6 +79,7 @@
 				<li><A href="fListView.do">자주묻는질문</a></li>
 				<li><A href="proListView.do">문의사항</a></li>
 				<li><A href="notListView.do">공지사항</a></li>
+				<li><A href="reViewList.do">리뷰</A>
 			</ul>
 		</div>
 	</div>
