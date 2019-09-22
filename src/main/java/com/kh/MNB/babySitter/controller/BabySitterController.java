@@ -427,5 +427,6 @@ public class BabySitterController
 			throw new BoardException("댓글 등록에 실패하였습니다.");
 		}
 	}
+	
 }
 

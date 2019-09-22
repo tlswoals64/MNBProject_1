@@ -257,4 +257,49 @@ public class BoardDAO {
 	      return 0;
 	   }
 
+	public ArrayList<Board> mDectopList() {
+		return (ArrayList)sqlSession.selectList("boardMapper.mDectopList");
+	}
+
+	public ArrayList<Board> mQnatopList() {
+		return (ArrayList)sqlSession.selectList("boardMapper.mQnatopList");
+	}
+
+	public int getManaListCount() {
+		return sqlSession.selectOne("boardMapper.getManaListCount");
+	}
+
+	public ArrayList<Board> selectNoticeList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); 
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectNoticeList", null, rowBounds);
+	}
+
+	public Board mNoticeDetail(int bNo) {
+		return sqlSession.selectOne("boardMapper.mNoticeDetail", bNo);
+	}
+
+	public int mNoticeUpdate(Board b) {
+		return sqlSession.update("boardMapper.mNoticeUpdate", b);
+	}
+
+	public int mNoticeInsert(Board b) {
+		return sqlSession.insert("boardMapper.mNoticeInsert", b);
+	}
+
+	public int mNoticedelete(int bNo) {
+		return sqlSession.insert("boardMapper.mNoticedelete", bNo);
+	}
+
+	public ArrayList<Board> comTopList() {
+		return (ArrayList)sqlSession.selectList("boardMapper.comTopList");
+	}
+
+	public ArrayList<Board> nanumTopList() {
+		return (ArrayList)sqlSession.selectList("boardMapper.nanumTopList");
+	}
+
 }

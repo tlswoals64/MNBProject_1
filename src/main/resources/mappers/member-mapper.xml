@@ -127,7 +127,58 @@
 		where nickname = #{nickName}
 	</select>
   	
-
   	
+  	<!-- 마이페이지들어갈때 bsapply했는지 확인유무용 -->
+  	<select id="myPageBsaCheck" resultType="BSApply" parameterType="Member">
+  		select *
+  		from bsapply
+  		where userId = #{ userId }
+  	</select>
+  	
+  	<!-- 마이페이지에서 회원정보 -->
+  	<select id="myPageInfo" resultType="Member" parameterType="Member">
+  		select *
+  		from member
+  		where userId = #{ userId }
+  	</select>
+
+	<!-- 블랙리스트 해제 -->
+	<update id="blackListCancle" parameterType="Member">
+		update member
+		set dec = 0, dec_Date = null
+		where userId = #{ userId }
+	</update>
+  	
+  	<!-- 오늘 가입한 회원수  -->
+  	<select id="mUserCount" resultType="_int">
+  		select count(*)
+  		from member
+  		where TO_CHAR(enroll_date, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+  	</select>
+ 	<!-- 오늘 신고된 게시글 수 -->
+  	<select id="mDecCount" resultType="_int">
+  		select count(*)
+  		from board
+  		where TO_CHAR(B_CREATEDATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') and bType = 7
+  	</select>
+  	
+  	<!-- 오늘 접수된 문의사항 게시글 수 -->
+  	<select id="mQnacCount" resultType="_int">
+  		select count(*)
+  		from board
+  		where TO_CHAR(B_CREATEDATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') and bType = 5
+  	</select>
+
+  	<!-- 관리자 신규회워 -->
+	<select id="seletMUserTopList" resultType="Member">
+		<![CDATA[
+			select *
+			from (select * 
+				  from member
+				  where status = 'Y'
+				  order by enroll_date desc)
+			where rownum < 6
+		]]>
+	</select>
   	
 </mapper>

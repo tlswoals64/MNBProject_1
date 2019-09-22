@@ -7,4 +7,44 @@
 		select *
 		from fna
 	</select>
+	
+	<!-- 관리자 faq 받아올때 페이징에 사용 -->
+	<select id="getFaqListCount" resultType="_int">
+		select count(*)
+		from fna
+	</select>
+	
+	<!-- 관리자 faq 리스트 -->
+	<select id="selectFaQList" resultType="fna">
+		select *
+		from fna
+		order by fno desc
+	</select>
+	
+	<!-- 관리자 fna 추가 -->
+	<insert id="mFaqInsert" parameterType="fna">
+		insert into fna
+		values(seq_fno.nextval, #{fTitle}, #{fType}, #{fContent})
+	</insert>
+	
+	<!-- 관리자 fna 상세보기 -->
+	<select id="selectmfNaDetail" resultType="fna" parameterType="_int">
+		select *
+		from fna
+		where fNo = #{ fNo }
+	</select>
+	
+	<!-- 관리자 fna 수정 -->
+	<update id="mFaqUpdate" parameterType="fna">
+		update fna
+		set fTitle = #{ fTitle }, fContent = #{ fContent }, fType = #{fType}
+		where fNo = #{ fNo }
+	</update>
+	
+	<!-- 관리자 fna 삭제 -->
+	<delete id="mFaQdelete" parameterType="int">
+		delete from fna
+		where fNo = #{ fNo}
+	
+	</delete>
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,6 +138,39 @@
 		padding : 20px;
 		height : 150px;
 	}
+	
+	#bsaBtnArea{
+		width : 1000px;
+		margin-left : 400px;
+		margin-top : 10px;
+		width : 100px;
+		height : 40px;
+		border : 3px solid rgb(240,240,240);
+		background : rgb(240,240,240);
+		font-weight : bold;
+		
+	}
+	
+	.bsaImgArea{
+		padding-left : 20px;
+		width : 100px;
+		height : 100px;
+		display : inline-block;
+	}
+	.bsaImgArea >img{
+		width : 100%;
+		height : 100%;
+	}
+	.bsaComent{
+		padding-left : 10px;
+		display : inline-block;
+	}
+	.reasonComent{
+		display : inline-block;
+		padding-left : 20px;
+		color : #01A9DB;
+		font-weight : bold;
+	}
 </style>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -214,7 +248,45 @@
 		<div class="BSApplyArea">
 			<div id="bsaB">베이비시터 신청 현황</div>
 			<div class="bsaStatus">
-				베이비시터등록에 신청하지 않았습니다!
+			<c:if test="${ empty b}">
+				<div class="bsaImgArea">
+					<img src="resources/images/sitterApply/plane.png">
+				</div>
+				<div class="bsaComent">
+					베이비시터등록에 신청하지 않았습니다!
+				</div>
+			</c:if>
+			<c:if test="${ m.memberType eq 2}">
+				<div class="bsaImgArea">
+					<img src="resources/images/sitterApply/love.png">
+				</div>
+				<div class="bsaComent">
+			  		베이비시터회원입니다!
+			  	</div>
+			</c:if>
+			<c:if test="${!empty b && b.apply_Date eq null && m.memberType == 1}">
+				<div class="bsaImgArea">
+					<img src="resources/images/sitterApply/happy.png">
+				</div>
+				<div class="bsaComent">
+					관리자의 승인을 기다리는중입니다!
+				</div>
+			</c:if>
+			<c:if test="${!empty b && b.reason ne null}">
+				<div class="bsaImgArea">
+					<img src="resources/images/sitterApply/crying.png">
+				</div>
+				<div class="bsaComent">
+					신청이 반려되었습니다.
+				</div>
+				<div class="reasonComent">
+					(반려 사유 : ${ b.reason })
+				</div>	
+							
+				<div>
+					<button id="bsaBtnArea" onclick="bsapplyUpdate();">수정하기</button>
+				</div>
+			</c:if>
 			</div>		
 			
 		</div>
@@ -223,4 +295,10 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	
 </body>
+
+<script>
+	function bsapplyUpdate(){
+		location.href = 'bsaUpdateView.do';
+	}
+</script>
 </html>
