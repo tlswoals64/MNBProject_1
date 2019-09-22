@@ -20,6 +20,95 @@ import com.kh.MNB.report.model.vo.Report;
 public class BoardServiceImpl implements BoardService {
 
 	
+	@Autowired
+	   BoardDAO bDAO;
+
+	   @Override
+	   public int getListNanumCount() {
+	      return bDAO.getListNanumCount();
+
+
+	   }
+
+	   @Override
+	   public ArrayList<Board> selectNanumList(PageInfo pi) {
+	      return bDAO.selectNanumList(pi);
+	   }
+
+	   
+
+	   @Override
+	   public int insertNanumBoard(Board b) {
+	      return bDAO.insertNanumBoard(b);
+	   }
+
+	   
+	   @Override
+	   public int insertNanumAttachment(ArrayList<Attachment> aList) {
+	      return bDAO.insertNanumAttachment(aList);
+	   }
+
+	   
+	   @Override
+	   public int insertNanumReply(Reply r) {
+	      return bDAO.insertNanumReply(r);
+	   }
+
+	   @Override
+	   public ArrayList<Reply> selectNanumReplyList(int bNo) {
+	      return bDAO.selectNanumReplyList(bNo);
+	   }
+
+	   @Override
+	   public ArrayList<PictureBoard>  selectNanumBoard(int bNo) {
+	      return bDAO.selectNanumBoard(bNo);
+	   }
+
+	   @Override
+	   public int updateNanumBoard(Board board) {
+	      return bDAO.updateNanumBoard(board);
+	   }
+
+	   @Override
+	   public int updateNanumAttachment(ArrayList<Attachment> aList) {
+	      return bDAO.updateNanumAttachment(aList);
+	   }
+
+	   @Override
+	   public int deleteNanumBoard(int bNo) {
+	      return bDAO.deleteNanumBoard(bNo);
+	   }
+
+	   @Override
+	   public int insertSubNanumAttachment(ArrayList<Attachment> insertList) {
+	      return bDAO.insertSubNanumAttachment(insertList);
+	   }
+
+	   
+
+	   @Override
+	   public ArrayList<Board> selectNanumIntro() {
+	      return bDAO.selectNanumIntro();
+	   }
+	   
+	   @Override
+	   public ArrayList<Board> selectComIntro() {
+	      return bDAO.selectComIntro();
+	   }
+
+	   @Override
+	   public void addNanumCount(int bNo) {
+	         bDAO.addNanumCount(bNo);
+	      
+	   }
+	   
+	   @Override
+	   public int deleteSubNanumAttachment(ArrayList<Integer> deleteList) {
+	      return bDAO.deleteSubNanumBoard(deleteList);
+	   }
+	   
+	      //////////////////////////////////////////////////////////////////////////////////////////
+	
 		//////////////////////////////////////////////////////////////////////////////////////////
 	
 	   
@@ -304,93 +393,6 @@ public class BoardServiceImpl implements BoardService {
 }
 
    
-   @Autowired
-   BoardDAO bDAO;
-
-   @Override
-   public int getListNanumCount() {
-      return bDAO.getListNanumCount();
-
-
-   }
-
-   @Override
-   public ArrayList<Board> selectNanumList(PageInfo pi) {
-      return bDAO.selectNanumList(pi);
-   }
-
    
-
-   @Override
-   public int insertNanumBoard(Board b) {
-      return bDAO.insertNanumBoard(b);
-   }
-
-   
-   @Override
-   public int insertNanumAttachment(ArrayList<Attachment> aList) {
-      return bDAO.insertNanumAttachment(aList);
-   }
-
-   
-   @Override
-   public int insertNanumReply(Reply r) {
-      return bDAO.insertNanumReply(r);
-   }
-
-   @Override
-   public ArrayList<Reply> selectNanumReplyList(int bNo) {
-      return bDAO.selectNanumReplyList(bNo);
-   }
-
-   @Override
-   public ArrayList<PictureBoard>  selectNanumBoard(int bNo) {
-      return bDAO.selectNanumBoard(bNo);
-   }
-
-   @Override
-   public int updateNanumBoard(Board board) {
-      return bDAO.updateNanumBoard(board);
-   }
-
-   @Override
-   public int updateNanumAttachment(ArrayList<Attachment> aList) {
-      return bDAO.updateNanumAttachment(aList);
-   }
-
-   @Override
-   public int deleteNanumBoard(int bNo) {
-      return bDAO.deleteNanumBoard(bNo);
-   }
-
-   @Override
-   public int insertSubNanumAttachment(ArrayList<Attachment> insertList) {
-      return bDAO.insertSubNanumAttachment(insertList);
-   }
-
-   
-
-   @Override
-   public ArrayList<Board> selectNanumIntro() {
-      return bDAO.selectNanumIntro();
-   }
-   
-   @Override
-   public ArrayList<Board> selectComIntro() {
-      return bDAO.selectComIntro();
-   }
-
-   @Override
-   public void addNanumCount(int bNo) {
-         bDAO.addNanumCount(bNo);
-      
-   }
-   
-   @Override
-   public int deleteSubNanumAttachment(ArrayList<Integer> deleteList) {
-      return bDAO.deleteSubNanumBoard(deleteList);
-   }
-   
-      //////////////////////////////////////////////////////////////////////////////////////////
    
    
