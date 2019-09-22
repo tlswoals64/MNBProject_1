@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TranDetail</title>
+
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <style>
 .menubar ul{width:800px;height:30px;background:pink;list-style:none;padding-top:15px; margin-top:30px; }
@@ -68,11 +69,21 @@ element.style {
 .form{
 	margin-left:27%;
 }
-
+.sidebar{width:195px;float:left;border:1px solid #ee9a99;margin-left:110px; margin-top:220px;}
+.sidebar h2{background:#ee9a99;color:#fff;padding:20px}
+.sidebar li{padding:15px 20px ;border-bottom:1px solid #ddd}
+.sidebar li:hover{cursor:pointer;font-weight:bold;color:#ee9a99}
 </style>
 </head>
 <body>
  <%@ include file="../common/header.jsp"%> 
+        <div class="sidebar">
+      <h2>문의사항</h2>
+      <ul>
+         <li>문의사항</li>
+         <li>자주묻는질문</li>
+      </ul>
+   </div>
 <div class="form">
 <div style="width:730px;height:80px;background-image:url(resources/images/fna/faq.PNG);background-repeat:no-repeat;margin-top:20px">
 

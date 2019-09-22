@@ -137,6 +137,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		var year = date.getFullYear();
 		var month = date.getMonth() + 1;
 		var day = date.getDate();
+
 	
 		if((day + "").length < 2){
 			day = "0" + day;

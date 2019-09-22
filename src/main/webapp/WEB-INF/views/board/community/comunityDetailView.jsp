@@ -129,6 +129,14 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .applybtnArea > ul{
 	margin-left: 650px;
 }
+
+.delBtn{
+	margin-top : 20px;
+}
+.udBtn{
+	margin-top : 20px;
+}
+
 </style>
 
 <body>
@@ -148,15 +156,43 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
                   <tr>
                      <th scope="row">제목</th>
                      <td class="pnawtd">
-                    <input name="title" value="${ board123.bTitle }" class="inputTypeText" 
-                     style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes" style="bor" readonly/>
+                    <div name="title"  class="inputTypeText" 
+                     style='width: 80%;'>
+                     ${board123.bTitle }
+                     </div>
 					<input type="hidden"  name = "bNo" value="${baord123.bNo }">		
 						</td>	
                   </tr>
                   
                  	<tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="mem_name" value="${board123.bWriter }" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd">
+                     
+                     <div name="mem_name"  class="inputTypeText" >
+                     	${board123.bWriter }
+                     </div>
+                     
+                     </td>
+                  </tr>
+                  <tr>
+                     <th scope="row">조회수</th>
+                     <td class="pnawtd">
+                     
+                     <div name="mem_name"  class="inputTypeText" >
+                     	${board123.bCount }
+                     </div>
+                     
+                     </td>
+                  </tr>
+                  <tr>
+                     <th scope="row">작성일</th>
+                     <td class="pnawtd">
+                     
+                     <div name="mem_name"  class="inputTypeText" >
+                     	${board123.b_CreateDate }
+                     </div>
+                     
+                     </td>
                   </tr>
      
                   <tr>
@@ -175,8 +211,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 				<c:if test="${ !empty board4.changeName }"> 
 				<img src="resources/images/board/${board4.changeName}" width="200" height="200"> 
 			</c:if>
-				<textarea name="content"style='width: 100%; height: 200px;'readonly>${board123.bContent } 
-				</textarea>
+				<div name="content"style='width: 100%; height: 200px;'>${board123.bContent } 
+				</div>
 			</td>
 		  </tr>
                 
@@ -187,17 +223,24 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 			<div class="applybtnArea" style="max-width: 100%;">
                <ul class="ul01">
               
+              <c:if test="${board123.bWriter eq m.nickName}">
                <li>
-					
                		<input class="inputbox02 btn btn-outline-dark" type="button" onclick="comup();"  value="수정하기">
                </li>
              
+             	
                 <li><input class="inputbox02 btn btn-outline-dark" type="button" value="삭제하기" onclick="comdelete();"></li>
-    		
+    		  </c:if>
                 	<li><input class="inputbox02 btn btn-outline-dark" type="button" value="목록으로" onclick="menulo()"></li>
 					
                </ul>
             </div>
+            <ul style="margin-left:1500px;">
+           		 <li>
+           		 
+             		<input class="inputbox02 btn btn-outline-dark" type="button" onclick="report();"  value="신고하기">
+             	</li>
+             	</ul>
 		<script type="text/javascript">
 			function comup(){
 				var bNo = ${board123.bNo};
@@ -208,8 +251,22 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 			function comdelete() {
 				var bNo = ${board123.bNo};
 				console.log(bNo);
+				if(confirm("정말 삭제하시겠습니까?"))
+				 {
+					location.href="comdelete.do?bNo="+ bNo; 
+				 }
+				 else
+				 {
+				 alert('아니오를 누르셨습니다');
+				 }
 				
-				location.href="comdelete.do?bNo="+ bNo; 
+			}
+			function report() {
+				var bNo = ${board123.bNo};
+
+			
+				
+				window.open("openReport.do?bNo="+bNo, 'content', 'width=1024, height=600, menubar=no, status=no, toolbar=no ');
 			}
 		</script>
 		<div class="both"></div>
@@ -268,21 +325,30 @@ function getreplyList(){
 			$tableBody = $("#mtb tbody");
 			$tableBody.html("");
 			var $tr;
+			var $rNum;
 			var $rWriter;
 			var $rContent;
 			var $rCreateDate;
+			var $delBtn;
+			var $udBtn;
 			
 			$("#rCount").text("댓글 (" + data.length + ")");
 			
 			if(data.length > 0){
 				for(var i in data){
-					$tr = $("<tr>");
-				    $rContent = $("<td width='700px'; height='70px'; background:'green'>").text(decodeURIComponent(data[i].nContent.replace(/\+/g, " ")));
+					$tr = $("<tr class='replyTr'>");
+					$rNum = $("<td style='display:none' id='rNumTd' name='rNum'>").text(data[i].rNum)
+				    $rContent = $("<td width='700px'; height='70px'; background:'green' id='nContentTd'>").text(decodeURIComponent(data[i].nContent.replace(/\+/g, " ")));
 				    $rCreateDate =  $("<td width='200'>").text(data[i].nCreate_Date);
 				    $rWriter =  $("<td width='200'>").text(data[i].rWriter);
+				    $udBtn = $("<td width='100'><button class='udBtn' onclick='updateReply(this);'>수정</button></td>")
+				    $delBtn = $("<td width='100'><button class='delBtn' onclick='deleteReply(this);'>삭제</button></td>")
+				    $tr.append($rNum);
 				    $tr.append($rWriter);
    					$tr.append($rContent);
    					$tr.append($rCreateDate);
+   					$tr.append($udBtn);
+   					$tr.append($delBtn);
    					$tableBody.append($tr);
 				}
 			}
@@ -301,6 +367,40 @@ $(function(){
 getreplyList();
 
 });
+
+function deleteReply(d){
+	var rNum = $(d).parent().siblings('#rNumTd').text();
+	$.ajax({
+		url: "deleteReply.do",
+		data: {rNum : rNum},
+		dataType: "json",
+		success: function(data){
+			console.log(data);
+			if(data > 0){
+				getreplyList();
+			}
+		}
+		
+	})
+
+}
+function updateReply(d){
+	var rNum = $(d).parent().siblings('#rNumTd').text();
+	var nContent = $(d).parent().siblings('#nContentTd').text();
+	$.ajax({
+		url: "updateReply.do",
+		data: {rNum : rNum,
+			  nContent : nContent},
+		dataType: "json",
+		success: function(data){
+			if(data > 0){
+				getreplyList();
+			}
+		}
+		
+	})
+	
+}
 
 	
 $("#rSubmit").on("click", function(){
@@ -325,11 +425,13 @@ $("#rSubmit").on("click", function(){
 				
 		}
 	});
-});	
+});	   	
 
 function menulo() {
 	location.href='comListView.do'
 }
 	
 </script>
+
+
 </html>

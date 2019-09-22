@@ -2,7 +2,7 @@ package com.kh.MNB.common;
 
 import com.kh.MNB.board.model.vo.PageInfo;
 
-public class Pagination {
+public class PaginationNanum {
    // PageInfo 객체를 리턴하는 static 메소드 추가
    public static PageInfo getPageInfo(int currentPage, int listCount) {
       
@@ -17,7 +17,7 @@ public class Pagination {
       int startPage;     // 현재 페이지에서 보여질 페이징 버튼의 시작 페이지
       int endPage;       // 현재 페이지에서 보여될 페이징 버튼의 끝 페이지
       
-      int boardLimit = 10; // 한 페이지에 보여질 게시글 갯수
+      int boardLimit = 6; // 한 페이지에 보여질 게시글 갯수
       
       // * maxPage - 총 페이지 수
       // 목록 수가 123개이면 페이지 수는 13페이지임

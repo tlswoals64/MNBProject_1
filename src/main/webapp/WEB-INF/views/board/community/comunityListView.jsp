@@ -158,7 +158,7 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi1.currentPage < pi1.maxPage }">
-					<c:url var="after" value="blist.do">
+					<c:url var="after" value="comListView.do">
 						<c:param name="page" value="${ pi1.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
@@ -170,16 +170,16 @@
             
       
       <div align = "center">
-      <form action="./noticeListView.jsp" method="get">
+      <form action="searchCom.do" method="get">
       <select class="option fr" name="search_target">
             <option value="title_content">제목+내용</option>
-            <option value="title">제목</option><option value="content">내용</option>
-            <option value="comment">댓글</option><option value="nick_name">닉네임</option>
-            <option value="tag">태그</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+          <option value="nick_name">닉네임</option>
             </select>
             <input  type="text" name="search" value="" placeholder="검색어를 입력하세요.">&nbsp;
-         <input type="button" value="검색" style="background-color: white; color:black; width:50px;  border: solid 1px gray;
-  border-radius: 7px; text-align: center;">
+         <input type="submit" value="검색" style="background-color: white; color:black; width:50px;  border: solid 1px gray;
+  border-radius: 7px; text-align: center;" >
             
             
       </form>
@@ -193,7 +193,7 @@
    
       </div>
       </div>
-      <script>
+<script>
       $(function(){
          //아이디가 listArea의 자손인 td에 마우스가 들어가게되면 지금 마우스가 있는곳(td)의 부모(tr)에게 css를 적용한다.
          $('#listArea td').mouseenter(function(){
