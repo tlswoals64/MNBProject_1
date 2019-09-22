@@ -179,7 +179,7 @@ input, textarea, select {
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="${ board[0].bWriter }" class="inputTypeText" maxLength="125" type="text" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${loginUser.nickName}" class="inputTypeText" maxLength="125" type="text" readonly></td>
                   </tr>
                   <tr>
                      <th scope="row">메인 이미지</th>

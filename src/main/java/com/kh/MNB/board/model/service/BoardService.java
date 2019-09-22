@@ -9,14 +9,11 @@ import com.kh.MNB.board.model.vo.PictureBoard;
 import com.kh.MNB.board.model.vo.Reply;
 import com.kh.MNB.propose.model.vo.Propose;
 
-
-
 public interface BoardService {
 
 	int getListNanumCount();
 
 	ArrayList<Board> selectNanumList(PageInfo pi);
-
 
 	int insertNanumBoard(Board b);
 
@@ -26,7 +23,7 @@ public interface BoardService {
 
 	ArrayList<Reply> selectNanumReplyList(int bNo);
 
-	ArrayList<PictureBoard>  selectNanumBoard(int bNo);
+	ArrayList<PictureBoard> selectNanumBoard(int bNo);
 
 	int updateNanumBoard(Board board);
 
@@ -36,55 +33,57 @@ public interface BoardService {
 
 	int insertSubNanumAttachment(ArrayList<Attachment> insertList);
 
-	
+	ArrayList<Board> selectNanumIntro();
+
+	ArrayList<Board> selectComIntro();
+
+	int deleteSubNanumAttachment(ArrayList<Integer> deleteList);
+
 	//////////////////////////////////////////////////////////////////////////////////
-	
-	
-	 int getComListCount();
 
-	   ArrayList<Board> selectComList(PageInfo pi);
+	// 정보공유
+	int getListCount1();
 
-	   int insertComBoard(Board board);
+	// 정보공유
+	ArrayList<Board> selectList1(PageInfo pi);
 
-	   int insertComAttachment(ArrayList<Attachment> aList);
+	int insertReply1(Reply r);
 
-	   int insertProBoard(Board board);
+	// 디테일페이지
+	void addReadCount1(int bNo);
+	// 디테일페이지
 
-	   int insertProAttachment(ArrayList<Attachment> aList);
+	Attachment selectBoard1(int bNo);
 
-	   int insertComReply(Reply r);
+	ArrayList<Propose> selectProList(PageInfo pi);
 
-	   void addComReadCount(int bNo);
+	int getListCountPro();
 
-	   Attachment selectComPicBoard1(int bNo);
+	Board selectBoard2(int bNo);
 
-	   Attachment selectComPicBoard2(int bNo);
+	ArrayList<Reply> selectUserReply(int bNo);
 
-	   Attachment selectComPicBoard3(int bNo);
+	int insertReplyMH(Reply reply);
 
-	   Attachment selectComPicBoard4(int bNo);
+	int updateComBoard(Board b);
 
-	   Board selectComBoard(int bNo);
+	int deleteComBoard(int bNo);
 
-	   int getProListCount();
+	int insertProBoard(Board board);
 
-	   ArrayList<Propose> selectProList(PageInfo pi);
+	int insertProAttachment(ArrayList<Attachment> aList);
 
-	   Attachment selectComupPBoard1(int bNo);
+	Attachment selectPicBoard1(int bNo);
 
-	   Attachment selectComupPBoard2(int bNo);
+	Attachment selectPicBoard2(int bNo);
 
-	   Attachment selectComupPBoard3(int bNo);
+	int insertComBoard(Board board);
 
-	   Attachment selectComupPBoard4(int bNo);
+	int insertComAttachment(ArrayList<Attachment> aList);
 
-	   int updateComBoard(Board b);
+	void addNanumCount(int bNo);
 
-	   int deleteComBoard(int bNo);
 
-	   ArrayList<Reply> selectUserReply(int bNo);
-
-	   int insertReplyMH(Reply reply);
 
 	ArrayList<Board> mDectopList();
 
@@ -107,4 +106,5 @@ public interface BoardService {
 	ArrayList<Board> nanumTopList();
 
 	
+
 }

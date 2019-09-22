@@ -98,22 +98,12 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 							</th>
 						</tr>
 						<tr>
+						<c:forEach var="nanumImg" items="${ board }">
 							<td class="small">
-								<a href="resources/images/board/${ board[0].changeName }"><img src="resources/images/board/${ board[0].changeName }" width="480" height="380"/></a>
-								<p>사진1<br>
+								<a href="resources/images/board/${ nanumImg.changeName }"><img src="resources/images/board/${ nanumImg.changeName }" width="480" height="380"/></a>
+								<p>사진<br>
 							</td>	
-							<td class="small">
-								<a href="resources/images/board/${ board[1].changeName }"><img src="resources/images/board/${ board[1].changeName }" width="480" height="380"/></a>
-								<p>사진2<br>
-							</td>
-							<td class="small">
-								<a href="resources/images/board/${ board[2].changeName }"><img src="resources/images/board/${ board[2].changeName }" width="480" height="380"/></a>
-								<p>사진3<br>
-							</td>
-							<td class="small">
-								<a href="resources/images/board/${ board[3].changeName }"><img src="resources/images/board/${ board[3].changeName }" width="480" height="380"/></a>
-								<p>사진4<br>
-							</td>
+						</c:forEach>
 						</tr>
 					</table>
 						<script>
@@ -142,7 +132,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 				<p class="both"></p>
 				<ul>
 					<li class="pro_title">작성자</li>
-					<li> ${ board[0].bWriter }</li>
+					<li> ${ board[0].nickName }</li>
 				</ul>
 				<p class="both"></p>
 				<ul>
@@ -197,8 +187,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	   		</tbody>
 	   </table>
 			 	<table id = "replySelectTable">
-					
-							<tr>
+							<%-- <tr>
 								<td style="width:100px; font-size:20px;padding-top:10px;">${rWriter}</td> 
 								<td style="width:200px; font-size:20px;padding-top:10px;">${nCreate_Date}</td>
 							</tr>
@@ -207,7 +196,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 							</tr>
 						
 					
-					
+					 --%>
 				</table> 
 			</div>
 
@@ -325,15 +314,20 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
             <button onclick="location.href='${ updateNanumView }'" >수정하기</button>
             <button onclick="location.href='${ deleteNanumView }'">삭제하기</button>
  	</p>
-      </c:if>   
+      </c:if>
 	 <c:if test="${ loginUser.userId ne board[0].bWriter }"> 
 	 <p align="center">
 	 
-      <button onclick="location.href=' index.jsp '">시작 페이지로 이동</button>
-      <button onclick="location.href=' views/board/community/nanumView.jsp'">목록 보기로 이동</button>
-   </p>
+<!--      <button onclick="location.href=' index.jsp '">시작 페이지로 이동</button> -->
+          <li style="text-align:center;"><input class="inputbox02 btn btn-outline-dark" style="width:130px; height:25px;" type="button" value="목록으로" onclick="listGo()"></li>
+   </p>x`
    </c:if>
-   	
+   	<script>
+   	function listGo() {
+   		location.href='nBoard.do'
+   	}
+
+   	</script>
    	<div class="both"></div>
 
 	  <jsp:include page="../../common/footer.jsp"></jsp:include>

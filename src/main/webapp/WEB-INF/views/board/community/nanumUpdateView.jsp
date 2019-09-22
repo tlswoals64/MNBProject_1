@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +189,7 @@ input, textarea, select {
 						<tr>
 							<th scope="row">작성자</th>
 							<td class="pnawtd">
-								<input name="bWriter" value="${ board[0].bWriter }" class="inputTypeText" maxLength="125" type="text" readonly>
+								<input name="bWriter" value="${ board[0].nickName }" class="inputTypeText" maxLength="125" type="text" readonly>
 							</td>
 						</tr>
 						<tr>
@@ -206,30 +207,30 @@ input, textarea, select {
 								<textarea name='bContent'  style='width: 100%; height: 200px;'>${ board[0].bContent} </textarea>
 							</td>
 						</tr>
-						<tr>
+						<tr style="height:150px;">
 							<th>사진 첨부</th>
-							<td>
+							<td> 
 								<div class="par">
-									<div id="contentImgArea1" class="po">
-										<img id="contentImg1" src="resources/images/board/${ board[1].changeName }"name="thumbnailImg2" width="120" height="100">
-										<input type="hidden" id="upContentImg1" name="iNo1" value="${ board[1].iNo }" disabled>
-									</div>
-
-									<div id="contentImgArea2" class="po">
-										<img id="contentImg2" src="resources/images/board/${ board[2].changeName }"name="thumbnailImg3" width="120" height="100">
-										<input type="hidden" id="upContentImg2" name="iNo2" value="${ board[2].iNo }" disabled>
-									</div>
-
-									<div id="contentImgArea3" class="po">
-										<img id="contentImg3" src="resources/images/board/${ board[3].changeName }"name="thumbnailImg4" width="120" height="100">
-										<input type="hidden" id="upContentImg3" name="iNo3" value="${ board[3].iNo }" disabled>
-									
-									</div>
+									<c:forEach begin="1" end="3" var="i">
+											<c:if test="${ empty board[i].changeName }">
+												<div id="contentImgArea${ i }" class="po">
+					                              <img id="contentImg${ i }" name="thumbnailImg${ (i + 1) }" width="120" height="100">
+					                           </div>
+											</c:if>
+											<c:if test="${ not empty board[i].changeName }">
+												<div id="contentImgArea${ i }" class="po">
+													<img id="contentImg${ i }" src="resources/images/board/${ board[i].changeName }" name="thumbnailImg${ i + 1 }" width="120" height="100">
+													<input type="hidden" id="upContentImg${ i }" name="iNo${ i }" value="${ board[i].iNo }" disabled>
+													<input type="button" value="삭제" id="deleteBtn${ i }" onclick="nanumDelete(${ i });" style="width:50px; height:20px; margin-top: 5px; margin-left: 35px;"  >
+												</div>
+											</c:if>
+									</c:forEach>
 								</div>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				
 				<div class="joinbox" style="max-width: 100%;">
 					<ul class="ul01">
 						<li>
@@ -258,20 +259,16 @@ input, textarea, select {
 	<script>
 		$(function() {
 			$("#fileArea").hide();
-
-			$("#titleImgArea").click(function() {
-				$("#thumbnailImg1").click();
-			});
-			$("#contentImgArea1").click(function() {
-				$("#thumbnailImg2").click();
-			});
-			$("#contentImgArea2").click(function() {
-				$("#thumbnailImg3").click();
-			});
-			$("#contentImgArea3").click(function() {
-				$("#thumbnailImg4").click();
-			});
-
+		});
+		
+		$(document).on('click', '#contentImg1', function(){
+			$("#thumbnailImg2").click();
+		});
+		$(document).on('click', '#contentImg2', function(){
+			$("#thumbnailImg3").click();
+		});
+		$(document).on('click', '#contentImg3', function(){
+			$("#thumbnailImg4").click();
 		});
 		// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
 		function LoadImg(value, num) {
@@ -285,22 +282,49 @@ input, textarea, select {
 						$("#upTitleImg").removeAttr("disabled");
 						break;
 					case 2:
+						var check = $('#contentImg1').attr("src");
 						$("#contentImg1").attr("src", e.target.result);
 						$("#upContentImg1").removeAttr("disabled");
+						
+						if(check == undefined){
+							$("#contentImgArea1").append($("<input type='button' value='삭제' id='deleteBtn1' onclick='nanumDelete(1);' style='width:50px; height:20px; margin-top: 5px; margin-left: 35px;'  >"));
+						}
 						break;
 					case 3:
+						var check = $('#contentImg2').attr("src");
 						$("#contentImg2").attr("src", e.target.result);
 						$("#upContentImg2").removeAttr("disabled");
+						
+						if(check == undefined){
+							$("#contentImgArea2").append($("<input type='button' value='삭제' id='deleteBtn2' onclick='nanumDelete(2);' style='width:50px; height:20px; margin-top: 5px; margin-left: 35px;'  >"));
+						}
 						break;
 					case 4:
+						var check = $('#contentImg3').attr("src");
 						$("#contentImg3").attr("src", e.target.result);
 						$("#upContentImg3").removeAttr("disabled");
+
+						if(check == undefined){
+							$("#contentImgArea3").append($("<input type='button' value='삭제' id='deleteBtn3' onclick='nanumDelete(3);' style='width:50px; height:20px; margin-top: 5px; margin-left: 35px;'  >"));
+						}
 						break;
 					}
 				}
 
 				reader.readAsDataURL(value.files[0]);
 			}
+		}
+		
+		function nanumDelete(num){
+			var value = $('#upContentImg'+num).val();
+			$('#upContentImg'+num).val('N' + value);
+			$('#upContentImg'+num).removeAttr("disabled");
+			$('#contentImg'+num).remove();
+			$('#deleteBtn'+num).remove();
+			
+			var $img;
+			$img = $("<img id='contentImg" + num + "' name='thumbnailImg" + (num + 1) + "' width='120' height='100'>");
+			$('#contentImgArea'+num).append($img);
 		}
 
 		// 등록 버튼이 눌렷을때

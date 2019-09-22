@@ -52,6 +52,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .content_notice {width:100%; background-color:#fff;border : 3px solid rgb(240,240,240);margin-right:1%}
 .content_notice2 {width:100%; height:300px;background-color:#fff;border : 3px solid rgb(240,240,240); }
 .cont_name {color:#3360a9; font-size:18px; font-weight:600;padding:15px 0 15px 20px;border-bottom:1px #e0dfdf solid;font-family: 'NanumSquare'}
+ 
 .notice_cont {padding:15px 20px 15px 20px; height : 300px; border : 3px solid rgb(240,240,240); }
 .cont_more {float:right;padding-right:20px;padding-top:5px;}
 .tableDeTh{
@@ -70,10 +71,11 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		border-bottom : 1px solid rgb(240,240,240);
  }
 
+
 </style>
 
 </head>
-<body>
+<body>	
   <jsp:include page="../../common/header.jsp"></jsp:include>
   		
 		<div class="both"></div>
@@ -101,6 +103,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 커뮤니티 게시판 " 
 				</div>
 				<div class="notice_cont">
+
+
 				<table class="tableD" id="comTable">
 						<thead>
 							<tr class="tableDTr">
@@ -139,10 +143,57 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		</li>
 	</ul>
 </div>	
+	<script>
+	$(function () {
+	   		getComBoardList();
+	   		
+	   	setInterval(function(){
+	   		getComBoardList();
+	   	}, 10000);
+	});
+	
+	function getComBoardList(){
+   		$.ajax({
+   			url: 'cIntro.do',
+   			contentType: "application/json; charset=utf-8;",
+   			dataType: "json",
+   			success: function(data){
+   				 $tableBody = $("#ctb tbody");
+   				$tableBody.html("");
+   				var $tr;
+   				var $bTitle;
+   				var $bWriter;
+   				var $b_CreateDate;
+   				if(data.length > 0) {
+   					for(var i in data){
+   						$tr = $("<tr>");
+   						$bTitle =  $("<td>").text(data[i].bTitle);
+   					    $bWriter = $("<td>").text(data[i].bWriter);
+   					    $b_CreateDate =  $("<td>").text(data[i].b_CreateDate);
+   				
+   					    $tr.append($bTitle);
+	   					$tr.append($bWriter);
+	   					$tr.append($b_CreateDate);
+	   					$tableBody.append($tr);
+   					}
+   				} else{
+   					$tr = $("<tr>");
+   					$bTitle = $("<td colspan='3'>").text("조회된 게시물이 없습니다.");
+   		
+				   	$tr.append($bTitle);
+					$tableBody.append($tr);
+				} 
+   			}
+  	 	});
+   	}
+
+	</script>
 			
 	<p class="both"></p>
  
 	  <jsp:include page="../../common/footer.jsp"></jsp:include>
+	  
+ 
 
  </body>
  

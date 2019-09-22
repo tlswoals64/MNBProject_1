@@ -101,7 +101,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
          <p>가장 많이 싸우고 부딪힌다는 연년생 우리아이들,<br>
             어떻게 육아를 해야할지 고민이시라구요?<br>
             자신의 육아법을 공유하고, 다른 부모님의 육아법도 보고 듣고!</p>
-         <h5><a href="#">더 많은 정보보기</a></h5>
+         <h5><a href="comListView.do">더 많은 정보보기</a></h5>
          </li>
       </ul>
    </div>
@@ -117,7 +117,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
          육아가 너무 어려워요. 육아로 인해 진땀빼는 부모님들을 위한 공간.<br>
          최고의 베이비시터들이 여러분들의 아이와 즐겁게 놀아주고, 알려주고<br>
          좋은 아이가 되는 길로 이끌어 줄 것 입니다.</p>
-         <h5><a href="#">베이비시터 구하기</a></h5>
+         <h5><a href="babymom.do">베이비시터 구하기</a></h5>
          </li>
       </ul>
    </div>
