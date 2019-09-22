@@ -25,7 +25,7 @@ label{
 
 .boardbox {
    width: 80%;
-   max-width: 1024px;
+   max-width: 1040px;
    margin: 0 auto;
    padding: 2%;
    text-align: center;
@@ -193,21 +193,23 @@ input, textarea, select {
               <tr>
                      <th scope="row">상세내용</th>
                      <td class="write pnawtd">
-							<!-- textarea 읽기만 가능하게 하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<c:if test="${ !empty board.changeName }">
+                     <c:if test="${ !empty board.changeName }"> 
 			<img src="resources/images/board/${board.changeName}" width="200" height="200">  
+				<button class="inputbox02 btn btn-outline-dark" style="width:30px; height:30px; margin-bottom:155px;"type="button" onclick="comPicDelete();">X</button>
 			</c:if>
 			<c:if test="${ !empty board2.changeName }"> 
 				<img src="resources/images/board/${board2.changeName}" width="200" height="200">  
+				<button class="inputbox02 btn btn-outline-dark" style="width:30px; height:30px; margin-bottom:155px;"type="button" onclick="comPicDelete();">X</button>
 				</c:if>
 				<c:if test="${ !empty board3.changeName }"> 
-				<img src="resources/images/board/${board3.changeName}" width="200" height="200">  
+				<img src="resources/images/board/${board3.changeName}" width="200" height="200"> 
+				<button class="inputbox02 btn btn-outline-dark" style="width:30px; height:30px; margin-bottom:155px;"type="button" onclick="comPicDelete();">X</button> 
 		</c:if>
 				<c:if test="${ !empty board4.changeName }"> 
 				<img src="resources/images/board/${board4.changeName}" width="200" height="200"> 
-				</c:if>
-				<textarea name="content"style='width: 100%; height: 200px;'>${board123.bContent } 
-				</textarea>
+				<button class="inputbox02 btn btn-outline-dark" style="width:30px; height:30px; margin-bottom:155px;"type="button" onclick="comPicDelete();">X</button>
+			</c:if>
+				<textarea name="bContent" style='width: 100%; height: 200px;'>${board123.bContent }</textarea>
 			</td>
 		  </tr>
                
@@ -319,15 +321,6 @@ input, textarea, select {
           return false;
        }
       
-  /*     // 의류종류 선택 안햇을 경우 포커스
-      if($('#Smallclassification').val() == ''){
-          alert('의류종류를 선택해주세요.');
-          var offset = $('#cates').offset();
-          $("html").animate({scrollTop:offset.top},400);
-          isall = false;
-          return false;
-       } */
-      
       // text 박스 구분
        form.find('input[type=text]').each (function(){
          var obj = $(this);
@@ -343,12 +336,7 @@ input, textarea, select {
          }
       });
       
-  /*     // 메인 이미지가 없을 경우 포커스
-       if(img.src == ''){
-			alert('메인 이미지를 넣어주세요.');
-			$('#titleImg').focus();
-			return false;
-		} */
+
     // 작성 최종 확인
        if (isall) {
          answer = confirm("작성한 글을 등록 하시겠습니까?");
@@ -356,8 +344,17 @@ input, textarea, select {
             form.submit();
          }
       }
+     
    }
    
+    //사진 삭제
+   function comPicDelete() {
+      var iNo1 = ${board.iNo};
+      var bNo = ${board123.bNo}
+ 
+    location.href="comPicDelete.do?iNo1=" + iNo1 + "&bNo=" + bNo; 
+
+   }  
    </script>
 </body>
 </html>

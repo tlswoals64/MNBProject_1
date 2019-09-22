@@ -8,7 +8,7 @@ import com.kh.MNB.member.model.vo.Member;
 
 public interface LikeService {
 
-	int likeCheck(Member m);
+	int likeCheck(LikeTb b);
 
 	int likeAddBoard(LikeTb lk);
 

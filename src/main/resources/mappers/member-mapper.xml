@@ -176,8 +176,8 @@
  	<!-- 오늘 신고된 게시글 수 -->
   	<select id="mDecCount" resultType="_int">
   		select count(*)
-  		from board
-  		where TO_CHAR(B_CREATEDATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') and bType = 7
+  		from report
+  		where TO_CHAR(rdate, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
   	</select>
   	
   	<!-- 오늘 접수된 문의사항 게시글 수 -->

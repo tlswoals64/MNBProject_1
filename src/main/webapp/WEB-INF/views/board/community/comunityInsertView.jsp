@@ -183,7 +183,7 @@ input, textarea, select {
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="${loginUser.userId}" class="inputTypeText" maxLength="125" type="text" value="" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${loginUser.nickName}" class="inputTypeText" maxLength="125" type="text" value="" readonly></td>
                   </tr>
                  
                    
@@ -327,12 +327,12 @@ input, textarea, select {
          }
       });
       
-      // 메인 이미지가 없을 경우 포커스
+  /*     // 메인 이미지가 없을 경우 포커스
        if(img.src == ''){
 			alert('메인 이미지를 넣어주세요.');
 			$('#titleImg').focus();
 			return false;
-		} 
+		} */
     // 작성 최종 확인
        if (isall) {
          answer = confirm("작성한 글을 등록 하시겠습니까?");

@@ -100,10 +100,29 @@
            
          </thead> 
         <c:forEach var="b" items="${ list1 }">
-       
-		<tr onclick="comDetail(this);">
-			<td align="center" id="bNo">${ b.bNo }</td>
-			<td>분류</td>
+       	
+		<tr onclick="proDetail(this);">
+			<td align="center" id="bNo">${ b.pNo }</td>
+		
+			
+			
+			<td align="center">	
+			<c:if test="${b.pType == '1' }">
+				계정관련 문의
+			</c:if>
+			<c:if test="${b.pType == '2' }">
+				사이트이용관련 문의
+			</c:if>
+			<c:if test="${b.pType == '3' }">
+				베이비시터관련 문의
+			</c:if>
+			<c:if test="${b.pType == 4 }">
+				부모님관련 문의
+			</c:if>
+			<c:if test="${b.pType == 5 }">
+				기타 문의사항
+			</c:if>
+			</td>
 			<td align="left"> 
 				${ b.bTitle }
 			<%-- <c:if test="${ empty loginUser }">
@@ -111,18 +130,26 @@
 				</c:if> --%> 
 			</td>
 			
-			<td align="center">${ b.bWriter }</td>
-			<td align="center">${ b.Re }</td>
+			<td id="bWriter" align="center">${ b.bWriter }</td>
+			<td align="center">${ b.pRe }</td>
 			<td align="center">${ b.b_CreateDate }</td>
+			<td id="nickName" align="center" style="display:none">${m.nickName}</td>
 			
-		
+				
 		</tr>
 		<script>
-			function comDetail(v){
+			function proDetail(v){
+				var bWriter = $(v).children("#bWriter").text();
+				var nickName = $(v).children("#nickName").text();
+				if(bWriter == nickName){
+				
 				var bNo=$(v).children("#bNo").text();
-				console.log(bNo);
-				location.href="detailCom.do?bNo="+ bNo;
+				location.href="detailPro.do?pNo="+ bNo;
+				}else{
+					alert("본인의 글만 볼 수 있습니다.");
+				}
 			}
+			
 		</script>
 		</c:forEach>
 		<!-- 페이징 처리 -->

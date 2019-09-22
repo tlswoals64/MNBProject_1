@@ -68,7 +68,7 @@ label{
    border: 1px solid #eee;
    font-size: 17px;
    font-weight: normal;
-   background: #fafafa;
+   background: pink;
 }
 
 .pnaw_box td {
@@ -155,7 +155,7 @@ input, textarea, select {
 .comm{
    vertical-align: middle;
 }
-.
+
 </style>
 </head>
 <body>
@@ -167,10 +167,11 @@ input, textarea, select {
    <div class="boardbox">
       <div class="boxrow">
       	<div class = "boxrow-top">
-      		<h2 class="subtext">문의사항 글쓰기</h2>
+      		<h2 class="subtext">문의사항 수정하기</h2>
       	</div>
          <!--  enctype은 전송되는 데이터 형식을 설정한다. -->
-         <form name='writeform' id='writeform' action='insertPro.do' method='post' ENCTYPE='multipart/form-data'>
+         <form name='writeform' id='writeform' action='proUpdate.do' method='post' ENCTYPE='multipart/form-data'>
+         <input type="hidden" name="bNo" value="${board123.bNo }">
             <table class="pnaw_box" summary="">
                <tbody>
                <tr>
@@ -194,16 +195,16 @@ input, textarea, select {
                </tr>
                   <tr>
                      <th scope="row">제목</th>
-                     <td class="pnawtd"><input name="bTitle" value="" class="inputTypeText" style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
+                     <td class="pnawtd"><input name="bTitle" value="${board123.bTitle }" class="inputTypeText" style='width: 80%;' maxLength="125" type="text" msg="제목을 입력해주세요." valch="yes"/></td>
                   </tr>
                   <tr>
                      <th scope="row">작성자</th>
-                     <td class="pnawtd"><input name="bWriter" value="${loginUser.nickName}" class="inputTypeText" maxLength="125" type="text" value="" readonly></td>
+                     <td class="pnawtd"><input name="bWriter" value="${loginUser.userId}" class="inputTypeText" maxLength="125" type="text" value="" readonly></td>
                   </tr>
 
                   <tr>
                      <th scope="row">상세내용</th>
-                     <td class="write pnawtd"><textarea name='bContent' style='width: 100%; height: 200px;'></textarea></td>
+                     <td class="write pnawtd"><textarea name='bContent' style='width: 100%; height: 200px;'>${board123.bContent }</textarea></td>
                   </tr>
                </tbody>
             </table>

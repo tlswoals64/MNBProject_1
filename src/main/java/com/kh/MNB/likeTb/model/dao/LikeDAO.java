@@ -13,8 +13,8 @@ public class LikeDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public int likeCheck(Member m) {
-		return sqlSession.selectOne("likeMapper.likeCheck", m);
+	public int likeCheck(LikeTb b) {
+		return sqlSession.selectOne("likeMapper.likeCheck", b);
 	}
 
 	public int likeAddBoard(LikeTb lk) {

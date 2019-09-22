@@ -142,141 +142,15 @@
 	<!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   -->
 	
 
-	 <!-- 정보공유 리스트 -->
-   <select id = "selectComList" resultType = "Board">
-      select *
-      from board
-      where status = 'Y' and btype=1
-      order by bno desc
-   </select>
-   
-   <select id="getListComCount" resultType="_int">
-      select count(*)
-      from board
-      where status = 'Y'
-   </select>
-   
-   <insert id="insertComBoard" parameterType="Board">
-         insert into board
-      values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, #{bWriter})
-   </insert>
-   
-   <insert id="insertComAttachment0" parameterType="Attachment">
-      insert into board_picture
-      values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, 'Y')
-   </insert>
-   <insert id="insertComAttachment" parameterType="Attachment">
-      insert into board_picture
-      values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 1, sysdate, 'Y')
-   </insert>
-   
-   <insert id="insertComReply" parameterType="Reply">
-      insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
-   </insert>
-
-   
-   <!-- 정보공유 디테일 -->
-   <update id="updateCount1" parameterType="_int">
-      update board
-      set bcount = bcount + 1
-      where bno = #{bNo} 
-   </update>
-   
-   <!-- 정보공유 디테일-->
-   <select id="selectOne1" parameterType="_int" resultType="Attachment">
-      select *
-      from board_picture
-      where bno = #{bNo} and status = 'Y' and itype=0
-   </select>
-   
-   <!-- 정보공유 디테일 사진 2번째거 -->
-   
-   <select id="selectPicOne1" parameterType="_int" resultType="Attachment">
-      select *
-      from board_picture
-      where bno = #{bNo} and status = 'Y' and itype=1
-   </select>
-   <!-- 정보공유 디테일 사진 3번째거 -->
-   <select id="selectPicOne2" parameterType="_int" resultType="Attachment">
-      select *
-      from board_picture
-      where bno = #{bNo} and status = 'Y' and itype=2
-   </select>
-   
-   <insert id="insertReply1" parameterType="Reply">
-      insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
-   </insert>
-   
-   
-   <!-- 문의사항 리스트 불러오기 -->
-   <select id = "selectProList" resultType = "propose">
-      select *
-      from board b join propose p on b.bno = p.pno
-      where b.status = 'Y' and btype=5
-      order by p.pno desc 
-   </select>
-   
-   <select id="getListProCount" resultType="_int">
-      select count(*)
-      from board
-      where status = 'Y' 
-   </select>
-
-   <select id="selectOne2" parameterType="_int" resultType="board">
-      select * 
-      from board
-      where bno = #{bNo} and status = 'Y' and btype=1
-   </select>
-   
-   
-   <!-- 리플 가져오기 -->
-   
-   <select id="userReplyList" parameterType="_int" resultType="Reply">
-      select *
-      from reply
-      where bno = #{bNo} and status='Y'
-   </select>
-   <!-- 리플 등록 -->
-   <insert id="insertReplyMH" parameterType="Reply">
-      insert into Reply values(seq_rnum.nextval,  #{nContent}, sysdate, default, #{rWriter}, #{bNo})
-   </insert>
-   
-   <!-- 정보공유 수정하기 -->
-   <update id="updateComBoard" parameterType="Board">
-      update board
-      set btitle=#{bTitle}, bcontent=#{bContent} 
-      where bNo=#{bNo} and btype=1
-   </update>
-   
-   <!-- 정보공유 삭제하기 -->
-   <update id="deleteComBoard" parameterType="_int">
-      update board
-      set status = 'N'
-      where bNo = #{bNo} and btype=1
-   </update>
-   
-   <!-- 문의사항 글쓰기 -->
-   <insert id="insertProBoard" parameterType="Board">
-      insert into board
-      values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, 'user01')
-   </insert>
-   <insert id="insertProAttachment0" parameterType="Attachment">
-      insert into board_picture
-      values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, 'Y')
-   </insert>
-   <insert id="insertProAttachment" parameterType="Attachment">
-      insert into board_picture
-      values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 1, sysdate, 'Y')
-   </insert>
 	
 	<!-- 관리자 신고 top 5 -->
 	<select id="mDectopList" resultType="Board">
 		<![CDATA[
 			select *
-			from (select * 
-				  from board
-				  where status = 'Y' and bType = 7
-				  order by B_CREATEDATE desc)
+			from (select b.bTitle, b.bWriter, r.rDate as b_CreateDate
+				  from report r join Board b on (r.bno = b.bno)
+				  where b.status = 'Y' 
+				  order by r.rdate desc)
 			where rownum < 6
 		]]>
 	</select>
@@ -310,7 +184,7 @@
 	
 	<!-- 관리자 공지사항 디테일 -->
 	<select id="mNoticeDetail" resultType="Board" parameterType="_int">
-		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bContent, b.b_CreateDate, b.b_ModifyDate
+		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bCount, b.bContent, b.b_CreateDate, b.b_ModifyDate
 		from board b
 			 join member m on (b.bWriter = m.userId)
 		where b.bNo = #{bNo}
@@ -359,4 +233,311 @@
 			where rownum < 6
 		]]>
 	</select>
+	
+<!-- 민상 -->
+	<!-- 정보공유 리스트 -->
+	<select id = "selectComList" resultType = "Board">
+		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bCount, b.b_CreateDate
+		from board b
+			 join member m on (b.bWriter = m.userId)
+		where b.status='Y' and b.btype=1
+		order by b.bno desc
+	</select>
+	
+	<!-- 공지사항 리스트 -->
+	<select id = "noticeList" resultType = "Board">
+		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bCount, b.b_CreateDate
+		from board b
+			 join member m on (b.bWriter = m.userId)
+		where b.status='Y' and b.btype=6
+		order by b.bno desc
+	</select>
+	
+	
+	
+	
+	
+	<!-- 정보공유 검색(제목,내용) -->
+	<select id = "searchComtitleCon" resultType = "Board">
+		select *
+		from board
+		where btype=1 and status ='Y' and (btitle like '%' || #{search} || '%' or bcontent like '%' || #{search} || '%')
+		order by bno desc
+	</select>
+	
+	<!-- 정보공유 검색(제목) -->
+	<select id = "searchComtitle" resultType = "Board">
+		select *
+		from board
+		where  btype =1 and status='Y' and btitle like '%' || #{search} || '%'
+		order by bno desc
+	</select>
+	<!-- 정보공유 검색(내용) -->
+	<select id = "searchComcon" resultType = "Board">
+		select *
+		from board
+		where btype =1 and status='Y' and  bcontent like '%' || #{search} || '%'
+		order by bno desc
+	</select>
+	<!-- 정보공유 검색(닉네임) -->
+	<select id = "searchComnic" resultType = "Board">
+		select b.bno, b.bType, b.bTitle, m.nickName as bWriter, b.bContent, b.b_CreateDate, b.b_ModifyDate, b.status
+		from board b join member m on (b.bWriter = m.userId)
+		where b.btype =1 and b.status='Y' and  m.nickName like '%' || #{search} || '%'
+		order by b.bno desc
+	</select>
+	
+	
+	
+	<select id="getListComCount" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y' and btype=1 
+	</select>
+	
+	<select id="getnotListCount" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y' and btype=6
+	</select>
+	
+	<!-- 정보공유 검색페이징갯수 제목+내용 -->
+	<select id="getSearchCount" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y' and btype=1 and (btitle like '%' || #{search} || '%' or bcontent like '%' || #{search} || '%')
+	</select>
+	
+	<!-- 정보공유 검색페이징갯수  제목 -->
+	<select id="getSearchCounttitle" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y' and btype=1 and btitle like '%' || #{search} || '%'
+	</select>
+	<!-- 정보공유 검색페이징갯수  내용 -->
+	<select id="getSearchCountcon" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y' and btype=1 and bcontent like '%' || #{search} || '%'
+	</select>
+	<!-- 정보공유 검색페이징갯수  닉네임 -->
+	<select id="getSearchCountnic" resultType="_int">
+		select count(*)
+		from board b join member m on (b.bWriter = m.userId)
+		where m.nickName like '%' || #{search} || '%' and b.status='Y' and b.btype=1
+	</select>
+	
+	
+	<insert id="insertComBoard" parameterType="Board">
+			insert into board
+		values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, #{bWriter})
+	</insert>
+	
+	<insert id="insertComAttachment0" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, 0, sysdate, 'Y')
+	</insert>
+	<insert id="insertComAttachment" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, seq_bno.currval, #{originName}, #{changeName}, #{iType}, sysdate, 'Y')
+	</insert>
+	
+	<!-- 정보공유 수정사진추가 -->
+	<update id="insertComupAttachment0" parameterType="Attachment">
+		
+ 		insert into board_picture
+		values (seq_ino.nextval, #{bNo}, #{originName}, #{changeName}, #{iType}, sysdate, 'Y') 
+		
+		
+	</update>
+	<insert id="insertComupAttachment" parameterType="Attachment">
+		insert into board_picture
+		values (seq_ino.nextval, #{bNo}, #{originName}, #{changeName}, #{iType}, sysdate, 'Y')
+	</insert>
+	
+	<insert id="insertComReply" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
+	</insert>
+
+	
+	<!-- 정보공유 조회수증가 -->
+	<update id="updateCount1" parameterType="_int">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo} 
+	</update>
+	<!-- 공지사항 조회수증가 -->
+	<update id="addRaddReadCountNot" parameterType="_int">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo} 
+	</update>
+	<!-- 문의사항 조회수 증가 -->
+	<update id="updateProCount" parameterType="_int">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo} 
+	</update>
+	
+	<!-- 정보공유 디테일-->
+	<select id="selectOne1" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=0
+	</select>
+
+	
+	<!-- 정보공유 디테일 사진 2번째거 -->
+	
+	<select id="selectPicOne1" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=1
+	</select>
+	<!-- 정보공유 디테일 사진 3번째거 -->
+	<select id="selectPicOne2" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=2
+	</select>
+		<!-- 정보공유 디테일 사진 4번째거 -->
+	<select id="selectPicOne3" parameterType="_int" resultType="Attachment">
+		select *
+		from board_picture
+		where bno = #{bNo} and status = 'Y' and itype=3
+	</select>
+	
+	
+	<insert id="insertReply1" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, #{bNo}, #{rWriter}, sysdate, default)
+	</insert>
+	
+	
+	<!-- 문의사항 리스트 불러오기 -->
+	<select id = "selectProList" resultType = "propose">
+		select p.pNo, p.pType, p.pRe, p.pReContent, b.bTitle, m.nickName as bWriter, b.bContent, b.bCount, b.b_CreateDate
+		from board b 
+		join propose p on(b.bno = p.pno)
+		join member m on(b.bWriter = m.userId)
+		where b.status = 'Y' and b.btype=5
+		order by p.pno desc 
+	</select>
+	
+	<select id="getListProCount" resultType="_int">
+		select count(*)
+		from board
+		where status = 'Y' and btype=5
+	</select>
+
+	<select id="selectOne2" parameterType="_int" resultType="Board">
+		select b.bno, b.bType, b.bTitle, m.nickName as bWriter, b.bCount, b.bContent, b.b_CreateDate, b.b_ModifyDate, b.status
+		from board b join member m on (b.bWriter = m.userId)
+		where b.bno = #{bNo} and b.status ='Y' and b.btype=1
+	</select>
+	
+		<!-- 공지사항 디테일-->
+	<select id="detailNot" parameterType="_int" resultType="Board">
+		select b.bno, b.bType, b.bTitle, m.nickName as bWriter, b.bCount, b.bContent, b.b_CreateDate, b.b_ModifyDate, b.status
+		from board b join member m on (b.bWriter = m.userId)
+		where b.bno = #{bNo} and b.status ='Y' and b.btype=6
+	</select>
+	
+	<select id="selectProBoard" parameterType="_int" resultType="board">
+		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bCount, b.bContent, b.bCount, b.b_CreateDate, b.b_ModifyDate
+		from board b
+			 join member m on (b.bWriter = m.userId)
+		where b.bno = #{bNo} and b.status = 'Y' and b.btype=5
+	</select>
+	<select id="selectPropose" parameterType="_int" resultType="propose">
+		select * 
+		from propose
+		where pno = #{bNo}
+	</select>
+	
+	
+	<!-- 리플 가져오기 -->
+	
+	<select id="userReplyList" parameterType="_int" resultType="Reply">
+		select r.rNum, r.nContent, r.nCreate_date, r.status, m.nickName as rWriter
+		from reply r join member m on(r.rWriter = m.userId)
+		where r.bno = #{bNo} and r.status='Y'
+	</select>
+	<!-- 리플 등록 -->
+	<insert id="insertReplyMH" parameterType="Reply">
+		insert into Reply values(seq_rnum.nextval,  #{nContent}, sysdate, default, #{rWriter}, #{bNo})
+	</insert>
+	
+	<!-- 정보공유 수정하기 -->
+	<update id="updateComBoard" parameterType="Board">
+		update board
+		set btitle=#{bTitle}, bcontent=#{bContent}
+		where bNo=#{bNo} and btype=1
+	</update>
+	<!-- 정보공유 수정하기 -->
+	<update id="updateProBoard" parameterType="Board">
+		update board
+		set btitle=#{bTitle}, bcontent=#{bContent}
+		where bNo=#{bNo} and btype=5
+	</update>
+	
+	<!-- 정보공유 삭제하기 -->
+	<update id="deleteComBoard" parameterType="_int">
+		update board
+		set status = 'N'
+		where bNo = #{bNo} and btype=1
+	</update>
+	
+	<!-- 문의사항 삭제하기 -->
+	<update id="deleteProBoard" parameterType="_int">
+		update board
+		set status = 'N'
+		where bNo = #{bNo} and btype=5
+	</update>
+	
+	<!-- 문의사항 글쓰기 -->
+	<insert id="insertProBoard" parameterType="Board">
+		insert into board
+		values(seq_bno.nextval, 5, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, #{bWriter})
+	</insert>
+	
+	<insert id = "insertPropose" parameterType="Propose">
+		insert into propose
+		values(seq_bno.currval, #{pType}, default, #{pReContent})
+	</insert>
+	
+	<!-- 신고하기 오픈 -->
+	
+	<select id="selectRepBoard" parameterType="_int" resultType="board">
+		select * 
+		from board
+		where bNo = #{bNo} and status = 'Y'
+	</select>
+	
+	<!-- 신고하기 DB -->
+	<insert id = "insertReport" parameterType="Report">
+		insert into report
+		values(seq_rno.nextval, #{rContent}, #{rMan}, default, default, #{bNo}, default, #{rType})
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	
+	<delete id="deleteReply" parameterType="Reply">
+		delete from reply
+		where rNum = #{ rNum } and rWriter = #{ rWriter}
+	</delete>
+	<!--  댓글 수정 -->
+	<update id="updateReply" parameterType="Reply">
+		update reply
+		set nContent = #{ nContent }
+		where rNum = #{rNum} and rWriter = #{ rWriter}
+	</update>
+	<!-- 정보공유사진삭제 -->
+	<update id="comPicDelete" parameterType="_int">
+		update board_picture
+		set status='N'
+		where iNo=#{iNo11}
+	</update>
+	
+	
+	
 </mapper>

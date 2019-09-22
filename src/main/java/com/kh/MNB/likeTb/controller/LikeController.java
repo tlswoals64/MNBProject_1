@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.likeTb.model.service.LikeService;
 import com.kh.MNB.likeTb.model.vo.LikeTb;
 import com.kh.MNB.member.model.vo.Member;
@@ -22,10 +23,13 @@ public class LikeController {
 	LikeService lService;
 	
 	@RequestMapping("likeCheck.do")
-	public void likeCheck(HttpSession session, HttpServletResponse response) throws IOException {
-		
+	public void likeCheck(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int bNo = Integer.parseInt(request.getParameter("bNo"));
+		LikeTb b = new LikeTb();
 		Member m = (Member)session.getAttribute("loginUser");
-		int l = lService.likeCheck(m);
+		b.setUserId(m.getUserId());
+		b.setbNo(bNo);
+		int l = lService.likeCheck(b);
 		System.out.println("like했니? : " + l);
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

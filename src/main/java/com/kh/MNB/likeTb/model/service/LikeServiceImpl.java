@@ -14,8 +14,8 @@ public class LikeServiceImpl implements LikeService {
 	LikeDAO lDAO;
 	
 	@Override
-	public int likeCheck(Member m) {
-		return lDAO.likeCheck(m);
+	public int likeCheck(LikeTb b) {
+		return lDAO.likeCheck(b);
 	}
 	
 	@Override

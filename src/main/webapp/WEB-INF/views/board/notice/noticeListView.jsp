@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티</title>
+<title>공지사항</title>
 <link rel="stylesheet" href="resources/css/comunity/_base.css">
 <link rel="stylesheet" href="resources/css/comunity/_grid.css">
 <link rel="stylesheet" href="resources/css/comunity/member.css">
@@ -75,10 +75,10 @@
 <div class="frame">
 
        <div class="sidebar">
-      <h2>커뮤니티</h2>
+      <h2>공지사항</h2>
       <ul>
-         <li>커뮤니티</li>
-         <li>나눔게시판</li>
+         <li>공지사항</li>
+         <li>공지사항</li>
       </ul>
    </div>
       
@@ -100,7 +100,7 @@
          </thead> 
         <c:forEach var="b" items="${ list1 }">
        
-		<tr onclick="comDetail(this);">
+		<tr onclick="notDetail(this);">
 			<td align="center" id="bNo">${ b.bNo }</td>
 			
 			<td align="left"> 
@@ -117,10 +117,10 @@
 		
 		</tr>
 		<script>
-			function comDetail(v){
+			function notDetail(v){
 				var bNo=$(v).children("#bNo").text();
 				console.log(bNo);
-			location.href="detailCom.do?bNo="+ bNo; 
+			location.href="notDetail.do?bNo="+ bNo; 
 			}
 		</script>
 		</c:forEach>
@@ -184,12 +184,6 @@
             
       </form>
       </div>
-
-          <div align="right">
-         <button onclick="location.href='inCom.do'"
-            id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
-  border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
-    	  </div> 
    
       </div>
       </div>
