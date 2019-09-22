@@ -438,6 +438,7 @@ function openTab(evt, tabName) {
       tabcontent[i].style.display = "none";
     }
     tablinks = $(".tablinks");
+    console.log(tablinks);
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }

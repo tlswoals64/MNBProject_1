@@ -606,9 +606,14 @@ public class BabySitterController
 	}
 	
 
-	@RequestMapping("suppotSearch")
-	public ModelAndView suppotSearch(ModelAndView mv) {
-		
+	@RequestMapping("suppotSearch.do")
+	public ModelAndView suppotSearch(@RequestParam(value = "area", required = false) String area, @RequestParam(value = "checkDay", required = false) String checkDay,
+									@RequestParam(value = "time", required = false) String time, @RequestParam(value = "active", required = false) String active,
+									ModelAndView mv) {
+		System.out.println(area);
+		System.out.println(checkDay);
+		System.out.println(time);
+		System.out.println(active);
 		
 		
 		return mv;
