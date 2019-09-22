@@ -340,6 +340,7 @@
 
 	<!-- 게시판 -->
 	<div id="contents">
+		<c:if test="${ !empty loginUser && loginUser.dec != 5 }">
 		<div class="sidebar">
 			<h2>커뮤니티</h2>
 			<ul>
@@ -347,7 +348,6 @@
 				<li>나눔게시판</li>
 			</ul>
 		</div>
-
 		<div class="bbs">
 			<c:forEach items="${ list }" var="l" varStatus="s">
 				<c:if test="${ s.count % 4 != 3 }">
@@ -389,7 +389,60 @@
 		<div class="bbs">
 			</c:if>
 			</c:forEach>
-
+		</c:if>
+		</div>
+		
+		<div id="contents">
+		<c:if test="${ empty loginUser || loginUser.dec == 5}">
+		<div class="sidebar">
+			<h2>커뮤니티</h2>
+			<ul>
+				<li>커뮤니티</li>
+				<li>나눔게시판</li>
+			</ul>
+		</div>
+		<div class="bbs">
+			<c:forEach items="${ list }" var="l" varStatus="s">
+				<c:if test="${ s.count % 4 != 3 }">
+					<div class="g_box">
+						<p>
+							<c:url var="bdetail" value="dBoard.do">
+								<c:param name="bNo" value="${ l.bNo }" />
+								<%--   <c:param name="page" value="${ pi.currentPage }"/> --%>
+							</c:url>
+							<a href="#">
+								<img src="resources/images/board/${ l.changeName }">
+							</a>
+						</p>
+						<ul>
+							<h2>${ l.bTitle }</h2>
+							<h3>${ l.bWriter }</h3>
+							<span>${ l.b_CreateDate }</span>
+						</ul>
+					</div>
+				</c:if>
+				<c:if test="${ s.count % 4 == 3 }">
+					<div class="g_box">
+						<p>
+							<c:url var="bdetail" value="dBoard.do">
+								<c:param name="bNo" value="${ l.bNo }" />
+								<%--   <c:param name="page" value="${ pi.currentPage }"/> --%>
+							</c:url>
+							<a href="#">
+								<img src="resources/images/board/${ l.changeName }">
+							</a>
+						</p>
+						<ul>
+							<h2>${ l.bTitle }</h2>
+							<h3>${ l.bWriter }</h3>
+							<span>${ l.b_CreateDate }</span>
+						</ul>
+					</div>
+		</div>
+		<div class="bbs">
+			</c:if>
+			</c:forEach>
+		</c:if>
 		</div>
 
 		<div class="btn">
@@ -401,6 +454,7 @@
 		<div class="paging">
 			<ul>
 				<li class="off">
+					
 					<c:if test="${ pi.currentPage <= 1 }">
                			&lt;&lt; &nbsp; 
             		</c:if> 

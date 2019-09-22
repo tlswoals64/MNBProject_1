@@ -123,14 +123,6 @@ public class BabySitter {
 	public void setBcActivity(String bcActivity) {
 		this.bcActivity = bcActivity;
 	}
-	public String getbAge() {
-		return bAge;
-	}
-
-	public void setbAge(String bAge) {
-		this.bAge = bAge;
-	}
-
 	public int getbNo() {
 		return bNo;
 	}
@@ -159,7 +151,7 @@ public class BabySitter {
 	public String toString() {
 		return "BabySitter [bcCarrer=" + bcCarrer + ", bcSalary=" + bcSalary + ", bcDay=" + bcDay + ", bcTime=" + bcTime
 				+ ", bcactivity=" + bcActivity + ", req=" + req + ", bNo=" + bNo + ", address=" + address
-				+ ", personnel=" + personnel + ", bAge=" + bAge + ", bgender=" + bgender + "]";
+				+ ", personnel=" + personnel + ", bAge=" + bAge + ", bGender=" + bGender + "]";
 	}
 
 }
