@@ -141,6 +141,9 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 				</ul>
 				<p class="both"></p>
 				<span style="float:right;"><img src="resources/images/board/singo.png"></span>
+					<button onclick="popup();" id="reportbtn" style="float:right;">
+							<img src="resources/images/babySitter/note.png" style="width: 20px; height: 20px;">쪽지
+						</button>
 				<p class="info_txt"><span>직접거래시 아래 사항에 유의해주세요.</span><br>
 				불확실한 판매자(본인 미인증, 해외IP, 사기의심 전화번호)의 물건은 구매하지 말아주세요.<br>
 				판매자와의 연락은 메신저보다는 전화, 메일 등을 이용하시고 개인정보 유출에 주의하세요.<br>
@@ -326,12 +329,18 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
    	function listGo() {
    		location.href='nBoard.do'
    	}
-
+	
    	</script>
    	<div class="both"></div>
 
 	  <jsp:include page="../../common/footer.jsp"></jsp:include>
 	  
+	  	<div class = "popup">
+		<!-- 팝업창으로 보내줄 정보 -->
+		<form name="popupData" id="popupData" method="post">
+			<input type="hidden" name="bWriter" value="${ board[0].nickName }">
+		</form>
+	</div>
 </body>
 
 <script>
@@ -387,5 +396,20 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		}
 		
 	}
+</script>
+<script>
+function popup(){
+	 var popupData = document.popupData;
+	 var url= "noteInsertForm.do";    //팝업창 페이지 URL
+	 var winWidth = 759;
+	 var winHeight = 341;
+	 var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	
+	 window.open("","noteInsertForm",popupOption);
+	
+	 popupData.action = url;
+	 popupData.target = "noteInsertForm";
+	 popupData.submit();
+	 }
 </script>
 </html>

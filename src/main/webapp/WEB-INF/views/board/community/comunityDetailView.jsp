@@ -137,6 +137,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .udBtn{
 	margin-top : 20px;
 }
+
 #nContentText{
 	width : 550px;
 	resize : none;
@@ -177,7 +178,9 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
                     <div name="title"  class="inputTypeText" 
                      style='width: 80%;'>
                      ${board123.bTitle }
+
                      <span style="float:right;" id="likeArea" onclick="likeChange();"><img id="likeAreaImg" src="resources/images/main/unlike.png"></span>
+
                      </div>
 					<input type="hidden"  name = "bNo" value="${baord123.bNo }">		
 						</td>	
@@ -355,6 +358,7 @@ function getreplyList(){
 			
 			if(data.length > 0){
 				for(var i in data){
+
 					var content = decodeURIComponent(data[i].nContent.replace(/\+/g, " "));
 					$tr = $("<tr class='replyTr'>");
 					$rNum = $("<td style='display:none' id='rNumTd' name='rNum'>").text(data[i].rNum)
@@ -362,6 +366,7 @@ function getreplyList(){
 				    $rCreateDate =  $("<td width='200'>").text(data[i].nCreate_Date);
 				    $rWriter =  $("<td width='200'>").text(decodeURIComponent(data[i].rWriter.replace(/\+/g, " ")));
 				    $udBtn = $("<td width='100'><button class='udBtn'id='udAreaBtn' onclick='updateReplyBtn(this);'>수정</button><button style='display:none'class='udBtn'id='udBtn' onclick='updateReply(this);'>확인</button></td>")
+
 				    $delBtn = $("<td width='100'><button class='delBtn' onclick='deleteReply(this);'>삭제</button></td>")
 				    $tr.append($rNum);
 				    $tr.append($rWriter);
@@ -389,6 +394,7 @@ getreplyList();
 });
 
 function deleteReply(d){
+
 	var userId = '${m.userId}';
 	var rNum = $(d).parent().siblings('#rNumTd').text();
 	if (confirm("정말 삭제하시겠습니까??") == true){
@@ -433,16 +439,19 @@ function updateReply(d){
 		url: "updateReply.do",
 		data: {rNum : rNum,
 			   userId : userId,
+
 			  nContent : nContent},
 		dataType: "json",
 		success: function(data){
 			if(data > 0){
 				getreplyList();
 			}
+
 			else{
 				alert('댓글작성자만 수정할수있습니다.');
 				getreplyList();
 			}
+
 		}
 		
 	})
@@ -481,6 +490,7 @@ function menulo() {
 
 	
 </script>
+
 
 <script>
 (function(){

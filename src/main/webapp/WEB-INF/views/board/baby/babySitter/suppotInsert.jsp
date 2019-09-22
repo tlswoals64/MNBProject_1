@@ -520,7 +520,6 @@ input, textarea, select {
 					$(this).prop("checked", false);
 					alert("3개까지만 선택할 수 있습니다.");
 				}
-
 			});
 		});
 

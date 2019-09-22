@@ -12,60 +12,37 @@ import com.kh.MNB.report.model.vo.Report;
 
 public interface BoardService {
 
-	int getListNanumCount();
+   int getListNanumCount();
 
-	ArrayList<Board> selectNanumList(PageInfo pi);
+   ArrayList<Board> selectNanumList(PageInfo pi);
 
-	int insertNanumBoard(Board b);
+   int insertNanumBoard(Board b);
 
-	int insertNanumAttachment(ArrayList<Attachment> aList);
+   int insertNanumAttachment(ArrayList<Attachment> aList);
 
-	int insertNanumReply(Reply r);
+   int insertNanumReply(Reply r);
 
-	ArrayList<Reply> selectNanumReplyList(int bNo);
+   ArrayList<Reply> selectNanumReplyList(int bNo);
 
-	ArrayList<PictureBoard> selectNanumBoard(int bNo);
+   ArrayList<PictureBoard> selectNanumBoard(int bNo);
 
-	int updateNanumBoard(Board board);
+   int updateNanumBoard(Board board);
 
-	int updateNanumAttachment(ArrayList<Attachment> aList);
+   int updateNanumAttachment(ArrayList<Attachment> aList);
 
-	int deleteNanumBoard(int bNo);
+   int deleteNanumBoard(int bNo);
 
-	int insertSubNanumAttachment(ArrayList<Attachment> insertList);
+   int insertSubNanumAttachment(ArrayList<Attachment> insertList);
 
-	ArrayList<Board> selectNanumIntro();
+   ArrayList<Board> selectNanumIntro();
 
-	ArrayList<Board> selectComIntro();
+   ArrayList<Board> selectComIntro();
 
-	int deleteSubNanumAttachment(ArrayList<Integer> deleteList);
+   int deleteSubNanumAttachment(ArrayList<Integer> deleteList);
 
-	//////////////////////////////////////////////////////////////////////////////////
+   void addNanumCount(int bNo);
+   //////////////////////////////////////////////////////////////////////////////////
 
-
-	void addNanumCount(int bNo);
-
-
-
-	ArrayList<Board> mDectopList();
-
-	ArrayList<Board> mQnatopList();
-
-	int getManaListCount();
-
-	ArrayList<Board> selectNoticeList(PageInfo pi);
-
-	Board mNoticeDetail(int bNo);
-
-	int mNoticeUpdate(Board b);
-
-	int mNoticeInsert(Board b);
-
-	int mNoticedelete(int bNo);
-
-	ArrayList<Board> comTopList();
-
-	ArrayList<Board> nanumTopList();
 
 	
 	//민상 --------------------------------------------
@@ -109,9 +86,12 @@ public interface BoardService {
 
 		int insertComAttachment(ArrayList<Attachment> aList);
 
+   
+
 		Attachment selectPicBoard3(int bNo);
 
 		void addProReadCount(int bNo);
+
 
 		Board selectProBoard(int bNo);
 
@@ -160,7 +140,27 @@ public interface BoardService {
 
 		int comPicDelete(int iNo11);
 
+   ArrayList<Board> mDectopList();
 
-	
+   ArrayList<Board> mQnatopList();
+
+   int getManaListCount();
+
+   ArrayList<Board> selectNoticeList(PageInfo pi);
+
+   Board mNoticeDetail(int bNo);
+
+   int mNoticeUpdate(Board b);
+
+   int mNoticeInsert(Board b);
+
+   int mNoticedelete(int bNo);
+
+   ArrayList<Board> comTopList();
+
+   ArrayList<Board> nanumTopList();
+
+
+   
 
 }
