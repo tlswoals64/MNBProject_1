@@ -27,8 +27,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.MNB.board.model.exception.BoardException;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.exception.MemberException;
 import com.kh.MNB.member.model.service.MemberService;
@@ -191,16 +193,24 @@ public class MemberController {
 			Member loginUser = mService.memberLogin(m);	
 			if (bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {			
 				 if(loginUser.getUserId().equals("admin")) {
-					 model.addAttribute("loginUser", loginUser);
+					 
+					 int userCount = mService.mUserCount();
+					 int decCount = mService.mDecCount();
+					 int qnaCount = mService.mQnacCount();
+					
+					 model.addAttribute("userCount", userCount);
+					 model.addAttribute("decCount", decCount);
+					 model.addAttribute("userCount", userCount);
+					 model.addAttribute("qnaCount", qnaCount);
 					 return "manager/managermainView";
 				 }else {
 				 model.addAttribute("loginUser", loginUser); 
+				 
 				 return "redirect:index.jsp";
 				 }
 			 } else {
 				 throw new MemberException("로그인에 실패하였습니다.");
-			}
-			 
+			} 
 		}
       
 		// ---------- 로그아웃 ----------
@@ -340,14 +350,22 @@ public class MemberController {
    @RequestMapping("manaHome.do")
    public String test() {
 
-	   
-	   System.out.println("들어왔니?");
       return "manager/managermainView";
    }
    
    @RequestMapping("myPageView.do")
-   public String myPage() {
-	   	   return "member/myPageMainView";
+   public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+	   
+	   Member m = (Member)session.getAttribute("loginUser");
+	   Member myM = mService.myPageInfo(m);
+	   BSApply b= mService.myPageBsaCheck(m);
+	   System.out.println(b);
+	   
+	    mv.addObject("m", myM);
+	    mv.addObject("b", b);
+		mv.setViewName("member/myPageMainView");
+	   
+		return mv;
    }
 
 
@@ -577,6 +595,47 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
       else {
          throw new MemberException("ȸ������ ������ �����Ͽ����ϴ�.");
       }
+   }
+   
+   //블랙리스트 해제
+   @RequestMapping("blackListCancle.do")
+   public String blackListCancle(HttpSession session) {
+	   Member m = (Member)session.getAttribute("loginUser");
+	   m.setDec(0);
+	   m.setDec_date(null);
+	   mService.blackListCancle(m);
+	   
+	   return "redirect:index.jsp";
+   }
+   // 매니저 메인 신규회원 5명
+   @RequestMapping("mUsertopList.do")
+	public void seletMUserTopList(HttpServletResponse response) throws IOException {
+
+		ArrayList<Member> list = mService.seletMUserTopList();
+		System.out.println(list);
+		for(Member m : list) {
+			m.setNickName(URLEncoder.encode(m.getNickName(), "utf-8"));
+			m.setUserName(URLEncoder.encode(m.getUserName(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
+
+	}
+   
+   // 매니저 메인홈으로 가기
+   @RequestMapping("managerMainHome.do")
+   public String managerMainHome(Model model) {
+	   
+	   int userCount = mService.mUserCount();
+		 int decCount = mService.mDecCount();
+		 int qnaCount = mService.mQnacCount();
+		
+		 model.addAttribute("userCount", userCount);
+		 model.addAttribute("decCount", decCount);
+		 model.addAttribute("userCount", userCount);
+		 model.addAttribute("qnaCount", qnaCount);
+		 return "manager/managermainView";
    }
    
 }

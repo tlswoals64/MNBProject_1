@@ -473,7 +473,7 @@
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="activity" value="8">
+						<input type="checkbox" name="activity" value="체육놀이">
 						<span class="atiCheck">
 							<div class="imgdiv">
 								<img src="resources/images/sitterApply/soccer.png">
@@ -482,7 +482,7 @@
 						</span>
 					</label>
 					<label class="actiCheckInput">
-						<input type="checkbox" name="activity" value="9">
+						<input type="checkbox" name="activity" value="밥챙겨주기">
 						<span class="atiCheck">
 							<div class="imgdiv">
 								<img src="resources/images/sitterApply/dish.png">
@@ -494,13 +494,53 @@
 			</fieldset>
 		</div>
 		
-		<button type="submit" id="insertBtn">신청하기</button>
+		<button type="button" id="insertBtn">신청하기</button>
 		<button type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.bo'">취소하기</button>
 		</form>
 	</div>
 	
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
+
+<script>
+	(function() { 
+		var check = '${ check }';
+		if(check == '0'){
+			alert("이미 신청서를 작성하셨습니다. 신청결과는 마이페이지에서 확인하실수있습니다.");
+			location.href = 'myPageView.do';
+		}
+	}());
+</script>
+
+
+<script>
+ 	$('#insertBtn').click(function(){
+ 		console.log("실행되니?");
+		var bType = $("input:checkbox[name='bType']").is(':checked');
+		var job = $("input:radio[name='job']").is(':checked');
+		var activity = $("input:checkbox[name='activity']").is(':checked');
+		
+		console.log(bType);
+		console.log(job);
+		console.log(activity);
+		
+		if(!bType){
+			alert("돌봄 가능 유형을 체크해주세요!");
+		}
+		if(!job){
+			alert("직업을 체크해주세요!");
+		}
+		if(!activity){
+			alert("활동 가능 유형을 체크해주세요!");
+		}
+		if(bType && job && activity){
+			alert("베이비시터 신청서 작성이 완료되었습니다 :-)");
+			$("#insertBtn").attr('type', 'submit');
+		} 
+
+ 	})
+	
+</script>
 <script>
          function addressPopup() {
         	 daum.postcode.load(function(){

@@ -16,5 +16,13 @@ public interface BsApplyService {
 
 	int levelUpdate(BSApply b);
 
+	int memberBsapply(BSApply b);
+
+	int checkBsa(Member m);
+
+	BSApply bsaUpdateB(Member m);
+
+	int userBsApplyUpdate(BSApply b);
+
 	
 }

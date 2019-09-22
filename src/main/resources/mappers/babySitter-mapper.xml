@@ -91,7 +91,7 @@
 	</insert>
 	<insert id = "insertSuppot">
 		insert into bc_suppot
-		values(seq_bno.currval, #{bcCarrer}, #{bcSalary}, <!-- #{bcTime} -->'time', #{address}, #{bcactivity})
+		values(seq_bno.currval, #{bcCarrer}, #{bcSalary}, #{bcDay}, #{bcTime}, #{address}, #{bcactivity})
 	</insert>
 	
  	<update id="updateSuppotBoard">
@@ -106,7 +106,7 @@
 	</update>
 	<update id="updateSuppot">
 		update bc_suppot
-		set bccarrer = #{bcCarrer}, salary = #{bcSalary}, address = #{address}
+		set bccarrer = #{bcCarrer}, salary = #{bcSalary}, day = #{bcDay}, address = #{address}, bcactivity = #{bcactivity}
 		where bNo = #{bNo}
 	</update>
 	

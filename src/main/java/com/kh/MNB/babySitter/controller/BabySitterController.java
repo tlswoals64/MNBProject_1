@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.management.MXBean;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -60,8 +61,6 @@ public class BabySitterController
       
       ArrayList<sitterSuppot> list = bsService.selectList(pi);
       
-      System.out.println("suppotList.do list : " + list); 
-      
       if(list != null) {
          mv.addObject("list", list);
          mv.addObject("pi", pi);
@@ -107,11 +106,13 @@ public class BabySitterController
       return "board/baby/babymom/bcdetailView";
    }
    
+
 //베이비시터모집 디테일
    @RequestMapping("momDetail.do")
    public ModelAndView momDetail(@RequestParam("bNo") int bNo, @RequestParam("page") int page,  ModelAndView mv) {
 	   bsService.addMomReadCount(bNo);
 	   Momboard momboard = bsService.selectDetail(bNo);
+
 	   System.out.println(momboard);
 	  
 	   
@@ -219,10 +220,9 @@ public class BabySitterController
 			}catch(IllegalStateException e) {
 				e.printStackTrace();
 			}catch(IOException e){
-				e.printStackTrace();			
+				e.printStackTrace();
 			}
 			return renameFileName;
-		
 		}
 		//베이비시터모집 수정뷰
 		@RequestMapping("momboardUpdateForm.do")
@@ -319,7 +319,6 @@ public class BabySitterController
 			}
 			return mv;
 		}
-
 		
 		public void deleteMomFile(String fileName, HttpServletRequest request) {
 			String root = request.getSession().getServletContext().getRealPath("resources");
@@ -361,12 +360,14 @@ public class BabySitterController
 		}
 		
 		
-		
+	
    // 베이비시터 지원 상세 페이지
 	@RequestMapping("suppotDetail.do")
 	public ModelAndView suppotDetail(@RequestParam("bNo") int bNo, @RequestParam("page") int page, ModelAndView mv) {
 		bsService.addReadCount(bNo);
 		sitterSuppot suppot = bsService.selectSuppotBoard(bNo);
+		
+		System.out.println(suppot);
 		
 		if(suppot != null) {
 			mv.addObject("suppot", suppot)
@@ -384,26 +385,35 @@ public class BabySitterController
 	public String insertSuppotBoard(@ModelAttribute sitterSuppot suppot, @RequestParam(value = "inputimg", required = false) MultipartFile titleImg,
 									@RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress,
 									@RequestParam("time1") String time1, @RequestParam("time2") String time2, @RequestParam("active") String[] active,
-									HttpServletRequest request, HttpSession session) {
+									@RequestParam("checkDay") String[] checkDay, HttpServletRequest request, HttpSession session) {
 		String bcactive = "";
 		for(int i = 0; i < active.length; i++) {
-			if(i != active.length-1) {
+			if(i != active.length - 1) {
 				bcactive = bcactive + active[i] + "/";
 			} else {
 				bcactive = bcactive + active[i];
 			}
-			System.out.println(bcactive);
 		}
 		
-//		String time = "";
-//		for(int i = Integer.parseInt(time1); i <= Integer.parseInt(time2); i++) {
-//			if(i < Integer.parseInt(time2) + 1) {
-//				time = time + i + "/";
-//			} else {
-//				time = time + i;
-//			}
-//			System.out.println(time);
-//		}
+		String day = "";
+		for(int s = 0; s < checkDay.length; s++) {
+			if(s < checkDay.length - 1) {
+				day = day + checkDay[s] + "/";
+			} else {
+				day = day + checkDay[s];
+			}
+		}
+		
+		String time = "";
+		String[] minTime =  time1.split(":");
+		String[] maxTime =  time2.split(":");
+		for(int i = Integer.parseInt(minTime[0]); i <= Integer.parseInt(maxTime[0]); i++) {
+			if(i < Integer.parseInt(maxTime[0])) {
+				time = time + i + "/";
+			} else {
+				time = time + i;
+			}
+		}
 		
 		String ad = suppot.getAddress() + "/" + detailAddress + "/" + extraAddress;
 		suppot.setAddress(ad);
@@ -412,8 +422,8 @@ public class BabySitterController
 		String rename = saveSuppotFile(titleImg, request);
 		
 		Attachment Attachment = new Attachment(suppot.getbNo(), suppot.getOriginName(), rename, null);
-		Board board = new Board(suppot.getbNo(), 4, suppot.getbTitle(), loginUser.getNickName(), suppot.getbContent(), 0, null, null, null);
-		BabySitter sitter = new BabySitter(suppot.getbCcarrer(), suppot.getSalary(), suppot.getTime(), bcactive, suppot.getbNo(), suppot.getAddress());
+		Board board = new Board(suppot.getbNo(), 4, suppot.getbTitle(), loginUser.getUserId(), suppot.getbContent(), 0, null, null, null);
+		BabySitter sitter = new BabySitter(suppot.getbCcarrer(), suppot.getSalary(), day, time, bcactive, suppot.getbNo(), suppot.getAddress());
 		
 		if(rename != null) {
 			Attachment.setOriginName(titleImg.getOriginalFilename());
@@ -424,10 +434,6 @@ public class BabySitterController
 		int result1 = bsService.insertSuppotBoard(board);
 		int result2 = bsService.insertSuppotAttachment(Attachment);
 		int result3 = bsService.insertSuppot(sitter);
-		
-		System.out.println(result1);
-		System.out.println(result2);
-		System.out.println(result3);
 		
 		int result = result1 + result2 + result3;
 		
@@ -466,6 +472,7 @@ public class BabySitterController
 		return renameFileName;
 	}
 	
+	// 베이비시터 지원 수정 페이지
 	@RequestMapping("suppotUpdateForm.do")
 	public ModelAndView suppotUpdateForm(@RequestParam("bNo") int bNo, @RequestParam("page") int page, ModelAndView mv) {
 		sitterSuppot suppot = bsService.selectSuppotBoard(bNo);
@@ -481,9 +488,15 @@ public class BabySitterController
 		return mv;
 	}
 	
+	// 베이지시터 지원 수정
 	@RequestMapping("suppotUpdate.do")
-	public ModelAndView suppotUpdate(ModelAndView mv, @ModelAttribute sitterSuppot b, @RequestParam("page") int page, @RequestParam(value = "inputimg", required = false) MultipartFile titleImg, @RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress, HttpServletRequest request, HttpSession session) {
-		if(titleImg != null && !titleImg.isEmpty()) { // 등록되있는 파일이 있을 경우
+	public ModelAndView suppotUpdate(ModelAndView mv, @ModelAttribute sitterSuppot b, @RequestParam("page") int page,
+									@RequestParam(value = "inputimg", required = false) MultipartFile titleImg,
+									@RequestParam("detailAddress") String detailAddress, @RequestParam("extraAddress") String extraAddress,
+									@RequestParam("time1") String time1, @RequestParam("time2") String time2, @RequestParam("active") String[] active,
+									@RequestParam("checkDay") String[] checkDay, HttpServletRequest request, HttpSession session) {
+		
+		if(titleImg != null && !titleImg.isEmpty()) { // 교체되는 파일이 있을 경우
 			if(b.getChangeName() != null) {
 				deleteSuppotFile(b.getChangeName(), request);
 			}
@@ -495,13 +508,45 @@ public class BabySitterController
 				b.setChangeName(renameFileName);
 			}
 		}
+		
+		String bcactive = "";
+		for(int i = 0; i < active.length; i++) {
+			if(i != active.length - 1) {
+				bcactive = bcactive + active[i] + "/";
+			} else {
+				bcactive = bcactive + active[i];
+			}
+			System.out.println(bcactive);
+		}
+		
+		String day = "";
+		for(int s = 0; s < checkDay.length; s++) {
+			if(s < checkDay.length - 1) {
+				day = day + checkDay[s] + "/";
+			} else {
+				day = day + checkDay[s];
+			}
+		}
+		
+		String time = "";
+		String[] minTime =  time1.split(":");
+		String[] maxTime =  time2.split(":");
+		for(int i = Integer.parseInt(minTime[0]); i <= Integer.parseInt(maxTime[0]); i++) {
+			if(i < Integer.parseInt(maxTime[0])) {
+				time = time + i + "/";
+			} else {
+				time = time + i;
+			}
+			System.out.println(time);
+		}
+		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String ad = b.getAddress() + "/" + detailAddress + "/" + extraAddress;
 		b.setAddress(ad);
 		
 		Attachment Attachment = new Attachment(b.getbNo(), b.getOriginName(), b.getChangeName(), b.getUpload_Date());
 		Board board = new Board(b.getbNo(), 4, b.getbTitle(), loginUser.getNickName(), b.getbContent(), b.getbCount(), b.getB_CreateDate(), b.getB_ModifyDate(), b.getStatus());
-		BabySitter suppot = new BabySitter(b.getbCcarrer(), b.getSalary(), b.getTime(), b.getBcActivity(), b.getbNo(), b.getAddress());
+		BabySitter suppot = new BabySitter(b.getbCcarrer(), b.getSalary(), day, time, bcactive, b.getbNo(), b.getAddress());
 		
 		int result1 = bsService.updateSuppotBoard(board);
 		int result2 = bsService.updateAttachment(Attachment);
@@ -519,6 +564,7 @@ public class BabySitterController
 		return mv;
 	}
 	
+	// 사진 교체시 존재하는 파일 삭제
 	public void deleteSuppotFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\images\\babySitter\\suppot";
@@ -530,6 +576,7 @@ public class BabySitterController
 		}
 	}
 	
+	// 지원 댓글 리스트
 	@RequestMapping("rSuppotList.do")
 	public void getSuppotReplyList(HttpServletResponse response, int bNo) throws Exception {
 		ArrayList<Reply> rlist = bsService.selectSuppotReplyList(bNo);
@@ -542,10 +589,11 @@ public class BabySitterController
 		gson.toJson(rlist, response.getWriter());
 	}
 	
+	// 댓글 추가
 	@RequestMapping("addSuppotReply.do")
 	public String insertSuppotReply(@ModelAttribute Reply r, HttpSession session) throws IOException {
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		r.setrWriter(loginUser.getNickName());
+		r.setrWriter(loginUser.getUserId());
 		System.out.println(r);
 		
 		int result = bsService.insertSuppotReply(r);
@@ -556,5 +604,15 @@ public class BabySitterController
 			throw new BoardException("댓글 등록에 실패하였습니다.");
 		}
 	}
+	
+
+	@RequestMapping("suppotSearch")
+	public ModelAndView suppotSearch(ModelAndView mv) {
+		
+		
+		
+		return mv;
+	}
+
 }
 

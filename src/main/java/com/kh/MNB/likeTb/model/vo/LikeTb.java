@@ -11,8 +11,6 @@ public class LikeTb {
    public LikeTb() {
       super();
    }
-
-   
    
    //전체생성자
    public LikeTb(int lNo, int lCount, String userId, int bNo) {

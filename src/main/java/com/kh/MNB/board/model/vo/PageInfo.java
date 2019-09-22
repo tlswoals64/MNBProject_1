@@ -77,9 +77,13 @@ public class PageInfo {
 
 	public void setBoardLimit(int boardLimit) {
 		this.boardLimit = boardLimit;
+	}
+
+	@Override
+	public String toString() {
+		return "PageInfo [currentPage=" + currentPage + ", listCount=" + listCount + ", pageLimit=" + pageLimit
+				+ ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage=" + endPage + ", boardLimit="
+				+ boardLimit + "]";
 	};
 	
-	
-	
-
 }

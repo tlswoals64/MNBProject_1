@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.member.model.vo.Member;
 
 
@@ -47,6 +48,7 @@ public interface MemberService {
 
 	int myBoardupdate(Map<String, String> map);
 
+
 	Board boardType(int bNo);
 
 	boolean checkSend(String subject, String string, String string2, String email);
@@ -56,7 +58,21 @@ public interface MemberService {
 	int pwdcUpdate(Member m);
 
 	String pwdMemberSearch(Member m);
-	
+
+	BSApply myPageBsaCheck(Member m);
+
+	Member myPageInfo(Member m);
+
+	void blackListCancle(Member m);
+
+	int mUserCount();
+
+	int mDecCount();
+
+	int mQnacCount();
+
+	ArrayList<Member> seletMUserTopList();
+
 
 
 	

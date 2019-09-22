@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.member.model.vo.Member;
 
 @Repository("mDAO")
@@ -95,6 +96,7 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.myBoardUpdate",map);
 	}
 
+
 	public Board boardType(int bNo) {
 		return sqlSession.selectOne("memberMapper.boardType", bNo);
 	}
@@ -105,6 +107,34 @@ public class MemberDAO {
 
 	public String pwdMemberSearch(Member m) {
 		return sqlSession.selectOne("memberMapper.pwdMemberSearch",m);
+  }
+	public BSApply myPageBsaCheck(Member m) {
+		return sqlSession.selectOne("memberMapper.myPageBsaCheck", m);
+	}
+
+	public Member myPageInfo(Member m) {
+		return sqlSession.selectOne("memberMapper.myPageInfo", m);
+	}
+
+	public void blackListCancle(Member m) {
+		sqlSession.update("memberMapper.blackListCancle", m);
+		
+	}
+
+	public int mUserCount() {
+		return sqlSession.selectOne("memberMapper.mUserCount");
+	}
+
+	public int mDecCount() {
+		return sqlSession.selectOne("memberMapper.mDecCount");
+	}
+
+	public int mQnacCount() {
+		return sqlSession.selectOne("memberMapper.mQnacCount");
+	}
+
+	public ArrayList<Member> seletMUserTopList() {
+		return (ArrayList)sqlSession.selectList("memberMapper.seletMUserTopList");
 	}
 
 	

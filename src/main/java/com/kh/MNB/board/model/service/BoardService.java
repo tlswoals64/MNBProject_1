@@ -86,5 +86,25 @@ public interface BoardService {
 
 	   int insertReplyMH(Reply reply);
 
+	ArrayList<Board> mDectopList();
+
+	ArrayList<Board> mQnatopList();
+
+	int getManaListCount();
+
+	ArrayList<Board> selectNoticeList(PageInfo pi);
+
+	Board mNoticeDetail(int bNo);
+
+	int mNoticeUpdate(Board b);
+
+	int mNoticeInsert(Board b);
+
+	int mNoticedelete(int bNo);
+
+	ArrayList<Board> comTopList();
+
+	ArrayList<Board> nanumTopList();
+
 	
 }

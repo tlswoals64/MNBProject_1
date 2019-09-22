@@ -26,22 +26,34 @@ public class NoteController {
 	NoteService ntService;
 	
 	@RequestMapping("noteList.do")
-	public ModelAndView noteList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+	public ModelAndView noteList(@RequestParam(value = "page", required = false) Integer page, HttpSession session, ModelAndView mv) {
 		
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = page;
 		}
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		int listCount = ntService.getNoteListCount();
+		String user = loginUser.getUserId();
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		int sendlistCount = ntService.SendNoteListCount(user);
+		int responlistCount = ntService.ResponNoteListCount(user);
 		
-		ArrayList<Note> list = ntService.selectNoteList(pi);
+		System.out.println(sendlistCount);
+		System.out.println(responlistCount);
 		
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.addObject("pi", pi);
+		PageInfo sendPi = Pagination.getPageInfo(currentPage, sendlistCount);
+		PageInfo responPi = Pagination.getPageInfo(currentPage, responlistCount);
+		
+		System.out.println(sendPi);
+		System.out.println(responPi);
+		
+		ArrayList<Note> sendList = ntService.selectSendNoteList(sendPi, user);
+		ArrayList<Note> responList = ntService.selectResponNoteList(responPi, user);
+		
+		if(sendList != null && responList != null) {
+			mv.addObject("sendList", sendList).addObject("responList", responList);
+			mv.addObject("sendPi", sendPi).addObject("responPi", responPi);
 			mv.setViewName("note/noteList");
 		} else {
 			throw new NoteException("쪽지 전체 조회에 실패하였습니다.");
@@ -54,26 +66,36 @@ public class NoteController {
 	public ModelAndView noteInsertForm(@RequestParam("bWriter") String writer, ModelAndView mv, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		mv.addObject("loginUser", loginUser).addObject("writer",writer).setViewName("note/noteInsert");
+		Member Respone = ntService.selectRespone(writer);
+		
+		mv.addObject("loginUser", loginUser).addObject("respon",Respone).setViewName("note/noteInsert");
 		
 		return mv;
 	}
 	
 	@RequestMapping("noteInsert.do")
-	public String noteInsert(@ModelAttribute Note note) {
-		int result = ntService.insertNote(note);
+	public String noteInsert(@ModelAttribute Note note, @RequestParam(value = "respone", required = false) String writer) {
+		int result = 0;
+		
+		if(writer != null) {
+			Member respone = ntService.selectRespone(writer);
+			note.setRespon(respone.getUserId());
+			result = ntService.insertNote(note);
+		} else {
+			result = ntService.insertNote(note);
+		}
 		
 		if(result > 0) {
-			return "성공";
+			return "redirect:noteList.do";
 		} else {
-			return "fail";
+			throw new BoardException("쪽지 보내기에 실패하였습니다.");
 		}
 	}
 	
 	@RequestMapping("ndetail.do")
 	public ModelAndView notedetail(@RequestParam("nNo") int nNo, @RequestParam("page") int page, ModelAndView mv) {
 		ntService.updateRead(nNo);
-		Note note = ntService.selectNote(nNo);
+		Note note = ntService.detailNote(nNo);
 		
 		if(note != null) {
 			mv.addObject("note", note)

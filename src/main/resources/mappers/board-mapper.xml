@@ -124,5 +124,94 @@
 	
 	<!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   -->
 	
+	<!-- 관리자 신고 top 5 -->
+	<select id="mDectopList" resultType="Board">
+		<![CDATA[
+			select *
+			from (select * 
+				  from board
+				  where status = 'Y' and bType = 7
+				  order by B_CREATEDATE desc)
+			where rownum < 6
+		]]>
+	</select>
 	
+	<!-- 관리자 문의사항 top 5 -->
+	<select id="mQnatopList" resultType="Board">
+		<![CDATA[
+			select *
+			from (select * 
+				  from board
+				  where status = 'Y' and bType = 5
+				  order by B_CREATEDATE desc)
+			where rownum < 6
+		]]>
+	</select>
+	
+	<!-- 관리자 공지사항 리스트 받아올때 페이징에 사용 -->
+	<select id="getManaListCount" resultType="_int">
+		select count(*)
+		from board
+		where bType = 6
+	</select>
+	
+	<!-- 관리자 공지사항 리스트 -->
+	<select id="selectNoticeList" resultType="Board">
+		select b.bNo, b.bType, b.bTitle, b.bContent, b.B_CREATEDATE, b.bCount, m.nickName as bWriter
+		from board b join member m on (b.bWriter = m.userId) 
+     	where b.bType = 6 and b.status = 'Y'
+     	order by b.b_CreateDate 
+	</select>
+	
+	<!-- 관리자 공지사항 디테일 -->
+	<select id="mNoticeDetail" resultType="Board" parameterType="_int">
+		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bContent, b.b_CreateDate, b.b_ModifyDate
+		from board b
+			 join member m on (b.bWriter = m.userId)
+		where b.bNo = #{bNo}
+	</select>
+	
+	<!-- 관리자 공지사항 수정 -->
+	<update id="mNoticeUpdate" parameterType="Board">
+		update Board
+		set bTitle = #{ bTitle }, bContent = #{ bContent }, b_ModifyDate = sysdate
+		where bNo = #{ bNo }
+	</update>
+	
+	<!-- 관리자 공지사항 작성 -->
+	<insert id="mNoticeInsert" parameterType="Board">
+		insert into board
+		values (seq_bno.nextval, 6, #{bTitle}, #{bContent}, sysdate, 0, 'Y', sysdate, #{bWriter})
+	</insert>
+	
+	<!-- 관리자 공지사항 삭제 -->
+	<update id="mNoticedelete" parameterType="_int">
+		update board
+		set status = 'N'
+		where bNo = #{bNo}
+	</update>
+	
+	<!-- 커뮤니티 메인페이지 커뮤니티 top5 -->
+	
+	<select id="comTopList" resultType="Board">
+		<![CDATA[
+			select *
+			from (select b.bNo, b.bType, b.bTitle, b.bCount, m.nickName as bWriter, b.b_createDate
+				  from board b join member m on (b.bWriter = m.userId)
+				  where b.status = 'Y' and b.bType = 1
+				  order by b.bCount desc)
+			where rownum < 6
+		]]>
+	</select>
+	<!-- 커뮤니티 메인페이지 나눔 top5 -->
+	<select id="nanumTopList" resultType="Board">
+		<![CDATA[
+			select *
+			from (select b.bNo, b.bType, b.bTitle, b.bCount, m.nickName as bWriter, b.b_createDate
+				  from board b join member m on (b.bWriter = m.userId)
+				  where b.status = 'Y' and b.bType = 2
+				  order by b.bCount desc)
+			where rownum < 6
+		]]>
+	</select>
 </mapper>

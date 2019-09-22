@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.member.model.dao.MemberDAO;
 import com.kh.MNB.member.model.vo.Member;
 
@@ -192,10 +193,38 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.pwdMemberSearch(m);
 	}
 
+	public BSApply myPageBsaCheck(Member m) {
+		return mDAO.myPageBsaCheck(m);
+	}
 
+	@Override
+	public Member myPageInfo(Member m) {
+		return mDAO.myPageInfo(m);
+	}
 	
-
+	@Override
+	public void blackListCancle(Member m) {
+		mDAO.blackListCancle(m);
+		
+	}
 	
+	@Override
+	public int mUserCount() {
+		return mDAO.mUserCount();
+	}
 	
+	@Override
+	public int mDecCount() {
+		return mDAO.mDecCount();
+	}
 	
+	@Override
+	public int mQnacCount() {
+		return mDAO.mQnacCount();
+	}
+	
+	@Override
+	public ArrayList<Member> seletMUserTopList() {
+		return mDAO.seletMUserTopList();
+	}
 }

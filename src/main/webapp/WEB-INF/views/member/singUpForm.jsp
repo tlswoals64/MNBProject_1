@@ -412,7 +412,7 @@ vertical-align: top;
 		$("#emailCheckNumber").blur(function(){
 			var emailCheckNumber = $("#emailCheckNumber").val();
 			console.log(joinCode);
-			if(emailCheckNumber == joinCode){
+			if(emailCheckNumber == joinCode && joinCode != ""){
 				$(".guide.email.error").hide();
 				$(".guide.email.ok").show();
 				$("#emailCheck").val(1);
