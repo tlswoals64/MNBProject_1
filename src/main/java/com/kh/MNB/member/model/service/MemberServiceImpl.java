@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.member.model.dao.MemberDAO;
 import com.kh.MNB.member.model.vo.Member;
 
@@ -135,12 +136,95 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.myBoardUpdate(map);
 	}
 
+	@Override
+	public Board boardType(int bNo) {
+		return mDAO.boardType(bNo);
+		
+	}
 
+	@Override
+	public boolean checkSend(String subject, String string, String string2, String email) {
+		MimeMessage message = mailSender.createMimeMessage();
 
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setSubject(subject);
+			helper.setText(string);
+			helper.setFrom(string2);
+			helper.setTo(email);
 
-	
+			mailSender.send(message);
+			return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 
+		return false;
+	}
+
+	@Override
+	public boolean pwdSend(String subject, String string, String string2, String email) {
+		MimeMessage message = mailSender.createMimeMessage();
+
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setSubject(subject);
+			helper.setText(string);
+			helper.setFrom(string2);
+			helper.setTo(email);
+
+			mailSender.send(message);
+			return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int pwdcUpdate(Member m) {
+		
+		return mDAO.pwdcUpdate(m);
+	}
+
+	@Override
+	public String pwdMemberSearch(Member m) {
+		return mDAO.pwdMemberSearch(m);
+	}
+
+	public BSApply myPageBsaCheck(Member m) {
+		return mDAO.myPageBsaCheck(m);
+	}
+
+	@Override
+	public Member myPageInfo(Member m) {
+		return mDAO.myPageInfo(m);
+	}
 	
+	@Override
+	public void blackListCancle(Member m) {
+		mDAO.blackListCancle(m);
+		
+	}
 	
+	@Override
+	public int mUserCount() {
+		return mDAO.mUserCount();
+	}
 	
+	@Override
+	public int mDecCount() {
+		return mDAO.mDecCount();
+	}
+	
+	@Override
+	public int mQnacCount() {
+		return mDAO.mQnacCount();
+	}
+	
+	@Override
+	public ArrayList<Member> seletMUserTopList() {
+		return mDAO.seletMUserTopList();
+	}
 }

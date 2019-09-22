@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기</title>
 <style>
 .loginmenu {
 	display: flex;
@@ -75,8 +75,8 @@
   <div class="logintext"><h1 style="text-align:center">아이디 찾기</h1></div>
   <br>
   <div>
-  <form action="pwdIdCheck.do" class="login-container" method="post">
-	<div class="logintext"><input type="text" value="${searchId}"></div><br>
+  <form action="pwdIdCheck2.do" class="login-container" method="post">
+	<div class="logintext"><input type="text" id="id" name="userId" value="${searchId}"></div><br>
 	<br>
     <div class="logintext">
     <input type="submit" value="비밀번호 찾기" id="btn2">&nbsp;&nbsp;<input type="button" onclick="back();" value="취소" id="btn2">
@@ -88,7 +88,7 @@
 </div>
 <script>
 function back(){
-	location.href="javascript:history.go(-1);";	
+	location.href="loginView.do";
 }
 </script>
 <jsp:include page="../common/footer.jsp"/>

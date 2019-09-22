@@ -67,6 +67,15 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .info_txt {border:1px dashed #7a8799; padding:10px; background-color:#ededed;margin-top:30px}
 .info_txt  span {background:url('resources/images/board/icn_notice.png') no-repeat;padding-left:25px; color:#FF0000}
 .order_txt {margin-top:20px;}
+#likeArea{
+	width: 50px;
+	height : 50px;
+	cursor : pointer;
+}
+#likeArea>img{
+	width : 100%;
+	height: 100%;
+}
 
 
 </style>
@@ -114,7 +123,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 		<li>
 			<div class="product_info">
 				<h2>상품안내
-				<span style="float:right;"><img src="resources/images/board/singo.png"></span></h2>
+					<span style="float:right;" id="likeArea" onclick="likeChange();"><img id="likeAreaImg" src="resources/images/main/unlike.png"></span>
+				</h2>
 				<ul>
 					<li class="pro_title">제목</li>
 					<li> ${ board[0].bTitle }</li>
@@ -130,6 +140,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					<li>${ board[0].upload_Date }</li>
 				</ul>
 				<p class="both"></p>
+				<span style="float:right;"><img src="resources/images/board/singo.png"></span>
 				<p class="info_txt"><span>직접거래시 아래 사항에 유의해주세요.</span><br>
 				불확실한 판매자(본인 미인증, 해외IP, 사기의심 전화번호)의 물건은 구매하지 말아주세요.<br>
 				판매자와의 연락은 메신저보다는 전화, 메일 등을 이용하시고 개인정보 유출에 주의하세요.<br>
@@ -322,4 +333,57 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	  <jsp:include page="../../common/footer.jsp"></jsp:include>
 	  
 </body>
+
+<script>
+(function(){
+	$.ajax({
+		url: "likeCheck.do",
+		dataType: "json",
+		success: function(data){
+			console.log(data);
+			if(data > 0){
+				console.log("null 아님");
+				$('#likeAreaImg').attr('src', 'resources/images/main/like.png')
+			}
+		}
+	});
+}());
+</script>
+
+<script>
+	function likeChange(){
+		var check = $('#likeAreaImg').attr('src');
+		var bNo = '${board[0].bNo}';
+		console.log(bNo);
+		if(check.match("un")){
+			$.ajax({
+				url: "likeAddBoard.do",
+				data: {bNo:bNo},
+				dataType: "json",
+				success: function(data){
+					console.log(data);
+					if(data > 0){
+						alert('좋아요를 누르셨습니다!');
+						$('#likeAreaImg').attr('src', 'resources/images/main/like.png')
+					}
+				}
+			});
+		}
+		if(!check.match("un")){
+			$.ajax({
+				url: "likeCancleBoard.do",
+				data: {bNo:bNo},
+				dataType: "json",
+				success: function(data){
+					console.log(data);
+					if(data > 0){
+						alert('좋아요를 취소하셨습니다!');
+						$('#likeAreaImg').attr('src', 'resources/images/main/unlike.png')
+					}
+				}
+			});
+		}
+		
+	}
+</script>
 </html>

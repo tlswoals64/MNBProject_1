@@ -49,13 +49,28 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .content_wrap {width:1200px; margin:0 auto; margin-top:100px;}
 .content_wrap ul li {float:left;width:49%;}
 .content_wrap ul li:first-child {margin-right:1%;width:49%;}
-.content_notice {width:100%; height:300px;background-color:#fff;border:1px #e0dfdf solid;margin-right:1%}
-.content_notice2 {width:100%; height:300px;background-color:#fff;border:1px #e0dfdf solid;}
+.content_notice {width:100%; background-color:#fff;border : 3px solid rgb(240,240,240);margin-right:1%}
+.content_notice2 {width:100%; height:300px;background-color:#fff;border : 3px solid rgb(240,240,240); }
 .cont_name {color:#3360a9; font-size:18px; font-weight:600;padding:15px 0 15px 20px;border-bottom:1px #e0dfdf solid;font-family: 'NanumSquare'}
-.notice_cont {padding:15px 20px 15px 20px;}
-.notice_cont > table > tr > th:nth-child(2) {margin-right:15px}
+ 
+.notice_cont {padding:15px 20px 15px 20px; height : 300px; border : 3px solid rgb(240,240,240); }
 .cont_more {float:right;padding-right:20px;padding-top:5px;}
-.notice_cont table tbody tr td{border-bottom:1px dashed #dfdfdf; padding: 8px 0;}
+.tableDeTh{
+ 		width : 200px;
+ 		padding-left : 10px;
+		height: 30px;
+ 		background : rgb(240,240,240);
+ 		text-align : center;
+ 		border : 1px solid rgb(240,240,240);
+ 	}
+ 	
+ td{
+ 	padding-left : 10px;
+		height: 45px;
+		width : 100px;
+		border-bottom : 1px solid rgb(240,240,240);
+ }
+
 
 </style>
 
@@ -88,34 +103,20 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 커뮤니티 게시판 " 
 				</div>
 				<div class="notice_cont">
-				<!-- 제목 게시글 게시날짜 -->
-				<table id="ctb" style="font-size:17px">
-					<thead>
-						<tr style="boarder:1px; padding:15px 0;">
-							<th style="width:200px;">제목</th>
-							<th style="width:200px;">작성자</th>
-							<th>작성 날짜</th>
-						</tr>
-					</thead>
-					<tbody>
-					<%-- 	<c:forEach var="comL" items="${ comboard }" begin="0" end="4">
-							 <c:url var="detailCom" value="detailCom.do">
-							<c:param name="bNo" value="${ comL.bNo }" />
-							</c:url> 
-								<tr  onclick='location.href=${ detailCom }' >
-									<td>
-										<a href="${detailCom} ">${ comL.bTitle }</a> 
-									</td>
-									<td>
-										<a  href="${detailCom} ">${ comL.bWriter }</a> 
-									</td>
-									<td>
-										<a  href="${detailCom} "> ${ comL.b_CreateDate }</a> 
-									</td>
-								</tr>
-						</c:forEach> --%>
-					</tbody>
-				</table>
+
+
+				<table class="tableD" id="comTable">
+						<thead>
+							<tr class="tableDTr">
+								<th class="tableDeTh">제목</th>
+								<th class="tableDeTh" >작성자</th>
+								<th class="tableDeTh" >조회수</th>
+								<th class="tableDeTh">작성날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</li>
@@ -125,35 +126,19 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 					" 무료나눔 게시판 " 
 				</div>
 				<div class="notice_cont">
-				<!-- 제목 게시글 게시날짜 -->
-				<table style="font-size:17px">
-					<thead>
-						<tr>
-							<th style="width:200px;">제목</th>
-							<th style="width:200px;">작성자</th>
-							<th>작성 날짜</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%--  <c:forEach var="numL" items="${ nanumboard }" begin="0" end="4">
-							 <c:url var="bdetail" value="dBoard.do">
-							<c:param name="bNo" value="${ numL.bNo }" />
-							</c:url>  --%>
-								<%-- <tr onclick='location.href=${ bdetail }'>
-									<td>
-										<a href="${bdetail} ">${ bTitle }</a> 
-									</td>
-									<td>
-										<a  href="${bdetail} ">${ numL.bWriter }</a> 
-									</td>
-									<td>
-										<a  href="${bdetail} "> ${ numL.b_CreateDate }</a> 
-									</td>
-								</tr> --%>
-						<%-- </c:forEach>  --%>
-					</tbody>
-				</table>
-				</div>
+				<table class="tableD" id="nanumTable">
+						<thead>
+							<tr class="tableDTr">
+								<th class="tableDeTh">제목</th>
+								<th class="tableDeTh" >작성자</th>
+								<th class="tableDeTh" >조회수</th>
+								<th class="tableDeTh">작성날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>	
 			</div>
 		</li>
 	</ul>
@@ -211,4 +196,67 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
  
 
  </body>
+ 
+ <script>
+			function topList(){
+				$.ajax({
+					url: "comTopList.do",
+					dataType: "json",
+					success: function(data){
+						$tableBody = $("#comTable tbody");
+						$tableBody.html("");
+						
+						for(var i in data){
+							var $tr = $("<tr>");
+							var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
+							var $bCount = $("<td>").text(decodeURIComponent(data[i].bCount));
+							var $bWriter = $("<td>").text(decodeURIComponent(data[i].bWriter));
+							var $b_CreateDate = $("<td>").text(data[i].b_CreateDate);
+			
+							
+							$tr.append($bTitle);
+							$tr.append($bWriter);
+							$tr.append($bCount);
+							$tr.append($b_CreateDate);
+							
+							$tableBody.append($tr);
+						}
+					}
+				});
+				$.ajax({
+					url: "nanumTopList.do",
+					dataType: "json",
+					success: function(data){
+						$tableBody = $("#nanumTable tbody");
+						$tableBody.html("");
+						
+						for(var i in data){
+							var $tr = $("<tr>");
+							var $bTitle = $("<td>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
+							var $bWriter = $("<td>").text(decodeURIComponent(data[i].bWriter));
+							var $bCount = $("<td>").text(decodeURIComponent(data[i].bCount));
+							var $b_CreateDate = $("<td>").text(data[i].b_CreateDate);
+			
+							
+							$tr.append($bTitle);
+							$tr.append($bWriter);
+							$tr.append($bCount);
+							$tr.append($b_CreateDate);
+							
+							$tableBody.append($tr);
+						}
+					}
+				});
+				
+			}
+			
+			$(function(){
+				topList();
+				
+				setInterval(function(){
+					topList();
+					
+				}, 10000);
+			});
+</script>
 </html>

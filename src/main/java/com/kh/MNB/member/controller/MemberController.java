@@ -23,13 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.MNB.board.model.exception.BoardException;
-import com.kh.MNB.board.model.service.BoardService;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
+import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.exception.MemberException;
 import com.kh.MNB.member.model.service.MemberService;
@@ -133,6 +134,51 @@ public class MemberController {
 	    	  return "fail";
 	      }
 	   }
+	   //개인정보 수정 메일인증
+	   @RequestMapping(value = "updateSendMail.do", method = RequestMethod.POST)
+	   @ResponseBody
+	   public String updateSendMail(HttpSession session, @RequestParam String email) {
+	      String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+	      randomCode = randomCode.substring(0, 6);
+	      String checkCode = String.valueOf(randomCode);
+	      
+	      System.out.println(checkCode);
+	      
+	      String subject = "이메일 주소 변경 승인번호 입니다.";
+	      StringBuilder sb = new StringBuilder();
+	      sb.append("이메일 주소 변경 승인번호").append(checkCode).append(" 입니다.");
+	      
+	      
+	      boolean result = mService.checkSend(subject, sb.toString(), "seok1721@gamil.com", email);
+	      if(result) {
+	    	  return checkCode;
+	      } else {
+	    	  return "fail";
+	      }
+	   }
+	   
+	   //비밀번호 변경 이메일인증
+	   @RequestMapping(value = "pwdSendMail.do", method = RequestMethod.POST)
+	   @ResponseBody
+	   public String pwdSendMail(HttpSession session, @RequestParam String email) {
+	      String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+	      randomCode = randomCode.substring(0, 6);
+	      String checkCode = String.valueOf(randomCode);
+	      
+	      System.out.println(checkCode);
+	      
+	      String subject = "이메일 주소 변경 승인번호 입니다.";
+	      StringBuilder sb = new StringBuilder();
+	      sb.append("이메일 주소 변경 승인번호").append(checkCode).append(" 입니다.");
+	      
+	      
+	      boolean result = mService.pwdSend(subject, sb.toString(), "seok1721@gamil.com", email);
+	      if(result) {
+	    	  return checkCode;
+	      } else {
+	    	  return "fail";
+	      }
+	   }
       
 	   //---------로그인화면이동----------
 		@RequestMapping("loginView.do")
@@ -147,16 +193,24 @@ public class MemberController {
 			Member loginUser = mService.memberLogin(m);	
 			if (bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {			
 				 if(loginUser.getUserId().equals("admin")) {
-					 model.addAttribute("loginUser", loginUser);
+					 
+					 int userCount = mService.mUserCount();
+					 int decCount = mService.mDecCount();
+					 int qnaCount = mService.mQnacCount();
+					
+					 model.addAttribute("userCount", userCount);
+					 model.addAttribute("decCount", decCount);
+					 model.addAttribute("userCount", userCount);
+					 model.addAttribute("qnaCount", qnaCount);
 					 return "manager/managermainView";
 				 }else {
 				 model.addAttribute("loginUser", loginUser); 
+				 
 				 return "redirect:index.jsp";
 				 }
 			 } else {
 				 throw new MemberException("로그인에 실패하였습니다.");
-			}
-			 
+			} 
 		}
       
 		// ---------- 로그아웃 ----------
@@ -170,6 +224,7 @@ public class MemberController {
 		//---------- 아이디 찾기 ----------
 		@RequestMapping("idSearchView.do")
 		public String idSearchView() {
+			
 			return "login/idSearchView";
 		}
 		@RequestMapping(value="idSearch.do", method=RequestMethod.POST)
@@ -191,7 +246,10 @@ public class MemberController {
 			
 			return "myPage/pwdUpdateView";
 		}
-		@RequestMapping("pwdUpdate.do")
+		
+		
+		//비밀번호 변경
+		@RequestMapping(value="pwdUpdate.do", method=RequestMethod.POST)
 		public String pwdUpdate(@ModelAttribute Member m, Model model, @RequestParam("userPwd1") String userPwd1,
 								@RequestParam("newPassword") String newPassword,
 								@RequestParam("newPassword2") String newPassword2,
@@ -203,7 +261,8 @@ public class MemberController {
 		   System.out.println(encpwd);
 		 
 			if(encpwd==p.getUserPwd()) {*/
-			if(newPassword.equals(newPassword2)) {
+			if(bcryptPasswordEncoder.matches(userPwd1, p.getUserPwd()) && newPassword.equals(newPassword2) ) {
+			/* if(newPassword.equals(newPassword2)) { */
 				m.setUserId(p.getUserId());
 				m.setUserPwd(newPassword);
 				String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
@@ -213,31 +272,32 @@ public class MemberController {
 
 				if(result>0) {
 					model.addAttribute("loginUser",m);
+					
 					return "redirect:index.jsp";
 				}else {
 					throw new MemberException("비밀번호 변경에 실패하였습니다.");
 				}
 			}else {
-				throw new MemberException("새로운 비밀번호가 일치하지 않습니다.");
+				throw new MemberException("비밀번호가 일치하지 않습니다.");
 			}
-			/*}
-		 * else { throw new MemberException("현재 비밀번호가 일치하지 않습니다."); }
-		 */
-		}
-		
-		
 
-      
+		}
       
 
 		//--------- 비밀번호 찾기-----------
 		@RequestMapping("pwdIdCheck.do")
 		public String pwdIdCheckView() {
-			return "login/pwdIdCheckView";
+			return "login/pwdSearchForm";
+		}
+		@RequestMapping("pwdIdCheck2.do")
+		public String pwdIdCheckView2(@RequestParam("userId") String userId,Model model){
+			
+			model.addAttribute("pwdSearch", userId);		
+			return  "login/pwdSearchForm";
 		}
 		//비밀번호 찾기전 아이디 체크		
 		@RequestMapping(value="pwdIdSearch.do", method=RequestMethod.POST)
-		public String pwdSearch(@RequestParam("userId") String userId, Model model) {
+		public String pwdIdSearch(@RequestParam("userId") String userId, Model model) {
 			
 			System.out.println(userId);
 			String result= mService.pwdSearch(userId);
@@ -250,23 +310,62 @@ public class MemberController {
 			}			
 		}
 		
-		@RequestMapping("pwdSerach.do")
-		public String pwdSearch() {
+		@RequestMapping(value="pwdSerach.do", method=RequestMethod.POST)
+		public String pwdMemberSearch(@ModelAttribute Member m, Model model) {
+			
+			String userId= mService.pwdMemberSearch(m);
+			
+			model.addAttribute("pwdSearchId", userId);	
 			return "login/pwdChange";
-		}
+		}	
+		//비밀번호찾기 후 변경
+				@RequestMapping(value="pwdcUpdate.do", method=RequestMethod.POST )
+				public String pwdcUpdate(@ModelAttribute Member m, Model model,
+										@RequestParam("newPassword") String newPassword,
+										@RequestParam("newPassword2") String newPassword2, @RequestParam("userId") String userId) {
+				
+					
+					if(newPassword.equals(newPassword2)) {
+					/* if(newPassword.equals(newPassword2)) { */
+						m.setUserId(userId);
+						m.setUserPwd(newPassword);
+						String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+						m.setUserPwd(encPwd);
+						System.out.println(m.getUserId());
+						int result= mService.pwdcUpdate(m);
+
+						if(result>0) {
+							return "redirect:index.jsp";
+						}else {
+							throw new MemberException("비밀번호 변경에 실패하였습니다.");
+						}
+					}else {
+						throw new MemberException("비밀번호가 일치하지 않습니다.");
+					}
+				}
+
+	
    
    //-------------------------관리자 페이지로 이동 ---------------------------
    @RequestMapping("manaHome.do")
    public String test() {
 
-	   
-	   System.out.println("들어왔니?");
       return "manager/managermainView";
    }
    
    @RequestMapping("myPageView.do")
-   public String myPage() {
-	   	   return "member/myPageMainView";
+   public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+	   
+	   Member m = (Member)session.getAttribute("loginUser");
+	   Member myM = mService.myPageInfo(m);
+	   BSApply b= mService.myPageBsaCheck(m);
+	   System.out.println(b);
+	   
+	    mv.addObject("m", myM);
+	    mv.addObject("b", b);
+		mv.setViewName("member/myPageMainView");
+	   
+		return mv;
    }
 
 
@@ -287,41 +386,33 @@ public class MemberController {
 		}
 		return mv;
 	}
-	//개인정보수정
+	//개인정보수정페이지이동
 	@RequestMapping("updateMemberView.do")
 	public ModelAndView updateMemberView(HttpSession session, ModelAndView mv) {
 		  
 		Member m = (Member)session.getAttribute("loginUser");
-		mv.addObject("m", m);
+		mv.addObject("loginUser", m);
 		mv.setViewName("myPage/updateMember");
 		
 		return mv;
 	   }
+	//개인정보수정
 	@RequestMapping(value="updateMember.do", method=RequestMethod.POST)
 	public ModelAndView updateMember(@ModelAttribute Member m,
 								@RequestParam("address") String address,
 								@RequestParam("detailAddress") String detailAddress,
 								@RequestParam("extraAddress") String extraAddress, 
 								@RequestParam("addEmail") String addEmail,ModelAndView mv,HttpSession session) {
-		  Member p = (Member)session.getAttribute("loginUser");
+		  
 		  String email = m.getEmail() + "@" + addEmail;		  
 	      m.setEmail(email);
 	      m.setAddress(address + "/" + detailAddress + "/" + extraAddress);
-	      
-		  
-		  Map<String, String> map = new HashMap<String, String>();
-		  map.put("nickName", p.getNickName());
-		  map.put("nickName2", m.getNickName());	  
-		 
-		  int result1= mService.myBoardupdate(map);
+	      	
 	      int result = mService.updateMember(m);
-	     
-	     
-	     
-	      if(result > 1) {
-	    	  mv.addObject("loginUser", m);
-	    	  mv.setViewName("myPage/detailMember");
 	         
+	      if(result > 0) {
+	    	  mv.addObject("loginUser", m);
+	    	  mv.setViewName("myPage/detailMember");	         
 	         
 	      } else {
 	         throw new MemberException("회원정보 수정에 실패하였습니다.");
@@ -335,7 +426,7 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 		
 		Member m = (Member)session.getAttribute("loginUser");
 		/* String userId = m.getUserId(); */
-		String bWriter = m.getNickName();
+		String bWriter = m.getUserId();
 		System.out.println(bWriter);
 		int currentPage = 1;
 	      if(page != null) {
@@ -353,22 +444,66 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	         mv.setViewName("myPage/boardList");
 	      }
 	      else {
-	    	  throw new BoardException("게시글 불러오기에 실패하였습니다.");
+	    	  throw new MemberException("게시글 불러오기에 실패하였습니다.");
 	      }
 	      
 	      return mv;
 	   }
+	//게시글 상세페이지
+	@RequestMapping(value="myBoardDetail.do",method = RequestMethod.GET)
+	public String myBoardDetail(@RequestParam("bNo") int bNo, RedirectAttributes redirect) {
+		int page= 1;
+		
+		Board board= mService.boardType(bNo);
+		if(board!=null){
+		if(board.getbType()==1) {
+			
+		}else if(board.getbType()==1) {
+			
+		}
+		else if(board.getbType()==2) {
+			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);
+			return "redirect:dBoard.do";
+		}
+		else if(board.getbType()==3) {
+			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);
+			return "redirect:momDetail.do";
+		}
+		else if(board.getbType()==4) {
+			
+		}
+		else if(board.getbType()==5) {
+			
+		}
+		else if(board.getbType()==6) {
+			
+		}
+		else if(board.getbType()==7) {
+			
+		}
+		else if(board.getbType()==8) {
+			redirect.addAttribute("bNo", bNo);	
+			redirect.addAttribute("page", page);
+			return "redirect:detailReview.do";
+		}
+		
+		}else {
+			throw new MemberException("게시글 상세페이지 조회에 실패하였습니다.");
+		}
+		return null;
+		
+
+	}
 	 @RequestMapping("mdelete.do")
 	 public String deleteMember(@RequestParam("id") String id,SessionStatus status) {
 		 
-		 int result  = mService.deleteMember(id);
-		 
+		 int result  = mService.deleteMember(id);	 
 		 
 		 if(result>0) {
 		 status.setComplete();
 		 return "myPage/detailMember";	
-//		 session.invalidate();
-		 //return "redirect:logout.do";
 		 }
 		 else {
 			 
@@ -460,6 +595,47 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
       else {
          throw new MemberException("ȸ������ ������ �����Ͽ����ϴ�.");
       }
+   }
+   
+   //블랙리스트 해제
+   @RequestMapping("blackListCancle.do")
+   public String blackListCancle(HttpSession session) {
+	   Member m = (Member)session.getAttribute("loginUser");
+	   m.setDec(0);
+	   m.setDec_date(null);
+	   mService.blackListCancle(m);
+	   
+	   return "redirect:index.jsp";
+   }
+   // 매니저 메인 신규회원 5명
+   @RequestMapping("mUsertopList.do")
+	public void seletMUserTopList(HttpServletResponse response) throws IOException {
+
+		ArrayList<Member> list = mService.seletMUserTopList();
+		System.out.println(list);
+		for(Member m : list) {
+			m.setNickName(URLEncoder.encode(m.getNickName(), "utf-8"));
+			m.setUserName(URLEncoder.encode(m.getUserName(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
+
+	}
+   
+   // 매니저 메인홈으로 가기
+   @RequestMapping("managerMainHome.do")
+   public String managerMainHome(Model model) {
+	   
+	   int userCount = mService.mUserCount();
+		 int decCount = mService.mDecCount();
+		 int qnaCount = mService.mQnacCount();
+		
+		 model.addAttribute("userCount", userCount);
+		 model.addAttribute("decCount", decCount);
+		 model.addAttribute("userCount", userCount);
+		 model.addAttribute("qnaCount", qnaCount);
+		 return "manager/managermainView";
    }
    
 }

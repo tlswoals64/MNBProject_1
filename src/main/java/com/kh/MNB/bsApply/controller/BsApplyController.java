@@ -25,7 +25,7 @@ public class BsApplyController {
 	@Autowired
 	BsApplyService bsaService;
 	MemberService mService;
-
+	
 	// 회원등급 리스트
 	@RequestMapping("mLevelList.do")
 	public ModelAndView manaLevel(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
@@ -82,16 +82,21 @@ public class BsApplyController {
 
 	}
 	
+	// 시터페이지로 이동
 	@RequestMapping("sitterApplyPage.do")
 	public ModelAndView sitterApply(HttpSession session, ModelAndView mv) {
 		Member m = (Member)session.getAttribute("loginUser");
 		
-		if(m != null) {
+		int result = bsaService.checkBsa(m);
+		if(result > 0) {
+            mv.addObject("check", "0");
             mv.addObject("m", m);
             mv.setViewName("common/SitterApplicationView");
          }
          else {
-            throw new MemberException("�Խñ� ��ü ��ȸ�� �����Ͽ����ϴ�.");
+        	 mv.addObject("check", "1");
+        	 mv.addObject("m", m);
+             mv.setViewName("common/SitterApplicationView");
          }
          
 		return mv;
@@ -99,8 +104,84 @@ public class BsApplyController {
 	
 	// 신청서 작성
 	@RequestMapping("userBsApply.do")
-	public void userBsApply(BSApply b) {
-		System.out.println("신청서 작성 잘들어왔니?");
-		System.out.println(b);
+	public String userBsApply(BSApply b, 
+				@RequestParam("exT1") String exT1, @RequestParam("exP1") String exP1, @RequestParam("exC1") String exC1,
+				@RequestParam("exT2") String exT2, @RequestParam("exP2") String exP2, @RequestParam("exC2") String exC2,
+				@RequestParam("exT3") String exT3, @RequestParam("exP3") String exP3, @RequestParam("exC3") String exC3) {
+		String caring ="";
+		if(exT1 != "") {
+			caring += (exT1 + "@!" + exP1 +"@!" + exC1);
+		}
+		if(exT2 != "") {
+			caring += ("/" + exT2 + "@!" + exP2 +"@!" + exC2);
+		}
+		if(exT3 != "") {
+			caring += ("/" + exT3 + "@!" + exP3 +"@!" + exC3);
+		}
+		if(exT1 != "") {
+			b.setCaring(caring);
+		}
+		
+		int result = bsaService.memberBsapply(b);
+		if(result > 0) {
+            return "redirect:index.jsp";
+         }
+         else {
+            throw new BsApplyException("신청서작성에 실패했습니다.");
+         }
+         
+		
 	}
+	
+	@RequestMapping("bsaUpdateView.do")
+	public ModelAndView bsaUpdate(HttpSession session, ModelAndView mv) {
+		Member m = (Member)session.getAttribute("loginUser");
+		System.out.println("수정들어옴?");
+		System.out.println(m.getUserId());
+
+		BSApply b = bsaService.bsaUpdateB(m);
+		System.out.println("bsa : " + b);
+		if(b != null) {
+            mv.addObject("m", m);
+            mv.addObject("b", b);
+            mv.setViewName("common/SitterApplicationUpdateView");
+         }
+         else {
+        	 throw new BsApplyException("신청서수정에 실패했습니다.");
+         }
+         
+		return mv;
+	}
+	
+	@RequestMapping("userBsApplyUpdate.do")
+	public String userBsApplyUpdate(BSApply b, 
+			@RequestParam("exT1") String exT1, @RequestParam("exP1") String exP1, @RequestParam("exC1") String exC1,
+			@RequestParam("exT2") String exT2, @RequestParam("exP2") String exP2, @RequestParam("exC2") String exC2,
+			@RequestParam("exT3") String exT3, @RequestParam("exP3") String exP3, @RequestParam("exC3") String exC3) {
+	String caring ="";
+	if(exT1 != "") {
+		caring += (exT1 + "@!" + exP1 +"@!" + exC1);
+	}
+	if(exT2 != "") {
+		caring += ("/" + exT2 + "@!" + exP2 +"@!" + exC2);
+	}
+	if(exT3 != "") {
+		caring += ("/" + exT3 + "@!" + exP3 +"@!" + exC3);
+	}
+	if(exT1 != "") {
+		b.setCaring(caring);
+	}
+	System.out.println("제발요  : " + b);
+	
+	int result = bsaService.userBsApplyUpdate(b);
+	if(result > 0) {
+        return "redirect:index.jsp";
+     }
+     else {
+        throw new BsApplyException("신청서작성에 실패했습니다.");
+     }
+     
+	
+}
+	
 }

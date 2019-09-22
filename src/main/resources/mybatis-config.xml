@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.MNB.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.MNB.bsApply.model.vo.BSApply" alias="BSApply"/>
 		<typeAlias type="com.kh.MNB.reView.model.vo.ReView" alias="ReView"/>
+		<typeAlias type="com.kh.MNB.reView.model.vo.ReVi" alias="ReVi"/>
 		<typeAlias type="com.kh.MNB.chat.model.vo.Chat" alias="Chat"/>
 		<typeAlias type="com.kh.MNB.fna.model.vo.FnA" alias="FnA"/>
 		<typeAlias type="com.kh.MNB.member.model.vo.Member" alias="Member"/>
@@ -39,6 +40,7 @@
 		<mapper resource="mappers/propose-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml"/>
 		<mapper resource="mappers/memo-mapper.xml"/>
+		<mapper resource="mappers/reView-mapper.xml"/>
 		
 	</mappers>
 </configuration>

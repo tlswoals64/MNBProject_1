@@ -40,4 +40,32 @@
 		where userid = #{ userId }  
 	</update>
 	
+	
+	<!-- 신청서 작성 -->
+	<insert id="memberBsapply" parameterType="BSApply">
+		insert into bsapply values(#{ userId }, #{ caring }, #{ intro }, #{ job }, #{ bType }, #{ activity }, null, sysdate, null)
+	</insert>
+	
+	<!-- 신청서를 작성했는지유무 -->
+	<select id="checkBsa" resultType="_int" parameterType="Member">
+		select count(*)
+		from bsapply
+		where userId = #{ userId }
+	</select>
+	
+	<!-- 신청서 재작성때 필요 -->
+	
+	<select id="bsaUpdateB" resultType="BSApply" parameterType="Member">
+		select *
+		from bsapply
+		where userId = #{ userId }
+	</select>
+	
+	<!--  신청서 재작성 -->
+	<update id="userBsApplyUpdate" parameterType="BSApply">
+		update bsapply
+		set caring=#{caring}, intro=#{intro}, job=#{job}, bType=#{bType},
+		    activity=#{activity}, reason = null, apply_Date=null, create_Date=sysdate
+		where USERID = #{userId}
+	</update>
 </mapper>

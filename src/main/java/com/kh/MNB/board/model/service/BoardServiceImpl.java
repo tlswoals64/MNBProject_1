@@ -205,15 +205,52 @@ public class BoardServiceImpl implements BoardService {
 	   public Attachment selectPicBoard2(int bNo) {
 	      return bDAO.selectPicBoard2(bNo);
 	   }
-
-
-
-
-
-
-
-
-
-
+	   
+	   @Override
+	public ArrayList<Board> mDectopList() {
+		return bDAO.mDectopList();
+	}
+	   @Override
+	public ArrayList<Board> mQnatopList() {
+		return bDAO.mQnatopList();
+	}
+	   
+	   @Override
+	public int getManaListCount() {
+		   return bDAO.getManaListCount();
+	}
+	   
+	   @Override
+	public ArrayList<Board> selectNoticeList(PageInfo pi) {
+		   return bDAO.selectNoticeList(pi);
+	}
+	  
+	  @Override
+	public Board mNoticeDetail(int bNo) {
+		 return bDAO.mNoticeDetail(bNo);
+	}
+	
+	  @Override
+	public int mNoticeUpdate(Board b) {
+		return bDAO.mNoticeUpdate(b);
+	}
+	  @Override
+	public int mNoticeInsert(Board b) {
+		return bDAO.mNoticeInsert(b);
+	}
+	  
+	  @Override
+	public int mNoticedelete(int bNo) {
+		return bDAO.mNoticedelete(bNo);
+	}
+	  
+	  @Override
+	public ArrayList<Board> comTopList() {
+		return bDAO.comTopList();
+	}
+	  @Override
+	public ArrayList<Board> nanumTopList() {
+		  return bDAO.nanumTopList();
+	}
 
 }

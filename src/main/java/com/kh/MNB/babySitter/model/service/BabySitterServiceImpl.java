@@ -31,7 +31,7 @@ public class BabySitterServiceImpl implements BabySitterService {
 	}
 
 	@Override
-	public ArrayList selectList(PageInfo pi) {
+	public ArrayList<sitterSuppot> selectList(PageInfo pi) {
 		return bsDAO.selectList(pi);
 	}
 
@@ -61,11 +61,7 @@ public class BabySitterServiceImpl implements BabySitterService {
 		return bsDAO.getMomListCount();
 	}
 
-	@Override
-	public Momboard selectDetail(Board board) {
-		// TODO Auto-generated method stub
-		return bsDAO.selectDetail(board);
-	}
+
 
 	public int insertSuppotBoard(Board board) {
 		return bsDAO.insertSuppotBoard(board);
@@ -116,6 +112,50 @@ public class BabySitterServiceImpl implements BabySitterService {
 		return bsDAO.insertSuppotReply(r);
 
 	}
-	
+
+	@Override
+	public Momboard selectDetail(int bNo) {
+		
+		return bsDAO.selectDetail(bNo);
+	}
+
+	@Override
+	public void addMomReadCount(int bNo) {
+		bsDAO.addMomReadCount(bNo);
+		
+	}
+
+	@Override
+	public Momboard momboardUpdateForm(int bNo) {
+		return bsDAO.momboardUpdateForm(bNo);
+	}
+
+	@Override
+	public int upDateMomBoard(Board board) {
+		return bsDAO.upDateMomBoard(board);
+	}
+
+	@Override
+	public int upDateMomAttachment(Attachment attachment) {
+		return bsDAO.upDateMomAttachment(attachment);
+	}
+
+	@Override
+	public int upDateBcMojib(BabySitter babySitter) {
+		return bsDAO.upDateBcMojib(babySitter);
+	}
+
+	@Override
+	public ArrayList<Reply> selectMomReplyList(int bNo) {
+		return bsDAO.selectMomReplyList(bNo);
+	}
+
+	@Override
+	public int insertMomReply(Reply r) {
+		return bsDAO.insertMomReply(r);
+	}
+
+
+
 	
 }

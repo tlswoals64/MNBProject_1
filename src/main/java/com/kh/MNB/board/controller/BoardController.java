@@ -30,6 +30,7 @@ import com.kh.MNB.board.model.vo.PictureBoard;
 import com.kh.MNB.board.model.vo.Reply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.vo.Member;
+import com.kh.MNB.propose.model.exception.ProposeException;
 import com.kh.MNB.propose.model.vo.Propose;
 
 @Controller
@@ -893,6 +894,141 @@ public class BoardController {
 	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	      gson.toJson(result, response.getWriter());
 	   }
+	   
+	   // 매니저 신고 top 5
+	   @RequestMapping("mDectopList.do")
+		public void mDectopList(HttpServletResponse response) throws IOException {
+
+			ArrayList<Board> list = bService.mDectopList();
+			System.out.println(list);
+			for(Board b : list) {
+				b.setbTitle(URLEncoder.encode(b.getbTitle(), "utf-8"));
+			}
+			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(list, response.getWriter());
+
+		}
+	   
+	// 매니저 Qna top 5
+	   @RequestMapping("mQnatopList.do")
+		public void mQnatopList(HttpServletResponse response) throws IOException {
+
+			ArrayList<Board> list = bService.mQnatopList();
+			System.out.println(list);
+			for(Board b : list) {
+				b.setbTitle(URLEncoder.encode(b.getbTitle(), "utf-8"));
+			}
+			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(list, response.getWriter());
+
+		}
+	   
+	   // 관리자 공지사항 리스트
+		@RequestMapping("mNoticeList.do")
+		public ModelAndView qnaList(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
+			int currentPage = 1;
+			if (page != null) {
+				currentPage = page;
+			}
+
+			int listCount = bService.getManaListCount(); 
+
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+
+			ArrayList<Board> list = bService.selectNoticeList(pi);
+
+
+			if (list != null) {
+				mv.addObject("list", list);
+				mv.addObject("pi", pi);
+				mv.setViewName("manager/manaNoticeListView");
+			} else {
+				throw new BoardException("공지사항 리스트 불러오기에 실패했습니다.");
+			}
+
+			return mv;
+		}
+		
+		@RequestMapping("mNoticeDetail.do")
+		public ModelAndView mNoticeDetail(ModelAndView mv, HttpServletRequest request) {
+			int bNo = Integer.parseInt(request.getParameter("bNo"));
+			Board b = bService.mNoticeDetail(bNo);
+			System.out.println("notice : " + b);
+			if(b != null) {
+				mv.addObject("b", b);
+				mv.setViewName("manager/manaNoticeDetailView");
+			}
+			else {
+				throw new BoardException("공지사항 상세보기에 실패했습니다.");
+			}
+			return mv;
+		}
+		
+		@RequestMapping("mNoticeUpdateView.do")
+		public ModelAndView mNoticeUpdateView(ModelAndView mv, Board b) {
+			mv.addObject("b", b);
+			System.out.println("noticUpdate : " + b);
+			mv.setViewName("manager/manaNoticeUpdateView");
+			return mv;
+		}
+		
+		@RequestMapping("mNoticeUpdate.do")
+		public String mNoticeUpdate(Board b) {
+			int result = bService.mNoticeUpdate(b);
+			return "redirect:mNoticeDetail.do?bNo=" + b.getbNo();
+		}
+		
+		@RequestMapping("mNoticeInsertView.do")
+		public String mNoticeInsertView(){
+			return "manager/manaNoticeInsertView";
+		}
+		
+		@RequestMapping("mNoticeInsert.do")
+		public String mNoticeInsert(HttpServletRequest request, Board b) {
+			System.out.println("insert : " + b);
+			int result = bService.mNoticeInsert(b);
+			return "redirect:mNoticeList.do";
+		}
+		
+		 @RequestMapping("mNoticedelete.do")
+		 public String mNoticedelete(HttpServletRequest request) {
+			 int bNo = Integer.parseInt(request.getParameter("bNo"));
+			 int result = bService.mNoticedelete(bNo);
+			 return "redirect:mNoticeList.do";
+		 }
+		 
+		 
+		 // 커뮤니티 메인페이지 top5
+		 @RequestMapping("comTopList.do")
+		 public void comTopList(HttpServletResponse response) throws IOException {
+
+				ArrayList<Board> list = bService.comTopList();
+				System.out.println(list);
+				for(Board b : list) {
+					b.setbTitle(URLEncoder.encode(b.getbTitle(), "utf-8"));
+					b.setbWriter(URLEncoder.encode(b.getbWriter(), "utf-8"));
+				}
+				
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				gson.toJson(list, response.getWriter());
+
+			}
+		 @RequestMapping("nanumTopList.do")
+		 public void nanumTopList(HttpServletResponse response) throws IOException {
+
+				ArrayList<Board> list = bService.nanumTopList();
+				System.out.println(list);
+				for(Board b : list) {
+					b.setbTitle(URLEncoder.encode(b.getbTitle(), "utf-8"));
+					b.setbWriter(URLEncoder.encode(b.getbWriter(), "utf-8"));
+				}
+				
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				gson.toJson(list, response.getWriter());
+
+			}
 
 	}
 
