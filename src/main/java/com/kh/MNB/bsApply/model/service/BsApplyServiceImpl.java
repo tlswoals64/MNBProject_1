@@ -39,4 +39,24 @@ public class BsApplyServiceImpl implements BsApplyService {
 		return bsaDAO.levelUpdate(b);
 	}
 	
+	@Override
+	public int memberBsapply(BSApply b) {
+		return bsaDAO.memberBsapply(b);
+	}
+	
+	@Override
+	public int checkBsa(Member m) {
+		return bsaDAO.checkBsa(m);
+	}
+	
+@Override
+	public BSApply bsaUpdateB(Member m) {
+		return bsaDAO.bsaUpdateB(m);
+	}
+	
+
+@Override
+public int userBsApplyUpdate(BSApply b) {
+	return bsaDAO.userBsApplyUpdate(b);
+}
 }

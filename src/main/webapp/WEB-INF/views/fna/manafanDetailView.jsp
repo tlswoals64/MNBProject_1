@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
@@ -122,13 +122,27 @@
     .menuUl{
     	width : 100%;
     }
-    
 	/***********************************************/
 	
 	/************************nav2****************************/
 	.navArea2{
 		width : 280px;
 		background : #0B4C5F;
+	}
+	
+	#deListB{
+		font-size : 27px;
+		font-weight : 900;
+		margin-left : 15px;
+		width : 1600px;
+		padding-top : 10px;
+		padding-bottom : 10px;
+		border-bottom : 3px solid black;
+	}
+	#amountUser{
+		font-size : 18px;
+		color : #01A9DB;
+		
 	}
 	
 	#boardMbar{
@@ -157,14 +171,30 @@
 	
 	/**************************content*************************/
 	.content{
-		margin-left : 430px;
+		margin-left : 400px;
 		height : 100vh;
-		padding-top : 30px;
 	}
 	
+	#faq_selectOption{
+		height : 30px;
+		width : 300px;
+	}
+	
+	
+	#fTitle{
+		width : 1077px;
+		height : 40px;
+		border : 2px solid rgb(248,248,248);
+	}
+	
+	input, textArea:focus{
+		outline : none;
+	}
 	.qnaTable{
+		margin-top : 50px;
+		margin-left : 50px;
 		border : 2px solid #01A9DB;
-		border-bottom : 2px solid white;
+
 		border-collapse: separate;
 		border-spacing: 0 10px;
 		padding-left : 10px;
@@ -200,9 +230,7 @@
 		
 	}
 	
-	#writeDate, #userId, #type{
-		width : 300px;
-	}
+
 	
 	#typeArea{
 		width : 70px;
@@ -246,24 +274,6 @@
 		margin-top : 20px;
 	}
 	
-	/**********************************************************/
-	/*********************페이징***********************/
-	.pagingArea button{
-		border-radius: 15px; 
-		background: #0B4C5F;
-		color : white;
-		font-weight : 15px;
-		
-	}
-	.pagingArea{
-		padding-top : 20px;
-		padding-bottom :20px;
-		text-align : center;
-		width : 700px;
-		margin-left : 120px;
-	}
-	/************************************************/
-	
 	/********************** 버튼 *****************************/
 	.btn{
 		display : inline-block;
@@ -284,14 +294,17 @@
 	}
 	
 	.btnArea{
-		width : 1200px;
-		margin-left : auto;
-		margin-right : auto;
+		margin-left : 500px;
 		margin-top : 15px;
 		padding-bottom : 15px;
 	}
 	/*******************************************************/
-	
+	#fTitle{
+		width : 1077px;
+		height : 40px;
+		border : 2px solid rgb(248,248,248);
+	}
+
 </style>
 <head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -358,41 +371,40 @@
 		</nav>	
 		
 		<div class="content">
-			<table class="qnaTable">
+			<div id="deListB">FAQ 게시판</div>
+			<form action="mFaqUpdateView.do" method="post">
+				<table class="qnaTable">
 				<tr class="qnaTr" id="firstArea">
 					<th class="qnaTh" id="typeArea">유형</th>
 					<td class="qnaTd" id="type">
 						<c:choose>
-							<c:when test="${p.pType ==1}">
-								          사이트 이용관련
-								    </c:when>
-							<c:when test="${p.pType ==2}">
-								        회원정보
-								    </c:when>
-							<c:when test="${p.pType ==3}">
-								        불건전 행위
-								    </c:when>
-							<c:when test="${p.pType ==4}">
-								        베이비시터 관련
-								    </c:when>
-							<c:otherwise>
-								        부모님 관련
-								    </c:otherwise>
-						</c:choose>
+                     <c:when test="${f.fType ==1}">
+                                  사이트 이용관련
+                            </c:when>
+                     <c:when test="${f.fType ==2}">
+                                회원정보
+                            </c:when>
+                     <c:when test="${f.fType ==3}">
+                                불건전 행위
+                            </c:when>
+                     <c:when test="${f.fType ==4}">
+                               기타
+                            </c:when>
+                    <c:when test="${f.fType ==5}">
+                                베이비시터 관련
+                            </c:when>
+                     <c:otherwise>
+                                부모님 관련
+                            </c:otherwise>
+                  </c:choose>
 					</td>
-					
-					<th class="qnaTh" id="userIdArea">작성자</th>
-					<td class="qnaTd" id="userId">${ p.bWriter }</td>
-					
-					<th class="qnaTh" id="writeDateArea">작성일</th>
-					<td class="qnaTd" id="writeDate">
-						${ p.b_CreateDate }
-					</td>
+					<input type="hidden" name="fNo" value="${ f.fNo }">
+					<input type="hidden" name="fType" value="${ f.fType }">
 				</tr>
 				
 				<tr class="qnaTr" id="titleArea">
 					<th class="qnaTh" colspan="1">제목</th>
-					<td class="qnaTd" colspan="5">${ p.bTitle }</td>
+					<td class="qnaTd" colspan="5"><input type="text" id="fTitle" name="fTitle" value="${ f.fTitle }" readonly></td>
 				</tr>
 				
 				<tr class="qnaTr" id="contentArea">
@@ -400,32 +412,23 @@
 						내용
 					</th>
 					<td class="qnaTd" colspan="5">
-						<div id="qnaContent">${ p.bContent }</div>
+						<textarea class="qnaRely" rows="30" name="fContent" id="pReContent" readonly>${ f.fContent }</textarea>
 					</td>
 				</tr>
 				
 			</table>
-			<form action="qnaReplyAdd.do" method="post">
-				<table class="repTable">
-					<tr class="repTr" id="replyArea">
-						<th class="repTh" colspan="1">답변</th>
-						<td class="repTd" colspan="5">
-							<input type="hidden" name="pNo" id="pNo" value="${ p.pNo }">
-							<textarea class="qnaRely" rows="17" name="pReContent" id="pReContent">${ p.pReContent }</textarea>
-						</td>
-					</tr>
-				</table>
+			
 				<div class="btnArea">
-					<button type="submit" class="btn" id="applyBtn">확인</button>
-					<div class="btn" id="cancleBtn" onclick="location.href='mQnaList.do'">취소</div>
+					<button type="submit" class="btn" id="applyBtn">수정</button>
+					<button type="button" class="btn" id="cancleBtn" onclick="mFaQdelete();">삭제</button>
+					<div class="btn" id="cancleBtn" onclick="location.href='mFaqList.do'">목록</div>
 				</div>
 		</form>
-		
+			
+	
 		</div>
 	</div>
 </body>
-
-
 <script>
     $(document).ready(function(){
         $(".menu>div").click(function(){
@@ -441,6 +444,15 @@
             
         });
     });
+</script>
+
+<script>
+	function mFaQdelete(){
+		var fNo = '${ f.fNo }';
+		if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			location.href="mFaQdelete.do?fNo=" + fNo;
+		}
+	}
 </script>
 
 </html>

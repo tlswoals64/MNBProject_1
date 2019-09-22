@@ -353,8 +353,8 @@
 	<div id="header">
 		<b>MnB(Mom And Bebe) 관리자 홈페이지</b>
 		<div class="buttonArea">
-			<button type="button" class="homBtn">home</button>
-			<button type="button" class="logOutBtn">로그아웃</button>
+			<button type="button" class="homBtn" onclick="location.href='managerMainHome.do'">home</button>
+			<button type="button" class="logOutBtn" onclick="location.href='logout.do'">로그아웃</button>
 		</div>
 	</div>
 	<div class="wrap">
@@ -390,6 +390,12 @@
 	       			 </li>
 			        <li class="nav2Menu">
 			        	<div id="boardQnA" onclick="location.href='mQnaList.do'">QnA게시판</div>
+			        </li>
+			         <li class="nav2Menu">
+			        	<div id="boardFaQ" onclick="location.href='mFaqList.do'">FAQ게시판</div>
+			        </li>
+			        <li class="nav2Menu">
+			        	<div id="boardPro" onclick="location.href='mNoticeList.do'">공지사항</div>
 			        </li>
 			    </ul>
 			</div>
@@ -488,7 +494,7 @@
 						</tr>
 						<tr class="userDetailTr">
 							<th class="userDetailTh">핸드폰번호</th>
-							<td class="userDetailTd"><input type="text" name="phone" value="${ m.phone }" style="width:300px;height:30px;"></td>
+							<td class="userDetailTd"><input type="text" name="phone" id="phone" value="${ m.phone }" style="width:300px;height:30px;"></td>
 							<th class="userDetailTh">이메일</th>
 							<td class="userDetailTd"><input type="text" name="email" value="${ m.email }" style="width:300px;height:30px;"></td>
 						</tr>
@@ -522,6 +528,20 @@
 	</div>
 </body>
 
+<script>
+
+	$("#saveBtn").on("click", function(){
+			var phone = $("#phone").val();
+			var phoneCheck = /^010-\d{3,4}-\d{4}$/;
+			
+			if(phoneCheck.test(phone) != true){
+		 		alert('핸드폰번호를 다시 입력해주세요!');
+		 	} 
+			else{
+				alert('정보수정이 완료되었습니다 :-)');
+			}
+	})
+</script>
 <script>
 
 //메모 리스트 ajax

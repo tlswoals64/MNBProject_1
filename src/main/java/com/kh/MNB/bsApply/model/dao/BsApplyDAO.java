@@ -38,4 +38,20 @@ public class BsApplyDAO {
 		int result = sqlSession.update("bsApplyMapper.levelMemberUpdate", b);
 		return sqlSession.update("bsApplyMapper.levelUpdate", b);
 	}
+
+	public int memberBsapply(BSApply b) {
+		return sqlSession.insert("bsApplyMapper.memberBsapply", b);
+	}
+
+	public int checkBsa(Member m) {
+		return sqlSession.selectOne("bsApplyMapper.checkBsa", m);
+	}
+
+	public BSApply bsaUpdateB(Member m) {
+		return sqlSession.selectOne("bsApplyMapper.bsaUpdateB", m);
+	}
+
+	public int userBsApplyUpdate(BSApply b) {
+		return sqlSession.update("bsApplyMapper.userBsApplyUpdate", b);
+	}
 }

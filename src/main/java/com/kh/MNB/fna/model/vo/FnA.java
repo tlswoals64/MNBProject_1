@@ -4,7 +4,7 @@ public class FnA {
 
 	private int fNo; // 질문번호
 	private String fTitle; // 제목
-	private int fType;// 질문분류 (1 : 사이트 이용관련/ 2 : 회원정보 / 3: 불건전 행위 / 4 : 베이비시터 관련 / 5 : 부모님 관련)
+	private int fType;// 질문분류 (1 : 사이트 이용관련/ 2 : 회원정보 / 3: 불건전 행위 / 4 : 기타 / 5 : 베이비시터관련 /6 : 부모님 관련)
 	private String fContent; // 내용
 	
 	public FnA() {

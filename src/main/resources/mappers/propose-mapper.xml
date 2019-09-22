@@ -14,7 +14,7 @@
 		from propose p
      		left outer join board b
      		on (p.pno = b.bno)
-     	where b.status = 'Y'
+     	where b.status = 'Y' and b.bType = 5
      	order by b.b_createdate
 	</select>
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <html>
@@ -122,13 +122,27 @@
     .menuUl{
     	width : 100%;
     }
-    
 	/***********************************************/
 	
 	/************************nav2****************************/
 	.navArea2{
 		width : 280px;
 		background : #0B4C5F;
+	}
+	
+	#deListB{
+		font-size : 27px;
+		font-weight : 900;
+		margin-left : 15px;
+		width : 1600px;
+		padding-top : 10px;
+		padding-bottom : 10px;
+		border-bottom : 3px solid black;
+	}
+	#amountUser{
+		font-size : 18px;
+		color : #01A9DB;
+		
 	}
 	
 	#boardMbar{
@@ -157,96 +171,83 @@
 	
 	/**************************content*************************/
 	.content{
-		margin-left : 430px;
+		margin-left : 400px;
 		height : 100vh;
-		padding-top : 30px;
 	}
 	
-	.qnaTable{
-		border : 2px solid #01A9DB;
-		border-bottom : 2px solid white;
-		border-collapse: separate;
-		border-spacing: 0 10px;
-		padding-left : 10px;
-		padding-right : 10px;
-		
-	}
-	.qnaTh{
-		text-align : center;
-		font-size : 18px;
-		height : 50px;
-		margin-top : 20px;
+	#deListB{
+		font-size : 27px;
+		font-weight : 900;
+		margin-left : 15px;
+		width : 1700px;
+		padding-top : 10px;
+		padding-bottom : 10px;
+		border-bottom : 3px solid black;
 	}
 	
-	.qnaTd{
+	.deListTr:hover{
+		background: rgb(248,248,248);
+		cursor : pointer;
+	}
+	.deListArea {
+		padding-left : 50px;
+		padding-top : 10px;
+	}
+	
+	.deListList {
+		border-top: 2px solid black;
+		margin-bottom: 20px;
+	}
+	
+	.deListTable {
+		margin-left: 10px;
+		border-bottom: 1px solid darkgray;
+		border-collapse: collapse;
+	}
+	
+	.deListTrTh>th {
+		padding: 10px;
+		height: 40px;
+		border-bottom: 1px solid black;
+		font-weight : 800;
+		font-size : 20px;
+		text-align: center;
+	}
+	
+	.deListTd {
+		padding: 10px;
+		height: 90px;
+		text-align: center;
+		border-bottom: 1px solid gray;
+	}
+	
+	#rNo{
+		width : 150px;
+	}
+	#rType{
+		width : 220px;
+	}
+	#bNo{
+		width : 200px;
+	}
+	#bTitle{
+		width : 500px;
+	}
+	#bWriter{
+		width : 150px;
+	}
+	#rMan{
+		width : 150px;
+	}
+	#rDate{
+		width : 150px;
+	}
+	#status{
+		width : 100px;
+	}
 
-		font-size : 17px;
-		padding-left : 10px;
-	}
-	
-	#firstArea{
-		background : #CEE3F6;
-	}
-	
-	#contentArea > td{
-		border-top : 2px solid rgb(220,220,220);
-	}
-	#contentArea > th{
-		border-top : 2px solid rgb(220,220,220);
-		
-	}
-	#replyArea{
-		background : rgb(248,248,248);
-		
-	}
-	
-	#writeDate, #userId, #type{
-		width : 300px;
-	}
-	
-	#typeArea{
-		width : 70px;
-		
-	}
-	
-	#userIdArea, #writeDateArea{
-		width : 80px;
-	}
-	
-	.qnaRely{
-		width : 1077px;
-		margin-top : 10px;
-		resize : none;
-		border : 2px solid rgb(248,248,248);
-		font-size : 17px;
-		text-aling : left;
-	}
-	#replyTd{
-		border-top : 2px solid white;
-	}
-	
-	#qnaContent{
-		width : 1020px;
-		height : 300px;
-		margin-top : 30px;
-		
-		
-	}
-	
-	.repTable{
-		border : 3px solid #01A9DB;
-		border-top : 3px solid white;
-		
-	}
-	.repTh{
-		text-align : center;
-		font-size : 18px;
-		height : 50px;
-		width : 70px;
-		margin-top : 20px;
-	}
-	
 	/**********************************************************/
+	
 	/*********************페이징***********************/
 	.pagingArea button{
 		border-radius: 15px; 
@@ -259,39 +260,23 @@
 		padding-top : 20px;
 		padding-bottom :20px;
 		text-align : center;
-		width : 700px;
-		margin-left : 120px;
+		width : 1000px;
+		margin-left : 100px;
 	}
 	/************************************************/
 	
-	/********************** 버튼 *****************************/
-	.btn{
-		display : inline-block;
-		height : 40px;
-		width : 100px;
+	#btnArea{
+		margin-top : 30px;
+		margin-left : 900px;
+		margin-bottom : 20px;
 	}
-	
-	#applyBtn{
-		border : 2px solid #CEE3F6;
-	    background : #CEE3F6;
-	    font-szie : 18px;
-	    font-weight: bold;
+	#updateBtn{
+		font-weight : bold;
+		width : 70px;
+		height : 30px;
+		background : rgb(240,240,240);
+		board : rgb(240,240,240);
 	}
-	
-	#cancleBtn{
-		border : 2px solid #CEE3F6;
-		
-	}
-	
-	.btnArea{
-		width : 1200px;
-		margin-left : auto;
-		margin-right : auto;
-		margin-top : 15px;
-		padding-bottom : 15px;
-	}
-	/*******************************************************/
-	
 </style>
 <head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -358,74 +343,81 @@
 		</nav>	
 		
 		<div class="content">
-			<table class="qnaTable">
-				<tr class="qnaTr" id="firstArea">
-					<th class="qnaTh" id="typeArea">유형</th>
-					<td class="qnaTd" id="type">
-						<c:choose>
-							<c:when test="${p.pType ==1}">
-								          사이트 이용관련
-								    </c:when>
-							<c:when test="${p.pType ==2}">
-								        회원정보
-								    </c:when>
-							<c:when test="${p.pType ==3}">
-								        불건전 행위
-								    </c:when>
-							<c:when test="${p.pType ==4}">
-								        베이비시터 관련
-								    </c:when>
-							<c:otherwise>
-								        부모님 관련
-								    </c:otherwise>
-						</c:choose>
-					</td>
-					
-					<th class="qnaTh" id="userIdArea">작성자</th>
-					<td class="qnaTd" id="userId">${ p.bWriter }</td>
-					
-					<th class="qnaTh" id="writeDateArea">작성일</th>
-					<td class="qnaTd" id="writeDate">
-						${ p.b_CreateDate }
-					</td>
-				</tr>
-				
-				<tr class="qnaTr" id="titleArea">
-					<th class="qnaTh" colspan="1">제목</th>
-					<td class="qnaTd" colspan="5">${ p.bTitle }</td>
-				</tr>
-				
-				<tr class="qnaTr" id="contentArea">
-					<th class="qnaTh" colspan="1">
-						내용
-					</th>
-					<td class="qnaTd" colspan="5">
-						<div id="qnaContent">${ p.bContent }</div>
-					</td>
-				</tr>
-				
-			</table>
-			<form action="qnaReplyAdd.do" method="post">
-				<table class="repTable">
-					<tr class="repTr" id="replyArea">
-						<th class="repTh" colspan="1">답변</th>
-						<td class="repTd" colspan="5">
-							<input type="hidden" name="pNo" id="pNo" value="${ p.pNo }">
-							<textarea class="qnaRely" rows="17" name="pReContent" id="pReContent">${ p.pReContent }</textarea>
-						</td>
-					</tr>
-				</table>
-				<div class="btnArea">
-					<button type="submit" class="btn" id="applyBtn">확인</button>
-					<div class="btn" id="cancleBtn" onclick="location.href='mQnaList.do'">취소</div>
+			<div id="deListB">공지사항 게시판<b id="amountUser">총  공지사항 수 : ${ pi.listCount }</b></div>
+			<div class="deListArea">
+				<div class="deList">
+					<table class="deListTabe">
+						<tr class="deListTrTh">
+							<th>공지사항번호</th>
+							<th>공지사항 제목</th>
+							<th>작성자</th>
+							<th>조회수</th>
+							<th>작성 날짜</th>
+						</tr>
+						<c:forEach var="b" items="${ list }">
+							<tr class="deListTr" onclick="goNoticeDetail(this);">
+								<td class="deListTd" id="bNo">${ b.bNo }</td>
+								<td class="deListTd" id="bTitle">${ b.bTitle }</td>
+								<td class="deListTd" id="bWriter">${ b.bWriter }</td>
+								<td class="deListTd" id="bCount">${b.bCount }</td>
+								<td class="deListTd" id="rDate">${ b.b_CreateDate }</td>
+							</tr>
+							<script>
+								function goNoticeDetail(t){
+									var bNo = $(t).children("#bNo").text();
+									location.href = 'mNoticeDetail.do?bNo=' + bNo;
+								}
+							</script>
+						</c:forEach>
+								
+					</table>
 				</div>
-		</form>
-		
+			</div>
+			<div id="btnArea"><button id="updateBtn" onclick="location.href='mNoticeInsertView.do'">글쓰기</button></div>
+			<!-- paging 부분 -->
+			<div class="pagingArea">
+         
+	            <!-- [이전] -->
+	            <c:if test="${ pi.currentPage <= 1 }">
+	               [이전] &nbsp;
+	            </c:if>
+	            <c:if test="${ pi.currentPage > 1 }">
+	               <c:url var="before" value="mNoticeList.do">
+	                  <c:param name="page" value="${ pi.currentPage - 1 }"/>
+	               </c:url>
+	               <a href="${ before }">[이전]</a> &nbsp;
+	            </c:if>
+	            
+	            <!-- 페이지 -->
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <c:if test="${ p eq currentPage }">
+	                  <font color="red" size="4"><b>[${ p }]</b></font>
+	               </c:if>
+	               
+	               <c:if test="${ p ne currentPage }">
+	                  <c:url var="pagination" value="mNoticeList.do">
+	                     <c:param name="page" value="${ p }"/>
+	                     <!-- blist.do?page=${p}값   -->
+	                  </c:url>
+	                  <a href="${ pagination }">${ p }</a> &nbsp;
+	               </c:if>
+	            </c:forEach>
+	            
+	            <!-- [다음] -->
+	            <c:if test="${ pi.currentPage >= pi.maxPage }">
+	               [다음]
+	            </c:if>
+	            <c:if test="${ pi.currentPage < pi.maxPage }">
+	               <c:url var="after" value="mNoticeList.do">
+	                  <c:param name="page" value="${ pi.currentPage + 1 }"/>
+	               </c:url> 
+	               <a href="${ after }">[다음]</a>
+            	</c:if>
+					<!-- 맨 끝으로 -->
+			</div>
 		</div>
 	</div>
 </body>
-
-
 <script>
     $(document).ready(function(){
         $(".menu>div").click(function(){
