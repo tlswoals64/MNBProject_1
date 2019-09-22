@@ -187,6 +187,10 @@ td {
 	margin: 0;
 }
 
+.time{
+	display : none;
+}
+
 .timeSearch>* {
 	width: 33%;
 }
@@ -220,6 +224,10 @@ td {
 	width: 100%;
 }
 
+.timeBtnCheck{
+	background-color: pink;
+}
+
 ._1-3i7 {
 	border-radius: 100px;
 	padding: 10px 0;
@@ -242,6 +250,7 @@ td {
     color: #434343;
     background-color: #ff4500;
 } */
+
 .searchBox {
 	border: 1px solid #d3d3d3;
 }
@@ -468,21 +477,18 @@ td {
 							<strong>시간대</strong>
 						</div>
 						<div class="timeBox timeSearch">
-							<button tabindex="0" type="button" class = "timeBtn">
-								<div>
-									<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">07 - 12시</span>
-								</div>
-							</button>
-							<button tabindex="0" type="button" class="timeBtn">
-								<div>
-									<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">12 - 18시</span>
-								</div>
-							</button>
-							<button tabindex="0" type="button" class = "timeBtn">
-								<div>
-									<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">18 - 22시</span>
-								</div>
-							</button>
+							<div tabindex="0" class = "timeBtn" onclick = "timeCheck(this)">
+								<input type = "radio" id = "time1" class = "time" name = "time" value = "7/8/9/10/11/12">
+								<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">07 - 12시</span>
+							</div>
+							<div tabindex="0" class="timeBtn" onclick = "timeCheck(this)">
+								<input type = "radio" id = "time2" class = "time" name = "time" value = "12/13/14/15/16/17/18">
+								<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">12 - 18시</span>
+							</div>
+							<div tabindex="0" class = "timeBtn" onclick = "timeCheck(this)">
+								<input type = "radio" id = "time3" class = "time" name = "time" value = "18/19/20/21/22">
+								<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">18 - 22시</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -647,8 +653,7 @@ td {
 			</div>
 			<div id="map" style="height: 100%;"></div>
 		</div>
-		<script
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95916381578ec4a670a4e011225284ac"></script>
+		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95916381578ec4a670a4e011225284ac"></script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
@@ -743,5 +748,18 @@ td {
 	<footer style="margin-top: 10%;">
 		<jsp:include page="../../../common/footer.jsp"></jsp:include>
 	</footer>
+	
+	<script>
+		function timeCheck(value){
+			var Check = $(value).children('.time').is(':checked');
+			if(Check){
+				$(value).children('.time').prop('checked', false);
+				$(value).toggleClass(" timeBtnCheck");
+			} else{
+				$(value).children('.time').prop('checked', true);
+				$(value).toggleClass(" timeBtnCheck");
+			}
+		}
+	</script>
 </body>
 </html>  

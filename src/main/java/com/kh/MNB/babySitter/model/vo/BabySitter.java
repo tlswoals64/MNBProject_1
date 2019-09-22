@@ -5,7 +5,7 @@ public class BabySitter {
 
 	   private String bcCarrer; // 경력
 	   private String bcSalary; //급여
-     private String bcDay; // 요일
+	   private String bcDay; // 요일
 	   private String bcTime; //시간
 	   private String bcActivity; //가능 활동
 	   private String req; //요청사항
@@ -139,13 +139,7 @@ public class BabySitter {
 		this.bcDay = bcDay;
 	}
 
-	public String getbAge() {
-		return bAge;
-	}
 
-	public void setbAge(String bAge) {
-		this.bAge = bAge;
-	}
 
 	@Override
 	public String toString() {
