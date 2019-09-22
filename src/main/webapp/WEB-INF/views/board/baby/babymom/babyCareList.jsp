@@ -315,11 +315,15 @@ padding : 5px;
 		</div>
 
 		<div style="width: 100%; height: 800px; display: inline-block; margin: 3% 15% 0 15%;">
-			<div id="mojibList">
-			
-			<form id="mdetail" action="momDetail.do" method="post">						
-			<c:forEach var="bc" items="${bclist}">
-				<div class = "list" id="detail" style="cursor:pointer;">							
+			<div id="mojibList">		
+			<c:forEach var="bc" items="${ bclist }">
+					<c:if test="${ !empty loginUser }">
+						<c:url var="momDetail" value="momDetail.do">
+							<c:param name="bNo" value="${ bc.bNo }" />
+							<c:param name="page" value="${ pi.currentPage }" />
+						</c:url>
+						<a href=${ momDetail }>
+				<div class = "list" id="detail" style="cursor:pointer;">											
 					<table>
 						<colgroup>
 							<col width="30%">
@@ -340,8 +344,8 @@ padding : 5px;
 							<td><span>${bc.address }</span>&nbsp;|&nbsp;<span>${bc.bWriter}</span>&nbsp;|&nbsp;</td>
 						</tr>
 						<tr>
-							<th>0명 지원</th>
-							<td><span>시급10000원</span>&nbsp;/&nbsp;</td>
+							<th>희망시급</th>
+							<td><span>${bc.bcSalary }</span>원&nbsp;&nbsp;</td>
 						</tr>
 					</table>
 					<hr>
@@ -352,20 +356,53 @@ padding : 5px;
 						</colgroup>
 						<tr>
 							<th>시간</th>
-							<td><span>${bc.time}</span></td>
+							<td><span>${bc.bcTime}</span></td>
+						</tr>
+					</table>					
+				</div>
+				</a>
+				</c:if>
+				<c:if test="${ empty loginUser }">
+				<div class = "list" id="detail" style="cursor:pointer;">											
+					<table>
+						<colgroup>
+							<col width="30%">
+							<col width="70%">
+						</colgroup>
+						<tr>
+							<th rowspan="3"><img id="searchImg" width="70px"
+								height="70px" src="resources/images/board/babymom/${bc.changeName }"></th>
+							<td><span>${bc.bCount}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>등록 시간</span>
+							<input type="hidden" id="bNo" name="bNo" value="${bc.bNo}">
+							<input type="hidden" id="bWriter" name="bWriter" value="${bc.bWriter}">
+							</td>
+						</tr>
+						<tr>
+							<td>${bc.bTitle }</td>
+						</tr>
+						<tr>
+							<td><span>${bc.address }</span>&nbsp;|&nbsp;<span>${bc.bWriter}</span>&nbsp;|&nbsp;</td>
+						</tr>
+						<tr>
+							<th>희망시급</th>
+							<td><span>${bc.bcSalary }</span>원&nbsp;&nbsp;</td>
 						</tr>
 					</table>
-					
-				</div>	
+					<hr>
+					<table>
+						<colgroup>
+							<col width="30%">
+							<col width="70%">
+						</colgroup>
+						<tr>
+							<th>시간</th>
+							<td><span>${bc.bcTime}</span></td>
+						</tr>
+					</table>					
+				</div>
+				</c:if>
 				</c:forEach>
-				</form>	
-				<script>
-				$('#detail').on("click",function(){
-					$('#mdetail').submit();
-				});
-				</script>			
-				
-				
+	
 				<table>
 				<tr>
 			<td colspan="6" align="right" id="buttonTab">
@@ -375,6 +412,9 @@ padding : 5px;
 					<button onclick="location.href='detailMemberView.do'">내정보보기</button>
 					<button onclick="location.href='pwdUpdateView.do'">비밀번호변경</button>
 					<button onclick="location.href='myboardList.do'">내가 쓴 글목록</button>
+					<button onclick="location.href='reViewList.do'">리뷰리스트</button>
+					<button onclick="location.href='reViewDeView.do'">리뷰디테일</button>
+					<button onclick="location.href='reViewInView.do'">리뷰 글쓰기</button>
 				</c:if>
 			</td>
 		</tr>
@@ -388,7 +428,7 @@ padding : 5px;
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="blist.do">
+					<c:url var="before" value="babymom.do">
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
@@ -397,11 +437,11 @@ padding : 5px;
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:if test="${ p eq currentPage }">
-						<font color="red" size="4"><b>[${ p }]</b></font>
+						<font color="red" size="5"><b>[${ p }]</b></font>
 					</c:if>
 					
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="blist.do">
+						<c:url var="pagination" value="babymom.do">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -413,7 +453,7 @@ padding : 5px;
 					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="blist.do">
+					<c:url var="after" value="babymom.do">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>

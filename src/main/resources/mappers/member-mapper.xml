@@ -54,6 +54,18 @@
 	userPwd = #{userPwd}
 	where userId=#{userId}
 	</update>
+	<select id="pwdMemberSearch" parameterType="Member" resultType="string">
+	select userId
+	from member
+	where userId=#{userId} and userName = #{userName} and To_date(birth,'RR/MM/DD')=#{birth}  and email = #{email} and status='Y'
+	
+	</select>
+	<!-- 비밀번호 찾기 후  변경 -->
+	<update id="pwdcUpdate" parameterType="Member">
+	update Member set 
+	userPwd = #{userPwd}
+	where userId=#{userId}
+	</update>
 	
 	<!-- 내가 쓴 글 게시판 페이징에 사용 -->
 	<select id="getmyListCount" parameterType="string" resultType="_int">
@@ -68,7 +80,12 @@
 		where status ='Y' and bWriter=#{bWriter}
 		order by BNO desc
 	</select>
-	
+	<!-- 내가 쓴 글 디테일  -->
+	<select id="boardType" resultType="Board">
+		select *
+		from board
+		where bNo= ${bNo}
+	</select>
 	<!-- 관리자 회원 리스트 받아올때 페이징에 사용 -->
 	<select id="getListCount" resultType="_int">
 		select count(*)
@@ -122,10 +139,11 @@
 	</insert>
 	
 	<select id="nickCheck" parameterType="string" resultType="_int">
-		select count(*)
-		from member
-		where nickname = #{nickName}
-	</select>
+      select count(*)
+      from member
+      where nickname = #{nickName}
+   </select>
+	
   	
   	
   	<!-- 마이페이지들어갈때 bsapply했는지 확인유무용 -->

@@ -56,12 +56,9 @@ public class BabySitterDAO {
 		return sqlSession.insert("babySitterMapper.insertBcMojib", bs);
 	}
 
-	public Momboard selectDetail(Board board) {
-		return sqlSession.selectOne("babySitterMapper.selectDetail", board);
+	public Momboard selectDetail(int bNo) {
+		return sqlSession.selectOne("babySitterMapper.selectDetail", bNo);
 	}
-	
-	
-
 
 	public int insertSuppotBoard(Board board) {
 		return sqlSession.insert("babySitterMapper.insertSuppotBoard", board);
@@ -103,5 +100,38 @@ public class BabySitterDAO {
 		return sqlSession.insert("babySitterMapper.insertSuppotReply", r);
 	}
 
+	public void addMomReadCount(int bNo) {
+		sqlSession.update("babySitterMapper.addMomReadCount", bNo);
+		
+	}
+
+	public Momboard momboardUpdateForm(int bNo) {
+		return sqlSession.selectOne("babySitterMapper.momboardUpdateForm", bNo);
+	}
+
+	public int upDateMomBoard(Board board) {
+		return sqlSession.update("babySitterMapper.upDateMomBoard", board);
+		
+	}
+
+	public int upDateMomAttachment(Attachment attachment) {
+		return sqlSession.update("babySitterMapper.upDateMomAttachment", attachment);
+	}
+
+	public int upDateBcMojib(BabySitter babySitter) {
+		return sqlSession.update("babySitterMapper.upDateBcMojib", babySitter);
+	}
+
+
+	public int insertMomReply(Reply r) {
+		return sqlSession.insert("babySitterMapper.selectMomReplyList", r);
+	}
+
+	public ArrayList<Reply> selectMomReplyList(int bNo) {
+		
+		return (ArrayList)sqlSession.selectList("babySitterMapper.insertMomReply", bNo);
+	}
+
+	
 	
 }

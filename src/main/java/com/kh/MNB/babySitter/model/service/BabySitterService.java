@@ -29,8 +29,7 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 
 	int getMomListCount();
 
-
-	Momboard selectDetail(Board board);
+	Momboard selectDetail(int bNo);
 
 	int insertSuppotBoard(Board board);
 
@@ -51,6 +50,21 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 	ArrayList<Reply> selectSuppotReplyList(int bNo);
 
 	int insertSuppotReply(Reply r);
+
+	void addMomReadCount(int bNo);
+
+	Momboard momboardUpdateForm(int bNo);
+
+	int upDateMomBoard(Board board);
+
+	int upDateMomAttachment(Attachment attachment);
+
+	int upDateBcMojib(BabySitter babySitter);
+
+	ArrayList<Reply> selectMomReplyList(int bNo);
+
+	int insertMomReply(Reply r);
+
 
 	
 }

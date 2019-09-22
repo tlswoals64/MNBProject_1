@@ -34,6 +34,17 @@
 	border-radius: 12px;
 }
 
+
+#emailcheck  {
+	width: 110px;
+	height: 35px;
+	margin: auto;
+	font-size: 14px;
+	color: white;
+	text-align: center;
+	background: #9abf7f;
+	border-radius: 12px;
+}
 	.id,#nametext,#emailtext,#birthday, #cNum{
 		width:310px;
 		height:30px;

@@ -137,6 +137,62 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public Board boardType(int bNo) {
+		return mDAO.boardType(bNo);
+		
+	}
+
+	@Override
+	public boolean checkSend(String subject, String string, String string2, String email) {
+		MimeMessage message = mailSender.createMimeMessage();
+
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setSubject(subject);
+			helper.setText(string);
+			helper.setFrom(string2);
+			helper.setTo(email);
+
+			mailSender.send(message);
+			return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean pwdSend(String subject, String string, String string2, String email) {
+		MimeMessage message = mailSender.createMimeMessage();
+
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setSubject(subject);
+			helper.setText(string);
+			helper.setFrom(string2);
+			helper.setTo(email);
+
+			mailSender.send(message);
+			return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int pwdcUpdate(Member m) {
+		
+		return mDAO.pwdcUpdate(m);
+	}
+
+	@Override
+	public String pwdMemberSearch(Member m) {
+		return mDAO.pwdMemberSearch(m);
+	}
+
 	public BSApply myPageBsaCheck(Member m) {
 		return mDAO.myPageBsaCheck(m);
 	}

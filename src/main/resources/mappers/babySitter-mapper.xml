@@ -34,11 +34,52 @@
 		insert into BC_MOJIB
 		values(seq_bno.currval, #{bcActivity}, #{req}, #{bcSalary}, #{bcTime}, #{address}, #{personnel}, #{bAge}, #{bGender})
 	</insert>
+	
 	<select id="selectDetail" parameterType="board" resultType="Momboard">
 		select *
 		from suppotMom_list
-		where bNo=#{bNo} and status='Y' and bWriter=#{bWriter}
+		where bNo=#{bNo} and status='Y'
 	</select>
+	
+	<select id="momboardUpdateForm" resultType="Momboard">
+		select*
+		from suppotMom_list
+		where bNo=#{bNo} and status='Y'	
+	</select>
+	
+	<update id="upDateMomBoard" parameterType="board">
+	update board
+	set bTitle = #{bTitle}, bContent = #{bContent}, b_modifydate = sysdate
+	</update>
+	<update id="upDateMomAttachment" parameterType="Attachment">
+		update board_picture
+		set originname = #{originName}, changename = #{changeName}, upload_date = sysdate
+		where bNo = #{bNo}
+	</update>
+	<update id="upDateBcMojib" parameterType="BabySitter">
+		update bc_Mojib
+		set bcActivity = #{bcActivity}, req= #{req}, bcsalary = #{bcSalary}, bcTime= #{bcTime}, address=#{address}, personnel=#{personnel}, bAge=#{bAge}, bgender=#{bGender}
+		where bNo = #{bNo}
+	</update>
+	
+	<update id="addMomReadCount">
+		update board
+		set bcount = bcount + 1
+		where bno = #{bNo}
+	</update>
+	<select id="selectMomReplyList" parameterType="_int" resultType="Reply">
+		select *
+		from reply
+		where bno = #{bNo}
+		order by rnum desc
+	</select>
+	
+	<insert id="insertMomReply" parameterType="Reply">
+		insert into reply
+		values(seq_rnum.nextval, #{nContent}, sysdate, default, #{rWriter}, #{bNo})
+	</insert>
+	
+	
 
 	<insert id="insertSuppotBoard">
 		insert into board

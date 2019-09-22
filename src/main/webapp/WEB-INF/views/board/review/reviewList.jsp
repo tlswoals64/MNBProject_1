@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +34,27 @@ textarea{line-height:18px;font-size:12px;color:inherit}
 .board_list tbody tr td a{color:#777}
 .board_list tbody .notice td{background:#f6f6f6}
 .board_list tbody tr:hover td{background:#fafafa}
+table{
+	width:100%;
+	border:0;
+	border-spacing:0;
+	padding:0px;
+	
+}
+.wrap{
+	width:80%;
+	min-height:60vh;
+	display:inline-block;
+	float:rigth;
+}
 
 </style>
+<jsp:include page="../../common/header.jsp"/>
 </head>
-<body>
 
+<body>
+<div style="height:50px;"></div>
+<div style="width:100%; text-align:center;">
 <div class="wrap">
 
 	<ul class="board_search">
@@ -48,7 +64,7 @@ textarea{line-height:18px;font-size:12px;color:inherit}
 		<li><input type="text" title="검색어를 입력하세요" /><input type="submit" value="검색" /></li>
 	</ul>
 
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="공지사항을 나타낸 표" class="board_list">
+	<table summary="공지사항을 나타낸 표" class="board_list">
 		<caption>공지사항</caption>
 		<colgroup>
 			<col style="width:8%" />
@@ -65,19 +81,76 @@ textarea{line-height:18px;font-size:12px;color:inherit}
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="notice">
-				<td>공지</td>
-				<td class="tLeft"><a href="#">아뜨랑스 카카오톡 오픈 등록추가</a></td>
-				<td>attrangs</td>
-				<td>2015-09-03</td>
-			</tr>
+		<c:if test="${!empty rvlist }">	
+		<c:forEach var="b" items="${ rvlist }">
+		<tr class="notice">
+			<td align="center">${ b.bNo }</td>
 			
-		</tbody>
-	</table>
+			<td align="left" onclick =>
+				<c:if test="${ !empty loginUser }">
+					<c:url var="detailReview" value="detailReview.do">
+						<c:param name="bNo" value="${ b.bNo }"/>
+						<c:param name="page" value="${ pi.currentPage }"/>
+					</c:url>
+					<a href="${ detailReview }">${ b.bTitle }</a>
+				</c:if>
+				<c:if test="${ empty loginUser }">
+					${ b.bTitle }		
+				</c:if>
+			</td>			
+			<td align="center">${ b.bWriter }</td>
+			<td align="center">${ b.b_CreateDate }</td>		
+		</tr>
+		</c:forEach>
+		</c:if>
 	
+		</tbody>
+		<!-- 페이징 처리 -->
+		<tr align="center" height="20" id="buttonTab">
+			<td colspan="6">
+			
+				<!-- [이전] -->
+				<c:if test="${ pi.currentPage <= 1 }">
+					[이전] &nbsp;
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="before" value="reViewList.do">
+						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					</c:url>
+					<a href="${ before }">[이전]</a> &nbsp;
+				</c:if>
+				
+				<!-- 페이지 -->
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq currentPage }">
+						<font color="red" size="4"><b>[${ p }]</b></font>
+					</c:if>
+					
+					<c:if test="${ p ne currentPage }">
+						<c:url var="pagination" value="reViewList.do">
+							<c:param name="page" value="${ p }"/>
+						</c:url>
+						<a href="${ pagination }">${ p }</a> &nbsp;
+					</c:if>
+				</c:forEach>
+				
+				<!-- [다음] -->
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					[다음]
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="reViewList.do">
+						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+					</c:url> 
+					<a href="${ after }">[다음]</a>
+				</c:if>
+			</td>
+		</tr>
+	</table>
+	<button onclick="location.href='reViewInView.do';">글쓰기</button>
+</div>
 </div>
 
-
 </body>
-
+<jsp:include page="../../common/footer.jsp"/>
 </html>

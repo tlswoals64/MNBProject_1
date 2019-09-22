@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,13 @@
 
 .menu {
 	font-size: 13px;
-	color: pink;
+	color: block;
+}
+.inputbtn {
+   width: 200px;
+   height: 40px;
+   border-radius: 15px;
+   cursor: pointer;
 }
 
 .la {
@@ -69,6 +76,7 @@
 <jsp:include page="../../../common/header.jsp"/>
 </head>
 <body>
+	<div style="height:40px"></div>
 	<div style="margin:auto;">
 	<div class="UNS">
 	<table>
@@ -77,9 +85,7 @@
 	<h2>${momboard.bTitle}</h2>
 	</td>
 	<td>	
-	<button onclick="" id="reportbtn">
-	
-	<img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
+	<button onclick="" id="reportbtn"><img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
 	</td>
 	</tr>
 	</table>
@@ -90,7 +96,7 @@
 				<img width="500px" height="420px" src="resources/images/board/babymom/${momboard.changeName }">
 			</div>
 		</div>
-		<div class="_2T0ZR">
+		<div class="_2T0ZR" style="width:100%;">
 			<div>
 				<div class="_1yvNS" style="margin-bottom: 12px;">
 					<div class="_3Ub_z" style="margin-right: 15px;">
@@ -113,7 +119,7 @@
 				</div>
 				<div class="_1yvNS">
 					<div class="_1qvJA">
-						희망시급: 
+						희망시급: ${momboard.bcSalary}
 					</div>
 					<br>
 				</div>
@@ -129,23 +135,7 @@
 					</div>
 					<br><br>
 				</div>	
-				<div class="_1yvNS"	style="margin-bottom: 0px; justify-content: space-between;">
-					<div style="flex-basis: 14%;">
-						<button tabindex="0" type="button"
-							style="border: 1px solid rgb(236, 238, 239); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 60px; line-height: 36px; min-width: 100%; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgb(255, 255, 255); text-align: center;">
-							<div>
-								<div style="height: 60px;">
-									<div style="height: 27px;">
-										<img
-											src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/p-details-5-like-off.png">
-									</div>
-									<div
-										style="color: rgb(91, 91, 91); font-size: 0.75rem; font-weight: 500;">132</div>
-								</div>
-							</div>
-						</button>
-					</div>
-				</div>
+			
 			</div>
 		</div>
 	</div>
@@ -157,7 +147,7 @@
 	</tr>
 	<tr>
 	<td style="text-align:left">
-	<textarea name="content" cols="110" rows="10" style="text-align:left" readonly>
+	<textarea name="content" cols="110" rows="10" style="text-align:left; resize:none;" readonly>
 	${momboard.bContent}	
 	</textarea>
 	</td>
@@ -169,16 +159,52 @@
 	<div style="margin:auto">
 		<table>
 		<tr>
-		<th style="background-color:#f1f1f1;">아이 성별</th>
+		<th style="background-color:#f1f1f1;" colspan="3">아이 성별</th>		
 		</tr>
 		<tr>
-		<td style="text-align:center;">
-        <div class="ageicon"><br>
-        	
+		<c:set var="bGender" value="${ fn:split(momboard.bGender, ',') }"/>	
+		<td style="text-align:center;">		
+        <div class="icon"><br>
+        <c:choose>      
+        <c:when test="${bGender[0] eq '남자'}">
             <img src="resources/images/board/babymom/boy.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-        </div>       
-        </td>
-        
+    		<p class="menu">남자</p>
+    	</c:when>
+    	<c:when test="${bGender[0] eq '여자'}">
+    		 <img src="resources/images/board/babymom/girl.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">여자</p>
+    	</c:when>
+        </c:choose> 
+        </div>
+        <c:if test="${momboard.personnel >1 }">
+        <div class="icon"><br>
+        <c:choose>      
+        <c:when test="${bGender[1] eq '남자'}">
+            <img src="resources/images/board/babymom/boy.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">남자</p>
+    	</c:when>
+    	<c:when test="${bGender[1] eq '여자'}">
+    		 <img src="resources/images/board/babymom/girl.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">여자</p>
+    	</c:when>
+        </c:choose> 
+        </div>
+        </c:if>
+         <c:if test="${momboard.personnel >2 }">
+         <div class="icon"><br>
+        <c:choose>      
+        <c:when test="${bGender[2] eq '남자'}">
+            <img src="resources/images/board/babymom/boy.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">남자</p>
+    	</c:when>
+    	<c:when test="${bGender[2] eq '여자'}">
+    		 <img src="resources/images/board/babymom/girl.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">여자</p>
+    	</c:when>
+        </c:choose> 
+        </div>
+        </c:if>                
+      </td>
         </tr>
         </table>
         </div>
@@ -189,20 +215,63 @@
 		<tr>
 		<th style="background-color:#f1f1f1;">아이 나이</th>
 		</tr>
-		<tr><td style="text-align:center;">
+		<tr>
+		<c:set var="bAge" value="${ fn:split(momboard.bAge, ',') }"/>
+	
+		<td style="text-align:center;">		
         <div class="icon"><br>
-            <img src="resources/images/board/babymom/milk-bottle.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+        <c:choose>      
+        <c:when test="${bAge[0] eq '신생아'}">
+            <img src="resources/images/board/babymom/pacifier2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
     		<p class="menu">신생아(0~6개월)</p>
-        </div>
-        <div class="icon"><br>
-            <img src="resources/images/board/babymom/pacifier.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    	</c:when>
+    	<c:when test="${bAge[0] eq '영아'}">
+    		 <img src="resources/images/board/babymom/milk-bottle2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
     		<p class="menu">영아(7~36개월)</p>
-        </div>
-        <div class="icon"><br>
-            <img src="resources/images/board/babymom/maternity.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    	</c:when>
+    	<c:when test="${bAge[0] eq '유아'}">
+    		<img src="resources/images/board/babymom/maternity2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
     		<p class="menu">유아(4~6살)</p>
-        </div>       
-        </td></tr>
+    	</c:when>
+        </c:choose> 
+        </div>
+        <c:if test="${momboard.personnel >1 }">
+         <div class="icon"><br>
+        <c:choose>
+        <c:when test="${bAge[1] eq '신생아'}">
+            <img src="resources/images/board/babymom/pacifier2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">신생아(0~6개월)</p>
+    	</c:when>
+    	<c:when test="${bAge[1] eq '영아'}">
+    		 <img src="resources/images/board/babymom/milk-bottle2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">영아(7~36개월)</p>
+    	</c:when>
+    	<c:when test="${bAge[1] eq '유아'}">
+    		<img src="resources/images/board/babymom/maternity2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">유아(4~6살)</p>
+    	</c:when>
+        </c:choose> 
+        </div>
+        </c:if>
+         <c:if test="${momboard.personnel >2 }">
+         <div class="icon"><br>
+        <c:choose>
+        <c:when test="${bAge[2] eq '신생아'}">
+            <img src="resources/images/board/babymom/pacifier2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">신생아(0~6개월)</p>
+    	</c:when>
+    	<c:when test="${bAge[2] eq '영아'}">
+    		 <img src="resources/images/board/babymom/milk-bottle2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">영아(7~36개월)</p>
+    	</c:when>
+    	<c:when test="${bAge[2] eq '유아'}">
+    		<img src="resources/images/board/babymom/maternity2.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
+    		<p class="menu">유아(4~6살)</p>
+    	</c:when>
+        </c:choose> 
+        </div>
+        </c:if>                
+      </td></tr>
         </table>
         </div>
 	</div>
@@ -216,45 +285,187 @@
 	<td style="text-align:center;">
 				<div>
                   <div class="icon"><br>
-                 <img src="resources/images/board/babymom/puzzle.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">실내놀이</p>
-                  </div>
-                  <div class="icon"><br>
-                  <img src="resources/images/board/babymom/gohome.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">등하원돕기</p>
-                  </div>
-                  <div class="icon"><br>
-                 <img src="resources/images/board/babymom/book.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">책읽기</p>
-                  </div>       
-                  <br><br>        
-                  <div class="icon"><br>
-                  <img src="resources/images/board/babymom/butterfly.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">야외활동</p>
-                  </div>
-                  <div class="icon"><br>
-                 <img src="resources/images/board/babymom/hangle.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">한글놀이</p>
-                  </div>
-                  <div class="icon"><br>
-                  <img src="resources/images/board/babymom/english.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">영어놀이</p>       
-                  </div>
-                  <br><br>
-                   <div class="icon"><br>
-                  <img src="resources/images/board/babymom/study.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">학습지도</p>
-                  </div>
-                  <div class="icon"><br>
-                  <img src="resources/images/board/babymom/soccer.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">체육놀이</p>
-                  </div>
-                  <div class="icon"><br>
-                  <img src="resources/images/board/babymom/baby-feeding.png" style="width:100px; height:100px; border: 1px solide pink;"><br>
-                  <p class="menu">밥챙겨주기</p>        
-                  </div>
-                 </div>
-		</td>
+                              <c:set var="active" value="${ fn:split(momboard.bcActivity, ',') }"/>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '실내놀이'}">
+                                    <img src="resources/images/board/babymom/puzzle2.png"
+                                       style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '실내놀이'}">
+                                    <img src="resources/images/board/babymom/puzzle2.png"
+                                       style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '실내놀이'}">
+                                    <img src="resources/images/board/babymom/puzzle2.png"
+                                       style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/puzzle.png"
+                                       style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">실내놀이</p>
+                        </div>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '등하원돕기'}">
+                                    <img src="resources/images/board/babymom/gohome2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '등하원돕기'}">
+                                    <img src="resources/images/board/babymom/gohome2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '등하원돕기'}">
+                                    <img src="resources/images/board/babymom/gohome2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/gohome.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">등하원돕기</p>
+                        </div>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '책읽기'}">
+                                    <img src="resources/images/board/babymom/book2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '책읽기'}">
+                                    <img src="resources/images/board/babymom/book2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '책읽기'}">
+                                    <img src="resources/images/board/babymom/book2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/book.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">책읽기</p>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '야외활동'}">
+                                    <img src="resources/images/board/babymom/butterfly2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '야외활동'}">
+                                    <img src="resources/images/board/babymom/butterfly2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '야외활동'}">
+                                    <img src="resources/images/board/babymom/butterfly2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/butterfly.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">야외활동</p>
+                        </div>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '한글놀이'}">
+                                    <img src="resources/images/board/babymom/hangle2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '한글놀이'}">
+                                    <img src="resources/images/board/babymom/hangle2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '한글놀이'}">
+                                    <img src="resources/images/board/babymom/hangle2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/hangle.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">한글놀이</p>
+                        </div>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '영어놀이'}">
+                                    <img src="resources/images/board/babymom/english2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '영어놀이'}">
+                                    <img src="resources/images/board/babymom/english2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '영어놀이'}">
+                                    <img src="resources/images/board/babymom/english2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/english.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">영어놀이</p>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '학습지도'}">
+                                    <img src="resources/images/board/babymom/study2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '학습지도'}">
+                                    <img src="resources/images/board/babymom/study2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '학습지도'}">
+                                    <img src="resources/images/board/babymom/study2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/study.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">학습지도</p>
+                        </div>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '체육놀이'}">
+                                    <img src="resources/images/board/babymom/soccer2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '체육놀이'}">
+                                    <img src="resources/images/board/babymom/soccer2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '체육놀이'}">
+                                    <img src="resources/images/board/babymom/soccer2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/soccer.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">체육놀이</p>
+                        </div>
+                        <div class="icon">
+                           <br>
+                              <c:choose>
+                                 <c:when test="${ active[0] eq '밥챙겨주기'}">
+                                    <img src="resources/images/board/babymom/baby-feeding2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[1] eq '밥챙겨주기'}">
+                                    <img src="resources/images/board/babymom/baby-feeding2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:when test="${ active[2] eq '밥챙겨주기'}">
+                                    <img src="resources/images/board/babymom/baby-feeding2.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:when>
+                                 <c:otherwise>
+                                    <img src="resources/images/board/babymom/baby-feeding.png" style="width: 100px; height: 100px; border: 1px solide pink;">
+                                 </c:otherwise>
+                              </c:choose>
+                           <br>
+                           <p class="menu">밥챙겨주기</p>
+                        </div>
+                     </div>
+                  </td>
+		
 	</tr>
 	</table>	
 	</div>	
@@ -264,20 +475,42 @@
 		<c:set var="req0" value="${momboard.req}"/>
 		<c:set var="req1" value="req0.split(',')"/>
 		
-		
+		 <c:set var="req1" value="${ fn:split(momboard.req, ',') }"/>
 		 <label class="la">희망 돌보는 방식 : </label>
-         <input type="text" class="req" id="req2" value="req1[0]" placeholder="예시) 부모님과 같이 돌봐주세요">
+         <input type="text" class="req" id="req2" value="${req1[0]}" placeholder="예시) 부모님과 같이 돌봐주세요">
          <br>
          <label class="la">희망 인터뷰 방식 :</label>
-         <input type="text" class="req" id="req3" value="req1[1]" placeholder="예시) 시범채용">
+         <input type="text" class="req" id="req3" value="${req1[1]}" placeholder="예시) 시범채용">
          <br>
          <label class="la">희망 베이비시터 성별 : </label>
-         <input type="text" class="req" id="req1" value="req1[2]" placeholder="예시) 남자">         
+         <input type="text" class="req" id="req1" value="${req1[2]}" placeholder="예시) 남자">         
 		</div>
 	</div>
+
 	
+	</div>
 	
-</div>
+	<div class="UNS">
+	<c:if test="${ loginUser.nickName eq momboard.bWriter }">
+         <div class="joinbox" style="max-width: 90%; margin: 20px auto;">
+            <c:url var="momboardUpdate" value="momboardUpdateForm.do">
+               <c:param name="bNo" value="${ momboard.bNo }" />
+               <c:param name="page" value="${ page }" />
+            </c:url>
+            <c:url var="momboardDelete" value="momboardDelete.do">
+               <c:param name="bNo" value="${ momboard.bNo }" />
+               <c:param name="page" value="${ page }" />
+            </c:url>           
+            <ul class="ul01">
+               <li><input class="inputbtn" type="button" value="수정" onclick="location.href='${ momboardUpdate }'"></li>
+               <li><input class="inputbtn" type="button" value="삭제" onclick="location.href='${ momboardDelete }'"></li>
+               <li><input class="inputbtn" type="button" value="목록" onclick="location.href='babymom.do'"></li>
+            </ul>
+         </div>
+      </c:if>
+	
+	</div>
+
 
 
 
