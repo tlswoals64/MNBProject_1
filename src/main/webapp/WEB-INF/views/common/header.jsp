@@ -32,7 +32,7 @@
 	.header_btn ul li a {color:#fff}
 	
 	.header_nav {width:100%;background-color:#fff;box-shadow:5px 5px 5px rgba(46,46,46,0.3);min-height:150px;}
-	.header_nav_wrap {width:1400px;margin:0 auto;padding:25px 0;}
+	.header_nav_wrap {width:1650px;margin:0 auto;padding:25px 0;}
 	.header_nav_wrap img {float:left;}
 	.header_nav_wrap ul {padding:38px 0 0 660px;}
 	.header_nav_wrap ul li {float:left; font-size:20px; font-weight:bold;margin-right:68px;}
@@ -78,6 +78,7 @@
 				<li><A href="cIntro.do">커뮤니티</a></li>
 				<li><A href="fListView.do">자주묻는질문</a></li>
 				<li><A href="proListView.do">문의사항</a></li>
+				<li><A href="notListView.do">공지사항</a></li>
 			</ul>
 		</div>
 	</div>

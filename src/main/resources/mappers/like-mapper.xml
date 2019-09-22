@@ -5,7 +5,7 @@
 	<select id="likeCheck" resultType="_int" parameterType="LikeTb">
 		select count(*)
 		from liketb
-		where userId = #{ userId }
+		where userId = #{ userId } and bNo = #{bNo}
 	</select>
 	
 	<insert id="likeAddBoard" parameterType="LikeTb">

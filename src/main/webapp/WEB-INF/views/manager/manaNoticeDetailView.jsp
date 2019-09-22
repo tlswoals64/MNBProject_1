@@ -12,7 +12,7 @@
 		float: left;
 		background-color: #01A9DB;
 		width : 120px;
-		height : 100vh;
+		height : 1500px;
 	}
 	
 	/*********************header*********************/
@@ -304,6 +304,44 @@
 		height : 40px;
 		border : 2px solid rgb(248,248,248);
 	}
+	
+	#replyyy {
+	width: 1200px;
+	margin-left: 50px;
+}
+
+#replyListArea {
+	width: 1200px;
+	margin-top: 15px;
+	border-top: 2px solid rgb(230, 230, 230);
+	margin-bottom: 20px;
+}
+
+#replyB {
+	padding-top: 15px;
+}
+
+.replyList td {
+	border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.applybtnArea>ul {
+	margin-left: 650px;
+}
+
+.delBtn {
+	margin-top: 20px;
+}
+
+.udBtn {
+	margin-top: 20px;
+}
+
+#nContentText{
+	width : 550px;
+	resize : none;
+	border : 1px solid white;
+}
 
 </style>
 <head>
@@ -422,8 +460,36 @@
 				</div>
 		</form>
 			
-	
-		</div>
+
+
+		<div id="replyyy" style="display:inline-block;" >
+		<div id="userMemoArea" style="display:inline-block;">
+					<table id="userMemoTable">
+						<colgroup>
+							<col width="20%">
+							<col width="60%">
+							<col width="20%">
+						</colgroup>
+						
+						<tr class="userMemoTr">
+							<th class="userMemoTh" style="font-size:18px;">댓글</th>
+							<td class="userMemoTextTd"><textarea cols=100 rows=3 id=rContent style="resize: none;"></textarea></td>
+	   						<td  style = "text-align: center;"><button id="rSubmit" class="inputbox02 btn btn-outline-dark">등록하기</button></td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="replyListArea" style="display:inline-block;">
+					<div id="replyB" style="font-size: 18px;">댓글목록 </div>
+					<table class="memoTable" id="mtb">					
+						<tbody class="replyList">
+						   			
+						</tbody>
+					</table>
+				</div> 
+		 </div>
+	</div>
+		
 	</div>
 </body>
 <script>
@@ -450,6 +516,150 @@
 			location.href="mNoticedelete.do?bNo=" + bNo;
 		}
 	}
+</script>
+<script>
+function getreplyList(){
+	var bNo = '${b.bNo}';
+	console.log("ajax전" + bNo);
+	$.ajax({
+		url: "reply.do",
+		data: {bNo:bNo},
+		dataType: "json",
+		success: function(data){
+			$tableBody = $("#mtb tbody");
+			$tableBody.html("");
+			var $tr;
+			var $rNum;
+			var $rWriter;
+			var $rContent;
+			var $rCreateDate;
+			var $delBtn;
+			var $udBtn;
+			
+			$("#rCount").text("댓글 (" + data.length + ")");
+			
+			if(data.length > 0){
+				for(var i in data){
+					var content = decodeURIComponent(data[i].nContent.replace(/\+/g, " "));
+					$tr = $("<tr class='replyTr'>");
+					$rNum = $("<td style='display:none' id='rNumTd' name='rNum'>").text(data[i].rNum)
+				    $rContent = $("<td width='700px'; height='70px'; background:'green' id='nContentTd'><input type='text' id='nContentText' readonly value="+content + ">")
+				    $rCreateDate =  $("<td width='200'>").text(data[i].nCreate_Date);
+				    $rWriter =  $("<td width='200'>").text(decodeURIComponent(data[i].rWriter.replace(/\+/g, " ")));
+				    $udBtn = $("<td width='100'><button class='udBtn'id='udAreaBtn' onclick='updateReplyBtn(this);'>수정</button><button style='display:none'class='udBtn'id='udBtn' onclick='updateReply(this);'>확인</button></td>")
+				    $delBtn = $("<td width='100'><button class='delBtn' onclick='deleteReply(this);'>삭제</button></td>")
+				    $tr.append($rNum);
+				    $tr.append($rWriter);
+   					$tr.append($rContent);
+   					$tr.append($rCreateDate);
+   					$tr.append($udBtn);
+   					$tr.append($delBtn);
+   					$tableBody.append($tr);
+				}
+			}
+			else{
+				$tr = $("<tr>");
+				$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+	
+		   	$tr.append($rContent);
+			$tableBody.append($tr);
+			}
+		}
+ 	});
+};
+
+$(function(){
+getreplyList();
+
+});
+
+function deleteReply(d){
+	var userId = 'admin';
+	var rNum = $(d).parent().siblings('#rNumTd').text();
+	if (confirm("정말 삭제하시겠습니까??") == true){
+		$.ajax({
+			url: "deleteReply.do",
+			data: {rNum : rNum,
+				   userId : userId},
+			dataType: "json",
+			success: function(data){
+				console.log(data);
+				if(data > 0){
+					getreplyList();
+				}
+				else{
+					alert('댓글작성자만 삭제가능합니다.');
+					getreplyList();
+				}
+			}
+			
+		})
+	}
+
+}
+
+function updateReplyBtn(d){
+	
+	$(d).hide();
+	$(d).siblings('#udBtn').show();
+	
+	$(d).parent().siblings('#nContentTd').children().removeAttr('readonly');
+	$(d).parent().siblings('#nContentTd').children('#nContentText').focus();
+}
+function updateReply(d){
+	var rNum = $(d).parent().siblings('#rNumTd').text();
+	var userId = 'admin';
+	var nContent = $(d).parent().siblings('#nContentTd').children('#nContentText').val();
+	console.log(nContent);
+	$(d).hide();
+	$(d).siblings('#udBtn').show();
+	$(d).parent().siblings('#nContentTd').children().attr('readonly');
+	$.ajax({
+		url: "updateReply.do",
+		data: {rNum : rNum,
+			   userId : userId,
+			  nContent : nContent},
+		dataType: "json",
+		success: function(data){
+			if(data > 0){
+				getreplyList();
+			}
+			else{
+				alert('댓글작성자만 수정할수있습니다.');
+				getreplyList();
+			}
+		}
+		
+	})
+	
+}
+
+	
+$("#rSubmit").on("click", function(){
+	var rContent = $("#rContent").val();
+	var userId = '${m.userId}';
+	var bNo = '${b.bNo}';
+		
+	$.ajax({
+		url: "addReplyMH.do",
+		data: {rContent:rContent, userId:userId, bNo:bNo},
+		type: "post",
+		success: function(data){
+				
+			if(data > 0){
+				$("#rContent").val("");
+				getreplyList();
+			}
+			else{
+				alert("댓글등록에 실패했습니다.");
+				$("#rContent").val("");
+			}
+				
+		}
+	});
+});	   	
+
+
 </script>
 
 </html>

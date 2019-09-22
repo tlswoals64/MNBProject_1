@@ -345,8 +345,10 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 
 <script>
 (function(){
+	var bNo = '${board[0].bNo}';
 	$.ajax({
 		url: "likeCheck.do",
+		data: {bNo:bNo},
 		dataType: "json",
 		success: function(data){
 			console.log(data);

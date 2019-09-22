@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티</title>
+<title>공지사항</title>
 <link rel="stylesheet" href="resources/css/comunity/_base.css">
 <link rel="stylesheet" href="resources/css/comunity/_grid.css">
 <link rel="stylesheet" href="resources/css/comunity/member.css">
@@ -75,10 +75,10 @@
 <div class="frame">
 
        <div class="sidebar">
-      <h2>문의사항</h2>
+      <h2>공지사항</h2>
       <ul>
-         <li>문의사항</li>
-         <li>자주묻는질문</li>
+         <li>공지사항</li>
+         <li>공지사항</li>
       </ul>
    </div>
       
@@ -90,39 +90,19 @@
          <thead>
             <tr style="background-color:pink">
                <th>번호</th>
-               <th>분류 </th>
                <th class="title">제목</th>
                <th>글쓴이</th>
-               <th>답변여부</th>   
+               <th>조회수</th>   
                <th>작성 일</th>
             </tr>
             <!-- 리스트가져오기 -->
            
          </thead> 
         <c:forEach var="b" items="${ list1 }">
-       	
-		<tr onclick="proDetail(this);">
-			<td align="center" id="bNo">${ b.pNo }</td>
-		
+       
+		<tr onclick="notDetail(this);">
+			<td align="center" id="bNo">${ b.bNo }</td>
 			
-			
-			<td align="center">	
-			<c:if test="${b.pType == '1' }">
-				계정관련 문의
-			</c:if>
-			<c:if test="${b.pType == '2' }">
-				사이트이용관련 문의
-			</c:if>
-			<c:if test="${b.pType == '3' }">
-				베이비시터관련 문의
-			</c:if>
-			<c:if test="${b.pType == 4 }">
-				부모님관련 문의
-			</c:if>
-			<c:if test="${b.pType == 5 }">
-				기타 문의사항
-			</c:if>
-			</td>
 			<td align="left"> 
 				${ b.bTitle }
 			<%-- <c:if test="${ empty loginUser }">
@@ -130,26 +110,18 @@
 				</c:if> --%> 
 			</td>
 			
-			<td id="bWriter" align="center">${ b.bWriter }</td>
-			<td align="center">${ b.pRe }</td>
+			<td align="center">${ b.bWriter }</td>
+			<td align="center">${ b.bCount }</td>
 			<td align="center">${ b.b_CreateDate }</td>
-			<td id="nickName" align="center" style="display:none">${m.nickName}</td>
 			
-				
+		
 		</tr>
 		<script>
-			function proDetail(v){
-				var bWriter = $(v).children("#bWriter").text();
-				var nickName = $(v).children("#nickName").text();
-				if(bWriter == nickName){
-				
+			function notDetail(v){
 				var bNo=$(v).children("#bNo").text();
-				location.href="detailPro.do?pNo="+ bNo;
-				}else{
-					alert("본인의 글만 볼 수 있습니다.");
-				}
+				console.log(bNo);
+			location.href="notDetail.do?bNo="+ bNo; 
 			}
-			
 		</script>
 		</c:forEach>
 		<!-- 페이징 처리 -->
@@ -161,7 +133,7 @@
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi1.currentPage > 1 }">
-					<c:url var="before" value="proListView.do">
+					<c:url var="before" value="comListView.do">
 						<c:param name="page" value="${ pi1.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
@@ -174,7 +146,7 @@
 					</c:if>
 					
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="proListView.do">
+						<c:url var="pagination" value="comListView.do">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -186,7 +158,7 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi1.currentPage < pi1.maxPage }">
-					<c:url var="after" value="proListView.do">
+					<c:url var="after" value="comListView.do">
 						<c:param name="page" value="${ pi1.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
@@ -198,29 +170,24 @@
             
       
       <div align = "center">
-      <form action="./noticeListView.jsp" method="get">
+      <form action="searchCom.do" method="get">
       <select class="option fr" name="search_target">
             <option value="title_content">제목+내용</option>
-            <option value="title">제목</option><option value="content">내용</option>
-            <option value="comment">댓글</option><option value="nick_name">닉네임</option>
-            <option value="tag">태그</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+          <option value="nick_name">닉네임</option>
             </select>
             <input  type="text" name="search" value="" placeholder="검색어를 입력하세요.">&nbsp;
-         <input type="button" value="검색" style="background-color: white; color:black; width:50px;  border: solid 1px gray;
-  border-radius: 7px; text-align: center;">
+         <input type="submit" value="검색" style="background-color: white; color:black; width:50px;  border: solid 1px gray;
+  border-radius: 7px; text-align: center;" >
             
             
       </form>
       </div>
-
-          <div align="right">
-         <button onclick="location.href='inPro.do'"
-            id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
-  border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
-    	  </div> 
+   
       </div>
       </div>
-      <script>
+<script>
       $(function(){
          //아이디가 listArea의 자손인 td에 마우스가 들어가게되면 지금 마우스가 있는곳(td)의 부모(tr)에게 css를 적용한다.
          $('#listArea td').mouseenter(function(){
