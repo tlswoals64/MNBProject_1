@@ -221,6 +221,96 @@ input, textarea, select {
 #contentImg img {
 	max-width: 100%;
 }
+
+.checks input[type="checkbox"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+.checks input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+  content: ' ';
+  display: inline-block;
+  width: 21px;  /* 체크박스의 너비를 지정 */
+  height: 21px;  /* 체크박스의 높이를 지정 */
+  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+  margin: -2px 8px 0 0;
+  text-align: center; 
+  vertical-align: middle;
+  background: #fafafa;
+  border: 1px solid #cacece;
+  border-radius : 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="checkbox"] + label:active:before,
+.checks input[type="checkbox"]:checked + label:active:before {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+  content: '\2714';  /* 체크표시 유니코드 사용 */
+  color: #99a1a7;
+  text-shadow: 1px 1px #fff;
+  background: #e9ecee;
+  border-color: #adb8c0;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
+.checks.etrans input[type="checkbox"] + label {
+  padding-left: 30px;
+  margin-right: 30px;
+}
+.checks.etrans input[type="checkbox"] + label:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 0;
+  opacity: .6;
+  box-shadow: none;
+  border-color: #6cc0e5;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+.checks.etrans input[type="checkbox"]:checked + label:before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity:1; 
+  background: transparent;
+  border-color:transparent #6cc0e5 #6cc0e5 transparent;
+  border-top-color:transparent;
+  border-left-color:transparent;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
+.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
+  /*content:"\2713";*/
+  content: "\2714";
+  top: 0;
+  left: 0;
+  width: 21px;
+  line-height: 21px;
+  color: #6cc0e5;
+  text-align: center;
+  border: 1px solid #6cc0e5;
+}
 </style>
 <jsp:include page="../../../common/header.jsp" />
 </head>
@@ -244,6 +334,18 @@ input, textarea, select {
 							<td class="pnawtd"><input name="bTitle" value=""
 								class="inputTypeText" style='width: 80%; height: 40px;'
 								maxLength="125" type="text" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row">희망 요일</th>
+							<td class="pnawtd checks etrans">
+								<input type = "checkbox" name = "checkDay" id = "daycheckmon" value = "월"><label for = "daycheckmon">월요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daychecktue" value = "화"><label for = "daychecktue">화요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daycheckwed" value = "수"><label for = "daycheckwed">수요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daycheckthu" value = "목"><label for = "daycheckthu">목요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daycheckfri" value = "금"><label for = "daycheckfri">금요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daychecksat" value = "토"><label for = "daychecksat">토요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daychecksun" value = "일"><label for = "daychecksun">일요일</label>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row">희망 시간</th>
@@ -284,51 +386,51 @@ input, textarea, select {
 							<td style="text-align: center;">
 								<div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb4" value="실내놀이"
+										<br> <input type="checkbox" id="cb4" value="실내놀이" class = "activity"
 											name="active"> <label for="cb4"></label>
 										<p class="menu">실내놀이</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb5" value="등하원돕기"
+										<br> <input type="checkbox" id="cb5" value="등하원돕기" class = "activity"
 											name="active"> <label for="cb5"></label>
 										<p class="menu">등하원돕기</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb6" value="책읽기"
+										<br> <input type="checkbox" id="cb6" value="책읽기" class = "activity"
 											name="active"><label for="cb6"></label>
 										<p class="menu">책읽기</p>
 									</div>
 									<br>
 									<br>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb7" value="야외활동"
+										<br> <input type="checkbox" id="cb7" value="야외활동" class = "activity"
 											name="active"> <label for="cb7"></label>
 										<p class="menu">야외활동</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb8" value="한글놀이"
+										<br> <input type="checkbox" id="cb8" value="한글놀이" class = "activity"
 											name="active"> <label for="cb8"></label>
 										<p class="menu">한글놀이</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb9" value="영어놀이"
+										<br> <input type="checkbox" id="cb9" value="영어놀이" class = "activity"
 											name="active"> <label for="cb9"></label>
 										<p class="menu">영어놀이</p>
 									</div>
 									<br>
 									<br>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb10" value="학습지도"
+										<br> <input type="checkbox" id="cb10" value="학습지도" class = "activity"
 											name="active"> <label for="cb10"></label>
 										<p class="menu">학습지도</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb11" value="체육놀이"
+										<br> <input type="checkbox" id="cb11" value="체육놀이" class = "activity"
 											name="active"> <label for="cb11"></label>
 										<p class="menu">체육놀이</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb12" value="밥챙겨주기"
+										<br> <input type="checkbox" id="cb12" value="밥챙겨주기" class = "activity"
 											name="active"> <label for="cb12"></label>
 										<p class="menu">밥챙겨주기</p>
 									</div>
@@ -412,8 +514,8 @@ input, textarea, select {
 		}
 
 		$(document).ready(function() {
-			$("input[type='checkbox']").on("click", function() {
-				var count = $("input:checked[type='checkbox']").length;
+			$("input[class='activity']").on("click", function() {
+				var count = $("input:checked[class='activity']").length;
 				if (count > 3) {
 					$(this).prop("checked", false);
 					alert("3개까지만 선택할 수 있습니다.");

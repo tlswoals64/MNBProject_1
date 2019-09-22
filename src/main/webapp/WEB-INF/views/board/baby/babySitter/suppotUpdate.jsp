@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -222,6 +223,96 @@ input, textarea, select {
 #contentImg img {
 	max-width: 100%;
 }
+
+.checks input[type="checkbox"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+.checks input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+  content: ' ';
+  display: inline-block;
+  width: 21px;  /* 체크박스의 너비를 지정 */
+  height: 21px;  /* 체크박스의 높이를 지정 */
+  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+  margin: -2px 8px 0 0;
+  text-align: center; 
+  vertical-align: middle;
+  background: #fafafa;
+  border: 1px solid #cacece;
+  border-radius : 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="checkbox"] + label:active:before,
+.checks input[type="checkbox"]:checked + label:active:before {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+  content: '\2714';  /* 체크표시 유니코드 사용 */
+  color: #99a1a7;
+  text-shadow: 1px 1px #fff;
+  background: #e9ecee;
+  border-color: #adb8c0;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
+.checks.etrans input[type="checkbox"] + label {
+  padding-left: 30px;
+  margin-right: 30px;
+}
+.checks.etrans input[type="checkbox"] + label:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 0;
+  opacity: .6;
+  box-shadow: none;
+  border-color: #6cc0e5;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+.checks.etrans input[type="checkbox"]:checked + label:before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity:1; 
+  background: transparent;
+  border-color:transparent #6cc0e5 #6cc0e5 transparent;
+  border-top-color:transparent;
+  border-left-color:transparent;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
+.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
+  /*content:"\2713";*/
+  content: "\2714";
+  top: 0;
+  left: 0;
+  width: 21px;
+  line-height: 21px;
+  color: #6cc0e5;
+  text-align: center;
+  border: 1px solid #6cc0e5;
+}
 </style>
 <jsp:include page="../../../common/header.jsp" />
 </head>
@@ -233,7 +324,7 @@ input, textarea, select {
 	<div class="boardbox">
 		<div class="boxrow">
 			<div class="boxrow-top">
-				<pre class="subtext">베이비시터 지원 수정</pre>
+				<pre class="subtext">베이비시터 지원</pre>
 			</div>
 			<!--  enctype은 전송되는 데이터 형식을 설정한다. -->
 			<form action='suppotUpdate.do' name='writeform' id='writeform'
@@ -242,34 +333,96 @@ input, textarea, select {
 					<tbody>
 						<tr>
 							<th scope="row">제목</th>
-							<td class="pnawtd"><input name="bTitle" value=""
+							<td class="pnawtd"><input name="bTitle" value = "${ suppot.bTitle }"
 								class="inputTypeText" style='width: 80%; height: 40px;'
 								maxLength="125" type="text" required="required"></td>
 						</tr>
 						<tr>
+							<th scope="row">희망 요일</th>
+							<td class="pnawtd checks etrans">
+								<input type = "checkbox" name = "checkDay" id = "daycheckmon" value = "월"><label for = "daycheckmon">월요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daychecktue" value = "화"><label for = "daychecktue">화요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daycheckwed" value = "수"><label for = "daycheckwed">수요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daycheckthu" value = "목"><label for = "daycheckthu">목요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daycheckfri" value = "금"><label for = "daycheckfri">금요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daychecksat" value = "토"><label for = "daychecksat">토요일</label>
+								<input type = "checkbox" name = "checkDay" id = "daychecksun" value = "일"><label for = "daychecksun">일요일</label>
+								<c:forTokens var = "day" items="${ suppot.day }" delims="/">
+									<c:if test = "${ day eq '월' }">
+										<script>
+											$("#daycheckmon").attr("checked", true);
+										</script>
+									</c:if>
+									<c:if test = "${ day eq '화' }">
+										<script>
+											$("#daychecktue").attr("checked", true);
+										</script>
+									</c:if>
+									<c:if test = "${ day eq '수' }">
+										<script>
+											$("#daycheckwed").attr("checked", true);
+										</script>
+									</c:if>
+									<c:if test = "${ day eq '목' }">
+										<script>
+											$("#daycheckthu").attr("checked", true);
+										</script>
+									</c:if>
+									<c:if test = "${ day eq '금' }">
+										<script>
+											$("#daycheckfri").attr("checked", true);
+										</script>
+									</c:if>
+									<c:if test = "${ day eq '토' }">
+										<script>
+											$("#daychecksat").attr("checked", true);
+										</script>
+									</c:if>
+									<c:if test = "${ day eq '일' }">
+										<script>
+											$("#daychecksun").attr("checked", true);
+										</script>
+									</c:if>
+								</c:forTokens>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row">희망 시간</th>
-							<td class="pnawtd"><input type="time" name="time1"
-								required="required" style="height: 30px; font-size: 13px;">
-								~ <input type="time" name="time2"
-								style="height: 30px; font-size: 13px;"></td>
+							<td class="pnawtd">
+								<c:forTokens var = "time" items="${ suppot.time }" delims="/" varStatus="timeset">
+									<c:if test = "${ timeset.first }">
+										<c:if test="${ time < 10 }">
+											<input type="time" name="time1" value = "0${ time }:00" style="height: 30px; font-size: 13px;">
+										</c:if>
+										<c:if test="${ time >= 10 }">
+											<input type="time" name="time1" value = "${ time }:00" style="height: 30px; font-size: 13px;">
+										</c:if>
+									</c:if>
+									<c:if test = "${ timeset.last }">
+										~ <input type="time" name="time2" value = "${ time }:00" style="height: 30px; font-size: 13px;">
+									</c:if>
+								</c:forTokens>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row">희망 급여</th>
-							<td class="pnawtd"><input type="text" name="salary"
-								placeholder="ex) 시급10000원 " id="salary"
-								style="height: 30px; font-size: 13px;"></td>
+							<td class="pnawtd">
+								<input type="text" name="salary" placeholder="ex) 시급10000원 " id="salary" value = "${ suppot.salary }" style="height: 30px; font-size: 13px;">
+							</td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td><input type="text" id="sample6_postcode" class="addr1"
-								placeholder="우편번호" name="postNum"> <input type="button"
-								onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+							<td>
+								<c:set var = "ad" value = "${ fn:split(suppot.address ,'/') }" />
+								<input type="text" id="sample6_postcode" class="addr1"
+								placeholder="우편번호" name="postNum"><input type="button"
+								onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
 								<input type="text" id="sample6_address" class="addr"
-								placeholder="주소" style="width: 38em;" name="address"
+								placeholder="주소" style="width: 38em;" name="address" value = "${ ad[0] }"
 								required="required"><br> <input type="text"
-								id="sample6_detailAddress" class="addr" placeholder="상세주소"
+								id="sample6_detailAddress" class="addr" placeholder="상세주소" value = "${ ad[1] }"
 								name="detailAddress"> <input type="text"
-								id="sample6_extraAddress" class="addr" placeholder="참고항목"
+								id="sample6_extraAddress" class="addr" placeholder="참고항목" value = "${ ad[2] }"
 								name="extraAddress"> <script
 									src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 							</td>
@@ -277,80 +430,127 @@ input, textarea, select {
 
 						<tr>
 							<th scope="row">상세내용</th>
-							<td class="write pnawtd"><textarea name='bContent'
-									required="required" style='width: 90%; height: 200px;'></textarea></td>
+							<td class="write pnawtd"><textarea name='bContent' required="required" style='width: 90%; height: 200px;'>${ suppot.bContent }</textarea></td>
 						</tr>
 						<tr>
 							<th>활동 유형</th>
 							<td style="text-align: center;">
 								<div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb4" value="실내놀이"
-											name="active"> <label for="cb4"></label>
+										<c:set var="active" value="${ fn:split(suppot.bcActivity, '/') }"/>
+										<br> <input type="checkbox" id="cb4" value="실내놀이" class = "activity" name="active"> <label for="cb4"></label>
 										<p class="menu">실내놀이</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb5" value="등하원돕기"
+										<br> <input type="checkbox" id="cb5" value="등하원돕기" class = "activity"
 											name="active"> <label for="cb5"></label>
 										<p class="menu">등하원돕기</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb6" value="책읽기"
+										<br> <input type="checkbox" id="cb6" value="책읽기" class = "activity"
 											name="active"><label for="cb6"></label>
 										<p class="menu">책읽기</p>
 									</div>
 									<br>
 									<br>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb7" value="야외활동"
+										<br> <input type="checkbox" id="cb7" value="야외활동" class = "activity"
 											name="active"> <label for="cb7"></label>
 										<p class="menu">야외활동</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb8" value="한글놀이"
+										<br> <input type="checkbox" id="cb8" value="한글놀이" class = "activity"
 											name="active"> <label for="cb8"></label>
 										<p class="menu">한글놀이</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb9" value="영어놀이"
+										<br> <input type="checkbox" id="cb9" value="영어놀이" class = "activity"
 											name="active"> <label for="cb9"></label>
 										<p class="menu">영어놀이</p>
 									</div>
 									<br>
 									<br>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb10" value="학습지도"
+										<br> <input type="checkbox" id="cb10" value="학습지도" class = "activity"
 											name="active"> <label for="cb10"></label>
 										<p class="menu">학습지도</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb11" value="체육놀이"
+										<br> <input type="checkbox" id="cb11" value="체육놀이" class = "activity"
 											name="active"> <label for="cb11"></label>
 										<p class="menu">체육놀이</p>
 									</div>
 									<div class="icon">
-										<br> <input type="checkbox" id="cb12" value="밥챙겨주기"
+										<br> <input type="checkbox" id="cb12" value="밥챙겨주기" class = "activity"
 											name="active"> <label for="cb12"></label>
 										<p class="menu">밥챙겨주기</p>
 									</div>
+									<c:forEach var="ac" items="${ active }" >
+										<c:if test="${ ac eq '실내놀이' }">
+											<script>
+												$("#cb4").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '등하원돕기' }">
+											<script>
+												$("#cb5").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '책읽기' }">
+											<script>
+												$("#cb6").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '야외활동' }">
+											<script>
+												$("#cb7").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '한글놀이' }">
+											<script>
+												$("#cb8").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '영어놀이' }">
+											<script>
+												$("#cb9").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '학습지도' }">
+											<script>
+												$("#cb10").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '체육놀이' }">
+											<script>
+												$("#cb11").attr("checked", true);
+											</script>
+										</c:if>
+										<c:if test="${ ac eq '밥챙겨주기' }">
+											<script>
+												$("#cb12").attr("checked", true);
+											</script>
+										</c:if>
+									</c:forEach>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th>경력</th>
 							<td>
-								<textarea name='bCcarrer' required="required" style='width: 90%; height: 200px;'></textarea>
+								<textarea name='bCcarrer' required="required" style='width: 90%; height: 200px;'>${ suppot.bCcarrer }</textarea>
 							</td>
 						</tr>
 						<tr>
 							<th>사진 첨부</th>
 							<td>
 								<div class="par">
-									<div id="contentImgArea1" class="po">
-										<img id="contentImg">
+									<div id="contentImgArea1" class="po" style = "cursor: pointer;">
+										<img id="contentImg" src = "resources/images/babySitter/suppot/${ suppot.changeName }">
 									</div>
-									<input type="file" id="inputimg" name="inputimg"
-										onchange="LoadImg(this,1);">
+									<input type="file" id="inputimg" name="inputimg" onchange="LoadImg(this,1);">
+									<input type="hidden" id="originName" name="originName" value="${ suppot.originName }">
+									<input type="hidden" id="changeName" name="changeName" value="${ suppot.changeName }">
 								</div>
 								<input type = "hidden" name = "bNo" value = "${ suppot.bNo }">
 								<input type="hidden" name="page" value="${ page }">
@@ -360,7 +560,7 @@ input, textarea, select {
 				</table>
 				<div class="joinbox" style="max-width: 90%;">
 					<ul class="ul01">
-						<li><input class="inputbtn" type="submit" value="등록"></li>
+						<li><input class="inputbtn" type="submit" value="수정"></li>
 						<li><input class="inputbtn" type="button" value="취소"
 							onclick="javascript:history.back()"></li>
 					</ul>
@@ -369,10 +569,13 @@ input, textarea, select {
 		</div>
 	</div>
 	<script>
+		$("#inputimg").hide();
+		$("#reinputimg").hide();
+	
 		function sample6_execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
-					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.	
+					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
 					// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
@@ -405,7 +608,7 @@ input, textarea, select {
 						document.getElementById("sample6_extraAddress").value = '';
 					}
 					// 우편번호와 주소 정보를 해당 필드에 넣는다.
-					document.getElementById('sample6_postcode').value = data.zonecode;
+					/* document.getElementById('sample6_postcode').value = data.zonecode; */
 					document.getElementById("sample6_address").value = addr;
 					// 커서를 상세주소 필드로 이동한다.
 					document.getElementById("sample6_detailAddress").focus();
@@ -414,14 +617,17 @@ input, textarea, select {
 		}
 
 		$(document).ready(function() {
-			$("input[type='checkbox']").on("click", function() {
-				var count = $("input:checked[type='checkbox']").length;
+			$("input[class='activity']").on("click", function() {
+				var count = $("input:checked[class='activity']").length;
 				if (count > 3) {
 					$(this).prop("checked", false);
 					alert("3개까지만 선택할 수 있습니다.");
 				}
-
 			});
+		});
+		
+		$("#contentImgArea1").click(function() {
+			$("#inputimg").click();
 		});
 
 		function LoadImg(value) {
@@ -430,7 +636,8 @@ input, textarea, select {
 
 				reader.onload = function(e) {
 					$("#contentImg").attr("src", e.target.result);
-
+					$("#originName").attr("disabled", true);
+					$("#changeName").attr("disabled", true);
 				}
 				reader.readAsDataURL(value.files[0]);
 			}

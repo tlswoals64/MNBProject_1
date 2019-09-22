@@ -15,6 +15,7 @@ public class sitterSuppot {
 	private String bWriter;
 	private String bCcarrer;
 	private String salary;
+	private String day;
 	private String time;
 	private String address;
 	private String bcActivity;
@@ -26,8 +27,9 @@ public class sitterSuppot {
 	public sitterSuppot() {}
 
 	public sitterSuppot(int rNo, int bNo, int bType, String bTitle, String bContent, int bCount, String status,
-			Date b_CreateDate, Date b_ModifyDate, String bWriter, String bCcarrer, String salary, String time,
-			String address, String bcActivity, int iNo, String originName, String changeName, Date upload_Date) {
+			Date b_CreateDate, Date b_ModifyDate, String bWriter, String bCcarrer, String salary, String day,
+			String time, String address, String bcActivity, int iNo, String originName, String changeName,
+			Date upload_Date) {
 		super();
 		this.rNo = rNo;
 		this.bNo = bNo;
@@ -41,6 +43,7 @@ public class sitterSuppot {
 		this.bWriter = bWriter;
 		this.bCcarrer = bCcarrer;
 		this.salary = salary;
+		this.day = day;
 		this.time = time;
 		this.address = address;
 		this.bcActivity = bcActivity;
@@ -146,6 +149,14 @@ public class sitterSuppot {
 		this.salary = salary;
 	}
 
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
 	public String getTime() {
 		return time;
 	}
@@ -207,8 +218,9 @@ public class sitterSuppot {
 		return "sitterSuppot [rNo=" + rNo + ", bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bContent="
 				+ bContent + ", bCount=" + bCount + ", status=" + status + ", b_CreateDate=" + b_CreateDate
 				+ ", b_ModifyDate=" + b_ModifyDate + ", bWriter=" + bWriter + ", bCcarrer=" + bCcarrer + ", salary="
-				+ salary + ", time=" + time + ", address=" + address + ", bcActivity=" + bcActivity + ", iNo=" + iNo
-				+ ", originName=" + originName + ", changeName=" + changeName + ", upload_Date=" + upload_Date + "]";
+				+ salary + ", Day=" + day + ", time=" + time + ", address=" + address + ", bcActivity=" + bcActivity
+				+ ", iNo=" + iNo + ", originName=" + originName + ", changeName=" + changeName + ", upload_Date="
+				+ upload_Date + "]";
 	}
 	
 }

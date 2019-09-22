@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="noteMapper">
-
-	<select id="getNoteListCount" resultType = "_int">
+	
+	<select id="SendNoteListCount" resultType = "_int">
 		select count(*)
 		from note
-		where status = 'Y'
+		where status = 'Y' and send = #{user}
 	</select>
 	
-	<select id = "selectNoteList" resultType = "Note">
+	<select id="ResponNoteListCount" resultType = "_int">
+		select count(*)
+		from note
+		where status = 'Y' and respon = #{user}
+	</select>
+
+	<select id = "selectSendNoteList" resultType = "Note">
 		select *
 		from note
-		where status = 'Y'
+		where status = 'Y' and send = #{user}
+	</select>
+	
+	<select id = "selectResponNoteList" resultType = "Note">
+		select *
+		from note
+		where status = 'Y' and respon = #{user}
 	</select>
 	
 	<insert id="insertNote">
@@ -25,10 +37,16 @@
 		where nno = #{nNo}
 	</update>
 	
-	<select id="selectNote" resultType="Note">
+	<select id="detailNote" resultType="Note">
 		select *
 		from note
 		where nno = #{nNo}
+	</select>
+	
+	<select id = "selectNote" resultType = "Member">
+		select *
+		from member
+		where nickname = #{writer}
 	</select>
 	
 </mapper>

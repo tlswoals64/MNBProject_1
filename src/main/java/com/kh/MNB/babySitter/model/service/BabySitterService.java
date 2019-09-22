@@ -17,8 +17,7 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 
 	int getListCount();
 
-	ArrayList selectList(PageInfo pi);
-
+	ArrayList<sitterSuppot> selectList(PageInfo pi);
 
 	int insertMomBoard(Board board);
 

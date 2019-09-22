@@ -31,7 +31,7 @@ public class BabySitterServiceImpl implements BabySitterService {
 	}
 
 	@Override
-	public ArrayList selectList(PageInfo pi) {
+	public ArrayList<sitterSuppot> selectList(PageInfo pi) {
 		return bsDAO.selectList(pi);
 	}
 
