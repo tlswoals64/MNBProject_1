@@ -325,7 +325,7 @@ $("#rSubmit").on("click", function(){
 				
 		}
 	});
-});	   	
+});	
 
 function menulo() {
 	location.href='comListView.do'

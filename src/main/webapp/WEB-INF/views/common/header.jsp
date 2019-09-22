@@ -34,7 +34,7 @@
 	.header_nav {width:100%;background-color:#fff;box-shadow:5px 5px 5px rgba(46,46,46,0.3);min-height:150px;}
 	.header_nav_wrap {width:1400px;margin:0 auto;padding:25px 0;}
 	.header_nav_wrap img {float:left;}
-	.header_nav_wrap ul {padding:38px 0 0 760px;}
+	.header_nav_wrap ul {padding:38px 0 0 660px;}
 	.header_nav_wrap ul li {float:left; font-size:20px; font-weight:bold;margin-right:68px;}
 	.header_nav_wrap ul li:last-child {float:left; font-size:20px; font-weight:bold;margin-right:0px;}
 </style>
@@ -67,7 +67,7 @@
 				<li><A href="logout.do">로그아웃</a></li>
 				<li><A href="sitterApplyPage.do">베이비시터등록</a></li>
 				<li><A href="noteList.do">쪽지</a></li>
-
+			
 			</ul>
 			</c:if>
 		</div>

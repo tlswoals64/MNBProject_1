@@ -32,7 +32,6 @@ import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.vo.Member;
 import com.kh.MNB.propose.model.vo.Propose;
 
-
 @Controller
 public class BoardController {
 	@Autowired
@@ -75,6 +74,9 @@ public class BoardController {
 			/* @RequestParam("page") int page, */
 			ModelAndView mv) {
 		ArrayList<PictureBoard> board = bService.selectNanumBoard(bNo);
+		   
+	      bService.addReadCount1(bNo);
+		
 		
 		if(board != null) {
 			mv.addObject("board", board)/* .addObject("page", page) */.setViewName("board/community/nanumDetailView");
@@ -85,12 +87,20 @@ public class BoardController {
 		
 		return mv;
 	}
-			
 	
 	@RequestMapping("cIntro.do")
-	public String cBoard() {
-		return "board/community/communityIntro";
+	public ModelAndView cBoard(ModelAndView mv) {
+		ArrayList<Board> board = bService.selectNanumIntro();
+		ArrayList<Board> comboard = bService.selectComIntro();
+		
+		if(board != null) {
+			mv.addObject("comboard", comboard);
+			mv.addObject("nanumboard", board).setViewName("board/community/communityIntro");
+		}
+		return mv;
 	}
+	
+	
 	
 	@RequestMapping("bNanumlist.do")
 	public ModelAndView boardNanumList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
@@ -131,7 +141,6 @@ public class BoardController {
 		Member member = (Member)request.getSession().getAttribute("loginUser");
 //		String userId = member.getUserId();
 //		Board board = new Board(b.getbNo(), 2, b.getbTitle(), b.getbWriter(), b.getbContent(), 0, null, null, null);
-		
 		
 		Board board = new Board(b.getbNo(), 2, b.getbTitle(), member.getUserId(), b.getbContent(), 0, null, null, null);
 		Attachment a;
@@ -193,30 +202,43 @@ public class BoardController {
 									@RequestParam(value="iNo0", required = false) String iNo0, 
 									@RequestParam(value="iNo1", required = false) String iNo1, 
 									@RequestParam(value="iNo2", required = false) String iNo2, 
-									@RequestParam(value="iNo3", required = false) String iNo3, HttpServletRequest request) {
+									@RequestParam(value="iNo3", required = false) String iNo3, 
+									HttpServletRequest request) {
 		
-//		System.out.println(iNo0);
-//		System.out.println(iNo1);
-//		System.out.println(iNo2);
-//		System.out.println(iNo3);
-		// update를 해줘야할 것은 숫자로 들어온 애
-		// insert를 해줘야할 것은 ""로 들어온 애
 		
+		/**
+		 	update
+		 		iNo가 null이 아니면서 originName이 존재할때 수정할수있
+		 		iNo 앞에 N이 붙을 수 있음
+		 	insert
+		 		iNo가 null이면서 originName이 존재할때 추가할수 있
+		 	delete
+		 		iNo가 null이 아니면서 originName이 공백([]) 일때 삭제할수 있 
+		 	그대로(손대지 않아도 되는)
+		 		iNo가 null이면서 originName이 공백([]) 일때 그대로 ㄱ
+		 */
 		
 		Member member = (Member)request.getSession().getAttribute("loginUser");
 		Attachment a;
 		Board board = new Board(b.getbNo(), 2, b.getbTitle(), member.getUserId(), b.getbContent(), 0, null, null, null);
-//		
 //		if(a.getChangeName() != null) {
 //			deleteNanumFile(a.getChangeName(), request);
 //		}
 		
+//		System.out.println("=============== 타이틀 이미지 ===============");
+//		System.out.println(iNo0);
 //		System.out.println(titleImg);
 //		System.out.println(titleImg.getOriginalFilename());
+//		System.out.println("=============== 이미지 1 ===============");
+//		System.out.println(iNo1);
 //		System.out.println(contentImg1);
 //		System.out.println(contentImg1.getOriginalFilename());
+//		System.out.println("=============== 이미지 2 ===============");
+//		System.out.println(iNo2);
 //		System.out.println(contentImg2);
 //		System.out.println(contentImg2.getOriginalFilename());
+//		System.out.println("=============== 이미지 3 ===============");
+//		System.out.println(iNo3);
 //		System.out.println(contentImg3);
 //		System.out.println(contentImg3.getOriginalFilename());
 		
@@ -238,16 +260,19 @@ public class BoardController {
 		iNoString.add(iNo2);
 		iNoString.add(iNo3);
 		
-		// update, insert할 부분을 담은 ArrayList
+		// update, insert, delete할 부분을 담은 ArrayList
 		ArrayList<Attachment> updateList = new ArrayList<Attachment>();
 		ArrayList<Attachment> insertList = new ArrayList<Attachment>();
-
+		ArrayList<Integer> deleteList = new ArrayList<Integer>();
+		
 		for(int i = 0; i < iNoString.size(); i++) {
 			a = new Attachment();
 			a.setbNo(b.getbNo());
 			
-			if(iNoString.get(i) != null && !iNoString.get(i).equals("")) { // update
-				a.setiNo(Integer.parseInt(iNoString.get(i)));
+			if(iNoString.get(i) != null && !originNameList.get(i).equals("")) { // update
+				if(iNoString.get(i).charAt(0) == 'N') a.setiNo(Integer.parseInt(iNoString.get(i).substring(1)));
+				else a.setiNo(Integer.parseInt(iNoString.get(i)));
+				
 				a.setOriginName(originNameList.get(i));
 				
 				if(i == 0) a.setiType(0);
@@ -256,11 +281,15 @@ public class BoardController {
 				updateList.add(a);
 			}
 			
-			if(iNoString.get(i) != null && iNoString.get(i).equals("")) { // insert
+			if(iNoString.get(i) == null && !originNameList.get(i).equals("")) { // insert
 				a.setOriginName(originNameList.get(i));
 				a.setiType(1);
 				
 				insertList.add(a);
+			}
+			
+			if(iNoString.get(i) != null && originNameList.get(i).equals("")) { // delete
+				deleteList.add(Integer.parseInt(iNoString.get(i).substring(1)));
 			}
 		}
 		
@@ -282,10 +311,13 @@ public class BoardController {
 		int result1 = bService.updateNanumBoard(board);
 		int result2 = 0;
 		int result3 = 0;
+		int result4 = 0;		
 		
 		if(!updateList.isEmpty()) result2 = bService.updateNanumAttachment(updateList);
 		if(!insertList.isEmpty()) result3 = bService.insertSubNanumAttachment(insertList);
-		int result = result1 + result2 + result3;
+		if(!deleteList.isEmpty()) result4 = bService.deleteSubNanumAttachment(deleteList);
+		
+		int result = result1 + result2 + result3 + result4;
 
 		if(result >= 2) {
 			return "redirect:bNanumlist.do";
@@ -293,6 +325,7 @@ public class BoardController {
 		else {
 			throw new BoardException("게시물 수정에 실패하였습니다.");
 		}	
+		
 	}		
 	
 	public ArrayList<String> updateSaveFile(ArrayList<MultipartFile> list, HttpServletRequest request){
@@ -437,7 +470,7 @@ public class BoardController {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	   // 정보공유게시판 리스트불러오기
+	 // 정보공유게시판 리스트불러오기
 	   @RequestMapping("comListView.do")
 	   public ModelAndView cListView(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
 	      
@@ -446,11 +479,11 @@ public class BoardController {
 	         currentPage = page;
 	      }
 
-	      int listCount = bService.getComListCount();
+	      int listCount = bService.getListCount1();
 
 	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-	      ArrayList<Board> list = bService.selectComList(pi);
+	      ArrayList<Board> list = bService.selectList1(pi);
 
 	      if (list != null) {
 	         mv.addObject("list1", list);
@@ -498,15 +531,12 @@ public class BoardController {
 	      Member member = (Member)request.getSession().getAttribute("loginUser");
 //	      String userId = member.getUserId();
 //	      Board board = new Board(b.getbNo(), 2, b.getbTitle(), b.getbWriter(), b.getbContent(), 0, null, null, null);
-	      
+
 	      System.out.println("Member : " + member);
 	      Board board = new Board(b.getbNo(), 1, b.getbTitle(), member.getUserId(), b.getbContent(), 0, null, null, null);
 	      Attachment a;
 
 	      ArrayList<MultipartFile> list = new ArrayList<MultipartFile>();
-	      
-	      //int result = bService.insertNanumReply(r);
-
 	      
 	      if(titleImg.getOriginalFilename() != "") {
 	         list.add(titleImg);
@@ -520,42 +550,32 @@ public class BoardController {
 	      if(contentImg3.getOriginalFilename() != "") {
 	         list.add(contentImg3);
 	      }
-	      
+
 	      ArrayList<String> renameList = saveFile1(list, request);
 
 	      ArrayList<Attachment> aList = new ArrayList<Attachment>();
-	      
+
+	   
 	      if (renameList != null) {
-	         System.out.println("rename="+renameList.size());
+
 	         for (int i = 0; i < renameList.size(); i++) {
 	            a = new Attachment();
 	            a.setOriginName(list.get(i).getOriginalFilename());
 	            a.setChangeName(renameList.get(i));
-	            
-	            if (i == 0) {
+
+	            if (i == 0)
 	               a.setiType(0);
-	            }
-	            else if(i==1)
-	            {
+	            else
 	               a.setiType(1);
-	            }
-	            else if(i==2) {
-	               System.out.println("인서트컴!!!!");
-	               a.setiType(2);
-	            }
-	            else if(i==3)
-	            {
-	               a.setiType(3);
-	            }
+
 	            aList.add(a);
-	            
-	            }
 	         }
-	   
+	      }
+
 	      int result1 = bService.insertComBoard(board);
 	      int result2 = bService.insertComAttachment(aList);
 
-	      int result = result1+result2;
+	      int result = result1 + result2;
 
 	      if (result == 2) {
 	         return "redirect:comListView.do";
@@ -633,7 +653,7 @@ public class BoardController {
 	            list.add(contentImg3);
 	         }
 
-	         ArrayList<String> renameList = saveFilePro(list, request);
+	         ArrayList<String> renameList = saveFile1(list, request);
 
 	         ArrayList<Attachment> aList = new ArrayList<Attachment>();
 
@@ -645,20 +665,19 @@ public class BoardController {
 	               a.setChangeName(renameList.get(i));
 	               
 	               if (i == 0) {
-	                  a.setiType(0);
+	                  a.setiType(i);
 	               }
 	               else if(i==1)
 	               {
-	                  a.setiType(1);
+	                  a.setiType(i);
 	               }
 	               else if(i==2) {
-	                  a.setiType(2);
+	                  a.setiType(i);
 	               }
 	               else if(i==3)
 	               {
-	                  a.setiType(3);
+	                  a.setiType(i);
 	               }
-	            
 	               aList.add(a);
 	            }
 	         }
@@ -717,13 +736,13 @@ public class BoardController {
 	   // 정보공유게시판
 	   @RequestMapping("addReply1.do")
 	   @ResponseBody
-	   public String addReply1(Reply r, HttpSession session) {
+	   public String addComReply(Reply r, HttpSession session) {
 	      Member loginUser = (Member) session.getAttribute("loginUser");
 	      String rWriter = loginUser.getUserId();
 
 	      r.setrWriter(rWriter);
 
-	      int result = bService.insertComReply(r);
+	      int result = bService.insertReply1(r);
 
 	      if (result > 0) {
 	         return "success";
@@ -734,26 +753,25 @@ public class BoardController {
 	   }
 	      
 	   // 정보공유게시판 상세보기 페이지
+
 	   @RequestMapping("detailCom.do")
-	   public ModelAndView bDetailView(HttpServletRequest request, ModelAndView mv) {
+	   public ModelAndView ComDetailView(HttpServletRequest request, ModelAndView mv) {
 	      Member member = (Member)request.getSession().getAttribute("loginUser");
 	      int bNo = Integer.parseInt(request.getParameter("bNo"));
 	   
-	      bService.addComReadCount(bNo);
-	      Attachment board = bService.selectComPicBoard1(bNo);
-	      Attachment board2 = bService.selectComPicBoard2(bNo);
-	      Attachment board3 = bService.selectComPicBoard3(bNo);
-	      Attachment board4 = bService.selectComPicBoard4(bNo);
+	      bService.addReadCount1(bNo);
+	      Attachment board = bService.selectBoard1(bNo);
+	      Attachment board2 = bService.selectPicBoard1(bNo);
+	      Attachment board3 = bService.selectPicBoard2(bNo);
 	      
-	      Board board123 = bService.selectComBoard(bNo);
+	      Board board123 = bService.selectBoard2(bNo);
 
 	      
-	      if (board123 != null) {
+	      if (board != null) {
 	         mv.addObject("m", member);
 	         mv.addObject("board", board);
 	         mv.addObject("board2",board2);
 	         mv.addObject("board3",board3);
-	         mv.addObject("board4",board4);
 	         mv.addObject("board123", board123);
 	         mv.setViewName("board/community/comunityDetailView");
 	      } else {
@@ -765,7 +783,7 @@ public class BoardController {
 	   }
 	   
 	   // 문의사항게시판 리스트 불러오기
-	   @RequestMapping("proListView.do")
+	   @RequestMapping("proListViewdo")
 	   public ModelAndView proListView(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
 	      
 	      int currentPage = 1;
@@ -773,7 +791,7 @@ public class BoardController {
 	         currentPage = page;
 	      }
 
-	      int listCount = bService.getProListCount();
+	      int listCount = bService.getListCountPro();
 
 	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
@@ -791,35 +809,27 @@ public class BoardController {
 
 	   }
 
+	   
 	   //정보공유게시판 수정하기페이지 들어가기(뷰만)
 	   @RequestMapping("comup.do")
-	   public ModelAndView comUpdateView(@RequestParam("bNo") int bNo
+	   public ModelAndView ComUpdateView(@RequestParam("bNo") int bNo
 	         
+
 	           , ModelAndView mv) {
 	      
-	      Attachment board = bService.selectComupPBoard1(bNo);
-	      Attachment board2 = bService.selectComupPBoard2(bNo);
-	      Attachment board3 = bService.selectComupPBoard3(bNo);
-	      Attachment board4 = bService.selectComupPBoard4(bNo);
-	      Board board123 = bService.selectComBoard(bNo);
 	      
-	      if (board123 != null) {
-	         mv.addObject("board", board);
-	         mv.addObject("board2",board2);
-	         mv.addObject("board3",board3);
-	         mv.addObject("board4",board4);
-	         mv.addObject("board123", board123);
-	         mv.setViewName("board/community/comunityUpdateForm");
-	      } else {
-	         throw new BoardException("게시글 상세보기에 실패하였습니다.");
-	      }
+	      
+	      Board board = bService.selectBoard2(bNo);
+	      
+	      mv.addObject("board",board).setViewName("board/community/comunityUpdateForm");
 	      
 	      return mv;
 	   }
 	   
+	      
 	   /* 정보공유 수정게시판(기능부분)*/
 	   @RequestMapping("comupdate.do")
-	   public ModelAndView boardUpdate(@ModelAttribute Board b
+	   public ModelAndView ComUpdate(@ModelAttribute Board b
 	                            , ModelAndView mv
 	                            , HttpServletRequest request) {
 	      
@@ -838,7 +848,7 @@ public class BoardController {
 	   
 	   // 정보공유 게시판 삭제하기
 	   @RequestMapping("comdelete.do")
-	   public ModelAndView deleteComBoard(@RequestParam("bNo") int bNo, ModelAndView mv) {
+	   public ModelAndView deleteCom(@RequestParam("bNo") int bNo, ModelAndView mv) {
 	      System.out.println("삭제하기들어옴. bNo="+bNo);
 	      
 	      int result = bService.deleteComBoard(bNo);
@@ -849,10 +859,11 @@ public class BoardController {
 	         throw new BoardException("게시글 삭제에 실패하였습니다.");
 	      }
 	      return mv;
+	      
 	   }
 	   
 	   @RequestMapping("reply.do")
-	   public void getReplyList(HttpServletResponse response, int bNo) throws IOException {
+	   public void getComReplyList(HttpServletResponse response, int bNo) throws IOException {
 	      
 
 	      ArrayList<Reply> rList = bService.selectUserReply(bNo);
@@ -861,16 +872,16 @@ public class BoardController {
 	         r.setnContent(URLEncoder.encode(r.getnContent(), "utf-8"));
 	         r.setrWriter(URLEncoder.encode(r.getrWriter(), "utf-8"));
 	         r.setnCreate_Date(r.getnCreate_Date());
+
 	      }
 	      
 	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	      gson.toJson(rList, response.getWriter());
 	   }
 	   
-	   
-	   // 댓글
+	   // 占쌨몌옙 占쌩곤옙
 	   @RequestMapping("addReplyMH.do")
-	   public void insertReplyMH(HttpServletResponse response, String rContent, String userId, int bNo) throws IOException {
+	   public void insertComReplyMH(HttpServletResponse response, String rContent, String userId, int bNo) throws IOException {
 	      
 	      Reply reply = new Reply();
 	      reply.setrWriter(userId);
@@ -882,7 +893,6 @@ public class BoardController {
 	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	      gson.toJson(result, response.getWriter());
 	   }
-
 
 	}
 
