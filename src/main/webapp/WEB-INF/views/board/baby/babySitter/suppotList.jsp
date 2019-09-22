@@ -26,7 +26,10 @@ td {
 }
 
 .week {
-	border: 1px solid black;
+	border: 1px solid rgb(211, 211, 211);
+	padding: 5px 8px;
+	margin-right: 5px;
+	border-radius: 30px;
 }
 
 #headview {
@@ -64,7 +67,7 @@ td {
 #bigForm {
 	margin: 0 auto;
 	height: 100%;
-	padding : 0 20%;
+	padding: 0 20%;
 }
 
 #listForm {
@@ -79,33 +82,6 @@ td {
 #searchImg {
 	border-radius: 90px;
 }
-
-/* #search {
-	width: 80%;
-	box-sizing: border-box;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-	background-color: white;
-	background-image: url('resources/images/babySitter/search.png');
-	background-position: 10px 10px;
-	background-size: 25px;
-	background-repeat: no-repeat;
-	padding: 12px 20px 12px 40px;
-	-webkit-transition: width 0.4s ease-in-out;
-	transition: width 0.4s ease-in-out;
-}
-
-#searchBtn {
-	border: 2px solid black;
-	background-color: white;
-	color: black;
-	padding: 10px 28px;
-	font-size: 16px;
-	cursor: pointer;
-	border-radius: 4px;
-	text-align: center;
-} */
 
 .timeBtn {
 	marigin: 0;
@@ -140,7 +116,7 @@ td {
 	display: block;
 }
 
-._3x_br {
+.DayBox {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -154,7 +130,48 @@ td {
 	justify-content: space-around;
 }
 
-.o9IuZ, .zIHPK {
+.weekday {
+	border: 1px solid rgb(211, 211, 211);
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: & amp; quot; Noto Sans KR&amp; quot; , sans-serif;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	font-size: inherit;
+	font-weight: inherit;
+	position: relative;
+	z-index: 1;
+	height: 30px;
+	line-height: 30px;
+	min-width: 30px;
+	color: rgba(0, 0, 0, 0.87);
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	border-radius: 30px;
+	user-select: none;
+	overflow: hidden;
+	background-color: white;
+	text-align: center;
+	width: 30px;
+	min-height: 30px;
+}
+
+.weekdayCheck {
+	position: relative;
+	padding: 0px;
+	vertical-align: top;
+	letter-spacing: 0px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 12px;
+	color: rgb(63, 52, 52);
+	line-height: 30px;
+}
+
+.timeBox, .searchBox {
 	/* display: -webkit-box; */
 	display: -ms-flexbox;
 	display: flex;
@@ -164,14 +181,43 @@ td {
 	flex-direction: row;
 }
 
-.o9IuZ {
+.timeBox {
 	-ms-flex-wrap: nowrap;
 	flex-wrap: nowrap;
 	margin: 0;
 }
 
-._2h7-S>* {
+.timeSearch>* {
 	width: 33%;
+}
+
+.timeBtn {
+	border: 1px solid rgb(222, 222, 222);
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: & amp; amp; quot; Noto Sans KR&amp; amp; quot; ,
+	sans-serif;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	font-size: inherit;
+	font-weight: inherit;
+	position: relative;
+	z-index: 1;
+	height: 31px;
+	line-height: 36px;
+	min-width: 0px;
+	color: rgba(0, 0, 0, 0.87);
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	border-radius: 0px;
+	user-select: none;
+	overflow: hidden;
+	background-color: white;
+	text-align: center;
+	width: 100%;
 }
 
 ._1-3i7 {
@@ -191,28 +237,147 @@ td {
 	background-color: #fff;
 	border: 1px solid #c4c4c4;
 }
+
 /* ._3XBMg {
     color: #434343;
     background-color: #ff4500;
 } */
-.zIHPK {
+.searchBox {
 	border: 1px solid #d3d3d3;
 }
 
-.list{
-border: 1px solid black;
-border-radius: 3px;
-margin-bottom: 10px;
-height : 150px;
-padding : 5px;
+.searchBtn {
+	border: 10px;
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: & amp; quot; Noto Sans KR&amp; quot; , sans-serif;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	font-size: inherit;
+	font-weight: inherit;
+	position: relative;
+	vertical-align: middle;
+	z-index: 1;
+	height: 40px;
+	line-height: 36px;
+	min-width: 88px;
+	color: rgba(0, 0, 0, 0.87);
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	border-radius: 2px;
+	user-select: none;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0);
+	text-align: center;
+	flex-basis: 85%;
 }
 
-.list > hr{
-    border-color: #e8e8e8;
-    border-top: none;
-    width : 90%;
+.searchBtn:hover {
+	background-color: pink;
 }
 
+.searchReset {
+	border-width: 10px 10px 10px 1px;
+	border-top-style: initial;
+	border-right-style: initial;
+	border-bottom-style: initial;
+	border-left-style: solid;
+	border-top-color: initial;
+	border-right-color: initial;
+	border-bottom-color: initial;
+	border-left-color: rgb(224, 224, 224);
+	border-image: initial;
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: & amp; quot; Noto Sans KR&amp; quot; , sans-serif;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	font-size: inherit;
+	font-weight: inherit;
+	position: relative;
+	vertical-align: middle;
+	z-index: 1;
+	height: 40px;
+	line-height: 36px;
+	min-width: 88px;
+	color: rgba(0, 0, 0, 0.87);
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	border-radius: 2px;
+	user-select: none;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0);
+	text-align: center;
+	flex-basis: 15%;
+}
+
+.searchReset:hover {
+	background-color: pink;
+}
+
+.list {
+	border: 1px solid rgb(211, 211, 211);
+	border-radius: 3px;
+	margin-bottom: 10px;
+	height: 150px;
+	padding: 5px;
+}
+
+.list:hover {
+	border: 3px solid pink;
+}
+
+.list>hr {
+	border-color: #e8e8e8;
+	border-top: none;
+	width: 90%;
+}
+
+.paging {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.paging li {
+	display: inline-block;
+	vertical-align: middle;
+	border: 1px solid #ebeae9;
+}
+
+.paging li a {
+	display: block;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	color: #898786;
+}
+
+.paging li a:hover {
+	color: #ff5a20;
+	text-decoration: underline;
+}
+
+.paging li .prev a {
+	margin-right: 23px;
+}
+
+.paging li .next a {
+	margin-left: 23px;
+}
+
+.paging li .first a, .paging li .prev a, .paging li .next a, .paging li .last a
+	{
+	margin: 0.2px;
+	width: 30px;
+	height: 30px;
+	color: transparent;
+}
 </style>
 </head>
 <body>
@@ -223,7 +388,7 @@ padding : 5px;
 	<div id="bigForm">
 		<div id="headview">
 			<h2 class="headline headh2">
-				<strong style="font-weight: 600;"><span class="_21P78">M&B</span>
+				<strong style="font-weight: 600;"><span class="_21P78">MnB</span>
 					<!-- react-text: 1881 -->를 찾고 싶은 지역, <!-- /react-text --> <br></strong>
 				<!-- react-text: 1883 -->
 				원하는 요일, 시간을 넣어 검색해주세요.
@@ -231,7 +396,7 @@ padding : 5px;
 			</h2>
 			<p class="headline headp">
 				<!-- react-text: 1885 -->
-				M&B는 0 ~ 6세 아이를 집에서 안전하고 즐겁게
+				MnB는 0 ~ 6세 아이를 집에서 안전하고 즐겁게
 				<!-- /react-text -->
 				<br>
 				<!-- react-text: 1887 -->
@@ -244,10 +409,6 @@ padding : 5px;
 
 
 		<div id="listForm">
-			<!-- <form id="searchForm" action="">
-				<input type="text" id="search" name="search" placeholder="검색..">
-				<button id="searchBtn">검색</button>
-			</form> -->
 			<form>
 				<div class="searchOption"
 					style="display: line-block; justify-content: flex-start;">
@@ -256,116 +417,72 @@ padding : 5px;
 							<strong>돌봄 지역</strong>
 						</div>
 						<div class="searchAddress" style="position: relative;">
-							<svg viewBox="0 0 24 24"
-								style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: rgb(255, 83, 0); height: 20px; width: 20px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; position: absolute; left: 10px; top: 10px;">
-							<path
-									d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
-						</svg>
-							<input type="text" readonly=""
-								style="text-indent: 25px; width: 312px; box-sizing: border-box; height: 40px; border: 1px solid rgb(211, 211, 211); padding-left: 10px; font-size: 1rem;">
+							<svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: rgb(255, 83, 0); height: 20px; width: 20px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; position: absolute; left: 10px; top: 10px;">
+								<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+							</svg>
+							<input type="text" style="text-indent: 25px; width: 312px; box-sizing: border-box; height: 40px; border: 1px solid rgb(211, 211, 211); padding-left: 10px; font-size: 1rem;">
 						</div>
 					</div>
 					<div class="option1">
 						<div class="sfont">
 							<strong>돌봄 요일</strong>
 						</div>
-						<div class="IUJAV">
-							<div class="iJGfn">
-								<div class="_3x_br">
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">월</span>
-										</div>
-									</button>
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">화</span>
-										</div>
-									</button>
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">수</span>
-										</div>
-									</button>
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">목</span>
-										</div>
-									</button>
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">금</span>
-										</div>
-									</button>
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">토</span>
-										</div>
-									</button>
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(211, 211, 211); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 30px; line-height: 30px; min-width: 30px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 30px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 30px; min-height: 30px;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(63, 52, 52); line-height: 30px;">일</span>
-										</div>
-									</button>
+						<div class="DayBox">
+								<div class = "weekday">
+									<span class = "weekdayCheck">월</span>
 								</div>
-							</div>
+							<button class = "weekday" tabindex="0" type="button">
+								<div>
+									<span class = "weekdayCheck">화</span>
+								</div>
+							</button>
+							<button class = "weekday" tabindex="0" type="button">
+								<div>
+									<span class="weekdayCheck">수</span>
+								</div>
+							</button>
+							<button class = "weekday" tabindex="0" type="button">
+								<div>
+									<span class="weekdayCheck">목</span>
+								</div>
+							</button>
+							<button class = "weekday" tabindex="0" type="button">
+								<div>
+									<span class="weekdayCheck">금</span>
+								</div>
+							</button>
+							<button class = "weekday" tabindex="0" type="button">
+								<div>
+									<span class="weekdayCheck">토</span>
+								</div>
+							</button>
+							<button class = "weekday" tabindex="0" type="button">
+								<div>
+									<span class="weekdayCheck">일</span>
+								</div>
+							</button>
 						</div>
 					</div>
 					<div style="min-width: 270px;">
 						<div class="sfont">
 							<strong>시간대</strong>
 						</div>
-						<div class="o9IuZ _2h7-S">
-							<div class="_2TVt4">
-								<div class="_2OGG8">
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(222, 222, 222); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 31px; line-height: 36px; min-width: 0px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 0px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 100%;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">07
-												- 12시</span>
-										</div>
-									</button>
+						<div class="timeBox timeSearch">
+							<button tabindex="0" type="button" class = "timeBtn">
+								<div>
+									<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">07 - 12시</span>
 								</div>
-							</div>
-							<div class="_2TVt4">
-								<div class="_2OGG8">
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(222, 222, 222); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 31px; line-height: 36px; min-width: 0px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 0px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 100%;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">12
-												- 18시</span>
-										</div>
-									</button>
+							</button>
+							<button tabindex="0" type="button" class="timeBtn">
+								<div>
+									<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">12 - 18시</span>
 								</div>
-							</div>
-							<div class="_2TVt4">
-								<div class="_2OGG8">
-									<button tabindex="0" type="button"
-										style="border: 1px solid rgb(222, 222, 222); box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 31px; line-height: 36px; min-width: 0px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 0px; user-select: none; overflow: hidden; background-color: white; text-align: center; width: 100%;">
-										<div>
-											<span
-												style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">18
-												- 22시</span>
-										</div>
-									</button>
+							</button>
+							<button tabindex="0" type="button" class = "timeBtn">
+								<div>
+									<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">18 - 22시</span>
 								</div>
-							</div>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -375,50 +492,37 @@ padding : 5px;
 						<div class="sfont">
 							<strong>돌봄 내용</strong>
 						</div>
-						<div class="_2s30R">
-							<div class="_1sN0b">
-								<div class="_3GVQt">
-									<div class="u23yZ" style="text-align: left; overflow: visible; width: 100%; height: auto; display: inline-block; vertical-align: top;">
-										<div class="_1-6Wz _1-3i7" role="button">실내놀이</div>
-										<div class="_1-6Wz _1-3i7" role="button">등하원</div>
-										<div class="_1-6Wz _1-3i7" role="button">책읽기</div>
-										<div class="_1-6Wz _1-3i7" role="button">야외활동</div>
-										<div class="_1-6Wz _1-3i7" role="button">한글놀이</div>
-										<div class="_1-6Wz _1-3i7" role="button">영어놀이</div>
-										<div class="_1-6Wz _1-3i7" role="button">학습지도</div>
-										<div class="_1-6Wz _1-3i7" role="button">체육놀이</div>
-										<div class="_1-6Wz _1-3i7" role="button">밥 챙겨주기</div>
-									</div>
-								</div>
-							</div>
+						<div class="u23yZ" style="text-align: left; overflow: visible; width: 100%; height: auto; display: inline-block; vertical-align: top;">
+							<div class="_1-6Wz _1-3i7" role="checkbox">실내놀이</div>
+							<div class="_1-6Wz _1-3i7" role="button">등하원</div>
+							<div class="_1-6Wz _1-3i7" role="button">책읽기</div>
+							<div class="_1-6Wz _1-3i7" role="button">야외활동</div>
+							<div class="_1-6Wz _1-3i7" role="button">한글놀이</div>
+							<div class="_1-6Wz _1-3i7" role="button">영어놀이</div>
+							<div class="_1-6Wz _1-3i7" role="button">학습지도</div>
+							<div class="_1-6Wz _1-3i7" role="button">체육놀이</div>
+							<div class="_1-6Wz _1-3i7" role="button">밥 챙겨주기</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="zIHPK">
-					<button class = "search searchBtn" tabindex="0" type="button"
-						style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; vertical-align: middle; z-index: 1; height: 40px; line-height: 36px; min-width: 88px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgba(0, 0, 0, 0); text-align: center; flex-basis: 85%;">
-						<div>
-							<span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 600; font-size: 15px; text-align: center;"><span>검색</span></span>
-						</div>
+				<div class="searchBox">
+					<button class = "search searchBtn" tabindex="0" type="button">
+						<span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 600; font-size: 15px; text-align: center;">검색</span>
 					</button>
-					<button class = "search searchReset" tabindex="0" type="button"
-						style="border-width: 10px 10px 10px 1px; border-top-style: initial; border-right-style: initial; border-bottom-style: initial; border-left-style: solid; border-top-color: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: rgb(224, 224, 224); border-image: initial; box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; vertical-align: middle; z-index: 1; height: 40px; line-height: 36px; min-width: 88px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgba(0, 0, 0, 0); text-align: center; flex-basis: 15%;">
+					<button class = "search searchReset" tabindex="0" type="button">
 						<div>
-							<svg viewBox="0 0 24 24"
-								style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: rgb(106, 106, 106); height: 15px; width: 15px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; vertical-align: middle; margin-left: 12px; margin-right: 0px;">
-								<path
-									d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
-							<span
-								style="position: relative; padding-left: 8px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; font-size: 13px; text-align: center; color: rgb(106, 106, 106);"><span>검색
-									초기화</span></span>
+							<svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: rgb(106, 106, 106); height: 15px; width: 15px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; vertical-align: middle; margin-left: 12px; margin-right: 0px;">
+								<path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path>
+							</svg>
+							<span style="position: relative; padding-left: 8px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; font-size: 13px; text-align: center; color: rgb(106, 106, 106);">검색 초기화</span>
 						</div>
 					</button>
 				</div>
 			</form>
 		</div>
 
-		<div style="width: 100%; height: 1500px; display: inline-block; margin-top: 3%;">
+		<div style="width: 100%; height: 1710px; display: inline-block; margin-top: 3%;">
 			<div id="mojibList">
 				<c:forEach var="s" items="${ list }">
 					<c:if test="${ !empty loginUser }">
@@ -443,11 +547,26 @@ padding : 5px;
 									</tr>
 									<tr>
 										<td>
-											<span>${ s.address }</span>
+											<span>
+												<c:forTokens var = "address" items="${ s.address }" delims="/">
+													${ address }&nbsp;
+												</c:forTokens>
+											</span>
 										</td>
 									</tr>
 									<tr>
-										<td><span></span>&nbsp;/&nbsp;${ s.salary }</td>
+										<td>
+											<span>
+												<c:forTokens var = "time" items="${ s.time }" delims="/" varStatus="timeset">
+													<c:if test="${ timeset.first }">
+														<c:out value="${ time }:00 ~ " />
+													</c:if>
+													<c:if test="${ timeset.last }">
+														<c:out value="${ time }:00" />
+													</c:if>
+												</c:forTokens>
+											</span>&nbsp;/&nbsp;${ s.salary }
+										</td>
 									</tr>
 								</table>
 								<hr>
@@ -457,11 +576,12 @@ padding : 5px;
 										<col width="70%">
 									</colgroup>
 									<tr>
-										<th>기간</th>
-										<td><span class="week">월</span> <span class="week">화</span>
-											<span class="week">수</span> <span class="week">목</span> <span
-											class="week">금</span> <span class="week">토</span> <span
-											class="week">일</span></td>
+										<th>돌봄 요일</th>
+										<td>
+											<c:forTokens var = "day" items="${ s.day }" delims="/">
+												<span class = "week">${ day }</span>
+											</c:forTokens>
+										</td>
 									</tr>
 								</table>
 							</div>
@@ -469,43 +589,59 @@ padding : 5px;
 					</c:if>
 					<c:if test="${ empty loginUser }">
 						<div class="list">
-							<table summary="베이비시터 중 구직글을 작성한 리스트">
-								<colgroup>
-									<col width="30%">
-									<col width="70%">
-								</colgroup>
-								<tr>
-									<th rowspan="4"><img id="searchImg" width="70px"
-										height="70px" src="resources/images/babySitter/suppot/${ s.changeName }"></th>
-									<td><span>${ s.bWriter }</span>&nbsp;| &nbsp;<span>${ s.b_CreateDate }</span></td>
-								</tr>
-								<tr>
-									<td>${ s.bTitle }</td>
-								</tr>
-								<tr>
-									<td>
-										<span>${ s.address }</span>
-									</td>
-								</tr>
-								<tr>
-									<td><span></span>&nbsp;/&nbsp;${ s.salary }</td>
-								</tr>
-							</table>
-							<hr>
-							<table>
-								<colgroup>
-									<col width="30%">
-									<col width="70%">
-								</colgroup>
-								<tr>
-									<th>기간</th>
-									<td><span class="week">월</span> <span class="week">화</span>
-										<span class="week">수</span> <span class="week">목</span> <span
-										class="week">금</span> <span class="week">토</span> <span
-										class="week">일</span></td>
-								</tr>
-							</table>
-						</div>
+								<table summary="베이비시터 중 구직글을 작성한 리스트">
+									<colgroup>
+										<col width="30%">
+										<col width="70%">
+									</colgroup>
+									<tr>
+										<th rowspan="4"><img id="searchImg" width="70px"
+											height="70px" src="resources/images/babySitter/suppot/${ s.changeName }"></th>
+										<td><span>${ s.bWriter }</span>&nbsp;| &nbsp;<span>${ s.b_CreateDate }</span></td>
+									</tr>
+									<tr>
+										<td>${ s.bTitle }</td>
+									</tr>
+									<tr>
+										<td>
+											<span>
+												<c:forTokens var = "address" items="${ s.address }" delims="/">
+													${ address }&nbsp;
+												</c:forTokens>
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span>
+												<c:forTokens var = "time" items="${ s.time }" delims="/" varStatus="timeset">
+													<c:if test="${ timeset.first }">
+														<c:out value="${ time }:00 ~ " />
+													</c:if>
+													<c:if test="${ timeset.last }">
+														<c:out value="${ time }:00" />
+													</c:if>
+												</c:forTokens>
+											</span>&nbsp;/&nbsp;${ s.salary }
+										</td>
+									</tr>
+								</table>
+								<hr>
+								<table>
+									<colgroup>
+										<col width="30%">
+										<col width="70%">
+									</colgroup>
+									<tr>
+										<th>돌봄 요일</th>
+										<td>
+											<c:forTokens var = "day" items="${ s.day }" delims="/">
+												<span class = "week">${ day }</span>
+											</c:forTokens>
+										</td>
+									</tr>
+								</table>
+							</div>
 					</c:if>
 				</c:forEach>
 			</div>
@@ -540,7 +676,69 @@ padding : 5px;
 		</script>
 	</div>
 	<div>
-		페이징<button onclick="location.href='suppotInsert.do'">글쓰기</button>
+		<c:if test="${ !empty loginUser }">
+			<p style = "text-align: right; margin-right: 20%;">
+				<button style = "width: 120px; height: 38px; background: #fff; border-radius: 4px; border: 1px solid #ddd; cursor: pointer;" onclick="location.href='suppotInsert.do'">글쓰기</button>
+			</p>
+		</c:if>
+		<ol class = "paging">
+			<li class = "first">
+				<c:if test="${ pi.currentPage <= 1 }">
+					<a>&lt;&lt;</a>
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="first" value="suppotList.do">
+						<c:param name="page" value="${ pi.startPage }"/>
+					</c:url>
+					<a href = "${ first }">&lt;&lt;</a>
+				</c:if>
+			</li>
+			<li class = "prev">
+				<c:if test="${ pi.currentPage <= 1 }">
+					<a>&lt;</a>
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="prev" value="suppotList.do">
+						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					</c:url>
+					<a href = "${ prev }">&lt;</a>
+				</c:if>
+			</li>
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:if test="${ p eq pi.currentPage }">
+					<li><font size="4"><a style="color: red;">${ p }</a></font></li>
+				</c:if>
+
+				<c:if test="${ p ne pi.currentPage }">
+					<c:url var="pagination" value="suppotList.do">
+						<c:param name="page" value="${ p }" />
+					</c:url>
+					<li><a href="${ pagination }">${ p }</a></li>
+				</c:if>
+			</c:forEach>
+			<li class = "next">
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					<a>&gt;</a>
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="next" value="suppotList.do">
+						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+					</c:url> 
+					<a href = "${ next }">&gt;</a>
+				</c:if>
+			</li>
+			<li class = "last">
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					<a>&gt;&gt;</a>
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="last" value="suppotList.do">
+						<c:param name="page" value="${ pi.maxPage }"/>
+					</c:url> 
+					<a href = "${ last }">&gt;&gt;</a>
+				</c:if>
+			</li>
+		</ol>
 	</div>
 	<footer style="margin-top: 10%;">
 		<jsp:include page="../../../common/footer.jsp"></jsp:include>
