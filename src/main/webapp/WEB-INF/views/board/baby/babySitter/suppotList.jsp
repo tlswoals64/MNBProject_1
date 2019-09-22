@@ -130,6 +130,10 @@ td {
 	justify-content: space-around;
 }
 
+.checkDay{
+	display: none;
+}
+
 .weekday {
 	border: 1px solid rgb(211, 211, 211);
 	box-sizing: border-box;
@@ -169,6 +173,10 @@ td {
 	font-size: 12px;
 	color: rgb(63, 52, 52);
 	line-height: 30px;
+}
+
+.dayBtnCheck{
+	background-color: pink;
 }
 
 .timeBox, .searchBox {
@@ -228,7 +236,11 @@ td {
 	background-color: pink;
 }
 
-._1-3i7 {
+.active{
+	display: none;
+}
+
+.Activity {
 	border-radius: 100px;
 	padding: 10px 0;
 	display: inline-block;
@@ -237,19 +249,20 @@ td {
 	width: 80px;
 	margin: 9px 5px;
 	text-align: center;
+	border: 1px solid #c4c4c4;
 	cursor: pointer;
+	
 }
 
-._1-6Wz {
+.noAcCheck {
 	color: #434343;
 	background-color: #fff;
-	border: 1px solid #c4c4c4;
 }
 
-/* ._3XBMg {
+.AcCheck {
     color: #434343;
-    background-color: #ff4500;
-} */
+    background-color: pink;
+}
 
 .searchBox {
 	border: 1px solid #d3d3d3;
@@ -418,7 +431,7 @@ td {
 
 
 		<div id="listForm">
-			<form>
+			<form action = "suppotSearch.do" method = "post">
 				<div class="searchOption"
 					style="display: line-block; justify-content: flex-start;">
 					<div class="option1">
@@ -429,7 +442,7 @@ td {
 							<svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: rgb(255, 83, 0); height: 20px; width: 20px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; position: absolute; left: 10px; top: 10px;">
 								<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
 							</svg>
-							<input type="text" style="text-indent: 25px; width: 312px; box-sizing: border-box; height: 40px; border: 1px solid rgb(211, 211, 211); padding-left: 10px; font-size: 1rem;">
+							<input type="text" id = "area" name = "area" style="text-indent: 25px; width: 312px; box-sizing: border-box; height: 40px; border: 1px solid rgb(211, 211, 211); padding-left: 10px; font-size: 1rem;">
 						</div>
 					</div>
 					<div class="option1">
@@ -437,39 +450,35 @@ td {
 							<strong>돌봄 요일</strong>
 						</div>
 						<div class="DayBox">
-								<div class = "weekday">
-									<span class = "weekdayCheck">월</span>
-								</div>
-							<button class = "weekday" tabindex="0" type="button">
-								<div>
-									<span class = "weekdayCheck">화</span>
-								</div>
-							</button>
-							<button class = "weekday" tabindex="0" type="button">
-								<div>
-									<span class="weekdayCheck">수</span>
-								</div>
-							</button>
-							<button class = "weekday" tabindex="0" type="button">
-								<div>
-									<span class="weekdayCheck">목</span>
-								</div>
-							</button>
-							<button class = "weekday" tabindex="0" type="button">
-								<div>
-									<span class="weekdayCheck">금</span>
-								</div>
-							</button>
-							<button class = "weekday" tabindex="0" type="button">
-								<div>
-									<span class="weekdayCheck">토</span>
-								</div>
-							</button>
-							<button class = "weekday" tabindex="0" type="button">
-								<div>
-									<span class="weekdayCheck">일</span>
-								</div>
-							</button>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "월">
+								<span class = "weekdayCheck">월</span>
+							</div>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "화">
+								<span class = "weekdayCheck">화</span>
+							</div>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "수">
+								<span class = "weekdayCheck">수</span>
+							</div>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "목">
+								<span class = "weekdayCheck">목</span>
+							</div>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "금">
+								<span class = "weekdayCheck">금</span>
+							</div>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "토">
+								<span class = "weekdayCheck">토</span>
+							</div>
+							<div class = "weekday" onclick = "dayCheck(this)">
+								<input type = "checkbox" class = "checkDay" name = "checkDay" value = "일">
+								<span class = "weekdayCheck">일</span>
+							</div>
+							
 						</div>
 					</div>
 					<div style="min-width: 270px;">
@@ -477,15 +486,15 @@ td {
 							<strong>시간대</strong>
 						</div>
 						<div class="timeBox timeSearch">
-							<div tabindex="0" class = "timeBtn" onclick = "timeCheck(this)">
+							<div tabindex="0" id = "timeBtn1" class = "timeBtn" onclick = "timeCheck(this)">
 								<input type = "radio" id = "time1" class = "time" name = "time" value = "7/8/9/10/11/12">
 								<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">07 - 12시</span>
 							</div>
-							<div tabindex="0" class="timeBtn" onclick = "timeCheck(this)">
+							<div tabindex="0" id = "timeBtn2" class="timeBtn" onclick = "timeCheck(this)">
 								<input type = "radio" id = "time2" class = "time" name = "time" value = "12/13/14/15/16/17/18">
 								<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">12 - 18시</span>
 							</div>
-							<div tabindex="0" class = "timeBtn" onclick = "timeCheck(this)">
+							<div tabindex="0" id = "timeBtn3" class = "timeBtn" onclick = "timeCheck(this)">
 								<input type = "radio" id = "time3" class = "time" name = "time" value = "18/19/20/21/22">
 								<span style="position: relative; padding: 0px; vertical-align: top; letter-spacing: 0px; text-transform: uppercase; font-weight: 400; font-size: 12px; color: rgb(154, 154, 154); line-height: 31px;">18 - 22시</span>
 							</div>
@@ -494,30 +503,57 @@ td {
 				</div>
 
 				<div class="searchOption">
-					<div class="_2zsvj">
+					<div>
 						<div class="sfont">
 							<strong>돌봄 내용</strong>
 						</div>
-						<div class="u23yZ" style="text-align: left; overflow: visible; width: 100%; height: auto; display: inline-block; vertical-align: top;">
-							<div class="_1-6Wz _1-3i7" role="checkbox">실내놀이</div>
-							<div class="_1-6Wz _1-3i7" role="button">등하원</div>
-							<div class="_1-6Wz _1-3i7" role="button">책읽기</div>
-							<div class="_1-6Wz _1-3i7" role="button">야외활동</div>
-							<div class="_1-6Wz _1-3i7" role="button">한글놀이</div>
-							<div class="_1-6Wz _1-3i7" role="button">영어놀이</div>
-							<div class="_1-6Wz _1-3i7" role="button">학습지도</div>
-							<div class="_1-6Wz _1-3i7" role="button">체육놀이</div>
-							<div class="_1-6Wz _1-3i7" role="button">밥 챙겨주기</div>
+						<div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "실내놀이">
+								<span>실내놀이</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "등하원">
+								<span>등하원</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "책읽기">
+								<span>책읽기</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "야외활동">
+								<span>야외활동</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "한글놀이">
+								<span>한글놀이</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "영어놀이">
+								<span>영어놀이</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "학습지도">
+								<span>학습지도</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "체육놀이">
+								<span>체육놀이</span>
+							</div>
+							<div class="Activity noAcCheck" onclick = "acCheck(this)">
+								<input type = "checkbox" class = "active" name = "active" value = "밥 챙겨주기">
+								<span>밥 챙겨주기</span>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="searchBox">
-					<button class = "search searchBtn" tabindex="0" type="button">
+					<button class = "search searchBtn" tabindex="0">
 						<span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 600; font-size: 15px; text-align: center;">검색</span>
 					</button>
 					<button class = "search searchReset" tabindex="0" type="button">
-						<div>
+						<div onclick = "reset();">
 							<svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: rgb(106, 106, 106); height: 15px; width: 15px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; vertical-align: middle; margin-left: 12px; margin-right: 0px;">
 								<path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path>
 							</svg>
@@ -751,14 +787,51 @@ td {
 	
 	<script>
 		function timeCheck(value){
-			var Check = $(value).children('.time').is(':checked');
-			if(Check){
-				$(value).children('.time').prop('checked', false);
-				$(value).toggleClass(" timeBtnCheck");
+			$('.timeBtn').css('background-color', 'white');
+			var Check = $(value).children('.time').is(':checked'); // radio 버튼 체크 유무 확인
+			
+ 			if(Check){
+				$(value).children('.time').prop('checked', false); // 체크 되있을 시 해제
 			} else{
-				$(value).children('.time').prop('checked', true);
-				$(value).toggleClass(" timeBtnCheck");
+				$(value).children('.time').prop('checked', true); // 체크 안 되있을 시 체크
+				$(value).css('background-color', 'pink');
 			}
+		}
+		
+		function dayCheck(value){
+			var Check = $(value).children('.checkDay').is(':checked');
+			if(Check){
+				$(value).children('.checkDay').prop('checked', false);
+				$(value).toggleClass("dayBtnCheck");
+			} else{
+				$(value).children('.checkDay').prop('checked', true);
+				$(value).toggleClass("dayBtnCheck");
+			}
+		}
+		
+		function acCheck(value){
+			var Check = $(value).children('.active').is(':checked');
+			
+			if(Check){
+				$(value).children('.active').prop('checked', false);
+				$(value).toggleClass("AcCheck");
+				$(value).toggleClass("noAcCheck");
+			} else {
+				$(value).children('.active').prop('checked', true);
+				$(value).toggleClass("noAcCheck");
+				$(value).toggleClass("AcCheck");
+			}
+		}
+		
+		function reset(){
+			$('#area').val("");
+			$('.timeBtn').css('background-color', 'white');
+			$('.time').prop('checked', false);
+			$('.weekday').removeClass("dayBtnCheck");
+			$('.checkDay').prop('checked', false);
+			$('.Activity').removeClass("AcCheck");
+			$('.Activity').addClass("noAcCheck");
+			$('.active').prop('checked', false);
 		}
 	</script>
 </body>

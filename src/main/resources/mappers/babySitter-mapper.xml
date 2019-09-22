@@ -133,5 +133,6 @@
 		insert into reply
 		values(seq_rnum.nextval, #{nContent}, sysdate, default, #{rWriter}, #{bNo})
 	</insert>
+	
 
 </mapper>
