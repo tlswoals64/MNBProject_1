@@ -176,10 +176,18 @@ public class BabySitterServiceImpl implements BabySitterService {
 		return bsDAO.deleteAttachment(bNo);
 	}
 
+
 	@Override
-	public int deleteSuppot(int bNo) {
-		return bsDAO.deleteSuppot(bNo);
+	public int deleteMomBoard(int bNo) {
+		return bsDAO.deleteMomBoard(bNo);
 	}
+
+	@Override
+	public int deleteMomAttachment(int bNo) {
+		return bsDAO.deleteMomAttachment(bNo);
+	}
+
+	
 
 
 

@@ -240,6 +240,21 @@ public class BabySitterController
 			
 			return mv;
 		}
+		@RequestMapping("momboardDelete.do")
+		public String momDelete(@RequestParam("bNo") int bNo, @RequestParam("page") int page) {
+			int result1 = bsService.deleteMomBoard(bNo);
+			int result2 = bsService.deleteMomAttachment(bNo);
+
+			
+			int result = result1 + result2;
+			
+			if(result >1) {
+				return "redirect:babymom.do";
+			} else {
+				throw new BoardException("게시판 삭제에 실패하였습니다.");
+			}
+		}
+		
 		//베이비시터모집 수정
 		@RequestMapping("babymomUpdate.do")
 		public ModelAndView momUpdate(@ModelAttribute Momboard b,  @RequestParam("time1") String time1, @RequestParam("time2") String time2,
@@ -508,8 +523,8 @@ public class BabySitterController
 				b.setOriginName(titleImg.getOriginalFilename());
 				b.setChangeName(renameFileName);
 			}
-		}
-		
+		}		
+	
 		String bcactive = "";
 		for(int i = 0; i < active.length; i++) {
 			if(i != active.length - 1) {
@@ -580,11 +595,10 @@ public class BabySitterController
 	public String suppotDelete(@RequestParam("bNo") int bNo, @RequestParam("page") int page) {
 		int result1 = bsService.deleteSuppotBoard(bNo);
 		int result2 = bsService.deleteAttachment(bNo);
-		int result3 = bsService.deleteSuppot(bNo);
 		
-		int result = result1 + result2 + result3;
+		int result = result1 + result2;
 		
-		if(result == 3) {
+		if(result == 2) {
 			return "redirect:suppotList.do";
 		} else {
 			throw new BoardException("게시판 삭제에 실패하였습니다.");

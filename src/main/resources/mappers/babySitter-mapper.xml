@@ -199,13 +199,21 @@
 	<update id="deleteAttachment">
 		update board_picture
 		set status = 'N'
-		where bno = #{bNo} and btype = 4
-	</update>
-	
-	<update id="deleteSuppot">
-		update bc_suppot
-		set status = 'N'
-		where bno = #{bNo} and btype = 4
+		where bno = #{bNo}
 	</update>
 
+	
+	<update id="deleteMomBoard">
+		update board
+		set status = 'N'
+		where bno = #{bNo} and btype = 3
+	</update>
+	
+	<update id="deleteMomAttachment">
+		update board_picture
+		set status = 'N'
+		where bno = #{bNo} 
+	</update>
+	
+	
 </mapper>
