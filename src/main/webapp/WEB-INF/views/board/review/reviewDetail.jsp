@@ -284,9 +284,7 @@
 	</tr>
 	<tr>
 	<td style="text-align:left">
-	<textarea name="content" cols="110" rows="10" style="text-align:left; resize:none;" readonly>
-	${revi.bContent}	
-	</textarea>
+	<textarea name="content" cols="110" rows="10" style="text-align:left; resize:none;" readonly>${revi.bContent}</textarea>
 	</td>
 	</tr>
 	</table>	
@@ -337,13 +335,17 @@
 					<c:param name="bNo" value="${ revi.bNo }" />
 					<c:param name="page" value="${ page }" />
 				</c:url>
+				<c:url var="reViewList" value="reViewList.do">
+				<c:param name="bNo" value="${ revi.bNo }" />
+				<c:param name="page" value="${ page }" />
+				</c:url>
 			</div>
 		
    	<div class="both"></div>
 		<div class= "joinButton">
 				<button type = "button" onclick ="location.href='${ reviewUpdateView }'">수정</button>
 				<button type = "button" onclick="location.href='${ reviewDelete }'">삭제</button>
-				<button onclick="location.href='reViewList.do'">목록으로</button>
+				<button type = "button" onclick="location.href='${reViewList}'">목록으로</button>
 		</div>
 		</c:if>
 		<c:if test="${ loginUser.nickName != revi.bWriter }">		
@@ -351,7 +353,7 @@
 		<div class= "joinButton">
 				<button type = "button" onclick ="noUpdate();">수정</button>
 				<button type = "button" onclick="noDelete();">삭제</button>
-				<button onclick="location.href='reViewList.do'">목록으로</button>
+				<button type = "button" onclick="location.href='${reViewList}'">목록으로</button>
 		</div>
 		</c:if>
 			

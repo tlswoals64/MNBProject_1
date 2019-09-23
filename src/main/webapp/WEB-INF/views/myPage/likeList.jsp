@@ -101,7 +101,7 @@ table{
 					${ b.bTitle }		
 				</c:if>
 			</td>			
-			<td align="center">${ loginUser.nickName }</td>
+			<td align="center">${ b.bWriter }</td>
 			<td align="center">${ b.b_CreateDate }</td>
 		
 		</tr>
@@ -160,5 +160,13 @@ table{
 </div>
 <jsp:include page="../common/footer.jsp"/>
 </body>
+
+<script>
+(function() {
+	var bWriter = '$(list[0].bWriter)';
+	console.log(bWriter);
+}());
+
+</script>
 
 </html>
