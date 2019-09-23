@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.bsApply.model.vo.BSApply;
+import com.kh.MNB.member.model.vo.Like;
 import com.kh.MNB.member.model.vo.Member;
 
 
@@ -73,7 +74,9 @@ public interface MemberService {
 
 	ArrayList<Member> seletMUserTopList();
 
-	ArrayList<Board> mylikeList(PageInfo pi, String bWriter);
+	ArrayList<Like> mylikeList(PageInfo pi, String bWriter);
+
+	int getmylikeCount(String bWriter);
 
 
 

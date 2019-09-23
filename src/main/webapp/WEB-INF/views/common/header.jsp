@@ -50,7 +50,7 @@
 		<div class="header_btn">
 			<c:if test="${ empty sessionScope.loginUser }">
 			<ul>
-				<li><A href='loginView.do'>LOGIN</a></li>
+				<li><A onclick='login();'>LOGIN</a></li>
 				<li><A href="memberSingUp.do">JOIN</a></li>
 
 				<li><A href="#">베이비시터등록</a></li>
@@ -84,6 +84,10 @@
 		</div>
 	</div>
   </div>
-
+<script>
+	function login(){
+		location.href = 'loginView.do?check='+0;
+	}
+</script>
 </body>
 </html>

@@ -114,7 +114,13 @@
 
 </div>
 <script>
-
+(function() {
+    var check = '${check}';
+    console.log(check);
+    if(check == 1){
+    	alert('아이디나 비밀번호가 틀렸습니다!');
+    }
+}());
 
 	
 </script>

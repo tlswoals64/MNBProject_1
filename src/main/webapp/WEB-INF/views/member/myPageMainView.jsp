@@ -188,7 +188,15 @@
 					<th class="myInfoTh">닉네임</th>
 					<td class="myInfoTd">${loginUser.nickName}</td>
 					<th class="myInfoTh">회원등급</th>
-					<td class="myInfoTd">${loginUser.memberType}</td>
+					<c:if test="${loginUser.memberType eq 1 }">
+					<td class="myInfoTd">일반회원</td>
+					</c:if>
+					<c:if test="${loginUser.memberType eq 2 }">
+					<td class="myInfoTd">베이비시터</td>
+					</c:if>
+					<c:if test="${loginUser.dec eq 5 }">
+					<td class="myInfoTd">블랙리스트</td>
+					</c:if>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">생년월일</th>
@@ -200,6 +208,8 @@
 					<c:if test="${loginUser.gender eq 'F' }">
 					<td class="myInfoTd">여자</td>
 					</c:if>
+		
+					
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">이메일</th>
