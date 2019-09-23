@@ -1256,6 +1256,9 @@ public class BoardController {
 				reply.setnContent(rContent);
 				reply.setbNo(bNo);
 				
+				
+				System.out.println("댓글 작성자 확인!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + userId);
+				
 				int result = bService.insertReplyMH(reply);
 				
 				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
