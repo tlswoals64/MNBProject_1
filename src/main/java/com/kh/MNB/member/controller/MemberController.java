@@ -391,7 +391,7 @@ public class MemberController {
 	public ModelAndView updateMemberView(HttpSession session, ModelAndView mv) {
 		  
 		Member m = (Member)session.getAttribute("loginUser");
-		mv.addObject("loginUser", m);
+		mv.addObject("m", m);
 		mv.setViewName("myPage/updateMember");
 		
 		return mv;
@@ -449,6 +449,35 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	      
 	      return mv;
 	   }
+	//내가 좋아요 한 게시글
+	@RequestMapping("mylikeList.do")
+public ModelAndView mylikeView(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv,HttpSession session) {		
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		/* String userId = m.getUserId(); */
+		String bWriter = m.getUserId();
+		System.out.println(bWriter);
+		int currentPage = 1;
+	      if(page != null) {
+	         currentPage = page;
+	      }
+	      
+	      int listCount = mService.getmyListCount(bWriter); 
+	      System.out.println(listCount);
+	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+	      
+	      ArrayList<Board> list = mService.mylikeList(pi, bWriter);
+	      if(list != null) {
+	         mv.addObject("list", list);
+	         mv.addObject("pi", pi);
+	         mv.setViewName("myPage/boardList");
+	      }
+	      else {
+	    	  throw new MemberException("게시글 불러오기에 실패하였습니다.");
+	      }
+	      
+	      return mv;
+	   }
 	//게시글 상세페이지
 	@RequestMapping(value="myBoardDetail.do",method = RequestMethod.GET)
 	public String myBoardDetail(@RequestParam("bNo") int bNo, RedirectAttributes redirect) {
@@ -457,9 +486,9 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 		Board board= mService.boardType(bNo);
 		if(board!=null){
 		if(board.getbType()==1) {
-			
-		}else if(board.getbType()==1) {
-			
+			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);			
+			return "redirect:detailCom.do";
 		}
 		else if(board.getbType()==2) {
 			redirect.addAttribute("bNo", bNo);
@@ -472,6 +501,10 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 			return "redirect:momDetail.do";
 		}
 		else if(board.getbType()==4) {
+			redirect.addAttribute("bNo", bNo);
+			redirect.addAttribute("page", page);
+			return "redirect:suppotDetail.do";
+			
 			
 		}
 		else if(board.getbType()==5) {

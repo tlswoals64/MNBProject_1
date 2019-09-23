@@ -212,7 +212,7 @@ vertical-align: top;
 	<script>
 	
 	function deleteMember(){
-		var bool = confirm("정말로 삭제하시겠습니까?");
+		var bool = confirm("정말로 탈퇴하시겠습니까?");
 		
 		if(bool){
 		location.href='${ mdelete }';

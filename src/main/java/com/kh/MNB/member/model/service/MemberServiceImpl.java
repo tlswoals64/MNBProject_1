@@ -227,4 +227,9 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> seletMUserTopList() {
 		return mDAO.seletMUserTopList();
 	}
+
+	@Override
+	public ArrayList<Board> mylikeList(PageInfo pi, String bWriter) {
+		return mDAO.mylikeList(pi, bWriter);
+	}
 }

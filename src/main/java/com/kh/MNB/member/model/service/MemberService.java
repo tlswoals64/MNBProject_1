@@ -73,6 +73,8 @@ public interface MemberService {
 
 	ArrayList<Member> seletMUserTopList();
 
+	ArrayList<Board> mylikeList(PageInfo pi, String bWriter);
+
 
 
 	
