@@ -51,7 +51,8 @@
 	<update id="upDateMomBoard" parameterType="board">
 	update board
 	set bTitle = #{bTitle}, bContent = #{bContent}, b_modifydate = sysdate
-	where bno = #{bNo}
+	where bNo=#{bNo}
+
 	</update>
 	<update id="upDateMomAttachment" parameterType="Attachment">
 		update board_picture
