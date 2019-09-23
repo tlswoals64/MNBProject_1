@@ -70,7 +70,7 @@ font-size: initial;
 }
 
 .updateButton button{
-	width : 30%;
+	width : 20%;
 	margin: 10px;
 	padding: 10px 32px;
 	font-size: 16px;
@@ -205,6 +205,7 @@ vertical-align: top;
 				<c:url var="mdelete" value="mdelete.do">
 						<c:param name="id" value="${ loginUser.userId }"/><!-- 넘어갈 값이 있으니 param을 넣게 c:url을 쓰자 -->
 				</c:url>
+				<button type ="button" onclick="location.href='pwdUpdateView.do'">비밀번호변경</button>
 				<button onclick="deleteMember()">회원탈퇴</button>
 				<button onclick = "history.back();">취소</button>
 			</div>
