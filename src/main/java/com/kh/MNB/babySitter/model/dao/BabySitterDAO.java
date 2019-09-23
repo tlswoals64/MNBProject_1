@@ -152,9 +152,15 @@ public class BabySitterDAO {
 		return sqlSession.update("babySitterMapper.deleteAttachment", bNo);
 	}
 
-	public int deleteSuppot(int bNo) {
-		return sqlSession.update("babySitterMapper.deleteSuppot", bNo);
+
+	public int deleteMomBoard(int bNo) {
+		return sqlSession.update("babySitterMapper.deleteMomBoard", bNo);
 	}
+
+	public int deleteMomAttachment(int bNo) {
+		return sqlSession.update("babySitterMapper.deleteMomAttachment", bNo);
+	}
+
 
 	
 	

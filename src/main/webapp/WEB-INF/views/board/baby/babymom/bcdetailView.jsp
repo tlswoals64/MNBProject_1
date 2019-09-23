@@ -189,10 +189,23 @@
 					<br>
 						${momboard.address}
 					</div>
+					<br>
 				</div>
 				<div class="_1yvNS">
 					<div class="_1qvJA">
 						희망시급: ${momboard.bcSalary}
+					</div>
+					<br>
+				</div>
+				<div class="_1yvNS">
+					<div class="_1qvJA">
+						희망시간: ${momboard.bcTime}
+					</div>
+					<br>
+				</div>
+				<div class="_1yvNS">
+					<div class="_1qvJA">
+						작성일 : ${momboard.b_CreateDate}
 					</div>
 					<br>
 				</div>
@@ -216,13 +229,11 @@
 	<div style="margin:auto">
 	<table >
 	<tr>
-	<th style="background-color:#f1f1f1;">간단 소개</th>
+	<th style="background-color:#f1f1f1;">상세 내용</th>
 	</tr>
 	<tr>
 	<td style="text-align:left">
-	<textarea name="content" cols="110" rows="10" style="text-align:left; resize:none; text-indent: 0px;" readonly>
-	${momboard.bContent}	
-	</textarea>
+	<textarea name="content" cols="110" rows="10" style="text-align:left; resize:none; text-indent: 0px;" readonly>${momboard.bContent}</textarea>
 	</td>
 	</tr>
 	</table>
@@ -581,6 +592,15 @@
 			</div>
          </div>
       </c:if>
+      <c:if test="${ loginUser.nickName != momboard.bWriter }">
+         <div class="joinbox" style="max-width: 90%; margin: 20px auto;">                      
+            <div class= "joinButton" style="width:800px">
+				<button type = "button" onclick="noUpdate();">수정</button>
+				<button type = "button" onclick="noDelete();">삭제</button>
+				<button onclick="location.href='babymom.do'">목록으로</button>
+			</div>
+         </div>
+      </c:if>
 	
 	</div>
 	<div style="height:20px;"></div>
@@ -624,6 +644,12 @@
 	</form>
 	</div>
 	<script>
+	function noUpdate(){		
+		alert("게시글을 수정할 수 없습니다.")
+	}
+	function noDelete(){
+		alert("게시글을 삭제할 수 없습니다.")
+	}
 
 	
 	function popup(){

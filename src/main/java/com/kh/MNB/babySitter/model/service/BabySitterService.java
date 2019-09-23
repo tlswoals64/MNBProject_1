@@ -74,7 +74,11 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 
 	int deleteAttachment(int bNo);
 
-	int deleteSuppot(int bNo);
+
+
+	int deleteMomBoard(int bNo);
+
+	int deleteMomAttachment(int bNo);
 
 
 	

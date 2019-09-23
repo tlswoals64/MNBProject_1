@@ -76,12 +76,12 @@
 	margin:auto;
 }
 .star{
-	font-size:20px;
+	font-size:36px;
 	color:red;
 
 }
 .estar{
-	font-size:20px;
+	font-size:36px;
 	color:gray;	
 }
 /****************댓글 버튼 *******************/
@@ -169,13 +169,16 @@
 	<form action="">
 	<div style="margin:auto;">
 	<div class="UNS">
-	<table>
+	<table style="width:400px;">
 	<tr>
 	<td>
 	<input type="hidden" value="${revi.bNo}" name="bNo" id="bNo">
-	<h2>${revi.bTitle}</h2>
+	<h2 style="display:inline-block;">${revi.bTitle}</h2>
 	<span style="float:right;" id="likeArea" onclick="likeChange();"><img id="likeAreaImg" src="resources/images/main/unlike.png"></span>
 	<button type="button" onclick="report();" id="reportbtn"><img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
+	<button type="button" onclick="popup();" id="reportbtn">
+		<img src="resources/images/babySitter/note.png" style="width: 20px; height: 20px;">쪽지
+	</button>
 	</td>
 	</tr>
 	</table>
@@ -189,7 +192,7 @@
 		<div class="_2T0ZR" style="width:100%;">
 			<div>
 				<div class="_1yvNS" style="margin-bottom: 12px;">
-					<div class="_3Ub_z" style="margin-right: 15px;">
+					<div class="_3Ub_z" style="margin-right: 15px; font-size:16px;">
 					<br><br>		
 					<table>
 					<tr>
@@ -206,13 +209,15 @@
 					</div>
 					<br>
 				</div>
-			</div>
+			</div> 
 			<div>
-				<div style="flex-basis: 100%;">
+				<div style="flex-basis: 100%; font-size:16px;">
 					<div style="justify-content: space-around;">
 						<div >
 							<div>
 							<div>조회수 : ${revi.bCount}</div>
+							<div>작성일 : ${revi.b_CreateDate }</div>
+							
 							</div>
 						</div>						
 					</div>
@@ -288,21 +293,9 @@
 	</div>
 	</div>
 	
-		<c:if test="${ loginUser.nickName eq revi.bWriter }">
-			<div class="joinbox" style="max-width: 90%; margin:auto" >
-				<c:url var="reviewUpdateView" value="reviewUpdateView.do">
-					<c:param name="bNo" value="${ revi.bNo }" />
-					<c:param name="page" value="${ page }" />
-				</c:url>
-				<c:url var="reviewDelete" value="reviewDelete.do">
-					<c:param name="bNo" value="${ revi.bNo }" />
-					<c:param name="page" value="${ page }" />
-				</c:url>
-			</div>
-		</c:if>
-		
 		<div class="both" ></div>	
 		</div>	
+		<div style="height:20px;"></div>
 		<div id="replyyy">
 		<div id="userMemoArea">
 					<table id="userMemoTable">
@@ -334,13 +327,33 @@
 	<div class="both"></div>
 	
 
-   	
+   		<c:if test="${ loginUser.nickName eq revi.bWriter }">
+			<div class="joinbox" style="max-width: 90%; margin:auto" >
+				<c:url var="reviewUpdateView" value="reviewUpdateView.do">
+					<c:param name="bNo" value="${ revi.bNo }" />
+					<c:param name="page" value="${ page }" />
+				</c:url>
+				<c:url var="reviewDelete" value="reviewDelete.do">
+					<c:param name="bNo" value="${ revi.bNo }" />
+					<c:param name="page" value="${ page }" />
+				</c:url>
+			</div>
+		
    	<div class="both"></div>
 		<div class= "joinButton">
 				<button type = "button" onclick ="location.href='${ reviewUpdateView }'">수정</button>
-				<button type = "button" onclick="location.href='${ reviewDelete }'"">삭제</button>
+				<button type = "button" onclick="location.href='${ reviewDelete }'">삭제</button>
 				<button onclick="location.href='reViewList.do'">목록으로</button>
-			</div>
+		</div>
+		</c:if>
+		<c:if test="${ loginUser.nickName != revi.bWriter }">		
+   		<div class="both"></div>
+		<div class= "joinButton">
+				<button type = "button" onclick ="noUpdate();">수정</button>
+				<button type = "button" onclick="noDelete();">삭제</button>
+				<button onclick="location.href='reViewList.do'">목록으로</button>
+		</div>
+		</c:if>
 			
 
 </form>
@@ -351,11 +364,35 @@
 			}
 		</script>
 <script>
+
+function noUpdate(){		
+	alert("게시글을 수정할 수 없습니다.")
+}
+function noDelete(){
+	alert("게시글을 삭제할 수 없습니다.")
+}
 function back(){	  	   
 	   location.href="reViewList.do"
 	   }
 </script>
 <script>
+
+
+function popup(){
+	 var popupData = document.popupData;
+	 var url= "noteInsertForm.do";    //팝업창 페이지 URL
+	 var winWidth = 759;
+	 var winHeight = 341;
+	 var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	
+	 window.open("","noteInsertForm",popupOption);
+	
+	 popupData.action = url;
+	 popupData.target = "noteInsertForm";
+	 popupData.submit();
+	 }
+	 
+	 
 	function getreplyList(){
 		var bNo = '${revi.bNo}';
 		console.log("ajax전" + bNo);
