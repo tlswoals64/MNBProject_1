@@ -46,8 +46,9 @@
   to {transform: scale(1)}
 }
 </style>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <body>
-		<form class="modal-content animate" action="noteInsert.do" method="post">
+		<form id = "sendNote" class="modal-content animate" action="noteInsert.do" method="post">
 			<div style = "height : 45px; position: relative; background-color: lightpink; text-indent: 20px;">
 				<h1>쪽지 보내기</h1>
 			</div>
@@ -67,7 +68,8 @@
 					<tr>
 						<th><label for = "respon">수신인 </label></th>
 						<td>
-							<input type="text" id = "respon" name="respone" value=${ respon.nickName }>
+							<input type="text" value=${ respon.nickName }>
+							<input type="text" id = "respon" name="respon" value=${ respon.userId }>
 						</td>
 					</tr>
 					<tr>
@@ -85,9 +87,15 @@
 				</table>
 			</div>
 			<div>
-			<button>보내기</button>
+				<button type = "button" onclick = "sendNote();">보내기</button>
 			</div>
 			<input type="hidden" name="bWriter" value="${ suppot.bWriter }">
 		</form>
+		<script>
+			function sendNote(){
+				$("#sendNote").submit();
+				window.close();
+			}
+		</script>
 </body>
 </html>

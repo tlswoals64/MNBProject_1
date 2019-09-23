@@ -1,6 +1,7 @@
 package com.kh.MNB.babySitter.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -153,6 +154,31 @@ public class BabySitterServiceImpl implements BabySitterService {
 	@Override
 	public int insertMomReply(Reply r) {
 		return bsDAO.insertMomReply(r);
+	}
+
+	@Override
+	public int getSuppotSearchListCount(Map<String, Object> map) {
+		return bsDAO.SuppotSearchListCount(map);
+	}
+
+	@Override
+	public ArrayList<sitterSuppot> selectsuppotSearchList(Map<String, Object> map, PageInfo pi) {
+		return bsDAO.selectsuppotSearchList(map, pi);
+	}
+
+	@Override
+	public int deleteSuppotBoard(int bNo) {
+		return bsDAO.deleteSuppotBoard(bNo);
+	}
+
+	@Override
+	public int deleteAttachment(int bNo) {
+		return bsDAO.deleteAttachment(bNo);
+	}
+
+	@Override
+	public int deleteSuppot(int bNo) {
+		return bsDAO.deleteSuppot(bNo);
 	}
 
 

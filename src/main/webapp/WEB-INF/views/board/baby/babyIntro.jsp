@@ -70,39 +70,64 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div class="Community_list">
 		<h2>실시간 인기 게시글</h2>
 		<ul>	
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
+
 		</ul>
 		<ul>	
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네.</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네.</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
-			<li><a href=""><img src="img/main/mong6.jpg" width="300" height="300"></a>
-			<h4>M & B</h4>
-			<p>씨벌 사이즈 존나크네</p>
+			<li>
+				<a href="">
+					<img src="img/main/mong6.jpg" width="300" height="300">
+				</a>
+				<h4>제목</h4>
+				<p>작성일 | 조회수</p>
 			</li>
 		</ul>
 	</div>

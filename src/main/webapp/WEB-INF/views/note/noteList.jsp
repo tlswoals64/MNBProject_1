@@ -197,9 +197,9 @@
 					<tr style="background: pink;">
 						<th>번호</th>
 						<th width="300">제목</th>
-						<th>발신인</th>
-						<th>수신인</th>
-						<th>날짜</th>
+						<th>보낸 이</th>
+						<th>받는 이</th>
+						<th>보낸 날짜</th>
 						<th>읽음 여부</th>
 					</tr>
 					<c:forEach var="n" items="${ responList }">
@@ -218,7 +218,7 @@
 								</c:if>
 							</td>
 							<td align="center">${ n.send }</td>
-							<td align="center">${ n.respon }</td>
+							<td align="center">${ loginUser.nickName }</td>
 							<td align="center">${ n.enroll_Date }</td>
 							<td align="center"><c:if test = "${ n.read eq 'Y' }" >읽음</c:if><c:if test = "${ n.read ne 'Y' }" >읽지 않음</c:if></td>
 						</tr>
@@ -291,9 +291,9 @@
 					<tr style="background: pink;">
 						<th>번호</th>
 						<th width="300">제목</th>
-						<th>발신인</th>
-						<th>수신인</th>
-						<th>날짜</th>
+						<th>보낸 이</th>
+						<th>받는 이</th>
+						<th>보낸 날짜</th>
 						<th>읽음 여부</th>
 					</tr>
 					<c:forEach var="n" items="${ sendList }">
@@ -311,7 +311,7 @@
 									${ n.nTitle }
 								</c:if>
 							</td>
-							<td align="center">${ n.send }</td>
+							<td align="center">${ loginUser.nickName }</td>
 							<td align="center">${ n.respon }</td>
 							<td align="center">${ n.enroll_Date }</td>
 							<td align="center">
@@ -321,12 +321,13 @@
 					</c:forEach>
 					<tr>
 						<td colspan="6" align="right" id="buttonTab">
-							<c:if test="${ !empty loginUser }">
+							<c:if test="${ !empty loginUser || loginUser.memberType != 3 }">
 								<button type="button" onclick="document.getElementById('popup').style.display='block'">쪽지 보내기</button>
 							</c:if>
 						</td>
 					</tr>
 				</table>
+				
 				<ol class="paging">
 					<li class="first"><c:if test="${ sendPi.currentPage <= 1 }">
 							<a>&lt;&lt;</a>
@@ -396,16 +397,16 @@
 						<col width="50%">
 					</colgroup>
 					<tr>
-						<th><label>발신인 </label></th>
+						<th><label>보낸 이 </label></th>
 						<td>
 							<label>${ loginUser.nickName }</label>
 							<input type="hidden" name="send" value="${ loginUser.userId }">
 						</td>
 					</tr>
 					<tr>
-						<th><label for = "respon">수신인 </label></th>
+						<th><label for = "respon">받는 이 </label></th>
 						<td>
-							<input type="text" id = respon name="respon">
+							<input type="text" id = respon name="respone">
 						</td>
 					</tr>
 					<tr>

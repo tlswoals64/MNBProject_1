@@ -1,6 +1,7 @@
 package com.kh.MNB.babySitter.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -130,6 +131,29 @@ public class BabySitterDAO {
 	public ArrayList<Reply> selectMomReplyList(int bNo) {
 		
 		return (ArrayList)sqlSession.selectList("babySitterMapper.insertMomReply", bNo);
+	}
+
+	public int SuppotSearchListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("babySitterMapper.SuppotSearchListCount", map);
+	}
+
+	public ArrayList<sitterSuppot> selectsuppotSearchList(Map<String, Object> map, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("babySitterMapper.selectsuppotSearchList", map, rowBounds);
+	}
+
+	public int deleteSuppotBoard(int bNo) {
+		return sqlSession.update("babySitterMapper.deleteSuppotBoard", bNo);
+	}
+
+	public int deleteAttachment(int bNo) {
+		return sqlSession.update("babySitterMapper.deleteAttachment", bNo);
+	}
+
+	public int deleteSuppot(int bNo) {
+		return sqlSession.update("babySitterMapper.deleteSuppot", bNo);
 	}
 
 	

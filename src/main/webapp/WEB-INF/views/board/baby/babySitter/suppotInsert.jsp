@@ -379,7 +379,7 @@ input, textarea, select {
 						<tr>
 							<th scope="row">상세내용</th>
 							<td class="write pnawtd"><textarea name='bContent'
-									required="required" style='width: 90%; height: 200px;'></textarea></td>
+									required="required" style='width: 90%; height: 200px; resize: none;'></textarea></td>
 						</tr>
 						<tr>
 							<th>활동 유형</th>
@@ -440,7 +440,7 @@ input, textarea, select {
 						<tr>
 							<th>경력</th>
 							<td>
-								<textarea name='bCcarrer' required="required" style='width: 90%; height: 200px;'></textarea>
+								<textarea name='bCcarrer' required="required" style='width: 90%; height: 200px; resize: none;'></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -469,6 +469,9 @@ input, textarea, select {
 		</div>
 	</div>
 	<script>
+		$("#inputimg").hide();
+		$("#reinputimg").hide();
+		
 		function sample6_execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
@@ -521,6 +524,10 @@ input, textarea, select {
 					alert("3개까지만 선택할 수 있습니다.");
 				}
 			});
+		});
+		
+		$("#contentImgArea1").click(function() {
+			$("#inputimg").click();
 		});
 
 		function LoadImg(value) {
