@@ -717,7 +717,7 @@ td {
 		</script>
 	</div>
 	<div>
-		<c:if test="${ !empty loginUser || loginUser.memberType != 3 }">
+		<c:if test="${ !empty loginUser && loginUser.memberType != 1 && loginUser.dec != 5 }">
 			<p style = "text-align: right; margin-right: 20%;">
 				<button style = "width: 120px; height: 38px; background: #fff; border-radius: 4px; border: 1px solid #ddd; cursor: pointer;" onclick="location.href='suppotInsert.do'">글쓰기</button>
 			</p>

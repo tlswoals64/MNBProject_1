@@ -187,6 +187,16 @@ public class BabySitterServiceImpl implements BabySitterService {
 		return bsDAO.deleteMomAttachment(bNo);
 	}
 
+	@Override
+	public ArrayList<sitterSuppot> suppotTopList() {
+		return bsDAO.suppotTopList();
+	}
+
+	@Override
+	public ArrayList<Momboard> momTopList() {
+		return bsDAO.momTopList();
+	}
+
 	
 
 

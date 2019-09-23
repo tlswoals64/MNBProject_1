@@ -161,6 +161,14 @@ public class BabySitterDAO {
 		return sqlSession.update("babySitterMapper.deleteMomAttachment", bNo);
 	}
 
+	public ArrayList<sitterSuppot> suppotTopList() {
+		return (ArrayList)sqlSession.selectList("babySitterMapper.suppotTopList");
+	}
+
+	public ArrayList<Momboard> momTopList() {
+		return (ArrayList)sqlSession.selectList("babySitterMapper.momTopList");
+	}
+
 
 	
 	

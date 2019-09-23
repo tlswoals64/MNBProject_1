@@ -80,6 +80,10 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 
 	int deleteMomAttachment(int bNo);
 
+	ArrayList<sitterSuppot> suppotTopList();
+
+	ArrayList<Momboard> momTopList();
+
 
 	
 }

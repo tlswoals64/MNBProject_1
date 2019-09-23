@@ -39,14 +39,8 @@ public class NoteController {
 		int sendlistCount = ntService.SendNoteListCount(user);
 		int responlistCount = ntService.ResponNoteListCount(user);
 		
-		System.out.println(sendlistCount);
-		System.out.println(responlistCount);
-		
 		PageInfo sendPi = Pagination.getPageInfo(currentPage, sendlistCount);
 		PageInfo responPi = Pagination.getPageInfo(currentPage, responlistCount);
-		
-		System.out.println(sendPi);
-		System.out.println(responPi);
 		
 		ArrayList<Note> sendList = ntService.selectSendNoteList(sendPi, user);
 		ArrayList<Note> responList = ntService.selectResponNoteList(responPi, user);
@@ -68,6 +62,9 @@ public class NoteController {
 		
 		Member Respone = ntService.selectRespone(writer);
 		
+		System.out.println(loginUser);
+		System.out.println(Respone);
+		
 		mv.addObject("loginUser", loginUser).addObject("respon",Respone).setViewName("note/noteInsert");
 		
 		return mv;
@@ -76,7 +73,7 @@ public class NoteController {
 	@RequestMapping("noteInsert.do")
 	public String noteInsert(@ModelAttribute Note note, @RequestParam(value = "respone", required = false) String writer) {
 		int result = 0;
-		
+		System.out.println(note);
 		if(writer != null) {
 			Member respone = ntService.selectRespone(writer);
 			note.setRespon(respone.getUserId());
