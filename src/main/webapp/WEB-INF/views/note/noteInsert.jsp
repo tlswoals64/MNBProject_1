@@ -69,7 +69,7 @@
 						<th><label for = "respon">수신인 </label></th>
 						<td>
 							<input type="text" value=${ respon.nickName }>
-							<input type="text" id = "respon" name="respon" value=${ respon.userId }>
+							<input type="hidden" id = "respon" name="respon" value=${ respon.userId }>
 						</td>
 					</tr>
 					<tr>

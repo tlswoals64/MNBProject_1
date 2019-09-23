@@ -44,6 +44,16 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 .Community_list ul li h4 {font-size:20px;margin-top:10px; padding-bottom:10px; border-bottom:1px solid #ededed;}
 .Community_list ul li p {font-size: 13px; color:#5d5d5d; margin-top:10px;}
 
+#suppotTopList img{
+	width: 300px;
+	height: 300px;
+}
+
+#momTopList img{
+	width: 300px;
+	height: 300px;
+}
+
 </style>
 
 </head>
@@ -69,73 +79,83 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div id="content">
 	<div class="Community_list">
 		<h2>실시간 인기 게시글</h2>
-		<ul>	
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-
-		</ul>
-		<ul>	
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-			<li>
-				<a href="">
-					<img src="img/main/mong6.jpg" width="300" height="300">
-				</a>
-				<h4>제목</h4>
-				<p>작성일 | 조회수</p>
-			</li>
-		</ul>
+		<div id = "suppotTopList">
+		</div>
+		<div id = "momTopList">
+		</div>
 	</div>
 </div>
  
   
-  <jsp:include page="../../common/footer.jsp"></jsp:include>
- 
- 
- </body>
+<jsp:include page="../../common/footer.jsp"></jsp:include>
+<script>
+$(function(){
+	topSuppotList();
+	
+	setInterval(function(){
+		topSuppotList();
+	}, 10000);
+});
+
+$(function(){
+	topMomList();
+	
+	setInterval(function(){
+		topMomList();
+	}, 10000);
+});
+
+function topSuppotList(){
+	$.ajax({
+		url : "topSuppotList.do",
+		dataType : "json",
+		success: function(data){
+			$Body = $("#suppotTopList");
+			$Body.html("");
+
+			for(var i in data){
+				var $ul = $("<ul>");
+				var $li = $("<li>");
+				var $a = $("<a href=suppotDetail.do?bNo=" + data[i].bNo + " >").html("<img src = resources/images/babySitter/suppot/" + decodeURIComponent(data[i].changeName) + ">");
+				var $h4 = $("<h4>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
+				var $p = $("<p>").text(data[i].b_CreateDate + "| 조회수 : " + decodeURIComponent(data[i].bCount));
+				
+				$li.append($a);
+				$li.append($h4);
+				$li.append($p);
+				
+				$ul.append($li);
+				$Body.append($ul);
+			}
+		}
+	});
+}
+
+function topMomList(){
+	$.ajax({
+		url : "momTopList.do",
+		dataType : "json",
+		success: function(data){
+			$Body = $("#momTopList");
+			$Body.html("");
+
+			for(var i in data){
+				var $ul = $("<ul>");
+				var $li = $("<li>");
+				var $a = $("<a href=momDetail.do?bNo=" + data[i].bNo + " >").html("<img src = resources/images/board/babymom/" + decodeURIComponent(data[i].changeName) + ">");
+				var $h4 = $("<h4>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
+				var $p = $("<p>").text(data[i].b_CreateDate + "| 조회수 : " + decodeURIComponent(data[i].bCount));
+				
+				$li.append($a);
+				$li.append($h4);
+				$li.append($p);
+				
+				$ul.append($li);
+				$Body.append($ul);
+			}
+		}
+	});
+}
+</script>
+</body>
 </html>

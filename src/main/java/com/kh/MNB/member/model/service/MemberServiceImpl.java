@@ -15,6 +15,7 @@ import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.member.model.dao.MemberDAO;
+import com.kh.MNB.member.model.vo.Like;
 import com.kh.MNB.member.model.vo.Member;
 
 @Service("mService")
@@ -229,7 +230,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Board> mylikeList(PageInfo pi, String bWriter) {
+	public ArrayList<Like> mylikeList(PageInfo pi, String bWriter) {
 		return mDAO.mylikeList(pi, bWriter);
+	}
+
+	@Override
+	public int getmylikeCount(String bWriter) {
+		return mDAO.getmylikeCount(bWriter);
 	}
 }

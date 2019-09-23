@@ -24,6 +24,7 @@
 	<insert id="insertMomBoard">
 	insert into board
 	values(seq_bno.nextval, #{bType}, #{bTitle}, #{bContent}, sysdate, default, default, sysdate, #{bWriter})
+
 	</insert>
 	<insert id="insertMomAttachment" parameterType="Attachment">
 		insert into board_picture
@@ -51,6 +52,7 @@
 	update board
 	set bTitle = #{bTitle}, bContent = #{bContent}, b_modifydate = sysdate
 	where bNo=#{bNo}
+
 	</update>
 	<update id="upDateMomAttachment" parameterType="Attachment">
 		update board_picture
@@ -216,5 +218,26 @@
 		where bno = #{bNo} 
 	</update>
 	
+	<select id="suppotTopList" resultType="sitterSuppot">
+		<![CDATA[
+			select *
+			from (select *
+				  from suppot_list
+				  where status = 'Y'
+				  order by bcount desc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<select id="momTopList" resultType="Momboard">
+		<![CDATA[
+			select *
+			from (select *
+				  from suppotmom_list
+				  where status = 'Y'
+				  order by bcount desc)
+			where rownum <= 5
+		]]>
+	</select>
 	
 </mapper>

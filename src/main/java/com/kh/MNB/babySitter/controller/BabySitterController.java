@@ -110,23 +110,21 @@ public class BabySitterController
 
 //베이비시터모집 디테일
    @RequestMapping("momDetail.do")
-   public ModelAndView momDetail(@RequestParam("bNo") int bNo, @RequestParam("page") int page,  ModelAndView mv) {
+   public ModelAndView momDetail(@RequestParam("bNo") int bNo, @RequestParam(value = "page", required = false) Integer page,  ModelAndView mv) {
 	   bsService.addMomReadCount(bNo);
 	   Momboard momboard = bsService.selectDetail(bNo);
 
-	   System.out.println(momboard);
-	  
-	   
 	   if(momboard!=null) {
-		   mv.addObject("momboard", momboard)
-		   .addObject("page", page)
-		   .setViewName("board/baby/babymom/bcdetailView");
+		   mv.addObject("momboard", momboard);
+		   if(page != null) {
+			   mv.addObject("page", page);
+		   }
+		   mv.setViewName("board/baby/babymom/bcdetailView");
 	   }else {
 		   throw new BabySitterException("게시글 조회에 실패하였습니다."); 
 	   }
+	   
 	   return mv;
-	
-		
    }
 //베이비시터모집 글쓰기
    @RequestMapping(value="babymominsert.do", method=RequestMethod.POST)
@@ -379,16 +377,16 @@ public class BabySitterController
 	
    // 베이비시터 지원 상세 페이지
 	@RequestMapping("suppotDetail.do")
-	public ModelAndView suppotDetail(@RequestParam("bNo") int bNo, @RequestParam("page") int page, ModelAndView mv) {
+	public ModelAndView suppotDetail(@RequestParam("bNo") int bNo, @RequestParam(value = "page", required = false) Integer page, ModelAndView mv) {
 		bsService.addReadCount(bNo);
 		sitterSuppot suppot = bsService.selectSuppotBoard(bNo);
 		
-		System.out.println(suppot);
-		
 		if(suppot != null) {
-			mv.addObject("suppot", suppot)
-			.addObject("page", page)
-			.setViewName("board/baby/babySitter/suppotDetail");
+			mv.addObject("suppot", suppot);
+			if(page != null) {
+				mv.addObject("page", page);
+			}
+			mv.setViewName("board/baby/babySitter/suppotDetail");
 		} else {
 			throw new BoardException("게시글 상세보기에 실패하였습니다.");
 		}
@@ -687,6 +685,34 @@ public class BabySitterController
 		}
 		
 		return mv;
+	}
+	
+	@RequestMapping("topSuppotList.do")
+	public void suppotTopList(HttpServletResponse response) throws IOException {
+		
+		ArrayList<sitterSuppot> list = bsService.suppotTopList();
+		
+		for(sitterSuppot s : list) {
+			s.setbTitle(URLEncoder.encode(s.getbTitle(), "utf-8"));
+			s.setChangeName(URLEncoder.encode(s.getChangeName(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
+	}
+	
+	@RequestMapping("momTopList.do")
+	public void momTopList(HttpServletResponse response) throws IOException {
+		
+		ArrayList<Momboard> list = bsService.momTopList();
+		
+		for(Momboard s : list) {
+			s.setbTitle(URLEncoder.encode(s.getbTitle(), "utf-8"));
+			s.setChangeName(URLEncoder.encode(s.getChangeName(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
 	}
 
 }

@@ -55,15 +55,7 @@ public class ReViewController {
 			   }
 		      return mv;
 		   }
-
-	 
 	
-	 
-	 @RequestMapping("reViewDeView.do")
-	 public String reViewDeView() {
-		 
-		 return "board/review/reviewDetail";
-	 }
 	 
 	 @RequestMapping("detailReview.do")
 	 public ModelAndView detailReview(@RequestParam("bNo") int bNo, @RequestParam("page") int page, ModelAndView mv) {

@@ -80,13 +80,20 @@
 		where status ='Y' and bWriter=#{bWriter}
 		order by BNO desc
 	</select>
-	<!-- 내가 좋아요 한 게시글 리스트 -->
-	<select id="mylikeList" resultType="Board">
-		select *
+	
+	<select id="getmylikeCount" parameterType="string" resultType="_int">
+		select count(*)
 		from board b
 		join liketb l on (b.bNo = l.bNo)
-		where status ='Y' and bWriter=#{bWriter}	
-		order by b.BNO desc
+		where status ='Y' and bWriter=#{bWriter}
+	</select>
+	<!-- 내가 좋아요 한 게시글 리스트 -->
+	<select id="mylikeList" resultType="Board">
+		select b.bNo, b.bType, b.bTitle, m.nickName as bWriter, b.bContent, b.bCount, b.b_CreateDate
+		from board b join likeTb l on (b.bNo = l.bNo)
+			 join member m on (b.bWriter = m.userId)
+		where b.status ='Y' and l.userId=#{bWriter}	
+		order by b.bNo desc
 	</select>
 	<!-- 내가 쓴 글 디테일  -->
 	<select id="boardType" resultType="Board">

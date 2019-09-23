@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.bsApply.model.vo.BSApply;
+import com.kh.MNB.member.model.vo.Like;
 import com.kh.MNB.member.model.vo.Member;
 
 @Repository("mDAO")
@@ -137,11 +138,15 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.seletMUserTopList");
 	}
 
-	public ArrayList<Board> mylikeList(PageInfo pi, String bWriter) {
+	public ArrayList<Like> mylikeList(PageInfo pi, String bWriter) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.mylikeList", bWriter, rowBounds);
+	}
+
+	public int getmylikeCount(String bWriter) {
+		return sqlSession.selectOne("memberMapper.getmylikeCount",bWriter);
 	}
 
 	

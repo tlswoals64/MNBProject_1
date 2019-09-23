@@ -27,13 +27,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kh.MNB.board.model.exception.BoardException;
 import com.kh.MNB.board.model.vo.Board;
 import com.kh.MNB.board.model.vo.PageInfo;
 import com.kh.MNB.bsApply.model.vo.BSApply;
 import com.kh.MNB.common.Pagination;
 import com.kh.MNB.member.model.exception.MemberException;
 import com.kh.MNB.member.model.service.MemberService;
+import com.kh.MNB.member.model.vo.Like;
 import com.kh.MNB.member.model.vo.Member;
 import com.kh.MNB.memo.model.service.MemoService;
 import com.kh.MNB.memo.model.vo.Memo;
@@ -182,8 +182,13 @@ public class MemberController {
       
 	   //---------로그인화면이동----------
 		@RequestMapping("loginView.do")
-		public String loginView() {
-			return "login/loginView";
+		public ModelAndView loginView(HttpServletRequest request, ModelAndView mv) {
+			int check = Integer.parseInt(request.getParameter("check"));
+			System.out.println("!!!!!!!!" + check);
+			
+			mv.addObject("check", check);
+			mv.setViewName("login/loginView");
+			return mv;
 		}
 		//-----------로그인 --------------
 		@RequestMapping(value="login.do", method=RequestMethod.POST)
@@ -209,7 +214,7 @@ public class MemberController {
 				 return "redirect:index.jsp";
 				 }
 			 } else {
-				 throw new MemberException("로그인에 실패하였습니다.");
+				 return "redirect:loginView.do?check=" + 1; 
 			} 
 		}
       
@@ -438,6 +443,8 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
 	      
 	      ArrayList<Board> list = mService.myBoardList(pi, bWriter);
+	      
+	     
 	      if(list != null) {
 	         mv.addObject("list", list);
 	         mv.addObject("pi", pi);
@@ -462,15 +469,17 @@ public ModelAndView mylikeView(@RequestParam(value = "page", required = false) I
 	         currentPage = page;
 	      }
 	      
-	      int listCount = mService.getmyListCount(bWriter); 
-	      System.out.println(listCount);
+	      int listCount = mService.getmylikeCount(bWriter); 
+	      
+	      System.out.println("내가 좋아요한 게시글 갯수 : " + listCount);
 	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
 	      
-	      ArrayList<Board> list = mService.mylikeList(pi, bWriter);
+	      ArrayList<Like> list = mService.mylikeList(pi, bWriter);
+	      System.out.println("list !!!!!!!! : " + list );
 	      if(list != null) {
 	         mv.addObject("list", list);
 	         mv.addObject("pi", pi);
-	         mv.setViewName("myPage/boardList");
+	         mv.setViewName("myPage/likeList");
 	      }
 	      else {
 	    	  throw new MemberException("게시글 불러오기에 실패하였습니다.");
