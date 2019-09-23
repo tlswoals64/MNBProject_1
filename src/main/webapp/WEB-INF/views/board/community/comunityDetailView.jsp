@@ -162,7 +162,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<jsp:include page="../../common/header.jsp"></jsp:include>
 
 	
-				<h2 style="text-align:center; margin-top:30px;">정보공유 게시판</h2>
+				<h2 style="margin-top:30px; margin-left:1010px;">정보공유 게시판</h2>
 	<div class="both"></div>
 	
 	
@@ -191,12 +191,20 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
                      <td class="pnawtd">
                      
                      <div name="mem_name"  class="inputTypeText" >
-                     	${board123.bWriter }
+                     	${board123.bWriter }<button onclick="popup();" id="reportbtn" style="margin-left:30px;">
+							<img src="resources/images/babySitter/note.png" style="width: 40px; height: 25px;">쪽지
+							</button>
                      </div>
-                     
+                     	
                      </td>
                   </tr>
-                  <tr>
+				<div class="popup">
+					<!-- 팝업창으로 보내줄 정보 -->
+					<form name="popupData" id="popupData" method="post">
+						<input type="hidden" name="bWriter" value="${ board123.bWriter }">
+					</form>
+				</div>
+				<tr>
                      <th scope="row">조회수</th>
                      <td class="pnawtd">
                      
@@ -242,8 +250,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
             </table>
             
 		<div class="both" style="margin-top:40px; margin-bottom:30px;"></div>
-			<div class="applybtnArea" style="max-width: 100%;">
-               <ul class="ul01">
+			<div class="applybtnArea" style="max-width: 100%;" >
+               <ul class="ul01" style="margin-left:850px;">
               
               <c:if test="${board123.bWriter eq m.nickName}">
                <li>
@@ -545,6 +553,20 @@ function menulo() {
 		}
 		
 	}
+	
+	function popup(){
+	 var popupData = document.popupData;
+	 var url= "noteInsertForm.do";    //팝업창 페이지 URL
+	 var winWidth = 759;
+	 var winHeight = 341;
+	 var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	
+	 window.open("","noteInsertForm",popupOption);
+	
+	 popupData.action = url;
+	 popupData.target = "noteInsertForm";
+	 popupData.submit();
+	 }
 </script>
 
 

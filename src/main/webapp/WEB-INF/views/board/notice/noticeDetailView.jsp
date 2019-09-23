@@ -350,7 +350,7 @@ a:hover, a:focus, a:active {
 				<li><input class="inputbox02 btn btn-outline-dark"
 					type="button" value="삭제하기" onclick=""></li> -->
 
-				<li><input class="inputbox02 btn btn-outline-dark"
+				<li style="margin-left:300px;"><input class="inputbox02 btn btn-outline-dark"
 					type="button" value="목록으로" onclick="menulo()"></li>
 
 			</ul>
