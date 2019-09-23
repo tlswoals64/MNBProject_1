@@ -215,5 +215,26 @@
 		where bno = #{bNo} 
 	</update>
 	
+	<select id="suppotTopList" resultType="sitterSuppot">
+		<![CDATA[
+			select *
+			from (select *
+				  from suppot_list
+				  where status = 'Y'
+				  order by bcount desc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<select id="momTopList" resultType="Momboard">
+		<![CDATA[
+			select *
+			from (select *
+				  from suppotmom_list
+				  where status = 'Y'
+				  order by bcount desc)
+			where rownum <= 5
+		]]>
+	</select>
 	
 </mapper>
