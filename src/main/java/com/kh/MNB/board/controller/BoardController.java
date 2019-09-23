@@ -1276,7 +1276,7 @@ public class BoardController {
 			         mv.setViewName("board/report/reportOpen");
 			     
 			      } else {
-			         throw new BoardException("게시글 오픈에 실패하였습니다.");
+			         throw new BoardException("신고글 오픈에 실패하였습니다.");
 			      }
 				return mv;
 			}
