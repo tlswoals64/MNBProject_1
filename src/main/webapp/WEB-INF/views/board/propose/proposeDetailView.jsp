@@ -220,7 +220,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
             
 		<div class="both" style="margin-top:40px; margin-bottom:30px;"></div>
 			<div class="applybtnArea" style="max-width: 100%;">
-               <ul class="ul01">
+               <ul class="ul01" style="margin-left:900px;">
               
               <c:if test="${board123.bWriter eq m.nickName}">
                <li>
