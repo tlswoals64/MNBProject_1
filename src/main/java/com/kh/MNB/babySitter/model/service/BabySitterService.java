@@ -1,6 +1,7 @@
 package com.kh.MNB.babySitter.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.MNB.babySitter.model.vo.BabySitter;
 
@@ -64,6 +65,16 @@ public interface BabySitterService { // 느슨한 결합구조때문에
 	ArrayList<Reply> selectMomReplyList(int bNo);
 
 	int insertMomReply(Reply r);
+
+	int getSuppotSearchListCount(Map<String, Object> map);
+
+	ArrayList<sitterSuppot> selectsuppotSearchList(Map<String, Object> map, PageInfo pi);
+
+	int deleteSuppotBoard(int bNo);
+
+	int deleteAttachment(int bNo);
+
+	int deleteSuppot(int bNo);
 
 
 	

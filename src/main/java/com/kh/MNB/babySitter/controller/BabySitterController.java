@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.management.MXBean;
@@ -537,7 +538,6 @@ public class BabySitterController
 			} else {
 				time = time + i;
 			}
-			System.out.println(time);
 		}
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
@@ -576,6 +576,21 @@ public class BabySitterController
 		}
 	}
 	
+	@RequestMapping("suppotDelete.do")
+	public String suppotDelete(@RequestParam("bNo") int bNo, @RequestParam("page") int page) {
+		int result1 = bsService.deleteSuppotBoard(bNo);
+		int result2 = bsService.deleteAttachment(bNo);
+		int result3 = bsService.deleteSuppot(bNo);
+		
+		int result = result1 + result2 + result3;
+		
+		if(result == 3) {
+			return "redirect:suppotList.do";
+		} else {
+			throw new BoardException("게시판 삭제에 실패하였습니다.");
+		}
+	}
+	
 	// 지원 댓글 리스트
 	@RequestMapping("rSuppotList.do")
 	public void getSuppotReplyList(HttpServletResponse response, int bNo) throws Exception {
@@ -605,16 +620,57 @@ public class BabySitterController
 		}
 	}
 	
-
+	// 검색
 	@RequestMapping("suppotSearch.do")
 	public ModelAndView suppotSearch(@RequestParam(value = "area", required = false) String area, @RequestParam(value = "checkDay", required = false) String checkDay,
 									@RequestParam(value = "time", required = false) String time, @RequestParam(value = "active", required = false) String active,
-									ModelAndView mv) {
+									@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 		System.out.println(area);
-		System.out.println(checkDay);
 		System.out.println(time);
+		System.out.println(checkDay);
 		System.out.println(active);
 		
+		String[] bcactive;
+		String[] timeSet;
+		String[] day;
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if(area != null) {
+			map.put("area", area);
+		}
+		if(time != null) {
+			timeSet = time.split("/");
+			map.put("timeSet", timeSet);
+		}
+		if(checkDay != null) {
+			day = checkDay.split(",");
+			map.put("day", day);
+		}
+		if(active != null) {
+			bcactive = active.split(",");
+			map.put("bcactive", bcactive);
+		}
+
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = bsService.getSuppotSearchListCount(map); // 
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); // 
+		
+		ArrayList<sitterSuppot> list = bsService.selectsuppotSearchList(map, pi);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("board/baby/babySitter/suppotList");
+		}
+		else {
+			throw new BoardException("검색 조회에 실패하였습니다.");
+		}
 		
 		return mv;
 	}

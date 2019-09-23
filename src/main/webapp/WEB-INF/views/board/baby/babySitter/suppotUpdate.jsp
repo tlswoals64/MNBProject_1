@@ -399,7 +399,12 @@ input, textarea, select {
 										</c:if>
 									</c:if>
 									<c:if test = "${ timeset.last }">
-										~ <input type="time" name="time2" value = "${ time }:00" style="height: 30px; font-size: 13px;">
+										<c:if test="${ time < 10 }">
+											~ <input type="time" name="time2" value = "0${ time }:00" style="height: 30px; font-size: 13px;">
+										</c:if>
+										<c:if test="${ time >= 10 }">
+											~ <input type="time" name="time2" value = "${ time }:00" style="height: 30px; font-size: 13px;">
+										</c:if>
 									</c:if>
 								</c:forTokens>
 							</td>
@@ -430,7 +435,7 @@ input, textarea, select {
 
 						<tr>
 							<th scope="row">상세내용</th>
-							<td class="write pnawtd"><textarea name='bContent' required="required" style='width: 90%; height: 200px;'>${ suppot.bContent }</textarea></td>
+							<td class="write pnawtd"><textarea name='bContent' required="required" style='width: 90%; height: 200px; resize: none;'>${ suppot.bContent }</textarea></td>
 						</tr>
 						<tr>
 							<th>활동 유형</th>
@@ -538,7 +543,7 @@ input, textarea, select {
 						<tr>
 							<th>경력</th>
 							<td>
-								<textarea name='bCcarrer' required="required" style='width: 90%; height: 200px;'>${ suppot.bCcarrer }</textarea>
+								<textarea name='bCcarrer' required="required" style='width: 90%; height: 200px; resize: none;'>${ suppot.bCcarrer }</textarea>
 							</td>
 						</tr>
 						<tr>
@@ -560,7 +565,7 @@ input, textarea, select {
 				</table>
 				<div class="joinbox" style="max-width: 90%;">
 					<ul class="ul01">
-						<li><input class="inputbtn" type="submit" value="수정"></li>
+						<li><input class="inputbtn" type="button" onclick = "updateBtn();" value="수정"></li>
 						<li><input class="inputbtn" type="button" value="취소"
 							onclick="javascript:history.back()"></li>
 					</ul>
@@ -640,6 +645,12 @@ input, textarea, select {
 					$("#changeName").attr("disabled", true);
 				}
 				reader.readAsDataURL(value.files[0]);
+			}
+		}
+		
+		function updateBtn(){
+			if(confirm("정말 수정하시겠습니까?")){
+				$("#writeform").submit();
 			}
 		}
 	</script>

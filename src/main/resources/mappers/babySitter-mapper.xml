@@ -91,7 +91,7 @@
 	</insert>
 	<insert id = "insertSuppot">
 		insert into bc_suppot
-		values(seq_bno.currval, #{bcCarrer}, #{bcSalary}, #{bcDay}, #{bcTime}, #{address}, #{bcactivity})
+		values(seq_bno.currval, #{bcCarrer}, #{bcSalary}, #{bcDay}, #{bcTime}, #{address}, #{bcActivity})
 	</insert>
 	
  	<update id="updateSuppotBoard">
@@ -134,5 +134,78 @@
 		values(seq_rnum.nextval, #{nContent}, sysdate, default, #{rWriter}, #{bNo})
 	</insert>
 	
+	<select id="SuppotSearchListCount" parameterType="map" resultType = "_int">
+		select count(*)
+		from suppot_list
+		<where>
+			<if test="area != null">
+				address like '%' || #{area} || '%'
+			</if>
+			<if test="day != null">
+				and
+				<foreach item="item" index="index" collection="day" open="(" close=")" separator="or">
+					day like '%' || #{item} || '%'
+				</foreach>
+			</if>
+			<if test="timeSet != null">
+				and
+				<foreach item="item" index="index" collection="timeSet" open="(" close=")" separator="or">
+					time like '%' || #{item} || '%'
+				</foreach>
+			</if>
+			<if test="bcactive != null">
+				and
+				<foreach item="item" index="index" collection="bcactive" open="(" close=")" separator="or">
+					bcactivity like '%' || #{item} || '%'
+				</foreach>
+			</if>
+		</where>
+	</select>
+	
+	<select id = "selectsuppotSearchList" parameterType="map" resultType = "sitterSuppot">
+		select *
+		from suppot_list
+		<where>
+			<if test="area != null">
+				address like '%' || #{area} || '%'
+			</if>
+			<if test="day != null">
+				and
+				<foreach item="item" index="index" collection="day" open="(" close=")" separator="or">
+					day like '%' || #{item} || '%'
+				</foreach>
+			</if>
+			<if test="timeSet != null">
+				and
+				<foreach item="item" index="index" collection="timeSet" open="(" close=")" separator="or">
+					time like '%' || #{item} || '%'
+				</foreach>
+			</if>
+			<if test="bcactive != null">
+				and
+				<foreach item="item" index="index" collection="bcactive" open="(" close=")" separator="or">
+					bcactivity like '%' || #{item} || '%'
+				</foreach>
+			</if>
+		</where>
+	</select>
+	
+	<update id="deleteSuppotBoard">
+		update board
+		set status = 'N'
+		where bno = #{bNo} and btype = 4
+	</update>
+	
+	<update id="deleteAttachment">
+		update board_picture
+		set status = 'N'
+		where bno = #{bNo} and btype = 4
+	</update>
+	
+	<update id="deleteSuppot">
+		update bc_suppot
+		set status = 'N'
+		where bno = #{bNo} and btype = 4
+	</update>
 
 </mapper>
