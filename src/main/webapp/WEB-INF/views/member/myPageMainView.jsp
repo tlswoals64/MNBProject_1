@@ -194,7 +194,12 @@
 					<th class="myInfoTh">생년월일</th>
 					<td class="myInfoTd">${loginUser.birth}</td>
 					<th class="myInfoTh">성별</th>
-					<td class="myInfoTd">${loginUser.gender}</td>
+					<c:if test="${loginUser.gender eq 'M' }">
+					<td class="myInfoTd">남자</td>
+					</c:if>
+					<c:if test="${loginUser.gender eq 'F' }">
+					<td class="myInfoTd">여자</td>
+					</c:if>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">이메일</th>
@@ -231,8 +236,8 @@
 					<button onclick="location.href='reViewList.do'">리뷰리스트</button>
 					<button onclick="location.href='reViewDeView.do'">리뷰디테일</button>
 					<button onclick="location.href='reViewInView.do'">리뷰 글쓰기</button> -->
-					<td class="btnTd">
-						<div class="imgdiv">
+					<td class="btnTd" onclick="location.href='mylikeList.do'" style="cursor:pointers">
+						<div class="imgdiv">						
 							<img src="resources/images/main/favorite.png">
 						</div>
 						<div class="bDiv">

@@ -175,7 +175,7 @@
 	<input type="hidden" value="${revi.bNo}" name="bNo" id="bNo">
 	<h2>${revi.bTitle}</h2>
 	<span style="float:right;" id="likeArea" onclick="likeChange();"><img id="likeAreaImg" src="resources/images/main/unlike.png"></span>
-	<button onclick="report();" id="reportbtn"><img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
+	<button type="button" onclick="report();" id="reportbtn"><img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
 	</td>
 	</tr>
 	</table>

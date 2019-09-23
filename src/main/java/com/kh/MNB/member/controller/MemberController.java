@@ -449,6 +449,35 @@ public ModelAndView myListView(@RequestParam(value = "page", required = false) I
 	      
 	      return mv;
 	   }
+	//내가 좋아요 한 게시글
+	@RequestMapping("mylikeList.do")
+public ModelAndView mylikeView(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv,HttpSession session) {		
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		/* String userId = m.getUserId(); */
+		String bWriter = m.getUserId();
+		System.out.println(bWriter);
+		int currentPage = 1;
+	      if(page != null) {
+	         currentPage = page;
+	      }
+	      
+	      int listCount = mService.getmyListCount(bWriter); 
+	      System.out.println(listCount);
+	      PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+	      
+	      ArrayList<Board> list = mService.mylikeList(pi, bWriter);
+	      if(list != null) {
+	         mv.addObject("list", list);
+	         mv.addObject("pi", pi);
+	         mv.setViewName("myPage/boardList");
+	      }
+	      else {
+	    	  throw new MemberException("게시글 불러오기에 실패하였습니다.");
+	      }
+	      
+	      return mv;
+	   }
 	//게시글 상세페이지
 	@RequestMapping(value="myBoardDetail.do",method = RequestMethod.GET)
 	public String myBoardDetail(@RequestParam("bNo") int bNo, RedirectAttributes redirect) {

@@ -137,6 +137,13 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.seletMUserTopList");
 	}
 
+	public ArrayList<Board> mylikeList(PageInfo pi, String bWriter) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.mylikeList", bWriter, rowBounds);
+	}
+
 	
 
 }

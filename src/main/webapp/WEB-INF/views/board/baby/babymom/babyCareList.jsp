@@ -216,10 +216,12 @@ padding : 5px;
 
 </style>
 </head>
+<jsp:include page="../../../common/header.jsp"></jsp:include>
 <body>
-		<jsp:include page="../../../common/header.jsp"></jsp:include>
+		
 
 <div style="height:50px;"></div>
+
 	<div id="bigForm">
 		<div id="headview">
 			<h2 class="headline headh2">
@@ -313,7 +315,7 @@ padding : 5px;
 			</form>
 		</div>
 
-		<div style="width: 100%; height: 800px; display: inline-block; margin: 3% 15% 0 15%;">
+		<div style="width: 100%; height: 80%; display: inline-block; margin: 3% 15% 0 15%;">
 			<div id="mojibList">		
 			<c:forEach var="bc" items="${ bclist }">
 					<c:if test="${ !empty loginUser  && loginUser.dec != 5 }">
@@ -402,7 +404,7 @@ padding : 5px;
 				</c:if>
 				</c:forEach>
 	
-				<table>
+		<table style="width:700px">
 				<tr>
 			<td colspan="6" align="right" id="buttonTab">
 				<c:if test="${ !empty loginUser }">
@@ -457,6 +459,7 @@ padding : 5px;
 	</div>
 	</div>
 </div>
+
 </body>
 	<jsp:include page="../../../common/footer.jsp"></jsp:include>
 </html>

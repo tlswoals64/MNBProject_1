@@ -158,7 +158,10 @@
 	<h2>${momboard.bTitle}
 	</h2>
 	<span style="float:right;" id="likeArea" onclick="likeChange();"><img id="likeAreaImg" src="resources/images/main/unlike.png"></span>
-	<button onclick="" id="reportbtn"><img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
+	<button onclick="report();" id="reportbtn"><img src="resources/images/board/babymom/siren.png" style="width:20px; height:20px;">신고</button>
+	<button onclick="popup();" id="reportbtn">
+							<img src="resources/images/babySitter/note.png" style="width: 20px; height: 20px;">쪽지
+						</button>
 	</div>
 	<div class="UNS" >
 		<div class="_1f8P3">
@@ -614,13 +617,33 @@
    	<div class="both"></div>
 	
 	</div>
-	
+		<div class = "popup">
+	<!-- 팝업창으로 보내줄 정보 -->
+	<form name="popupData" id="popupData" method="post">
+		<input type="hidden" name="bWriter" value="${ momboard.bWriter }">
+	</form>
+	</div>
 	<script>
+
 	
+	function popup(){
+	 var popupData = document.popupData;
+	 var url= "noteInsertForm.do";    //팝업창 페이지 URL
+	 var winWidth = 759;
+	 var winHeight = 341;
+	 var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	
+	 window.open("","noteInsertForm",popupOption);
+	
+	 popupData.action = url;
+	 popupData.target = "noteInsertForm";
+	 popupData.submit();
+	 }
 	function report() {
-		var bNo = ${revi.bNo};
-window.open("openReport.do?bNo="+bNo, 'content', 'width=1024, height=600, menubar=no, status=no, toolbar=no ');
+		var bNo = ${momboard.bNo};
+		window.open("openReport.do?bNo="+bNo, 'content', 'width=1024, height=600, menubar=no, status=no, toolbar=no ');
 	}
+	
 	function getreplyList(){
 		var bNo = '${momboard.bNo}';
 		console.log("ajax전" + bNo);

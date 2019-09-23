@@ -80,6 +80,14 @@
 		where status ='Y' and bWriter=#{bWriter}
 		order by BNO desc
 	</select>
+	<!-- 내가 좋아요 한 게시글 리스트 -->
+	<select id="mylikeList" resultType="Board">
+		select *
+		from board b
+		join liketb l on (b.bNo = l.bNo)
+		where status ='Y' and bWriter=#{bWriter}	
+		order by b.BNO desc
+	</select>
 	<!-- 내가 쓴 글 디테일  -->
 	<select id="boardType" resultType="Board">
 		select *
