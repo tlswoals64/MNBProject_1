@@ -90,7 +90,7 @@ public class MemberDAO {
 	}
 
 	public int deleteMember(String id) {
-		return sqlSession.update("memberMapper.deleteMember");
+		return sqlSession.update("memberMapper.deleteMember", id);
 	}
 
 	public int myBoardUpdate(Map<String, String> map) {

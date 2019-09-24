@@ -178,34 +178,34 @@
 	<div class="wrap">
 		<div id="myPageB">MY PAGE</div>
 		<div class="myInfo">
-			<div id="userName">${loginUser.userName}님, 안녕하세요!</div>
+			<div id="userName">${m.userName}님, 안녕하세요!</div>
 			<table class="myInfoTable">
 				<tr class="myInfoTr">
 					<th class="myInfoTh">아이디</th>
-					<td class="myInfoTd" colspan="3">${loginUser.userId}</td>
+					<td class="myInfoTd" colspan="3">${m.userId}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">닉네임</th>
-					<td class="myInfoTd">${loginUser.nickName}</td>
+					<td class="myInfoTd">${m.nickName}</td>
 					<th class="myInfoTh">회원등급</th>
-					<c:if test="${loginUser.memberType eq 1 }">
+					<c:if test="${m.memberType eq 1 }">
 					<td class="myInfoTd">일반회원</td>
 					</c:if>
-					<c:if test="${loginUser.memberType eq 2 }">
+					<c:if test="${m.memberType eq 2 }">
 					<td class="myInfoTd">베이비시터</td>
 					</c:if>
-					<c:if test="${loginUser.dec eq 5 }">
+					<c:if test="${m.dec eq 5 }">
 					<td class="myInfoTd">블랙리스트</td>
 					</c:if>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">생년월일</th>
-					<td class="myInfoTd">${loginUser.birth}</td>
+					<td class="myInfoTd">${m.birth}</td>
 					<th class="myInfoTh">성별</th>
-					<c:if test="${loginUser.gender eq 'M' }">
+					<c:if test="${m.gender eq 'M' }">
 					<td class="myInfoTd">남자</td>
 					</c:if>
-					<c:if test="${loginUser.gender eq 'F' }">
+					<c:if test="${m.gender eq 'F' }">
 					<td class="myInfoTd">여자</td>
 					</c:if>
 		
@@ -213,19 +213,19 @@
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">이메일</th>
-					<td class="myInfoTd" colspan="3">${loginUser.email}</td>
+					<td class="myInfoTd" colspan="3">${m.email}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">핸드폰번호</th>
-					<td class="myInfoTd" colspan="3">${loginUser.phone}</td>
+					<td class="myInfoTd" colspan="3">${m.phone}</td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">주소</th>
-					<td class="myInfoTd" colspan="3">${loginUser.address } </td>
+					<td class="myInfoTd" colspan="3">${m.address } </td>
 				</tr>
 				<tr class="myInfoTr">
 					<th class="myInfoTh">가입 날짜</th>
-					<td class="myInfoTd" colspan="3">${loginUser.enroll_Date }</td>
+					<td class="myInfoTd" colspan="3">${m.enroll_Date }</td>
 				</tr>
 			</table>
 		</div>

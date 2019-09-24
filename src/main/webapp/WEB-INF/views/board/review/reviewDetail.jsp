@@ -169,7 +169,7 @@
 	<form action="">
 	<div style="margin:auto;">
 	<div class="UNS">
-	<table style="width:400px;">
+	<table style="width:500px;">
 	<tr>
 	<td>
 	<input type="hidden" value="${revi.bNo}" name="bNo" id="bNo">

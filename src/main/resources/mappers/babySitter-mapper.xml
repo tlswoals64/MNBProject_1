@@ -20,6 +20,7 @@
 	<select id="selectMomlist" resultType="Momboard">
 		select * from suppotMom_list
 		where btype = 3 and status='Y'
+		order by bNo desc
 	</select>
 	<insert id="insertMomBoard">
 	insert into board
@@ -225,7 +226,7 @@
 				  from suppot_list
 				  where status = 'Y'
 				  order by bcount desc)
-			where rownum <= 5
+			where rownum < 5
 		]]>
 	</select>
 	
@@ -236,7 +237,7 @@
 				  from suppotmom_list
 				  where status = 'Y'
 				  order by bcount desc)
-			where rownum <= 5
+			where rownum < 5
 		]]>
 	</select>
 	

@@ -87,7 +87,7 @@
 <script>
 
 function back(){
-	location.href="loginView.do";
+	location.href="loginView.do?check=" + 0;
 }
 
 var checkCode = "";

@@ -149,7 +149,9 @@ table{
 		<li><input type="radio" name="searchtype" id="search03" /><label for="search03">내용</label></li>
 		<li><input type="text" title="검색어를 입력하세요" /><input type="submit" value="검색" /></li>
 	</ul>
+	<c:if test="${ !empty loginUser && loginUser.dec != 5 }">
 	<button onclick="location.href='reViewInView.do';">글쓰기</button>
+	</c:if>
 </div>
 </div>
 

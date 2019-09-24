@@ -57,7 +57,7 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 </style>
 
 </head>
-
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <body>
 
 
@@ -68,8 +68,8 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div id ="boardchoose">
 	<div class="boardchoose_wrap">
 		<ul>
-			<li><a href="babymom.do"><img src="resources/images/board/babyParentIntro.png" width="550" height="600"></a></li>
-			<li><a href="suppotList.do"><img src="resources/images/board/babySitterIntro.png" width="550" height="600"></a></li>
+			<li><a href="babymom.do"><img src="resources/images/board/babyParentIntro.png" width="550" height="600"><h5 style="position:absolute;top:633px;left:400px;font-size:20px;line-height:115%">베이비시터 모집 바로가기</h5></a></li>
+			<li><a href="suppotList.do"><img src="resources/images/board/babySitterIntro.png" width="550" height="600"><h5 style="position:absolute;top:633px;left:1000px;font-size:20px;line-height:115%">베이비시터 지원 바로가기</h5></a></li>
 		</ul>
 	</div>
 	</div>
@@ -80,8 +80,10 @@ a:hover, a:focus, a:active{background:none;text-decoration:none;}
 	<div class="Community_list">
 		<h2>실시간 인기 게시글</h2>
 		<div id = "suppotTopList">
+			<ul></ul>
 		</div>
 		<div id = "momTopList">
+			<ul></ul>
 		</div>
 	</div>
 </div>
@@ -110,11 +112,10 @@ function topSuppotList(){
 		url : "topSuppotList.do",
 		dataType : "json",
 		success: function(data){
-			$Body = $("#suppotTopList");
+			$Body = $("#suppotTopList ul");
 			$Body.html("");
 
 			for(var i in data){
-				var $ul = $("<ul>");
 				var $li = $("<li>");
 				var $a = $("<a href=suppotDetail.do?bNo=" + data[i].bNo + " >").html("<img src = resources/images/babySitter/suppot/" + decodeURIComponent(data[i].changeName) + ">");
 				var $h4 = $("<h4>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
@@ -124,8 +125,7 @@ function topSuppotList(){
 				$li.append($h4);
 				$li.append($p);
 				
-				$ul.append($li);
-				$Body.append($ul);
+				$Body.append($li);
 			}
 		}
 	});
@@ -136,11 +136,10 @@ function topMomList(){
 		url : "momTopList.do",
 		dataType : "json",
 		success: function(data){
-			$Body = $("#momTopList");
+			$Body = $("#momTopList ul");
 			$Body.html("");
 
 			for(var i in data){
-				var $ul = $("<ul>");
 				var $li = $("<li>");
 				var $a = $("<a href=momDetail.do?bNo=" + data[i].bNo + " >").html("<img src = resources/images/board/babymom/" + decodeURIComponent(data[i].changeName) + ">");
 				var $h4 = $("<h4>").text(decodeURIComponent(data[i].bTitle.replace(/\+/g, " ")));
@@ -150,8 +149,7 @@ function topMomList(){
 				$li.append($h4);
 				$li.append($p);
 				
-				$ul.append($li);
-				$Body.append($ul);
+				$Body.append($li);
 			}
 		}
 	});

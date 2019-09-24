@@ -364,6 +364,7 @@ public class MemberController {
 	   Member m = (Member)session.getAttribute("loginUser");
 	   Member myM = mService.myPageInfo(m);
 	   BSApply b= mService.myPageBsaCheck(m);
+	   m.setMemberType(myM.getMemberType());
 	   System.out.println(b);
 	   
 	    mv.addObject("m", myM);
@@ -542,10 +543,10 @@ public ModelAndView mylikeView(@RequestParam(value = "page", required = false) I
 	 public String deleteMember(@RequestParam("id") String id,SessionStatus status) {
 		 
 		 int result  = mService.deleteMember(id);	 
-		 
+		 System.out.println(result);
 		 if(result>0) {
 		 status.setComplete();
-		 return "myPage/detailMember";	
+		 return "redirect:index.jsp";
 		 }
 		 else {
 			 

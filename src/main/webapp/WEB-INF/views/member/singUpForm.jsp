@@ -192,7 +192,7 @@ vertical-align: top;
 				<tr>
 					<th><label for = "birthday"><em>*</em> 생년월일</label></th>
 					<td>
-						<input class = "joininput birthday" name = "birth" type = "date" style = "text-indent : 0px;" required>
+						<input class = "joininput birthday" id = "birth" name = "birth" type = "date" style = "text-indent : 0px;" required>
 						<input type = "hidden" name = "birthCheck" id = "birthCheck" value = "0">
 					</td>
 				</tr>
@@ -250,6 +250,7 @@ vertical-align: top;
 
 	<script>
 		var joinCode = "";
+		var Email ="";
 		function execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
@@ -312,6 +313,7 @@ vertical-align: top;
 						} else{
 							joinCode = data;
 							console.log(joinCode);
+							Email = email;
 						}
 					}, error : function(jqxhr, textStatus, errorThrown){
 						console.log("메일 전송 실패");
@@ -479,7 +481,8 @@ vertical-align: top;
 
 		function validate() {
 			var submit = true;
-
+			var email = $("#email").val() + '@' + $("#addEmail").val();
+			
 			if ($("#nameCheck").val() == 0) {
 				alert("이름을 입력해주세요.");
 				$("#name").focus();
@@ -510,9 +513,15 @@ vertical-align: top;
 				return false;
 			}
 			
-			if ($("#emailCheck").val() == 0) {
+			if ($("#emailCheck").val() == 0 || Email != email) {
 				alert("이메일 인증을 해주세요");
 				$("#email").focus();
+				return false;
+			}
+			
+			if ($("#phoneCheck").val() == 0) {
+				alert("연락처를 다시 입력해주세요.");
+				$("#phone").focus();
 				return false;
 			}
 			
