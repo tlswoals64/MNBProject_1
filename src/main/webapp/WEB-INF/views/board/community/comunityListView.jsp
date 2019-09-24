@@ -99,7 +99,7 @@
            
          </thead> 
         <c:forEach var="b" items="${ list1 }">
-       
+ 
 		<tr onclick="comDetail(this);">
 			<td align="center" id="bNo">${ b.bNo }</td>
 			
@@ -116,11 +116,17 @@
 			
 		
 		</tr>
+	
 		<script>
 			function comDetail(v){
+		    	var loginUser = '${ loginUser }';
+		    	var dec = '${loginUser.dec}';
+		    	if(loginUser != null && dec !=5){
 				var bNo=$(v).children("#bNo").text();
 				console.log(bNo);
 			location.href="detailCom.do?bNo="+ bNo; 
+		    	}
+			
 			}
 		</script>
 		</c:forEach>
@@ -185,11 +191,13 @@
       </form>
       </div>
 
-          <div align="right">
+        <div align="right">
+          <c:if test="${ !empty loginUser  && loginUser.dec != 5 }">
          <button onclick="location.href='inCom.do'"
             id="writeNoBtn" style="background-color:gray; color:black; border:1px solid black; width: 60px; height: 25px;  border: solid 1px gray;
   border-radius: 7px; background-color:white; margin-right:90px;">글쓰기</button><br>
-    	  </div> 
+ 		 </c:if>
+    	</div> 
    
       </div>
       </div>

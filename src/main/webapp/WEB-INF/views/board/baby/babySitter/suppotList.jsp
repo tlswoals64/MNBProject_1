@@ -567,7 +567,7 @@ td {
 		<div style="width: 100%; height: 1710px; display: inline-block; margin-top: 3%;">
 			<div id="mojibList">
 				<c:forEach var="s" items="${ list }">
-					<c:if test="${ !empty loginUser }">
+					<c:if test="${ !empty loginUser && loginUser.dec != 5 }">
 						<c:url var="suppotDetail" value="suppotDetail.do">
 							<c:param name="bNo" value="${ s.bNo }" />
 							<c:param name="page" value="${ pi.currentPage }" />

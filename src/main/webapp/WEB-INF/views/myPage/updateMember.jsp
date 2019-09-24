@@ -233,12 +233,13 @@ vertical-align: top;
 				</tr>
 			</table>
 			<div class= "joinButton">
-				<button type = "button" onclick = "validate();">개인정보 변경</button><button onclick = "history.back();">취소</button>
+				<button type = "button" onclick = "validate();">개인정보 변경</button><button onclick = "location.href='detailMemberView.do'">취소</button>
 			</div>
 		</div>
 	</form>
 
 	<script>
+	
 		var checkCode = "";
 		function execDaumPostcode() {
 			new daum.Postcode({

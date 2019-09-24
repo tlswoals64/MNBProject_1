@@ -439,7 +439,6 @@ function updateReply(d){
 	var rNum = $(d).parent().siblings('#rNumTd').text();
 	var userId = '${m.userId}';
 	var nContent = $(d).parent().siblings('#nContentTd').children('#nContentText').val();
-	console.log(nContent);
 	$(d).hide();
 	$(d).siblings('#udBtn').show();
 	$(d).parent().siblings('#nContentTd').children().attr('readonly');

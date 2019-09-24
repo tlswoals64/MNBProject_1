@@ -667,7 +667,7 @@ padding : 5px;
 		<table style="width:700px">
 				<tr>
 			<td colspan="6" align="right" id="buttonTab">
-				<c:if test="${ !empty loginUser }">
+				<c:if test="${ !empty loginUser && loginUser.dec != 5 }">
 					&nbsp; &nbsp; &nbsp;
 					<button onclick="location.href='babymomIn.do'">글쓰기</button>					
 				</c:if>

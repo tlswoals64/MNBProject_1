@@ -26,6 +26,7 @@
 		from report r
             join board b
      		on (r.bno = b.bno)
+     	where r.rNo = #{rNo}
      	order by b.b_createdate
 	</select>
 	

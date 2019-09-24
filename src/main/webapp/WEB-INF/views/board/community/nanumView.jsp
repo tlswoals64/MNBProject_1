@@ -447,7 +447,9 @@
 
 		<div class="btn">
 			<p>
+				  <c:if test="${ !empty loginUser  && loginUser.dec != 5 }">
 				<a href="inBoard.do"><input type="button" value="글쓰기"></a>
+				</c:if>
 			</p>
 		</div>
 

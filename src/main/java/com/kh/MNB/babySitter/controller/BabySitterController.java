@@ -694,7 +694,6 @@ public class BabySitterController
 		
 		for(sitterSuppot s : list) {
 			s.setbTitle(URLEncoder.encode(s.getbTitle(), "utf-8"));
-			s.setChangeName(URLEncoder.encode(s.getChangeName(), "utf-8"));
 		}
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
